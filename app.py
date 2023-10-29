@@ -5,9 +5,12 @@ app = Flask(__name__)
 
 
 @app.route('/')
-
 def index():
     return render_template('index.html')
+
+@app.route('/clicker/')
+def clicker():
+    return render_template('clicker.html')
 
 if __name__ == '__main__':
     class StandaloneApplication(Application):
