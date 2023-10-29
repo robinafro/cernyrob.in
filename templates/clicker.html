@@ -1,0 +1,37 @@
+<!doctype html>
+
+<body>
+
+    <head>
+        <title>Robin Clicker</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
+
+        <script src="/static/clicker.js"></script>
+    </head>
+
+    <div class="background">
+        <div class="main-title">
+            Robin Clicker
+        </div>
+
+        <div class="about default-font">
+            click as many times as you can
+        </div>
+
+        <div id="total-clicks" class="main-title">
+            Your clicks: 0
+        </div>
+
+        <div id="clicker-container">
+            <button id="clicker-button">
+                <img src="/static/assets/robin.png"id="clicker-image"></img>
+            </button>
+        </div>
+
+        <div id="clicker-leaderboard">
+            Leaderboard
+        </div>
+    </div>
+</body>
