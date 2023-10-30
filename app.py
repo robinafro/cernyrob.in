@@ -31,7 +31,7 @@ def load_data(ip_address):
 def get_player_data():
     return jsonify(player_data=load_data(request.remote_addr))
 
-@app.route('/add_click/')
+@app.route('/add_click', methods=['POST'])
 def add_click():
     data = load_data(request.remote_addr)
 
