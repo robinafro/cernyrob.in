@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ action: 'add_click' }),
+                    // body: JSON.stringify({ action: 'add_click' }),
                 });
 
             });
