@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
-    let playerData = {{ player_data|tojson|safe }}
+    var playerData = {{ player_data|tojson|safe }};
+    console.log(playerData);
 
     const button = document.getElementById('clicker-button');
     const clickCountElement = document.getElementById('click-count');
