@@ -35,7 +35,7 @@ def get_player_data():
 def add_click():
     data = load_data(request.remote_addr)
 
-    data.clicks = data.clicks + data.clickmult
+    data["clicks"] += data["clickmult"]
 
     save_data(request.remote_addr, data)
 
