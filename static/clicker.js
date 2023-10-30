@@ -1,18 +1,32 @@
-let counter = 0;
-
 document.addEventListener('DOMContentLoaded', function () {
+    let playerData = {{ player_data|tojson|safe }}
+
     const button = document.getElementById('clicker-button');
-    const counterDisplay = document.getElementById('total-clicks');
+    const clickCountElement = document.getElementById('click-count');
+    const entireClickText = document.getElementById('total-clicks');
+
+    let counter = parseInt(playerData["clicks"]);
 
     button.addEventListener('click', function () {
         counter++;
 
-        counterDisplay.textContent = "Your clicks: " + counter;
+        clickCountElement.textContent = counter;
 
-        counterDisplay.classList.remove('red');
+        entireClickText.classList.remove('red');
 
         setTimeout(() => {
-            counterDisplay.classList.add('red');
+            entireClickText.classList.add('red');
         }, 1);
+
+        fetch('/add_click', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ action: 'add_click' }),
+        });
+
     });
+
+    clickCountElement.textContent = counter
 });
