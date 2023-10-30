@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }, 1);
 
                 fetch('/add_click', {
-                    method: 'POST',
+                    method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
                     },

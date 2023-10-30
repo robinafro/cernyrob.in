@@ -31,13 +31,15 @@ def load_data(ip_address):
 def get_player_data():
     return jsonify(player_data=load_data(request.remote_addr))
 
-@app.route('/add_click', methods=['POST'])
+@app.route('/add_click')
 def add_click():
     data = load_data(request.remote_addr)
 
     data.clicks = data.clicks + data.clickmult
 
     save_data(request.remote_addr, data)
+
+    return jsonify(status="success")
 
 @app.route('/')
 def index():
