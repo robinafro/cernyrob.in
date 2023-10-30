@@ -41,8 +41,8 @@ def index():
 
 @app.route('/clicker/')
 def clicker():
-    player_ip = request.remote_addr
-    player_data = load_data(player_ip)
+    player_ip = request.remote_addr 
+    player_data = json.dumps(load_data(player_ip))
 
     return render_template('clicker.html', player_data=player_data)
 
