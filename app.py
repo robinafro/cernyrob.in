@@ -1,7 +1,7 @@
 import os
 import json
 
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 from gunicorn.app.base import Application
 
 app = Flask(__name__)
@@ -29,15 +29,15 @@ def load_data(ip_address):
 
 @app.route('/get_player_data')
 def get_player_data():
-    return load_data(request.remote_addr)
+    return jsonify(player_data=load_data(request.remote_addr))
 
 @app.route('/add_click/')
-def add_click(ip_address):
-    data = load_data(ip_address)
+def add_click():
+    data = load_data(request.remote_addr)
 
     data.clicks = data.clicks + data.clickmult
 
-    save_data(ip_address, data)
+    save_data(request.remote_addr, data)
 
 @app.route('/')
 def index():
