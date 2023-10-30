@@ -1,6 +1,7 @@
 import os
 import json
 import time
+import math
 
 from flask import Flask, render_template, request, jsonify, make_response
 from flask_session import Session
@@ -20,7 +21,7 @@ data_template = {
 }
 
 def current_time():
-    return str(floor(time.time()))
+    return str(math.floor(time.time()))
 
 def save_data(ip_address, data):
     filename = os.path.join(data_dir, f"{ip_address}.json")
