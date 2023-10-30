@@ -48,20 +48,21 @@ def add_click():
 
 @app.route('/')
 def index():
-    if request.cookies.get('id') is None:
-        request.cookies.set('id', time.time())
-        response.set_cookie('id', time.time())
-
     response = make_response(render_template('index.html'))
+    
+    if request.cookies.get('id') is None:
+        response.set_cookie('id', time.time())
 
     return response
 
 @app.route('/clicker/')
 def clicker():
-    if request.cookies.get('id') is None:
-        request.cookies.set('id', time.time())
+    tm = time.time()
 
-    response = make_response(render_template('clicker.html', player_data=json.dumps(load_data(request.cookies.get('id')))))
+    response = make_response(render_template('clicker.html', player_data=json.dumps(load_data(request.cookies.get('id') or tm))))
+
+    if request.cookies.get('id') is None:
+        response.set_cookie('id', tm)
 
     return response
 
