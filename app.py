@@ -6,7 +6,7 @@ from gunicorn.app.base import Application
 
 app = Flask(__name__)
 
-data_dir = os.path.join(script_dir, os.path.dirname(__file__))
+data_dir = os.path.join(os.path.dirname(__file__), "Database")
 
 data_template = {
     "clicks": 0,
