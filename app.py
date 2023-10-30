@@ -3,8 +3,10 @@ import json
 
 from flask import Flask, render_template, request, jsonify
 from gunicorn.app.base import Application
+from werkzeug.middleware.proxy_fix import ProxyFix
 
 app = Flask(__name__)
+app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1, x_host=1)
 
 data_dir = os.path.join(os.path.dirname(__file__), "Database")
 
