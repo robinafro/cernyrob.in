@@ -1,12 +1,14 @@
 import os
 import json
+import time
 
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, make_response
+from flask_session import Session
 from gunicorn.app.base import Application
-from werkzeug.middleware.proxy_fix import ProxyFix
 
 app = Flask(__name__)
-app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1, x_host=1)
+app.config['SESSION_TYPE'] = 'filesystem'
+Session(app)
 
 data_dir = os.path.join(os.path.dirname(__file__), "Database")
 
@@ -31,26 +33,31 @@ def load_data(ip_address):
 
 @app.route('/get_player_data')
 def get_player_data():
-    return jsonify(player_data=load_data(request.remote_addr))
+    return jsonify(player_data=load_data(request.cookies.get('id')))
 
 @app.route('/add_click')
 def add_click():
-    data = load_data(request.remote_addr)
+    data = load_data(request.cookies.get('id'))
 
     data["clicks"] += data["clickmult"]
 
-    save_data(request.remote_addr, data)
+    save_data(request.cookies.get('id'), data)
 
     return jsonify(status="success")
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    response = make_response(render_template('index.html'))
+
+    if request.cookies.get('id') is None:
+        response.set_cookie('id', time.time())
+
+    return response
 
 @app.route('/clicker/')
 def clicker():
-    player_ip = request.remote_addr 
-    player_data = json.dumps(load_data(player_ip))
+    player_id = request.cookies.get('id') 
+    player_data = json.dumps(load_data(player_id))
 
     return render_template('clicker.html', player_data=player_data)
 
