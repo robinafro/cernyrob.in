@@ -19,6 +19,9 @@ data_template = {
     "upgrades": [],
 }
 
+def current_time():
+    return str(floor(time.time()))
+
 def save_data(ip_address, data):
     filename = os.path.join(data_dir, f"{ip_address}.json")
     with open(filename, "w") as file:
@@ -51,13 +54,13 @@ def index():
     response = make_response(render_template('index.html'))
     
     if request.cookies.get('id') is None:
-        response.set_cookie('id', time.time())
+        response.set_cookie('id', current_time())
 
     return response
 
 @app.route('/clicker/')
 def clicker():
-    tm = time.time()
+    tm = current_time()
 
     response = make_response(render_template('clicker.html', player_data=json.dumps(load_data(request.cookies.get('id') or tm))))
 
