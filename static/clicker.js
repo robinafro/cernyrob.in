@@ -1,6 +1,13 @@
 document.addEventListener('DOMContentLoaded', function () {
-    var playerData = {{ player_data|tojson|safe }};
-    console.log(playerData);
+    var playerData = null
+        
+    fetch('/get_player_data')
+    .then(response => response.json())
+    .then(data => {
+        playerData = data.player_data;
+        console.log(playerData);
+    })
+    .catch(error => console.error('Error:', error));
 
     const button = document.getElementById('clicker-button');
     const clickCountElement = document.getElementById('click-count');

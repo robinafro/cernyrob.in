@@ -27,6 +27,10 @@ def load_data(ip_address):
     else:
         return data_template
 
+@app.route('/get_player_data')
+def get_player_data():
+    return load_data(request.remote_addr)
+
 @app.route('/add_click/')
 def add_click(ip_address):
     data = load_data(ip_address)
