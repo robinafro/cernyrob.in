@@ -130,12 +130,10 @@ def auth():
 
 @app.route('/login/')
 def login():
-    response = make_response(render_template('login.html'))
-
     if request.cookies.get('id') is None:
-        return response # return the login screen. the client will later send their login credentials
+        return make_response(render_template('login.html')) # return the login screen. the client will later send their login credentials
     else:
-        return 'OK'
+        return make_response(render_template('auth.html'))
 
 @app.route('/clicker/')
 def clicker():
