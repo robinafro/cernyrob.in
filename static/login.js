@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     var loginButton = document.getElementById('login-button');
+    var redirect = "/clicker"
 
     loginButton.addEventListener('click', function () {
         console.log("Clicked");

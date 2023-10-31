@@ -3,7 +3,7 @@ import json
 import time
 import math
 
-from flask import Flask, render_template, request, jsonify, make_response
+from flask import Flask, render_template, request, jsonify, make_response, redirect
 from flask_session import Session
 from gunicorn.app.base import Application
 
@@ -15,36 +15,65 @@ app.config['SESSION_TYPE'] = 'filesystem'
 Session(app)
 
 data_dir = os.path.join(os.path.dirname(__file__), "Database")
+ids_dir = os.path.join(os.path.dirname(__file__), "IDs")
 
 data_template = {
-    "clicks": 0,
-    "clickmult": 1,
-    "upgrades": [],
+    "robin_clicker": {
+        "clicks": 0,
+        "clickmult": 1,
+        "upgrades": [],
+    },
+
+    "user_data": {
+        "username": None,
+        "password": None,
+    }
 }
 
 def current_time():
     return str(math.floor(time.time()))
 
-def save_data(ip_address, data):
-    filename = os.path.join(data_dir, f"{ip_address}.json")
+def save_data(key, data):
+    filename = os.path.join(data_dir, f"{key}.json")
     with open(filename, "w") as file:
         json.dump(data, file)
 
-def load_data(ip_address):
-    filename = os.path.join(data_dir, f"{ip_address}.json")
+def load_data(key):
+    filename = os.path.join(data_dir, f"{key}.json")
     if os.path.exists(filename):
         with open(filename, "r") as file:
             return json.load(file)
     else:
         return data_template
 
+def get_user_from_cookie(cookie):
+    filename = os.path.join(ids_dir, f"{cookie}.txt")
+    if os.path.exists(filename):
+        with open(filename, "r") as file:
+            return file.read()
+    else:
+        return None
+    
+def set_user_to_cookie(cookie, user):
+    filename = os.path.join(ids_dir, f"{cookie}.txt")
+    with open(filename, "w") as file:
+       file.write(user)
+
+def get_cookie_from_user(username):
+    for filename in os.listdir(ids_dir):
+        with open(os.path.join(ids_dir, filename), "r") as file:
+            cookie = file.read()
+            if cookie == username:
+                return cookie
+    return False
+
 @app.route('/get_player_data')
 def get_player_data():
-    return jsonify(player_data=load_data(request.cookies.get('id')))
+    return jsonify(player_data=load_data(request.cookies.get('id'))["robin_clicker"])
 
 @app.route('/add_click')
 def add_click():
-    data = load_data(request.cookies.get('id'))
+    data = load_data(request.cookies.get('id'))["robin_clicker"]
 
     data["clicks"] += data["clickmult"]
 
@@ -61,8 +90,41 @@ def index():
 
     return response
 
+@app.route('/auth/', methods=['POST'])
+def auth():
+    if request.method == 'POST':
+        username = request.form.get('username')
+        password = request.form.get('password')
+
+        if not (request.cookies.get('id') is None):
+            return 'OK'
+        else:
+            response = make_response(render_template('auth.html'))
+            cookie_value = get_cookie_from_user(username)
+
+            if cookie_value is None:
+                cookie_value = current_time()
+            
+            user_data = load_data(cookie_value)
+
+            if cookie_value is None:
+                user_data["user_data"]["username"] = username
+                user_data["user_data"]["password"] = password
+
+                save_data(cookie_value, user_data)
+            else:
+                if user_data["user_data"]["username"] != username:
+                    return 'Incorrect username or password.', 401
+                elif user_data["user_data"]["password"] != password:
+                    return 'Incorrect username or password.', 401
+
+            set_user_to_cookie(cookie_value, username)
+            response.set_cookie('id', cookie_value, max_age=YEAR)
+
+            return response
+
 @app.route('/login/')
-def auth_screen():
+def login():
     response = make_response(render_template('auth.html'))
 
     if request.cookies.get('id') is None:
@@ -76,7 +138,7 @@ def auth_screen():
 def clicker():
     tm = current_time()
 
-    response = make_response(render_template('clicker.html', player_data=json.dumps(load_data(request.cookies.get('id') or tm))))
+    response = make_response(render_template('clicker.html', player_data=json.dumps(load_data(request.cookies.get('id') or tm)["robin_clicker"])))
 
     if request.cookies.get('id') is None:
         response.set_cookie('id', tm, max_age=YEAR)
