@@ -25,6 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
             response.text().then(function (text) {
                 if (text === "OK") {
                     console.log("Successful login");
+                    window.location.replace("/" + redirect)
                 } else {
                     document.getElementById("login-password").placeholder = text;
                 }
