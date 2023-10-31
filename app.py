@@ -139,7 +139,9 @@ def login():
 def clicker():
     tm = current_time()
 
-    response = make_response(render_template('clicker.html', player_data=json.dumps(load_data(request.cookies.get('id') or tm)["robin_clicker"])))
+    data = load_data(request.cookies.get('id') or 0)["robin_clicker"]
+
+    response = make_response(render_template('clicker.html', data))
 
     if request.cookies.get('id') is None:
         response.set_cookie('id', tm, max_age=YEAR)
