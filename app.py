@@ -141,7 +141,7 @@ def clicker():
 
     data = load_data(request.cookies.get('id') or 0)["robin_clicker"]
 
-    response = make_response(render_template('clicker.html'), player_data=data)
+    response = make_response(render_template('clicker.html', player_data=json.dumps(data)))
 
     # if request.cookies.get('id') is None:
     #     response.set_cookie('id', tm, max_age=YEAR)
