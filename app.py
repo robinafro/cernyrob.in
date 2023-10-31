@@ -65,7 +65,7 @@ def get_cookie_from_user(username):
             cookie = file.read()
             if cookie == username:
                 return cookie
-    return False
+    return None
 
 @app.route('/get_player_data')
 def get_player_data():
@@ -103,8 +103,6 @@ def auth():
         else:
             response = render_template('auth.html')
             cookie_value = get_cookie_from_user(username)
-            if True:
-                return cookie_value
             cookie_value_was_none = cookie_value is None
 
             if cookie_value is None:
