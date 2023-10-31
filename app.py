@@ -7,7 +7,7 @@ from flask import Flask, render_template, request, jsonify, make_response
 from flask_session import Session
 from gunicorn.app.base import Application
 
-YEAR= 60 * 60 * 24 * 365
+YEAR = 60 * 60 * 24 * 365
 
 app = Flask(__name__)
 app.config["SESSION_PERMANENT"] = True
