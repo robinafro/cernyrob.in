@@ -135,7 +135,7 @@ def login():
     if request.cookies.get('id') is None:
         return response # return the login screen. the client will later send their login credentials
     else:
-        return redirect('/auth/')
+        return 'OK'
 
 @app.route('/clicker/')
 def clicker():
