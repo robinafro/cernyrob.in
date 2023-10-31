@@ -9,7 +9,7 @@ from gunicorn.app.base import Application
 
 YEAR = 60 * 60 * 24 * 365
 
-app = Flask(__name__)
+app = Flask(__name__, debug=True)
 app.config["SESSION_PERMANENT"] = True
 app.config['SESSION_TYPE'] = 'filesystem'
 Session(app)
