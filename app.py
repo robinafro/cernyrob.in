@@ -61,6 +61,17 @@ def index():
 
     return response
 
+@app.route('/login/')
+def auth_screen():
+    response = make_response(render_template('auth.html'))
+
+    if request.cookies.get('id') is None:
+        return response # return the login screen. the client will later send their login credentials
+    else:
+        # redirect to the page that the user was at before they got redirected to the login screen
+        # temporary code below
+        return response
+
 @app.route('/clicker/')
 def clicker():
     tm = current_time()
