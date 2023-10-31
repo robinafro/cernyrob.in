@@ -9,7 +9,7 @@ from gunicorn.app.base import Application
 
 YEAR = 60 * 60 * 24 * 365
 
-app = Flask(__name__, debug=True)
+app = Flask(__name__)
 app.config["SESSION_PERMANENT"] = True
 app.config['SESSION_TYPE'] = 'filesystem'
 Session(app)
@@ -103,7 +103,8 @@ def auth():
         else:
             response = render_template('auth.html')
             cookie_value = get_cookie_from_user(username)
-            print(cookie_value)
+            if True:
+                return cookie_value
             cookie_value_was_none = cookie_value is None
 
             if cookie_value is None:
