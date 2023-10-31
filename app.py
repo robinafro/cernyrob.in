@@ -73,9 +73,10 @@ def get_player_data():
 
 @app.route('/add_click')
 def add_click():
-    data = load_data(request.cookies.get('id'))["robin_clicker"]
+    data = load_data(request.cookies.get('id'))
+    clicker_data = load_data(request.cookies.get('id'))["robin_clicker"]
 
-    data["clicks"] += data["clickmult"]
+    clicker_data["clicks"] += clicker_data["clickmult"]
 
     save_data(request.cookies.get('id'), data)
 
