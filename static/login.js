@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     var redirect = "clicker"
     console.log(document.getElementById('auth-text'))
-    if (document.getElementById('auth-text')) {
+    if (document.getElementById('auth-text') != null) {
         window.location.replace("/" + redirect)
     }
 
