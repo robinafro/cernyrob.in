@@ -333,17 +333,32 @@
     aspect-ratio: 6.5;
     background-color: rgb(8, 1, 49);
 
+    border-radius: 1vh;
+
     margin-top: 2.5%;
     margin-bottom: 2.5%;
 
     position: relative;
 }
 
+.login-field {
+    width: 95%;
+    height: 70%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    position: relative;
+    background: none;
+    border: none;
+    text-align: left;
+    font-size: 150%;
+}
+
 #login-button {
     width: 40%;
     height: 80%;
     left: 50%;
-    top: 0%;
+    top: -17%;
     transform: translateX(-50%);
     background-color: rgb(8, 1, 49);
 
