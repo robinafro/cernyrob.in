@@ -101,7 +101,7 @@ def auth():
         if not (request.cookies.get('id') is None):
             return 'OK'
         else:
-            response = render_template('auth.html')
+            response = make_response(render_template('auth_redirect.html'))
             cookie_value = get_cookie_from_user(username)
             cookie_value_was_none = cookie_value is None
 
