@@ -86,8 +86,8 @@ def add_click():
 def index():
     response = make_response(render_template('index.html'))
     
-    if request.cookies.get('id') is None:
-        response.set_cookie('id', current_time(), max_age=YEAR)
+    # if request.cookies.get('id') is None:
+    #     response.set_cookie('id', current_time(), max_age=YEAR)
 
     return response
 
@@ -143,8 +143,8 @@ def clicker():
 
     response = make_response(render_template('clicker.html', data))
 
-    if request.cookies.get('id') is None:
-        response.set_cookie('id', tm, max_age=YEAR)
+    # if request.cookies.get('id') is None:
+    #     response.set_cookie('id', tm, max_age=YEAR)
 
     return response
 
