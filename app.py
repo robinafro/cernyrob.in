@@ -7,6 +7,8 @@ from flask import Flask, render_template, request, jsonify, make_response
 from flask_session import Session
 from gunicorn.app.base import Application
 
+YEAR= 60 * 60 * 24 * 365
+
 app = Flask(__name__)
 app.config["SESSION_PERMANENT"] = True
 app.config['SESSION_TYPE'] = 'filesystem'
@@ -55,7 +57,7 @@ def index():
     response = make_response(render_template('index.html'))
     
     if request.cookies.get('id') is None:
-        response.set_cookie('id', current_time())
+        response.set_cookie('id', current_time(), max_age=YEAR)
 
     return response
 
@@ -66,7 +68,7 @@ def clicker():
     response = make_response(render_template('clicker.html', player_data=json.dumps(load_data(request.cookies.get('id') or tm))))
 
     if request.cookies.get('id') is None:
-        response.set_cookie('id', tm)
+        response.set_cookie('id', tm, max_age=YEAR)
 
     return response
 
