@@ -103,6 +103,7 @@ def auth():
         else:
             response = render_template('auth.html')
             cookie_value = get_cookie_from_user(username)
+            print(cookie_value)
             cookie_value_was_none = cookie_value is None
 
             if cookie_value is None:
