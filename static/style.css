@@ -303,14 +303,54 @@
 }
 
 #login-holder {
-	position: absolute;
 	transform: translate(-50%, -50%);
 	top: 50%;
 	left: 50%;
-	width: 40%;
-	aspect-ratio = 2.5;
+	height: 32%;
+    min-width: 500px;
+    max-width: 60vh;
+    width: 40%;
+    background-color: rgb(20, 28, 73);
+
+    display: grid;
+    grid-template-columns: 1;
+    grid-template-rows: repeat(2, 1fr);
+
+    gap: 1rem;
+
+    border-radius: 2vh;
+
+    padding-top: 2.5%;
+    padding-bottom: 2.5%;
+
+    position: absolute;
 }
 
 .login-line {
+    width: 90%;
+    left: 50%;
+    transform: translateX(-50%);
+    aspect-ratio: 6.5;
+    background-color: rgb(8, 1, 49);
 
+    margin-top: 2.5%;
+    margin-bottom: 2.5%;
+
+    position: relative;
+}
+
+#login-button {
+    width: 40%;
+    height: 80%;
+    left: 50%;
+    top: 0%;
+    transform: translateX(-50%);
+    background-color: rgb(8, 1, 49);
+
+    position: relative;
+
+    border-radius: 10px;
+    border-style: none;
+
+    font-size: 150%;
 }
