@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     var loginButton = document.getElementById('login-button');
-    var redirect = "/clicker"
+    var redirect = "clicker"
 
     loginButton.addEventListener('click', function () {
         console.log("Clicked");
@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
         var password = document.getElementById('login-password').value;
 
         // Make a URL-encoded string for passing POST data:
-        var dataString = "username=" + encodeURIComponent(username) + "&password=" + encodeURIComponent(password);
+        var dataString = "username=" + encodeURIComponent(username) + "&password=" + encodeURIComponent(password) + "&redirect=" + encodeURIComponent(redirect);
 
         fetch("/auth", {
             method: 'POST',

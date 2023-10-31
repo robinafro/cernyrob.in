@@ -96,19 +96,21 @@ def auth():
     if request.method == 'POST':
         username = request.form.get('username')
         password = request.form.get('password')
+        redirect = request.form.get('redirect')
 
         if not (request.cookies.get('id') is None):
             return 'OK'
         else:
-            response = make_response(render_template('auth.html'))
+            response = None
             cookie_value = get_cookie_from_user(username)
+            cookie_value_was_none = cookie_value is None
 
             if cookie_value is None:
                 cookie_value = current_time()
             
             user_data = load_data(cookie_value)
 
-            if cookie_value is None:
+            if cookie_value_was_none:
                 user_data["user_data"]["username"] = username
                 user_data["user_data"]["password"] = password
 
@@ -126,7 +128,7 @@ def auth():
 
 @app.route('/login/')
 def login():
-    response = make_response(render_template('auth.html'))
+    response = make_response(render_template('login.html'))
 
     if request.cookies.get('id') is None:
         return response # return the login screen. the client will later send their login credentials
