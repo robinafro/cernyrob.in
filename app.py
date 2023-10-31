@@ -91,7 +91,7 @@ def index():
 
     return response
 
-@app.route('/auth/', methods=['POST', 'GET'])
+@app.route('/auth/', methods=['POST'])
 def auth():
     if request.method == 'POST':
         username = request.form.get('username')
@@ -125,8 +125,6 @@ def auth():
             response.set_cookie('id', cookie_value, max_age=YEAR)
 
             return response
-    else:
-        return 'OK'
 
 @app.route('/login/')
 def login():
