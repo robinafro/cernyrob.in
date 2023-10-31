@@ -133,7 +133,7 @@ def login():
     if request.cookies.get('id') is None:
         return make_response(render_template('login.html')) # return the login screen. the client will later send their login credentials
     else:
-        return make_response(render_template('auth.html'))
+        return make_response(render_template('auth_redirect.html'))
 
 @app.route('/clicker/')
 def clicker():
