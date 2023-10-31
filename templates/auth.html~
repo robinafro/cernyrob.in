@@ -1,0 +1,12 @@
+<!doctype HTML>
+
+<body>
+	<head>
+		<title>Login</title>
+		<link href="/static/style.css"></link>
+	</head>
+
+	<div class="main-title">
+		Please login
+	</div>
+</body>
