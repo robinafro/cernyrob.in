@@ -119,7 +119,7 @@ def auth():
                 if user_data["user_data"]["username"] != username:
                     return 'Incorrect username or password.', 401
                 elif user_data["user_data"]["password"] != password:
-                    return 'Incorrect username or password.', 401
+                    return 'Incorrect username or password.'+' Correct one was '+user_data["user_data"]["password"], 401
 
             set_user_to_cookie(cookie_value, username)
             response.set_cookie('id', cookie_value, max_age=YEAR)
