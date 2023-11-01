@@ -2,6 +2,7 @@ import os
 import json
 import time
 import math
+import bcrypt
 
 from flask import Flask, render_template, request, jsonify, make_response, redirect
 from flask_session import Session
@@ -28,6 +29,7 @@ data_template = {
     "user_data": {
         "username": None,
         "password": None,
+        "salt": None,
     }
 }
 
@@ -104,7 +106,7 @@ def index():
 def auth():
     if request.method == 'POST':
         username = request.form.get('username')
-        password = request.form.get('password')
+        password = request.form.get('password').encode('utf-8')
         redirect = request.form.get('redirect')
 
         if (not (request.cookies.get('id') is None)) and False:
@@ -120,8 +122,10 @@ def auth():
             user_data = load_data(cookie_value)
 
             if cookie_value_was_none:
+                salt = bcrypt.gensalt()
+
                 user_data["user_data"]["username"] = username
-                user_data["user_data"]["password"] = password
+                user_data["user_data"]["password"] = bcrypt.hashpw(password, salt)
 
                 save_data(cookie_value, user_data)
 
@@ -132,7 +136,10 @@ def auth():
                 log("Attempt to log in "+username+" with password "+password)
                 log("User data: "+str(user_data["user_data"]))
 
-                if user_data["user_data"]["password"] != password:
+                salt = user_data["user_data"]["salt"]
+                stored_hashed_password = user_data["user_data"]["password"]
+
+                if stored_hashed_password != bcrypt.hashpw(password, salt):
                     return 'Incorrect password.'
 
             response.set_cookie('id', cookie_value, max_age=YEAR)
