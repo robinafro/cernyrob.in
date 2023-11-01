@@ -27,6 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     console.log("Successful login");
                     window.location.replace("/" + redirect)
                 } else {
+                    document.getElementById("login-password").value = "";
                     document.getElementById("login-password").placeholder = text;
                 }
             });
