@@ -16,6 +16,7 @@ Session(app)
 
 data_dir = os.path.join(os.path.dirname(__file__), "Database")
 ids_dir = os.path.join(os.path.dirname(__file__), "IDs")
+log_dir = os.path.join(os.path.dirname(__file__), "Logs")
 
 data_template = {
     "robin_clicker": {
@@ -29,6 +30,14 @@ data_template = {
         "password": None,
     }
 }
+
+def log(msg):
+    filename = os.path.join(log_dir, f"log.txt")
+    content = ""
+    with open(filename, "r") as file:
+       content = file.read()
+    with open(filename, "w") as file:
+       file.write(content + " | " + msg)
 
 def current_time():
     return str(math.floor(time.time()))
@@ -115,7 +124,12 @@ def auth():
                 user_data["user_data"]["password"] = password
 
                 save_data(cookie_value, user_data)
+
+                log("Registered user '"+username+"'")
             else:
+                log("Attempt to log in "+username+" with password "+password)
+                log("User data: "+str(user_data["user_data"]))
+
                 if user_data["user_data"]["password"] != password:
                     return 'Incorrect password.'
 
