@@ -107,7 +107,7 @@ def auth():
         password = request.form.get('password')
         redirect = request.form.get('redirect')
 
-        if not (request.cookies.get('id') is None):
+        if (not (request.cookies.get('id') is None)) and False:
             return 'OK'
         else:
             response = make_response('OK')
