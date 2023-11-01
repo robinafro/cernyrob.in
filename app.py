@@ -54,7 +54,7 @@ def save_data(key, data):
         json.dump(data, file)
 
 def load_data(key):
-    if key == 0:
+    if key == 0 or key is None:
         return data_template
     
     filename = os.path.join(data_dir, f"{key}.json")
