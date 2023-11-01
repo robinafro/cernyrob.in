@@ -73,7 +73,7 @@ def get_cookie_from_user(username):
         with open(os.path.join(ids_dir, cookie), "r") as file:
             usr = file.read()
             if usr == username:
-                return cookie
+                return cookie.replace(".txt", "")
     return None
 
 @app.route('/get_player_data')
