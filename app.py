@@ -60,10 +60,10 @@ def set_user_to_cookie(cookie, user):
        file.write(user)
 
 def get_cookie_from_user(username):
-    for filename in os.listdir(ids_dir):
-        with open(os.path.join(ids_dir, filename), "r") as file:
-            cookie = file.read()
-            if cookie == username:
+    for cookie in os.listdir(ids_dir):
+        with open(os.path.join(ids_dir, cookie), "r") as file:
+            usr = file.read()
+            if usr == username:
                 return cookie
     return None
 
@@ -106,7 +106,7 @@ def auth():
             cookie_value_was_none = cookie_value is None
 
             if cookie_value is None:
-                cookie_value = current_time()
+                cookie_value = current_time() # cookie value might be set to the current time even if the user is not new
             
             user_data = load_data(cookie_value)
 
@@ -119,7 +119,7 @@ def auth():
                 if user_data["user_data"]["username"] != username:
                     return 'Incorrect username.'+' Correct one was '+user_data["user_data"]["username"], 401
                 elif user_data["user_data"]["password"] != password:
-                    return 'Incorrect password.'+' Correct one was '+user_data["user_data"]["password"], 401 #todo
+                    return 'Incorrect password.'+' Correct one was '+user_data["user_data"]["password"], 401 #todo: username or password is none for some reason
 
             set_user_to_cookie(cookie_value, username)
             response.set_cookie('id', cookie_value, max_age=YEAR)
