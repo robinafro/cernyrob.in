@@ -95,7 +95,6 @@
     background-color: rgb(190, 156, 0);
 
     transition: all 40ms ease-in-out;
-    pointer-events: none;
 }
 
 #clicker-button:hover {
