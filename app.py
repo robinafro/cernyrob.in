@@ -106,7 +106,7 @@ def index():
 def auth():
     if request.method == 'POST':
         username = request.form.get('username')
-        password = request.form.get('password').encode('utf-8')
+        password = request.form.get('password')
         redirect = request.form.get('redirect')
 
         if (not (request.cookies.get('id') is None)) and False:
@@ -125,8 +125,9 @@ def auth():
                 salt = bcrypt.gensalt()
 
                 user_data["user_data"]["username"] = username
-                user_data["user_data"]["password"] = bcrypt.hashpw(password, salt)
-
+                user_data["user_data"]["password"] = bcrypt.hashpw(password.encode('utf-8'), salt)
+                user_data["user_data"]["salt"] = salt
+                
                 save_data(cookie_value, user_data)
 
                 log("Registered user '"+username+"'")
@@ -139,7 +140,7 @@ def auth():
                 salt = user_data["user_data"]["salt"]
                 stored_hashed_password = user_data["user_data"]["password"]
 
-                if stored_hashed_password != bcrypt.hashpw(password, salt):
+                if stored_hashed_password != bcrypt.hashpw(password.encode('utf-8'), salt):
                     return 'Incorrect password.'
 
             response.set_cookie('id', cookie_value, max_age=YEAR)
