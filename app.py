@@ -129,7 +129,7 @@ def auth():
 
                 user_data["user_data"]["username"] = username
                 user_data["user_data"]["password"] = hashed_password
-                user_data["user_data"]["salt"] = salt
+                user_data["user_data"]["salt"] = salt.decode('utf-8')
 
                 save_data(cookie_value, user_data)
 
@@ -140,7 +140,7 @@ def auth():
                 log("Attempt to log in "+username+" with password "+password)
                 log("User data: "+str(user_data["user_data"]))
 
-                salt = user_data["user_data"]["salt"]
+                salt = user_data["user_data"]["salt"].encode('utf-8')
                 stored_hashed_password = user_data["user_data"]["password"]
 
                 if stored_hashed_password != base64.b64encode(bcrypt.hashpw(base64.b64encodepassword.encode('utf-8'), salt)).decode('utf-8'):
