@@ -85,6 +85,9 @@ def get_player_data():
 
 @app.route('/add_click')
 def add_click():
+    if request.cookies.get('id') is None:
+        response.set_cookie('id', current_time(), max_age=YEAR)
+
     data = load_data(request.cookies.get('id'))
     clicker_data = data["robin_clicker"]
 
@@ -110,7 +113,7 @@ def auth():
         password = request.form.get('password')
         redirect = request.form.get('redirect')
 
-        if (not (request.cookies.get('id') is None)) and False:
+        if False: # disabled
             return 'OK'
         else:
             response = make_response('OK')
@@ -131,6 +134,11 @@ def auth():
                 user_data["user_data"]["password"] = hashed_password
                 user_data["user_data"]["salt"] = salt.decode('utf-8')
 
+                if not (request.cookies.get('id') is None):
+                    original_data = load_data(request.cookies.get('id'))
+                    original_data["user_data"] = user_data["user_data"]
+                    user_data = original_data
+                
                 save_data(cookie_value, user_data)
 
                 log("Registered user '"+username+"'")
