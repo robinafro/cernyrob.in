@@ -128,7 +128,7 @@ def auth():
                 hashed_password = base64.b64encode(hashed_password_bytes).decode('utf-8')
 
                 user_data["user_data"]["username"] = username
-                user_data["user_data"]["password"] = hashed_password_bytes.decode('utf-8')
+                user_data["user_data"]["password"] = hashed_password
                 user_data["user_data"]["salt"] = salt
 
                 save_data(cookie_value, user_data)
@@ -141,9 +141,9 @@ def auth():
                 log("User data: "+str(user_data["user_data"]))
 
                 salt = user_data["user_data"]["salt"]
-                stored_hashed_password = base64.b64decode(user_data["user_data"]["password"]).decode('utf-8')
+                stored_hashed_password = user_data["user_data"]["password"]
 
-                if stored_hashed_password != bcrypt.hashpw(password.encode('utf-8'), salt):
+                if stored_hashed_password != base64.b64encode(bcrypt.hashpw(base64.b64encodepassword.encode('utf-8'), salt)).decode('utf-8'):
                     return 'Incorrect password.'
 
             response.set_cookie('id', cookie_value, max_age=YEAR)
