@@ -135,8 +135,8 @@ def auth():
                 if user_data["user_data"]["password"] != password:
                     return 'Incorrect password.'
 
-            set_user_to_cookie(cookie_value, username)
             response.set_cookie('id', cookie_value, max_age=YEAR)
+            set_user_to_cookie(cookie_value, username)
 
             return response
 
