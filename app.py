@@ -85,9 +85,10 @@ def get_player_data():
 
 @app.route('/add_click')
 def add_click():
+    response = make_response(jsonify(status="success"))
     cookie = request.cookies.get('id')
 
-    if request.cookies.get('id') is None:
+    if cookie is None:
         tm = current_time()
         response.set_cookie('id', tm, max_age=YEAR)
         cookie = tm
@@ -99,7 +100,7 @@ def add_click():
 
     save_data(cookie, data)
 
-    return jsonify(status="success")
+    return response
 
 @app.route('/')
 def index():
