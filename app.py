@@ -85,15 +85,19 @@ def get_player_data():
 
 @app.route('/add_click')
 def add_click():
-    if request.cookies.get('id') is None:
-        response.set_cookie('id', current_time(), max_age=YEAR)
+    cookie = request.cookies.get('id')
 
-    data = load_data(request.cookies.get('id'))
+    if request.cookies.get('id') is None:
+        tm = current_time()
+        response.set_cookie('id', tm, max_age=YEAR)
+        cookie = tm
+
+    data = load_data(cookie)
     clicker_data = data["robin_clicker"]
 
     clicker_data["clicks"] += clicker_data["clickmult"]
 
-    save_data(request.cookies.get('id'), data)
+    save_data(cookie, data)
 
     return jsonify(status="success")
 
