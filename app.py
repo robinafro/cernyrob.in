@@ -46,11 +46,17 @@ def current_time():
     return str(math.floor(time.time()))
 
 def save_data(key, data):
+    if key == 0:
+        return
+    
     filename = os.path.join(data_dir, f"{key}.json")
     with open(filename, "w") as file:
         json.dump(data, file)
 
 def load_data(key):
+    if key == 0:
+        return data_template
+    
     filename = os.path.join(data_dir, f"{key}.json")
     if os.path.exists(filename):
         with open(filename, "r") as file:
