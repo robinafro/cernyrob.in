@@ -3,6 +3,7 @@ import json
 import time
 import math
 import bcrypt
+import base64
 
 from flask import Flask, render_template, request, jsonify, make_response, redirect
 from flask_session import Session
@@ -123,11 +124,13 @@ def auth():
 
             if cookie_value_was_none:
                 salt = bcrypt.gensalt()
+                hashed_password_bytes = bcrypt.hashpw(password.encode('utf-8'), salt)
+                hashed_password = base64.b64encode(hashed_password_bytes).decode('utf-8')
 
                 user_data["user_data"]["username"] = username
-                user_data["user_data"]["password"] = bcrypt.hashpw(password.encode('utf-8'), salt)
+                user_data["user_data"]["password"] = hashed_password
                 user_data["user_data"]["salt"] = salt
-                
+
                 save_data(cookie_value, user_data)
 
                 log("Registered user '"+username+"'")
