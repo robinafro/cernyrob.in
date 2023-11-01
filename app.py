@@ -142,7 +142,7 @@ def auth():
 
 @app.route('/login/')
 def login():
-    if request.cookies.get('id') is None:
+    if request.cookies.get('id') is None or True:
         return make_response(render_template('login.html')) # return the login screen. the client will later send their login credentials
     else:
         return make_response(render_template('auth_redirect.html'))
