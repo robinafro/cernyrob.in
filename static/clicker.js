@@ -11,6 +11,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
             let counter = parseInt(playerData["clicks"]);
 
+            button.ondragstart = () => {
+                return false;
+            };
+
             button.addEventListener('click', function () {
                 counter++;
 
