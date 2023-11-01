@@ -126,6 +126,8 @@ def auth():
                 save_data(cookie_value, user_data)
 
                 log("Registered user '"+username+"'")
+                log("User data: "+str(user_data["user_data"]))
+                log("Actual user data: "+str(load_data(cookie_value)["user_data"]))
             else:
                 log("Attempt to log in "+username+" with password "+password)
                 log("User data: "+str(user_data["user_data"]))
