@@ -28,10 +28,6 @@ if not os.path.exists(ids_dir):
 if not os.path.exists(log_dir):
     os.makedirs(log_dir)
 
-data_dir = os.path.join(os.path.dirname(__file__), "Database")
-ids_dir = os.path.join(os.path.dirname(__file__), "IDs")
-log_dir = os.path.join(os.path.dirname(__file__), "Logs")
-
 data_template = {
     "robin_clicker": {
         "clicks": 0,
