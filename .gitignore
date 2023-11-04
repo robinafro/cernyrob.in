@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /Database/*
 /IDs/*
 /Logs/*
@@ -5,3 +6,7 @@
 /__pycache__
 /flask_session
 /flask_session.bac
+=======
+/flask_session
+/flask_session/*
+>>>>>>> 1dc0706192c0163ad08ed40a0abe6d7ce0bb83de
