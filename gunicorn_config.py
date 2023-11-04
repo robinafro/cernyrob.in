@@ -12,5 +12,5 @@ forwarded_allow_ips = '*'
 
 secure_scheme_headers = { 'X-Forwarded-Proto': 'https' }
 
-keyfile = '/etc/letsencrypt/live/cernyrob.in/privkey.pem'
-certfile = '/etc/letsencrypt/live/cernyrob.in/fullchain.pem'
+keyfile = '/etc/letsencrypt/live/cernyrob.in-0001/privkey.pem'
+certfile = '/etc/letsencrypt/live/cernyrob.in-0001/fullchain.pem'

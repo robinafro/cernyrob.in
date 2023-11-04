@@ -1,1 +1,6 @@
-/test_server.py
+/Database/*
+/IDs/*
+/Logs/*
+/__pycache__
+/flask_session
+/flask_session.bac
