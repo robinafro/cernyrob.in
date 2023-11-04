@@ -7,7 +7,6 @@ import base64
 
 from flask import Flask, render_template, request, jsonify, make_response, redirect
 from flask_session import Session
-from gunicorn.app.base import Application
 
 YEAR = 60 * 60 * 24 * 365
 
@@ -194,18 +193,22 @@ if not os.path.exists(data_dir):
     os.mkdir(data_dir)
 
 if __name__ == '__main__':
-    class StandaloneApplication(Application):
-        def init(self, parser, opts, args):
-            return {
-                'bind': '0.0.0.0:8000',
-                'workers': 4,
-                'worker_class': 'gevent',
-            }
+    if os.name == "posix":
+        from gunicorn.app.base import Application
 
-        def load(self):
-            return app
+        class StandaloneApplication(Application):
+            def init(self, parser, opts, args):
+                return {
+                    'bind': '0.0.0.0:8000',
+                    'workers': 4,
+                    'worker_class': 'gevent',
+                }
 
-    print("Booting server...")
+            def load(self):
+                return app
 
-    StandaloneApplication().run()
+        print("Booting server using Gunicorn...")
 
+        StandaloneApplication().run()
+    else:
+        app.run(debug=True, host='0.0.0.0', port=80)
