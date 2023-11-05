@@ -30,10 +30,12 @@ rate_limit = {}
 def log(msg):
     filename = os.path.join(log_dir, f"log.txt")
     content = ""
-    with open(filename, "r") as file:
-       content = file.read()
-    with open(filename, "w") as file:
-       file.write(content + " | " + msg)
+
+    if os.path.exists(filename):
+        with open(filename, "r") as file:
+            content = file.read()
+        with open(filename, "w") as file:
+            file.write(content + " | " + msg)
 
 def current_time():
     return str(math.floor(time.time()))
