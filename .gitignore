@@ -10,3 +10,5 @@
 /flask_session
 /flask_session.bac
 /__pycache__
+
+/.vscode
