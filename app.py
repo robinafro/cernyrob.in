@@ -58,7 +58,7 @@ def get_player_data():
     return jsonify(player_data=database.load_data(request.cookies.get('id'))["robin_clicker"])
 
 @app.route('/add_click', methods=['GET'])
-@limiter.limit("50 per second", key_func=custom_key_func)
+@limiter.limit("50 per second")
 def add_click():
     response = None
     cookie = request.cookies.get('id')
