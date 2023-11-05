@@ -58,7 +58,7 @@ def add_click():
 
     rate_limited = time.time() - rate_limit[cookie] < RATE_LIMIT
 
-    clicker_data = {}#database.increment(cookie, "clicks", 0 if rate_limited else "clickmult")["robin_clicker"]
+    clicker_data = database.increment(cookie, "clicks", 0 if rate_limited else "clickmult")["robin_clicker"]
     
     response = make_response(jsonify(status=("rate_limited" if rate_limited else "success"), player_data=clicker_data))
     if request.cookies.get('id') is None:
