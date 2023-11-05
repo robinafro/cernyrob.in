@@ -92,7 +92,7 @@ def auth():
         password = request.form.get('password')
         redirect = request.form.get('redirect')
 
-        if False: # disabled
+        if False: # disabled, will delete soon
             return 'OK'
         else:
             response = make_response('OK')
@@ -100,7 +100,7 @@ def auth():
             cookie_value_was_none = cookie_value is None
 
             if cookie_value is None:
-                cookie_value = current_time() # cookie value might be set to the current time even if the user is not new
+                cookie_value = current_time()
             
             user_data = database.load_data(cookie_value)
 
