@@ -131,7 +131,7 @@ def auth():
 def login():
     if request.cookies.get('id') is None or True:
         return make_response(render_template('login.html')) # return the login screen. the client will later send their login credentials
-    else:
+    else: # Disabled
         return make_response(render_template('auth_redirect.html'))
 
 @app.route('/clicker/')
@@ -141,9 +141,6 @@ def clicker():
     data = database.load_data(request.cookies.get('id') or 0)["robin_clicker"]
 
     response = make_response(render_template('clicker.html', player_data=json.dumps(data)))
-
-    # if request.cookies.get('id') is None:
-    #     response.set_cookie('id', tm, max_age=YEAR)
 
     return response
 
