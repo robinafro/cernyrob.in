@@ -7,6 +7,8 @@ import base64
 
 from flask import Flask, render_template, request, jsonify, make_response, redirect
 from flask_session import Session
+from flask_limiter import Limiter
+from flask import request
 
 import database
 
@@ -16,6 +18,17 @@ RATE_LIMIT = 1 / 25 # CPS
 app = Flask(__name__)
 app.config["SESSION_PERMANENT"] = True
 app.config['SESSION_TYPE'] = 'filesystem'
+
+def custom_key_func():
+    # Get the "id" cookie from the client's request
+    client_id = request.cookies.get("id")
+    return f"client:{client_id}" if client_id else "client:anonymous"
+
+limiter = Limiter(
+    app,
+    key_func=custom_key_func,
+)
+
 Session(app)
 
 log_dir = os.path.join(os.path.dirname(__file__), "Logs")
@@ -45,6 +58,7 @@ def get_player_data():
     return jsonify(player_data=database.load_data(request.cookies.get('id'))["robin_clicker"])
 
 @app.route('/add_click', methods=['GET'])
+@limiter.limit("50 per second", key_func=custom_key_func)
 def add_click():
     response = None
     cookie = request.cookies.get('id')
