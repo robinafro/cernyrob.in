@@ -1,3 +1,5 @@
+var last_data = null;
+
 document.addEventListener('DOMContentLoaded', function () {
     fetch('/get_player_data')
         .then(response => response.json())
@@ -16,6 +18,12 @@ document.addEventListener('DOMContentLoaded', function () {
             };
 
             button.addEventListener('click', function () {
+                if (last_data != null) {
+                    if (last_data["clicks"] > counter) {
+                        counter = last_data["clicks"];
+                    }
+                }
+
                 counter++;
 
                 clickCountElement.textContent = counter;
@@ -31,8 +39,19 @@ document.addEventListener('DOMContentLoaded', function () {
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    // body: JSON.stringify({ action: 'add_click' }),
-                });
+                })
+                .then(response => response.json())
+                .then(data => {
+                    last_data = data.player_data;
+
+                    if (data.status == "rate_limited") {
+                        counter = parseInt(data.player_data["clicks"]);
+                        clickCountElement.textContent = counter;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });;
 
             });
 
