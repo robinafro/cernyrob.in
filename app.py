@@ -155,9 +155,15 @@ def clicker():
 
     return response
 
+@app.route('/', subdomain="test")
+def test():
+    return "Test subdomain"
+
 if __name__ == '__main__':
     if os.name == "posix":
         from gunicorn.app.base import Application
+
+        app.config['SERVER_NAME'] = 'cernyrob.in'
 
         class StandaloneApplication(Application):
             def init(self, parser, opts, args):
@@ -174,4 +180,6 @@ if __name__ == '__main__':
 
         StandaloneApplication().run()
     else:
+        app.config['SERVER_NAME'] = 'localhost'
+
         app.run(debug=True, host='0.0.0.0', port=80)
