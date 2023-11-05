@@ -24,10 +24,7 @@ def custom_key_func():
     client_id = request.cookies.get("id")
     return f"client:{client_id}" if client_id else "client:anonymous"
 
-limiter = Limiter(
-    app,
-    key_func=custom_key_func,
-)
+limiter = Limiter(custom_key_func, app=app)
 
 Session(app)
 
@@ -58,7 +55,7 @@ def get_player_data():
     return jsonify(player_data=database.load_data(request.cookies.get('id'))["robin_clicker"])
 
 @app.route('/add_click', methods=['GET'])
-@limiter.limit("50 per second")
+@limiter.limit("30 per second")
 def add_click():
     response = None
     cookie = request.cookies.get('id')
