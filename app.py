@@ -20,6 +20,7 @@ RATE_LIMIT = 1 / 25 # CPS
 app = Flask(__name__)
 app.config["SESSION_PERMANENT"] = True
 app.config['SESSION_TYPE'] = 'filesystem'
+app.config['SERVER_NAME'] = 'cernyrob.in'
 
 def custom_key_func():
     # Get the "id" cookie from the client's request
@@ -170,8 +171,6 @@ def redirect_to_non_www():
         return redirect(urlunparse(urlparts_list), code=301)
 
 if __name__ == '__main__':
-    print(platform.system())
-    log(platform.system())
     if platform.system() == "Linux":
         from gunicorn.app.base import Application
 
