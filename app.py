@@ -157,7 +157,7 @@ def clicker():
 
 @app.route('/', subdomain="www")
 def test():
-    return index()
+    return redirect('/')
 
 if __name__ == '__main__':
     if os.name == "posix":
