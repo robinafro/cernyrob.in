@@ -9,6 +9,7 @@ from flask import Flask, render_template, request, jsonify, make_response, redir
 from flask_session import Session
 from flask_limiter import Limiter
 from flask import request
+from urllib.parse import urlparse, urlunparse
 
 import database
 
@@ -155,9 +156,17 @@ def clicker():
 
     return response
 
-@app.route('/', subdomain="www")
+@app.route('/', subdomain="test")
 def test():
-    return redirect('/')
+    return "Test subdomain"
+
+@app.before_request
+def redirect_to_non_www():
+    urlparts = urlparse(request.url)
+    if urlparts.netloc == 'www.'+app.config['SERVER_NAME']:
+        urlparts_list = list(urlparts)
+        urlparts_list[1] = app.config['SERVER_NAME']
+        return redirect(urlunparse(urlparts_list), code=301)
 
 if __name__ == '__main__':
     if os.name == "posix":
