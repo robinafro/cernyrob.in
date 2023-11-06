@@ -79,7 +79,7 @@ def add_click():
 
     return response
 
-@app.route('/')
+@app.route('/', subdomain="")
 def index():
     response = make_response(render_template('index.html'))
 
