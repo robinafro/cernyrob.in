@@ -370,3 +370,27 @@
 
     font-size: 150%;
 }
+
+#login-warning {
+    width: 70%;
+    height: 10%;
+
+    left: 50%;
+    transform: translate(-50%);
+    position: relative;
+    
+    text-align: center;
+    font-size: 18px;
+
+    color: crimson;
+}
+
+#login-redirect {
+    position: absolute;
+
+    top: 3vh;
+    right: 15px;
+
+    aspect-ratio: 2.5;
+    height: 40px;
+}

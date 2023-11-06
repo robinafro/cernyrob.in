@@ -19,7 +19,11 @@
 				</div>
 
 				<div class="login-line">
-					<input id="login-password" class="default-font login-field" type="password" placeholder="Password" required></input>
+					<input id="login-password" class="default-font login-field" type="password" placeholder="Password" pattern="[^ ]+" required></input>
+				</div>
+
+				<div id="login-warning" class="default-font">
+					Incorrect username or password
 				</div>
 
 				<div class="login-line" style="background: none">
