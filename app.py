@@ -1,4 +1,5 @@
 import os
+import platform
 import json
 import time
 import math
@@ -169,7 +170,7 @@ def redirect_to_non_www():
         return redirect(urlunparse(urlparts_list), code=301)
 
 if __name__ == '__main__':
-    if os.name == "posix":
+    if platform.system() == "Linux":
         from gunicorn.app.base import Application
 
         app.config['SERVER_NAME'] = 'cernyrob.in'
