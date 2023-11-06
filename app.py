@@ -155,7 +155,7 @@ def clicker():
 
     return response
 
-@app.route('/', subdomain="test")
+@app.route('/', subdomain="www")
 def test():
     return "Test subdomain"
 
