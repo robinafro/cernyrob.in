@@ -13,6 +13,7 @@ from flask import request
 from urllib.parse import urlparse, urlunparse
 
 import database
+import callme
 
 YEAR = 60 * 60 * 24 * 365
 RATE_LIMIT = 1 / 25 # CPS
@@ -76,7 +77,7 @@ def add_click():
     
     response = make_response(jsonify(status=("rate_limited" if rate_limited else "success"), player_data=clicker_data))
     if request.cookies.get('id') is None:
-        response.set_cookie('id', cookie, max_age=YEAR)
+        response.set_cookie('id', cookie, max_age=YEAR, domain=('.'+app.config['SERVER_NAME']))
 
     rate_limit[cookie] = time.time()
 
@@ -136,17 +137,24 @@ def auth():
                 if stored_hashed_password != base64.b64encode(bcrypt.hashpw(password.encode('utf-8'), salt)).decode('utf-8'):
                     return 'Incorrect password.'
 
-            response.set_cookie('id', cookie_value, max_age=YEAR)
+            response.set_cookie('id', cookie_value, max_age=YEAR, domain=('.'+app.config['SERVER_NAME']))
             database.set_user_to_cookie(cookie_value, username)
 
             return response
 
-@app.route('/login/')
-def login():
-    if request.cookies.get('id') is None or True:
-        return make_response(render_template('login.html')) # return the login screen. the client will later send their login credentials
-    else: # Disabled
-        return make_response(render_template('auth_redirect.html'))
+@app.route('/login/<redirect>/')
+def login(redirect):
+    processed_redirect = redirect
+    page = redirect
+    subdomain = ""
+
+    if redirect.find(".") != -1:
+        subdomain = redirect.split(".")[0] + "."
+        page = redirect.split(".")[1]
+    
+    processed_redirect = "http://" + subdomain + app.config['SERVER_NAME'] + "/" + page
+    
+    return make_response(render_template('login.html', redirect=processed_redirect))
 
 @app.route('/clicker/')
 def clicker():
@@ -169,6 +177,8 @@ def redirect_to_non_www():
         urlparts_list = list(urlparts)
         urlparts_list[1] = app.config['SERVER_NAME'] or "cernyrob.in"
         return redirect(urlunparse(urlparts_list), code=301)
+
+callme.init(app)
 
 if __name__ == '__main__':
     if platform.system() == "Linux":

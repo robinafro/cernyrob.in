@@ -22,6 +22,11 @@ data_template = {
         "upgrades": [],
     },
 
+    "callme": {
+        "phone_number": None,
+        "theme": "default",
+    },
+
     "user_data": {
         "username": None,
         "password": None,
@@ -60,6 +65,22 @@ def load_data(key):
             return json.load(file)
     else:
         return data_template
+
+def load_or_create_data(request):
+    cookie = request.cookies.get('id')
+    was_none = False
+
+    if cookie is None:
+        was_none = True
+
+        cookie = time.time()
+    
+    data = load_data(cookie)
+
+    if was_none:
+        save_data(cookie, data_template)
+    
+    return data
 
 def increment(key, field, amount=1):
     # Initialize queue

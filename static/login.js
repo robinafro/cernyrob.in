@@ -1,8 +1,10 @@
 document.addEventListener("DOMContentLoaded", function () {
-    var redirect = "clicker"
+    var redirect = document.getElementById('login-destination').innerHTML;
+    console.log("Will redirect to " + redirect + " after login")
+
     console.log(document.getElementById('auth-text'))
     if (document.getElementById('auth-text') != null) {
-        window.location.replace("/" + redirect)
+        window.location.replace(redirect)
     }
 
     var loginButton = document.getElementById('login-button');
@@ -25,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 response.text().then(function (text) {
                     if (text === "OK") {
                         console.log("Successful login");
-                        window.location.replace("/" + redirect)
+                        window.location.replace(redirect)
                     } else {
                         document.getElementById("login-password").value = "";
                         loginWarning.innerHTML = text;
