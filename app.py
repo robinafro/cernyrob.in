@@ -79,7 +79,7 @@ def add_click():
 
     return response
 
-@app.route('/', subdomain="www")
+@app.route('/')
 def index():
     response = make_response(render_template('index.html'))
 
@@ -157,7 +157,7 @@ def clicker():
 
 @app.route('/', subdomain="www")
 def test():
-    return "Test subdomain"
+    return index()
 
 if __name__ == '__main__':
     if os.name == "posix":
