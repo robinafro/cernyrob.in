@@ -62,6 +62,9 @@ def load_data(key):
     filename = os.path.join(data_dir, f"{key}.json")
     if os.path.exists(filename):
         with open(filename, "r") as file:
+            if file is None or file == "":
+                return data_template
+            
             return json.load(file)
     else:
         return data_template
