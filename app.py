@@ -117,7 +117,7 @@ def auth():
                 user_data["user_data"]["password"] = hashed_password
                 user_data["user_data"]["salt"] = salt.decode('utf-8')
 
-                if not (request.cookies.get('id') is None):
+                if (not (request.cookies.get('id') is None)) and database.get_user_from_cookie(request.cookies.get('id')):
                     original_data = database.load_data(request.cookies.get('id'))
                     original_data["user_data"] = user_data["user_data"]
                     user_data = original_data
