@@ -1,8 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     var redirect = document.getElementById('login-destination').innerHTML;
-    console.log("Will redirect to " + redirect + " after login")
-
-    console.log(document.getElementById('auth-text'))
+    
     if (document.getElementById('auth-text') != null) {
         window.location.replace(redirect)
     }
@@ -26,7 +24,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 // when it loads. We further process this text in the .then callback.
                 response.text().then(function (text) {
                     if (text === "OK") {
-                        console.log("Successful login");
                         window.location.replace(redirect)
                     } else {
                         document.getElementById("login-password").value = "";
