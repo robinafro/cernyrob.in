@@ -108,7 +108,7 @@
 }
 
 #total-clicks {
-    margin-top: 10vh;
+    margin-top: 1vh;
 }
 
 .default-font {
@@ -385,12 +385,35 @@
     color: crimson;
 }
 
+#login-redirect-holder {
+    width: 90vw;
+    height: 7vh;
+    margin-top: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    position: relative;
+    display: inline-block;
+}
+
 #login-redirect {
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
     position: absolute;
 
-    top: 3vh;
-    right: 15px;
+    aspect-ratio: 4.1;
+    height: 6vh;
 
-    aspect-ratio: 2.5;
-    height: 40px;
+    border: none;
+    border-radius: 7px;
+    background-color: yellowgreen;
+
+    box-shadow: 0 0 20px 0px yellowgreen;
+
+    font-weight: bold;
+    font-size: 2vh;
+}
+
+body {
+    overflow-x: hidden;
 }

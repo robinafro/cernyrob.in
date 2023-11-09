@@ -21,34 +21,13 @@
             click as many times as you can
         </div>
 
-        <a href="/login/clicker">
-            <button id="login-redirect">
-                Login
-            </button>
-
-            <script>
-                function checkScreenWidth() {
-                    const screenWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-
-                    // Disabled for now
-
-                    // if (screenWidth <= 400) {
-                    //     document.getElementById('login-redirect').style.right = "50wv";
-                    //     document.getElementById('login-redirect').style.transform = "translateX(50%)";
-                    //     document.getElementById('login-redirect').style.margin_top = "2%";
-                    // } else {
-                    //     document.getElementById('login-redirect').style.right = "15px";
-                    //     document.getElementById('login-redirect').style.transform = "translateX(0%)";
-                    //     document.getElementById('login-redirect').style.top = "3vh";
-                    // }
-                }
-
-                checkScreenWidth();
-
-                window.addEventListener('resize', checkScreenWidth);
-                window.addEventListener('DOMContentLoaded', checkScreenWidth);
-            </script>
-        </a>
+        <div id="login-redirect-holder">
+            <a href="/login/clicker">
+                <button id="login-redirect" class="default-font">
+                    Log in to track progress
+                </button>
+            </a>
+        </div>
 
         <div id="total-clicks" class="main-title">
             Your clicks: <span id="click-count">{{ player_data["clicks"] }}</span>
