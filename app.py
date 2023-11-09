@@ -96,6 +96,10 @@ def auth():
         password = request.form.get('password')
         redirect = request.form.get('redirect')
 
+        # Make sure there are no spaces in the username or password, that they are not empty, and if the length is within 3 to 20 characters
+        if not ((not (username is None)) and (not (password is None)) and (not (username.find(' ') != -1)) and (not (password.find(' ') != -1)) and (not (username == '')) and (not (password == '')) and (len(username) >= 3) and (len(username) <= 20) and (len(password) >= 3) and (len(password) <= 20)):
+            return 'Invalid username or password.'
+
         if False: # disabled, will delete soon
             return 'OK'
         else:
