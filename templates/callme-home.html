@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>Home - callme</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='theme.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='callme.css') }}" />
+</head>
+
+<body>
+    <div class="background bg-gradient">
+        <div class="container" id="callme-title-container">
+            <h1 class="main-title callme-title">
+                callme
+            </h1>
+    
+            <p class="default-font callme-subtitle">
+                the easiest way to share your phone number
+            </p>
+        </div>
+
+        <div id="callme-buttons-container">
+            <button class="container callme-button default-font theme-text theme-input" id="add-number">
+                <span>Add number</span>
+            </button>
+
+            <button class="container callme-button default-font theme-text theme-input" id="share-number">
+                <span>Share number</span>
+            </button>
+        </div>
+
+        <div class="default-font" id="footer">
+            Powered by <a id="footer-link" href="https://cernyrob.in">cernyrob.in</a>
+        </div>
+    </div>
+</body>
+
+</html>

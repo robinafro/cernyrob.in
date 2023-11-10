@@ -24,7 +24,7 @@ data_template = {
 
     "callme": {
         "phone_number": None,
-        "theme": "default",
+        "name": None,
     },
 
     "user_data": {

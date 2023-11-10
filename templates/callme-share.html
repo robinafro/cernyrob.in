@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>Share - callme</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='theme.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='callme.css') }}" />
+</head>
+
+<body>
+    <div class="background bg-gradient">
+        <div class="container" id="qr-container">
+            <div id="qr-holder">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=nebud kokot ty retarde lol"
+                    id="qr-code">
+                    <!-- <img src="/static/assets/robin.png" id="qr-middle" /> -->
+                    <!-- Disabled the center image within the QR code to prevent issues with scanning -->
+                    <!-- Should use a library that allows the center images -->
+                </img>
+            </div>
+        </div>
+
+        <div id="callme-buttons-container">
+            <button href="https://callme.cernyrob.in/view/xxxxxxxxxx" class="container callme-button default-font" id="link-display">
+                <span>callme.cernyrob.in/view/xxxxxxxxxx</span>
+            </button>
+        </div>
+
+        <div class="default-font" id="footer">
+            Powered by <a id="footer-link" href="https://cernyrob.in">cernyrob.in</a>
+        </div>
+    </div>
+
+</html>

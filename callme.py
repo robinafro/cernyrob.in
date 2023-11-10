@@ -6,7 +6,7 @@ from urllib.parse import urlparse, urlunparse
 def init(app):
     @app.route('/', subdomain="callme")
     def callme_home():
-        return "Head over to callme.cernyrob.in/create to create a new phone number link" # Will display a button (href /create), or a button to share or edit (href /share) if already created
+        return render_template("callme-home.html")
         
     @app.route('/create/', subdomain="callme", methods=['GET', 'POST'])
     def callme_create():
@@ -18,13 +18,13 @@ def init(app):
             callme_data = data["callme"]
 
             callme_data["phone_number"] = request.form["phone_number"]
-            callme_data["theme"] = request.form["theme"]
+            callme_data["name"] = request.form["name"]
 
             database.save_data(request.cookies.get('id'), data)
 
             return "OK"
         else:
-            return "TEST/CREATE" # Will display a menu where you can create a new link (acts as Share if already created)
+            return render_template("callme-create.html")
     
     @app.route('/edit/', subdomain="callme", methods=['GET', 'POST']) # Just for the URL to look good
     def callme_edit():
@@ -32,7 +32,7 @@ def init(app):
 
     @app.route('/share/', subdomain="callme")
     def callme_share():
-        return "TEST/SHARE" # Will display a QR code and a link to share
+        return render_template("callme-share.html")
     
     @app.route('/view/<username>/', subdomain="callme")
     def callme_view(username):
@@ -40,6 +40,6 @@ def init(app):
         callme_data = data["callme"]
 
         if callme_data["phone_number"] is None:
-            return "NO PHONE NUMBER FOR THIS USERNAME"
+            return render_template("callme-error.html")
         
-        return "TEST/VIEW: " + callme_data["phone_number"]
+        return render_template("callme-view.html", phone_number=callme_data["phone_number"], name=callme_data["name"])
