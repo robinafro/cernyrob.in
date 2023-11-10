@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
     <link rel="stylesheet" href="{{ url_for('static', filename='theme.css') }}" />
     <link rel="stylesheet" href="{{ url_for('static', filename='callme.css') }}" />
+
+    <script src="{{ url_for('static', filename='callme-home.js') }}"></script>
 </head>
 
 <body>
@@ -16,20 +18,30 @@
             <h1 class="main-title callme-title">
                 callme
             </h1>
-    
+
             <p class="default-font callme-subtitle">
                 the easiest way to share your phone number
             </p>
         </div>
 
         <div id="callme-buttons-container">
-            <button class="container callme-button default-font theme-text theme-input" id="add-number">
-                <span>Add number</span>
-            </button>
+            <a href="/share" id="add-number-link">
+                <button class="container callme-button default-font theme-text theme-input" id="add-number">
+                    <span id="add-number-text">Add number</span>
+                </button>
+            </a>
 
-            <button class="container callme-button default-font theme-text theme-input" id="share-number">
-                <span>Share number</span>
-            </button>
+            <a href="/share">
+                <button class="container callme-button default-font theme-text theme-input" id="share-number">
+                    <span>Share number</span>
+                </button>
+            </a>
+
+            <a href="/delete">
+                <button class="container callme-button default-font theme-text theme-input" id="delete-number">
+                    <span>Delete number</span>
+                </button>
+            </a>
         </div>
 
         <div class="default-font" id="footer">

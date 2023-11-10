@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(response => response.json())
         .then(data => {
             var playerData = data.player_data;
-            console.log(playerData);
 
             const button = document.getElementById('clicker-button');
             const clickCountElement = document.getElementById('click-count');

@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
     <link rel="stylesheet" href="{{ url_for('static', filename='theme.css') }}" />
     <link rel="stylesheet" href="{{ url_for('static', filename='callme.css') }}" />
+
+    <script src="{{ url_for('static', filename='callme-create.js') }}"></script>
 </head>
 
 <body>
@@ -19,10 +21,10 @@
         </div>
 
         <div id="callme-buttons-container">
-            <input class="container callme-input default-font theme-text theme-input" id="" placeholder="Nickname"/>
-            <input class="container callme-input default-font theme-text theme-input" id="" placeholder="Phone number"/>
+            <input class="container callme-input default-font theme-text theme-input" id="nickname" placeholder="Nickname"/>
+            <input class="container callme-input default-font theme-text theme-input" id="phone_number" placeholder="Phone number"/>
 
-            <button class="container callme-button default-font theme-text theme-input" style="background-color: rgba(0,0,0, 0.8)" id="">
+            <button class="container callme-button default-font theme-text theme-input" style="background-color: rgba(0,0,0, 0.8)" id="submit">
                 <span>GO</span>
             </button>
         </div>

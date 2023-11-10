@@ -14,16 +14,18 @@
     <div class="background bg-gradient">
         <div class="container" id="number-container">
             <div class="default-font" id="name-text">
-                <span id="name">Name</span>'s number
+                <span id="name">{{ name }}</span>'s number
             </div>
 
-            <span class="number-title default-font" id="number">+420 123 456 789</span>
+            <span class="number-title default-font" id="number">{{ phone_number }}</span>
         </div>
 
         <div id="callme-buttons-container">
-            <button href="https://callme.cernyrob.in/view/xxxxxxxxxx" class="container callme-button default-font" id="link-display">
-                <span>Want to share your number? click here!</span>
-            </button>
+            <a href="https://callme.cernyrob.in" id="footer-link">
+                <button class="container callme-button default-font" id="link-display">
+                    <span>Want to share your number? click here!</span>
+                </button>
+            </a>
         </div>
 
         <div class="default-font" id="footer">

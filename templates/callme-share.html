@@ -8,13 +8,17 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
     <link rel="stylesheet" href="{{ url_for('static', filename='theme.css') }}" />
     <link rel="stylesheet" href="{{ url_for('static', filename='callme.css') }}" />
+
+    <script src="{{ url_for('static', filename='callme-share.js') }}"></script>
 </head>
 
 <body>
     <div class="background bg-gradient">
+        <span id="share-link" style="display: none;">{{ link }}</span>
+
         <div class="container" id="qr-container">
             <div id="qr-holder">
-                <img src="https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=nebud kokot ty retarde lol"
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=240x240&data={{ link }}"
                     id="qr-code">
                     <!-- <img src="/static/assets/robin.png" id="qr-middle" /> -->
                     <!-- Disabled the center image within the QR code to prevent issues with scanning -->
@@ -24,9 +28,11 @@
         </div>
 
         <div id="callme-buttons-container">
-            <button href="https://callme.cernyrob.in/view/xxxxxxxxxx" class="container callme-button default-font" id="link-display">
-                <span>callme.cernyrob.in/view/xxxxxxxxxx</span>
-            </button>
+            <a href="{{ link }}" id="footer-link">
+                <button class="container callme-button default-font">
+                    <span id="link-display">callme.cernyrob.in/view/xxxxxxxxxx</span>
+                </button>
+            </a>
         </div>
 
         <div class="default-font" id="footer">
