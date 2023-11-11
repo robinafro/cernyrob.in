@@ -1,3 +1,14 @@
+body {
+    margin: 0;
+    overflow: hidden;
+}
+
+.content {
+    height: 100vh;
+    overflow-y: auto;
+    /* Enable scrolling only for the content */
+}
+
 #callme-title-container {
     margin-top: 25vh;
     height: min(30vh, 80vw);
@@ -38,7 +49,7 @@
     width: 80vw;
     max-width: 42vh;
     aspect-ratio: 1;
-    background-color: rgb(0,0,0, 0.15);
+    background-color: rgb(0, 0, 0, 0.15);
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.6);
 }
 
@@ -49,7 +60,7 @@
     left: 50vw;
     width: 95vw;
     max-width: 50vh;
-    aspect-ratio: 5;
+    aspect-ratio: 4.5;
 }
 
 #qr-holder {
@@ -132,13 +143,13 @@
     vertical-align: middle;
 
     left: 50%;
-    top: 65%;
-    transform: translate(-50%, -50%);
+    bottom: 5%;
+    transform: translate(-50%, 0%);
 
     position: absolute;
 
     width: 90%;
-    height: 70%;
+    height: 60%;
 
     text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
 }
@@ -270,9 +281,10 @@
 
 #name-text {
     position: absolute;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, 0%);
     left: 50%;
-    top: 15%;
+    top: 7%;
+    height: 30%;
     font-weight: 500;
     font-size: 2.3vh;
 }
