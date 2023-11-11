@@ -6,11 +6,8 @@ from flask import request, redirect, make_response, render_template, jsonify, Re
 from urllib.parse import urlparse, urlunparse
 
 def validate_phone_number(phone_number):
-    # Define a regular expression pattern for phone numbers
-    phone_pattern = re.compile(r'^\+?[0-9]*$')
-
     # Check if the phone number matches the pattern
-    if phone_pattern.match(phone_number):
+    if re.match("^\\+?[1-9][0-9]{7,14}$", phone_number):
         return True
     else:
         return False
@@ -33,8 +30,20 @@ def init(app):
             if phone_number is None or phone_number == "":
                 return Response("Phone number not specified", status=400)
             
+            phone_number = phone_number.replace(" ", "")
+
             if not validate_phone_number(phone_number):
                 return Response("Invalid phone number", status=400)
+
+            # Validate name
+            if name is None or name == "":
+                return Response("Name not specified", status=400)
+            
+            if re.match("^[a-zA-Z0-9_ ]*$", name) is None:
+                return Response("Invalid name", status=400)
+            
+            if len(name) > 20:
+                return Response("Name too long", status=400)
 
             data = database.load_data(request.cookies.get('id'))
             callme_data = data["callme"]

@@ -28,7 +28,7 @@ def custom_key_func():
     client_id = request.cookies.get("id")
     return f"client:{client_id}" if client_id else "client:anonymous"
 
-limiter = Limiter(custom_key_func, app=app)
+limiter = Limiter(custom_key_func, app=app, default_limits=["60 per minute"])
 
 Session(app)
 

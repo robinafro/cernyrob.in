@@ -108,7 +108,7 @@
 }
 
 #total-clicks {
-    margin-top: 10vh;
+    margin-top: 6vh;
 }
 
 .default-font {
@@ -389,9 +389,32 @@
 #login-redirect {
     position: absolute;
 
-    top: 3vh;
-    right: 15px;
+    background-color: yellowgreen;
+    border: none;
+    border-radius: 1vh;
 
-    aspect-ratio: 2.5;
-    height: 40px;
+    box-shadow: 0 0 10px yellowgreen;
+
+    font-weight: bold;
+    font-size: 2vh;
+
+    top: 3vh;
+    left: 50%;
+
+    aspect-ratio: 3;
+    height: 15vw;
+    max-height: 7vh;
+}
+
+#login-redirect-holder {
+    position: relative;
+    display: inline-block;
+
+    margin-top: 3vh;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    width: 100%;
+    height: 5vh;
 }
