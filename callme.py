@@ -71,13 +71,13 @@ def init(app):
         if data["callme"]["phone_number"] is None:
             return render_template("callme-error.html")
         
-        link = "http://callme." + app.config['SERVER_NAME'] + "/view/" + data["user_data"]["username"]
+        link = "http://callme." + app.config['SERVER_NAME'] + "/view/" + database.get_userid_from_username(data["user_data"]["username"])
 
         return render_template("callme-share.html", link=link)
     
-    @app.route('/view/<username>/', subdomain="callme")
-    def callme_view(username):
-        data = database.load_data(database.get_cookie_from_user(username))
+    @app.route('/view/<userid>/', subdomain="callme")
+    def callme_view(userid):
+        data = database.load_data(database.get_cookie_from_user(database.get_user_from_user_id(userid)))
         callme_data = data["callme"]
 
         if callme_data["phone_number"] is None:

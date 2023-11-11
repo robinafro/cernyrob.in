@@ -94,9 +94,14 @@
 }
 
 #link-display {
-    font-size: 1.8vh;
+    text-align: center;
+    font-size: 1.5vh;
     font-weight: 800;
     color: rgba(255, 255, 255, 0.8);
+}
+
+#link-button {
+    overflow: hidden;
 }
 
 #callme-create-title {

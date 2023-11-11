@@ -29,6 +29,7 @@ data_template = {
 
     "user_data": {
         "username": None,
+        "user_id": None,
         "password": None,
         "salt": None,
     }
@@ -132,6 +133,21 @@ def increment(key, field, amount=1):
     queue.pop(0)
 
     return data
+
+def get_user_from_user_id(id):
+    # iterate through all database files
+    for file in os.listdir(data_dir):
+        # load the data
+        data = load_data(file.replace(".json", ""))
+        # check if the user_id matches
+        if data["user_data"].get("user_id") is None:
+            continue
+
+        if data["user_data"]["user_id"] == id:
+            return data["user_data"]["username"]
+    
+def get_userid_from_username(username):
+    return load_data(get_cookie_from_user(username))["user_data"]["user_id"]
 
 def get_user_from_cookie(cookie):
     filename = os.path.join(ids_dir, f"{cookie}.txt")

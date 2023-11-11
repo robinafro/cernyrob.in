@@ -5,6 +5,8 @@ import time
 import math
 import bcrypt
 import base64
+import uuid # for cookies
+import shortuuid # for user ids
 
 from flask import Flask, render_template, request, jsonify, make_response, redirect
 from flask_session import Session
@@ -51,6 +53,23 @@ def log(msg):
         with open(filename, "w") as file:
             file.write(content + " | " + msg)
 
+def generate_cookie():
+    id = str(uuid.uuid4())
+
+    # search the IDs folder to see if it exists already
+    while database.get_user_from_cookie(id) is not None:
+        id = str(uuid.uuid4())
+
+    return id
+
+def generate_user_id():
+    id = shortuuid.uuid()
+
+    while database.get_user_from_user_id(id) is not None:
+        id = shortuuid.uuid()
+
+    return id
+
 def current_time():
     return str(math.floor(time.time()))
 
@@ -66,7 +85,7 @@ def add_click():
     tm = current_time()
 
     if cookie is None:
-        cookie = tm
+        cookie = generate_cookie()
 
     if rate_limit.get(cookie) is None:
         rate_limit[cookie] = 0
@@ -108,8 +127,8 @@ def auth():
             cookie_value_was_none = cookie_value is None
 
             if cookie_value is None:
-                cookie_value = current_time()
-            
+                cookie_value = generate_cookie()
+            print("Cookie value: "+cookie_value)
             user_data = database.load_data(cookie_value)
 
             if cookie_value_was_none:
@@ -118,6 +137,8 @@ def auth():
                 hashed_password = base64.b64encode(hashed_password_bytes).decode('utf-8')
 
                 user_data["user_data"]["username"] = username
+                user_data["user_data"]["user_id"] = generate_user_id()
+                print("User ID: "+user_data["user_data"]["user_id"])
                 user_data["user_data"]["password"] = hashed_password
                 user_data["user_data"]["salt"] = salt.decode('utf-8')
 

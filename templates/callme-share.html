@@ -20,16 +20,13 @@
             <div id="qr-holder">
                 <img src="https://api.qrserver.com/v1/create-qr-code/?size=240x240&data={{ link }}"
                     id="qr-code">
-                    <!-- <img src="/static/assets/robin.png" id="qr-middle" /> -->
-                    <!-- Disabled the center image within the QR code to prevent issues with scanning -->
-                    <!-- Should use a library that allows the center images -->
                 </img>
             </div>
         </div>
 
         <div id="callme-buttons-container">
             <a href="{{ link }}" id="footer-link">
-                <button class="container callme-button default-font">
+                <button class="container callme-button default-font" id="link-button">
                     <span id="link-display">callme.cernyrob.in/view/xxxxxxxxxx</span>
                 </button>
             </a>
