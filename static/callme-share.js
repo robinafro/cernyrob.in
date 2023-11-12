@@ -8,5 +8,6 @@ document.addEventListener('DOMContentLoaded', function() {
     } else if (linkText.startsWith('http://')) {
         linkText = linkText.substring(7);
     }
+    
     linkDisplay.textContent = linkText;
 });

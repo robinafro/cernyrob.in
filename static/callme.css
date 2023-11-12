@@ -106,7 +106,7 @@ body {
 
 #link-display {
     text-align: center;
-    font-size: 1.5vh;
+    font-size: 1.3vh;
     font-weight: 800;
     color: rgba(255, 255, 255, 0.8);
 }
@@ -287,11 +287,21 @@ body {
     height: 30%;
     font-weight: 500;
     font-size: 2.3vh;
+    user-select: none;
 }
 
 #footer {
     position: absolute;
     bottom: 3%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.5vh;
+    font-weight: bolder;
+}
+
+#footer-below-number {
+    position: absolute;
+    top: 68%;
     left: 50%;
     transform: translate(-50%, -50%);
     font-size: 1.5vh;
