@@ -134,6 +134,23 @@ def increment(key, field, amount=1):
 
     return data
 
+def get_all_data(field):
+    data = {}
+    for file in os.listdir(data_dir):
+        file_data = load_data(file.replace(".json", ""))
+
+        if file_data["user_data"].get("user_id") is None:
+            continue
+
+        if not (field is None):
+            table = file_data[field]
+
+            data[file.replace(".json", "")] = table
+        else:
+            data[file.replace(".json", "")] = file_data
+    
+    return data
+
 def get_user_from_user_id(id):
     # iterate through all database files
     for file in os.listdir(data_dir):

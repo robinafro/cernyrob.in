@@ -51,15 +51,7 @@
 #clicker-container {
     position: relative;
     transform: translate(-50%, -50%);
-    margin-top: 25vh;
-    left: 50vw;
-    height: min(40vh, 95vw);
-    aspect-ratio: 1;
-}
-
-#clicker-leaderboard {
-    position: relative;
-    transform: translate(-50%, 0%);
+    margin-top: 22vh;
     left: 50vw;
     height: min(40vh, 95vw);
     aspect-ratio: 1;
@@ -77,6 +69,8 @@
     object-fit: contain;
 
     border-radius: 100%;
+
+    user-select: none;
 }
 
 #clicker-button {
@@ -417,4 +411,50 @@
 
     width: 100%;
     height: 5vh;
+}
+
+#clicker-leaderboard {
+    position: relative;
+    transform: translate(-50%, 0%);
+    left: 50vw;
+    width: 50vw;
+    min-width: 50vh;
+    height: auto;
+    margin-bottom: 15px;
+    aspect-ratio: 1.5;
+    display: inline-block;
+}
+
+#leaderboard-title {
+    font-size: max(3vh, 3vw);
+}
+
+.leaderboard-element {
+    width: 100%;
+    aspect-ratio: 12;
+    margin-top: 15px;
+
+    background-color: rgb(20, 28, 73);
+    border: 5px solid rgb(14, 20, 53);
+    box-shadow: rgb(20, 28, 73) 0px 0px 15px;
+    border-radius: 10px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.leaderboard-key {
+    transform: translate(0%, 0%);
+    width: 50%;
+    margin-left: 15px;
+    font-size: 4vh;
+}
+
+.leaderboard-value {
+    transform: translate(0%, 0%);
+    width: 50%;
+    margin-right: 15px;
+    font-size: 4vh;
+    text-align: right;
 }

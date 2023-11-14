@@ -4,11 +4,11 @@ import json
 import time
 import math
 import bcrypt
-import base64
+import base64  
 import uuid # for cookies
 import shortuuid # for user ids
 
-from flask import Flask, render_template, request, jsonify, make_response, redirect
+from flask import Flask, render_template, request, jsonify, make_response, redirect  
 from flask_session import Session
 from flask_limiter import Limiter
 from flask import request
@@ -18,7 +18,7 @@ import database
 import callme
 
 YEAR = 60 * 60 * 24 * 365
-RATE_LIMIT = 1 / 25 # CPS
+RATE_LIMIT = 1 / 35 # CPS
 
 app = Flask(__name__)
 app.config["SESSION_PERMANENT"] = True
@@ -75,7 +75,24 @@ def current_time():
 
 @app.route('/get_player_data', methods=['GET'])
 def get_player_data():
-    return jsonify(player_data=database.load_data(request.cookies.get('id'))["robin_clicker"])
+    return jsonify(player_data=database.load_data(request.cookies.get('id')))
+
+@app.route('/get_all_clicker_data/<count>', methods=['GET'])
+def get_all_clicker_data(count):
+    data = database.get_all_data("robin_clicker")
+    limited_data = {}
+
+    i = 1
+    for key, value in data.items():
+        if i > int(count):
+            break
+        
+        data[key]["name"] = database.get_user_from_cookie(key)
+        limited_data[key] = data[key]
+
+        i += 1
+    
+    return jsonify(all_clicker_data=limited_data)
 
 @app.route('/add_click', methods=['GET'])
 @limiter.limit("30 per second")

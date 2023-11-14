@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
     fetch('/get_player_data')
         .then(response => response.json())
         .then(data => {
-            var playerData = data.player_data;
+            var playerData = data.player_data["robin_clicker"];
 
             const button = document.getElementById('clicker-button');
             const clickCountElement = document.getElementById('click-count');

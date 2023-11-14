@@ -7,8 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="/static/assets/favicon.ico">
-    
+
     <script src="/static/clicker.js"></script>
+    <script src="/static/clicker-leaderboard.js"></script>
 </head>
 
 <body>
@@ -41,7 +42,19 @@
         </div>
 
         <div id="clicker-leaderboard">
-            Leaderboard
+            <div class="main-title" id="leaderboard-title">
+                Leaderboard
+            </div>
+
+            <div class="leaderboard-element" style="display: none">
+                <div class="leaderboard-key default-font">
+                    Name
+                </div>
+
+                <div class="leaderboard-value default-font">
+                    Clicks
+                </div>
+            </div>
         </div>
     </div>
 </body>
