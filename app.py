@@ -88,6 +88,8 @@ def get_all_clicker_data(count):
             break
         
         data[key]["name"] = database.get_user_from_cookie(key)
+        data[key]["user_id"] = None # User IDs should not be visible to the public unless it's required
+        data[key]["id"] = None
         limited_data[key] = data[key]
 
         i += 1
