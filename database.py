@@ -35,6 +35,10 @@ data_template = {
     }
 }
 
+developers = [
+    "admin"
+]
+
 queues = {}
 last_data = {}
 
@@ -142,6 +146,9 @@ def get_all_data(field):
         if file_data["user_data"].get("user_id") is None:
             continue
 
+        if file_data["username"] in developers:
+            continue
+
         if not (field is None):
             table = file_data[field]
 
@@ -186,3 +193,6 @@ def get_cookie_from_user(username):
             if usr == username:
                 return cookie.replace(".txt", "")
     return None
+
+def user_is_admin(cookie):
+    return get_user_from_cookie(cookie) in developers

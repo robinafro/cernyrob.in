@@ -210,6 +210,23 @@ def clicker():
 
     return response
 
+@app.route('/dev', methods=['GET', 'POST'])
+def dev():
+    if database.user_is_admin(request.cookies.get('id') or 0):
+        # request is POST or GET?
+        if request.method == 'POST':
+            # read from data
+            action = request.form.get('action')
+
+            if action == "update":
+                os.system("git pull 'https://github.com/Actulurus/cernyrob.in.git' main")
+
+            return "200"
+        else:
+            return render_template('dev.html')
+    else:
+        return "401"
+
 @app.route('/', subdomain="test")
 def test():
     return "Test subdomain"
