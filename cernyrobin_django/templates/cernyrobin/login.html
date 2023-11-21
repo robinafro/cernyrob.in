@@ -1,7 +1,7 @@
 <!doctype HTML>
 <html>
 	{% load static %}
-	
+
 <body>
 
 	<head>
@@ -21,15 +21,19 @@
 		</div>
 
 		<div id="login-holder">
-			<div class="login-line">
-				<input id="login-username" class="default-font login-field" type="text" placeholder="Username"
-					pattern="[a-zA-Z0-9_]+" required></input>
-			</div>
+			<form method="POST" action="">
+				{%csrf_token%}
+				
+				<div class="login-line">
+					<input id="login-username" class="default-font login-field" type="text" placeholder="Username"
+						pattern="[a-zA-Z0-9_]+" required></input>
+				</div>
 
-			<div class="login-line">
-				<input id="login-password" class="default-font login-field" type="password" placeholder="Password"
-					pattern="[^ ]+" required></input>
-			</div>
+				<div class="login-line">
+					<input id="login-password" class="default-font login-field" type="password" placeholder="Password"
+						pattern="[^ ]+" required></input>
+				</div>
+			</form>
 
 			<div id="login-warning" class="default-font">
 				Incorrect username or password

@@ -19,15 +19,20 @@ document.addEventListener("DOMContentLoaded", function () {
             formData.append("username", username.value);
             formData.append("password", password.value);
 
-            fetch("login/submit/", {
+            var headers = new Headers({
+                "X-CSRFToken": getCookie("csrftoken"),
+            });
+
+            fetch("/login/submit/", {
                 method: 'POST',
                 body: formData,
                 credentials: "include",
+                headers: headers,
             }).then(function (response) {
                 // response.text() returns a new promise that resolves with the full response text
                 // when it loads. We further process this text in the .then callback.
                 response.text().then(function (text) {
-                    if (text === "OK") {
+                    if (text === "200 OK") {
                         window.location.replace(redirect)
                     } else {
                         document.getElementById("login-password").value = "";
@@ -38,6 +43,12 @@ document.addEventListener("DOMContentLoaded", function () {
         } else {
             loginWarning.innerHTML = "kamo tohle fakt nejde sorry";
         };
+
+        function getCookie(name) {
+            var value = "; " + document.cookie;
+            var parts = value.split("; " + name + "=");
+            if (parts.length == 2) return parts.pop().split(";").shift();
+        }
     });
 
     username.addEventListener('input', function () {
