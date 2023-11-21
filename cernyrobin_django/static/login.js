@@ -1,10 +1,4 @@
 document.addEventListener("DOMContentLoaded", function () {
-    var redirect = document.getElementById('login-destination').innerHTML;
-    
-    if (document.getElementById('auth-text') != null) {
-        window.location.replace(redirect)
-    }
-
     var loginButton = document.getElementById('login-button');
     var loginWarning = document.getElementById('login-warning');
     var username = document.getElementById('login-username');
@@ -12,9 +6,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     loginButton.addEventListener('click', function () {
         if (username.checkValidity() && password.checkValidity() && username.value.length >= 3 && password.value.length >= 3 && username.value.length <= 20 && password.value.length <= 20) {
-            // Make a URL-encoded string for passing POST data:
-            var dataString = "username=" + encodeURIComponent(username.value) + "&password=" + encodeURIComponent(password.value) + "&redirect=" + encodeURIComponent(redirect); // Not used anymore
-
             const formData = new FormData();
             formData.append("username", username.value);
             formData.append("password", password.value);
@@ -33,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 // when it loads. We further process this text in the .then callback.
                 response.text().then(function (text) {
                     if (text === "200 OK") {
-                        window.location.replace(redirect)
+                        ////
                     } else {
                         document.getElementById("login-password").value = "";
                         loginWarning.innerHTML = text;
