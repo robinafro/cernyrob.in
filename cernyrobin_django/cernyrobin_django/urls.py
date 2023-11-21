@@ -24,4 +24,5 @@ urlpatterns = [
     path("", cernyrobin.home),
     path("home/", cernyrobin.home),
     path("clicker/", cernyrobin.clicker),
+    path("login/", cernyrobin.loginReg),
 ]
