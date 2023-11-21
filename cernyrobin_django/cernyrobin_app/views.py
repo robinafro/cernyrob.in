@@ -22,42 +22,46 @@ def clicker(request):
 
     return render(request, "cernyrobin/clicker.html", context)
    
-def login(request):
-    context = {}
+def login_page(request):
+    if request.user.is_authenticated:
+        return redirect("home") #!
+    else:
+        context = {
+            "page": "login",
+        }
 
-    return render(request, "cernyrobin/login.html", context)
+        return render(request, "cernyrobin/login.html", context)
 
+def login_submit(request):
+    if request.user.is_authenticated:
+        return HttpResponse("400 Bad Request")
+
+    if request.method == "POST":
+        username = request.POST.get("username").lower()
+        password = request.POST.get("password")
+
+        try:
+            user = User.objects.get(username=username)
+        except User.DoesNotExist:
+            user = User.objects.create_user(username=username, password=password)
+            user.save()
+            return HttpResponse("200 OK")
+
+        if user.check_password(password):
+            user = authenticate(request, username=username, password=password)
+            
+            if user is not None:
+                login(request, user)
+                return HttpResponse("200 OK")
+            else:
+                return HttpResponse("401 Unauthorized")
+        else:
+            return HttpResponse("401 Unauthorized")
+
+    return HttpResponse("405 Method Not Allowed")
+        
 # Clicker
 
 def add_click(request):
     if request.method == "POST":
         clicker.add_click(request)
-
-
-
-
-def loginReg(request):
-    page = "login"
-    if request.user.is_authenticated:
-        return redirect("home")
-    else:
-        if request.method == "POST":
-            username = request.POST.get("username").lower()
-            password = request.POST.get("password")
-            try:
-                user = User.objects.get(username=username)
-
-            except:
-                messages.error(request, "User doesnt exist")
-
-            user = authenticate(request, username=username, password=password)
-            if user is not None:
-                login(request, user)
-                return redirect("home")
-            else:
-                messages.error(request, "Password wrong")
-
-    context = {
-        "page": page,
-    }
-    return render(request, "cernyrobin/loginReg.html", context)
