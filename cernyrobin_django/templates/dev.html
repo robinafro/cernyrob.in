@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Dev - cernyrobin</title>
+    </head>
+
+    <body>
+        <button id="update">
+            Update
+        </button>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                document.getElementById("update").addEventListener("click", function () {
+                    fetch("/dev", {
+                        method: "POST",
+                        body: "action=update"
+                    }).then(function (response) {
+                        return response.json();
+                    }).then(function (json) {
+                        console.log(json);
+                    });
+                });
+            
+            })
+        </script>
+    </body>
+</html>
