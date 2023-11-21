@@ -1,42 +1,47 @@
 <!doctype HTML>
 <html>
 	{% load static %}
-	<body>
-		<head>
-    			<meta charset="UTF-8">
-    			<meta name="viewport" content="width=device-width, initial-scale=1.0">
-    			<link href="{% static 'style.css' %}" rel="stylesheet">
-				<link rel="icon" type="image/x-icon" href="/static/assets/favicon.ico">
-				<script src="{% static 'login.js' %}"></script>
-				<title>Login: cernyrobin</title>
+	
+<body>
 
-				<span id="login-destination">{{ redirect }}</span>
-		</head>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link href="{% static 'style.css'%}" rel="stylesheet">
+		<link rel="icon" type="image/x-icon" href="/static/assets/favicon.ico">
+		<script src="/static/login.js"></script>
+		<title>Login: cernyrobin</title>
 
-		<div class="background" style="height: 100vh">
-			<div class="main-title" style="top: 5%;">
-				zaregistruj se nebo se přihlaš idk
+		<span id="login-destination">{{ redirect }}</span>
+	</head>
+
+	<div class="background" style="height: 100vh">
+		<div class="main-title" style="top: 5%;">
+			zaregistruj se nebo se přihlaš idk
+		</div>
+
+		<div id="login-holder">
+			<div class="login-line">
+				<input id="login-username" class="default-font login-field" type="text" placeholder="Username"
+					pattern="[a-zA-Z0-9_]+" required></input>
 			</div>
 
-			<div id="login-holder">
-				<div class="login-line">
-					<input id="login-username" class="default-font login-field" type="text" placeholder="Username" pattern="[a-zA-Z0-9_]+" required></input>
-				</div>
+			<div class="login-line">
+				<input id="login-password" class="default-font login-field" type="password" placeholder="Password"
+					pattern="[^ ]+" required></input>
+			</div>
 
-				<div class="login-line">
-					<input id="login-password" class="default-font login-field" type="password" placeholder="Password" pattern="[^ ]+" required></input>
-				</div>
+			<div id="login-warning" class="default-font">
+				Incorrect username or password
+			</div>
 
-				<div id="login-warning" class="default-font">
-					Incorrect username or password
-				</div>
-
-				<div class="login-line" style="background: none">
-					<button id="login-button" class="default-font">
-						Login
-					</button>
-				</div>
+			<div class="login-line" style="background: none">
+				<button id="login-button" class="default-font">
+					Login
+				</button>
 			</div>
 		</div>
-	</body>
+	</div>
+</body>
+
 </html>
