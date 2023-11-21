@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>View - callme</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='theme.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='callme.css') }}" />
+</head>
+
+<body>
+    <div class="background bg-gradient">
+        <div class="container" id="number-container">
+            <div class="default-font" id="name-text">
+                <span id="name">{{ name }}</span>'s number
+            </div>
+
+            <span class="number-title default-font" id="number">{{ phone_number }}</span>
+        </div>
+
+        <div id="callme-buttons-container">
+            <a href="https://callme.cernyrob.in" id="footer-link">
+                <button class="container callme-button default-font" id="link-display">
+                    <span>Want to share your number? click here!</span>
+                </button>
+            </a>
+        </div>
+
+        <div class="default-font" id="footer-below-number">
+            Powered by <a id="footer-link" href="https://cernyrob.in">cernyrob.in</a>
+        </div>
+    </div>
+
+</html>

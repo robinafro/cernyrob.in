@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>Share - callme</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='theme.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='callme.css') }}" /> 
+    <script src="{{ url_for('static', filename='callme-share.js') }}"></script>
+</head>
+
+<body>
+    <div class="background bg-gradient">
+        <span id="share-link" style="display: none;">{{ link }}</span>
+
+        <div class="container" id="qr-container">
+            <div id="qr-holder">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=240x240&data={{ link }}"
+                    id="qr-code">
+                </img>
+            </div>
+        </div>
+
+        <div id="callme-buttons-container">
+            <a href="{{ link }}" id="footer-link">
+                <button class="container callme-button default-font" id="link-button">
+                    <span id="link-display">callme.cernyrob.in/view/xxxxxxxxxx</span>
+                </button>
+            </a>
+        </div>
+
+        <div class="default-font" id="footer">
+            Powered by <a id="footer-link" href="https://cernyrob.in">cernyrob.in</a>
+        </div>
+    </div>
+</html>

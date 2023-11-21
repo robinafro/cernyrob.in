@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Robin Clicker</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="/static/assets/favicon.ico">
+
+    <script src="/static/clicker.js"></script>
+    <script src="/static/clicker-leaderboard.js"></script>
+</head>
+
+<body>
+
+    <div class="background">
+        <div class="main-title">
+            Robin Clicker
+        </div>
+
+        <div class="about default-font">
+            click as many times as you can
+        </div>
+
+        <div id="login-redirect-holder">
+            <a href="/login/clicker">
+                <button id="login-redirect" class="default-font">
+                    Log in to track progress
+                </button>
+            </a>
+        </div>
+
+        <div id="total-clicks" class="main-title">
+            Your clicks: <span id="click-count">{{ player_data["clicks"] }}</span>
+        </div>
+
+        <div id="clicker-container">
+            <button id="clicker-button">
+                <img src="/static/assets/robin.png" id="clicker-image"></img>
+            </button>
+        </div>
+
+        <div id="clicker-leaderboard">
+            <div class="main-title" id="leaderboard-title">
+                Leaderboard
+            </div>
+
+            <div class="leaderboard-element" style="display: none">
+                <div class="leaderboard-key default-font">
+                    Name
+                </div>
+
+                <div class="leaderboard-value default-font">
+                    Clicks
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,22 @@
+.bg-gradient {
+    background-image: radial-gradient(circle at top left, rgb(37, 212, 60), rgb(22, 116, 204), rgb(55, 14, 109))
+}
+
+.container {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    left: 50vw;
+    background-color: rgba(0,0,0, 0.6);
+
+    border-radius: 2vh;
+}
+
+.theme-text {
+    text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+    font-weight: 600;
+}
+
+.theme-input {
+    font-size: 3vh;
+    border: none;
+}
