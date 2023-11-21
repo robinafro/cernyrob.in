@@ -20,8 +20,8 @@ from django.urls import path
 from cernyrobin_app import views as cernyrobin
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', cernyrobin.home),
-    path('/home', cenryrobin.home),
-    path('/clicker', cernyrobin.clicker),
+    path("admin/", admin.site.urls),
+    path("", cernyrobin.home),
+    path("/home", cernyrobin.home),
+    path("/clicker", cernyrobin.clicker),
 ]

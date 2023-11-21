@@ -22,6 +22,6 @@ from cernyrobin_app import views as cernyrobin
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", cernyrobin.home),
-    path("/home", cernyrobin.home),
-    path("/clicker", cernyrobin.clicker),
+    path("home/", cernyrobin.home),
+    path("clicker/", cernyrobin.clicker),
 ]
