@@ -1,10 +1,15 @@
 from django.shortcuts import render
 
-
 def home(request):
-    return render(request, "cernyrobin/home.html", {})
-
+    context = {}
+    return render(request, "cernyrobin/home.html", context)
 
 def clicker(request):
-    return render(request, "cernyrobin/clicker.html", {})
+    context = {}
+
+    return render(request, "cernyrobin/clicker.html", context)
    
+def login(request):
+    context = {}
+
+    return render(request, "cernyrobin/login.html", context)
