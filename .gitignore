@@ -1,0 +1,5 @@
+*.un
+*.un~
+.*
+!.gitignore
+*.cpython-311.pyc
