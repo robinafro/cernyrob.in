@@ -21,6 +21,7 @@ def go_back(request):
 
 def home(request):
     context = {}
+    
     return render(request, "cernyrobin/home.html", context)
 
 def clicker(request):
@@ -60,6 +61,7 @@ def login_submit(request):
             
             if user is not None:
                 login(request, user)
+
                 return go_back(request)
             else:
                 return HttpResponse("401 Unauthorized")
