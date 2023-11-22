@@ -2,6 +2,7 @@ from django.shortcuts import render
 from . import clicker
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from django.http import JsonResponse
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
@@ -12,8 +13,9 @@ from django.contrib.auth import authenticate, login, logout
 # Utils
 def go_back(request):
     next_url = request.POST.get('next', request.GET.get('next', ''))
+    response_data = {'redirect_url': next_url}
 
-    return redirect(next_url) if next_url else HttpResponse("200 OK")
+    return JsonResponse(response_data) if next_url else HttpResponse("200 OK")
 
 # Pages
 
@@ -52,9 +54,6 @@ def login_submit(request):
             login(request, user)
 
             return go_back(request)
-
-        if user is not None:
-            return HttpResponse("409 Conflict")
 
         if user.check_password(password):
             user = authenticate(request, username=username, password=password)

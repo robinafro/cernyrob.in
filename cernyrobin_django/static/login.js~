@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const formData = new FormData();
             formData.append("username", username.value);
             formData.append("password", password.value);
-	        formData.append("next", getQueryStringParameter("next") || "/");
+	    formData.append("next", getQueryStringParameter("next") || "");
             
 	    var headers = new Headers({
                 "X-CSRFToken": getCookie("csrftoken"),
@@ -21,28 +21,16 @@ document.addEventListener("DOMContentLoaded", function () {
                 credentials: "include",
                 headers: headers,
             }).then(function (response) {
-                if (response.ok) {
-                    // Check if the response is JSON
-                    if (response.headers.get('Content-Type').includes('application/json')) {
-                        return response.json();
+                // response.text() returns a new promise that resolves with the full response text
+                // when it loads. We further process this text in the .then callback.
+                response.text().then(function (text) {
+                    if (text === "200 OK") {
+                        ////
                     } else {
-                        // Handle other successful responses
-                        response.text().then(function (text) {
-                            if (text == "401 Unauthorized") {
-                                password.textContent = "";
-                                loginWarning.textContent = "špatný heslo vole";
-                            }
-                        });
+                        document.getElementById("login-password").value = "";
+                        loginWarning.textContent = text;
                     }
-                } else {
-                    // Handle error responses
-                    console.error("Error:", response.status, response.statusText);
-                }
-            }).then(function (jsonData) {
-                if (jsonData && jsonData.redirect_url) {
-                    // Manually perform the redirect
-                    window.location.href = jsonData.redirect_url;
-                }
+                });
             });
         } else {
             loginWarning.innerHTML = "kamo tohle fakt nejde sorry";

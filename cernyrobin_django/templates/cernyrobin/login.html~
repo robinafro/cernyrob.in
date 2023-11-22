@@ -21,7 +21,7 @@
 		</div>
 
 		<div id="login-holder">
-			<form method="POST" action="{% url 'login_submit' %}?next={{ request.GET.next|default:request.path }}">
+			<form method="POST" action="{% url 'login/submit/' %}?next={{ request.GET.next|default:request.path }}">
 				{%csrf_token%}
 				
 				<div class="login-line">
