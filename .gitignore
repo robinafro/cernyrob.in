@@ -4,3 +4,5 @@
 !.gitignore
 !.gitkeep
 *.cpython-311.pyc
+
+/cernyrobin_django/db.sqlite3
