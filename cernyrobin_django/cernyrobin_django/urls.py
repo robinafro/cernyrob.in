@@ -23,7 +23,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("", cernyrobin.home),
     path("home/", cernyrobin.home),
-    path("clicker/", cernyrobin.clicker),
+    path("clicker/", cernyrobin.clicker_page),
     path("login/", cernyrobin.login_page),
 
     path("login/submit/", cernyrobin.login_submit, name="login_submit"),

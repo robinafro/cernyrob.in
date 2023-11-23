@@ -1,7 +1,11 @@
+from django.contrib.auth.models import User
 from django.db import models
 
-class ClickCount(models.Model):
-    clicks = models.IntegerField(default=0)
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
 
-    def __str__(self):
-        return str(self.count)
+    clicks = models.IntegerField(default=0)
+    clicks_auto = models.IntegerField(default=0)
+    clicks_mult = models.IntegerField(default=0)
+
+    phone_number = models.CharField(max_length=20, default="")

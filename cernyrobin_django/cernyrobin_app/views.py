@@ -6,6 +6,7 @@ from django.http import JsonResponse
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
+from cernyrobin_app.models import UserProfile
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
@@ -21,10 +22,10 @@ def go_back(request):
 
 def home(request):
     context = {}
-    
+
     return render(request, "cernyrobin/home.html", context)
 
-def clicker(request):
+def clicker_page(request):
     context = {}
 
     return render(request, "cernyrobin/clicker.html", context)
@@ -50,6 +51,9 @@ def login_submit(request):
                 logout(request)
 
             user = User.objects.create_user(username=username, password=password)
+            user_profile = UserProfile.objects.create(user=user)
+
+            user_profile.save()
             user.save()
 
             login(request, user)
@@ -67,9 +71,14 @@ def login_submit(request):
                 return HttpResponse("401 Unauthorized")
         else:
             return HttpResponse("401 Unauthorized")
+    else:
+        user_profile = UserProfile.objects.get(user=request.user)
 
+        return HttpResponse(user_profile.user.username) # this is for debugging, delete when needed
     return HttpResponse("405 Method Not Allowed")
 
 def add_click(request):
     if request.method == "POST":
         clicker.add_click(request)
+    else:
+        return HttpResponse("405 Method Not Allowed")
