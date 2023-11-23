@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from cernyrobin_app.models import UserProfile
 from django.contrib.auth.models import User
+from django.contrib.auth.models import AnonymousUser
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 
@@ -44,10 +45,12 @@ def login_submit(request):
         username = request.POST.get("username")
         password = request.POST.get("password")
 
+        # add checks for username and password format
+
         try:
             user = User.objects.get(username=username.lower())
         except User.DoesNotExist:
-            if request.user.is_authenticated:
+            if request.user.is_authenticated or request.user.is_anonymous:
                 logout(request)
 
             user = User.objects.create_user(username=username, password=password)
@@ -81,4 +84,5 @@ def add_click(request):
     if request.method == "POST":
         clicker.add_click(request)
     else:
-        return HttpResponse("405 Method Not Allowed")
+        return HttpResponse(request.user.is_anonymous)
+        # return HttpResponse("405 Method Not Allowed")
