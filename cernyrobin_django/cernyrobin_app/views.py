@@ -84,5 +84,5 @@ def add_click(request):
     if request.method == "POST":
         clicker.add_click(request)
     else:
-        return HttpResponse(request.user.is_anonymous)
+        return clicker.add_click(request)
         # return HttpResponse("405 Method Not Allowed")

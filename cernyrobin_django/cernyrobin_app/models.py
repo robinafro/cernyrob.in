@@ -5,7 +5,7 @@ from django.db import models
 class BaseUserProfile(models.Model):
     clicks = models.IntegerField(default=0)
     clicks_auto = models.IntegerField(default=0)
-    clicks_mult = models.IntegerField(default=0)
+    clicks_mult = models.IntegerField(default=1)
 
     phone_number = models.CharField(max_length=20, default="")
 
