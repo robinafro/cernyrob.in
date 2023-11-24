@@ -1,10 +1,11 @@
 from .models import UserProfile, AnonymousUserProfile
+from django.contrib.auth.models import User
 
 def get_profile(request):
     if request.user.is_authenticated:
-        return UserProfile.objects.get_or_create(user=request.user)
+        user = User.objects.get(username=request.user.username)
+        return UserProfile.objects.get_or_create(user=user)
     else:
-        #TODO: fix this being called even when the user seems to be authenticated
         session_key = request.session.session_key
 
         if not session_key:
