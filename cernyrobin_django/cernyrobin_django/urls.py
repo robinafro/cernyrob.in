@@ -28,4 +28,6 @@ urlpatterns = [
 
     path("login/submit/", cernyrobin.login_submit, name="login_submit"),
     path("clicker/add_click", cernyrobin.add_click, name="add_click"),
+    path("get_user_data/", cernyrobin.get_user_data, name="get_user_data"),
+    path("get_all_data/", cernyrobin.get_all_data, name="get_all_data"),
 ]

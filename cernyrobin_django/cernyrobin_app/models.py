@@ -3,11 +3,15 @@ from django.db import models
 
 
 class BaseUserProfile(models.Model):
-    clicks = models.IntegerField(default=0)
-    clicks_auto = models.IntegerField(default=0)
-    clicks_mult = models.IntegerField(default=1)
+    robin_clicker = {
+        "clicks": 0,
+        "clicks_auto": 0,
+        "clicks_mult": 1,
+    }
 
-    phone_number = models.CharField(max_length=20, default="")
+    callme = {
+        "phone_number": models.CharField(max_length=20, default=""),
+    }
 
     class Meta:
         abstract = True

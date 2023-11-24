@@ -18,21 +18,20 @@ function cloneLeaderboardElement(name, clicks) {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-    fetch('/get_player_data')
+    fetch('/get_user_data/?scope=robin_clicker')
         .then(response => response.json())
         .then(data => {
-            var player_data = data.player_data;
-            var userData = player_data["user_data"];
-            var clickerData = player_data["robin_clicker"];
+            console.log(data);
+            
+            var localUsername = data["username"];
+            var clickerData = data["data"];
 
-            fetch('/get_all_clicker_data/10')
+            fetch('/get_all_data/?scope=robin_clicker')
                 .then(response => response.json())
                 .then(data => {
-                    var allData = data.all_clicker_data;
-
                     // Convert the object to an array of objects
-                    var dataArray = Object.entries(allData).map(([key, value]) => ({
-                        id: key,
+                    var dataArray = Object.entries(data).map(([key, value]) => ({
+                        user: key,
                         ...value
                     }));
 
@@ -40,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     console.log(dataArray);
 
                     // Sort the array in descending order based on the "clicks" property
-                    var sortedData = dataArray.sort((a, b) => b.clicks - a.clicks);
+                    var sortedData = dataArray.sort((a, b) => b.data.clicks - a.data.clicks);
 
                     console.log("Sorted data:");
                     console.log(sortedData);
@@ -51,16 +50,15 @@ document.addEventListener('DOMContentLoaded', function () {
                     for (var i = 0; i < sortedData.length; i++) {
                         var playerData = sortedData[i];
 
-                        if (playerData.name == userData.username) {
+                        if (playerData.username == localUsername) {
                             localPlayerIsInTop10 = true;
                         }
-
-                        // Assuming cloneLeaderboardElement takes two arguments: name and clicks
-                        cloneLeaderboardElement((i + 1) + ". " + playerData.name, playerData.clicks);
+                        
+                        cloneLeaderboardElement((i + 1) + ". " + playerData.username, playerData.data.clicks);
                     }
 
                     if (!localPlayerIsInTop10) {
-                        cloneLeaderboardElement((sortedData.length + 1) + ". " + userData.username, clickerData.clicks);
+                        cloneLeaderboardElement((sortedData.length + 1) + ". " + localUsername, clickerData.clicks);
                     }
                 });
         })

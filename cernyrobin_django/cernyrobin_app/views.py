@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from . import clicker
+from . import profile_operations
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.http import JsonResponse
@@ -11,6 +12,11 @@ from django.contrib.auth.models import User
 from django.contrib.auth.models import AnonymousUser
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+from django.core.serializers import serialize
+from django.db.models import IntegerField
+from django.db.models.fields.related import ForeignKey
+
+import json
 
 # Utils
 def go_back(request):
@@ -75,14 +81,49 @@ def login_submit(request):
         else:
             return HttpResponse("401 Unauthorized")
     else:
-        user_profile = UserProfile.objects.get(user=request.user)
-
-        return HttpResponse(user_profile.user.username) # this is for debugging, delete when needed
-    return HttpResponse("405 Method Not Allowed")
+        return HttpResponse("405 Method Not Allowed")
 
 def add_click(request):
     if request.method == "POST":
-        clicker.add_click(request)
-    else:
         return clicker.add_click(request)
-        # return HttpResponse("405 Method Not Allowed")
+    else:
+        return HttpResponse("405 Method Not Allowed")
+    
+def get_user_data(request):
+    if request.method == "GET":
+        scope = request.GET.get("scope")
+
+        user_profile, created = profile_operations.get_profile(request)
+
+        data = profile_operations.get_data(user_profile, scope)
+
+        if data:
+            return JsonResponse(data=data, safe=False)
+        else:
+            return HttpResponse("400 Bad Request")
+    else:
+        return HttpResponse("405 Method Not Allowed")
+    
+def get_all_data(request):
+    if request.method == "GET":
+        scope = request.GET.get("scope")
+
+        if not scope:
+            return HttpResponse("400 Bad Request")
+        
+        all_user_profiles = profile_operations.get_all_profiles()
+        
+        all_users_data = []
+        
+        for user_profile in all_user_profiles:
+            user_data = profile_operations.get_data(user_profile, scope)
+            print(user_profile.user.username)
+            print(user_data["data"]["clicks"])
+            if not user_data:
+                continue
+            
+            all_users_data.append(user_data)
+
+        return JsonResponse(data=all_users_data, safe=False)
+    else:
+        return HttpResponse("405 Method Not Allowed")
