@@ -1,5 +1,6 @@
 from .models import UserProfile, AnonymousUserProfile
 from django.contrib.auth.models import User
+import json
 
 def get_profile(request):
     if request.user.is_authenticated:
@@ -21,7 +22,7 @@ def get_data(user_profile, scope):
     if scope:
         try:
             data = {
-                "data": getattr(user_profile, scope),
+                "data": json.loads(getattr(user_profile, scope)),
                 "username": user_profile.user.username,
             }
 

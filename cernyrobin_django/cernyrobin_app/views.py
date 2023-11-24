@@ -117,8 +117,7 @@ def get_all_data(request):
         
         for user_profile in all_user_profiles:
             user_data = profile_operations.get_data(user_profile, scope)
-            print(user_profile.user.username)
-            print(user_data["data"]["clicks"])
+            
             if not user_data:
                 continue
             
