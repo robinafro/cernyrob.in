@@ -51,8 +51,6 @@ def login_page(request):
 # API
 
 def login_submit(request):
-    return HttpResponse("test")
-
     if request.method == "POST":
         username = request.POST.get("username")
         password = request.POST.get("password")
