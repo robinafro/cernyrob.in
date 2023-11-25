@@ -28,12 +28,16 @@ def go_back(request):
 # Pages
 
 def home(request):
-    context = {}
+    context = {
+        "page": "home",
+    }
 
     return render(request, "cernyrobin/home.html", context)
 
 def clicker_page(request):
-    context = {}
+    context = {
+        "page": "clicker",
+    }
 
     return render(request, "cernyrobin/clicker.html", context)
    
@@ -47,6 +51,8 @@ def login_page(request):
 # API
 
 def login_submit(request):
+    return HttpResponse("test")
+
     if request.method == "POST":
         username = request.POST.get("username")
         password = request.POST.get("password")

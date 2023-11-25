@@ -1,11 +1,15 @@
 var last_data = null;
 
 function getCSRFToken() {
-    const cookieValue = document.cookie
+    const cookie = document.cookie
         .split('; ')
         .find((row) => row.startsWith('csrftoken='))
-        .split('=')[1];
-    return cookieValue;
+
+    if (cookie === undefined) {
+        return "";
+    } else {
+        return cookie.split('=')[1];
+    }
 }
 
 document.addEventListener('DOMContentLoaded', function () {

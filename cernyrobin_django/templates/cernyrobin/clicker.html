@@ -37,6 +37,8 @@
 
         <div id="clicker-container">
             <button id="clicker-button">
+                {% csrf_token %}
+                
                 <img src="/static/assets/robin.png" id="clicker-image"></img>
             </button>
         </div>

@@ -15,6 +15,5 @@ def add_click(request):
     user_profile.set_robin_clicker(clicker_data)
 
     user_profile.save()
-    request.user.save()
 
     return HttpResponse(clicker_data["clicks"])

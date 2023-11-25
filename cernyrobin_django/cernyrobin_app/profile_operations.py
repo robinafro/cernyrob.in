@@ -21,13 +21,23 @@ def get_all_profiles():
 def get_data(user_profile, scope):
     if scope:
         try:
+            username = ""
+
+            if hasattr(user_profile, "user"):
+                username = user_profile.user.username
+            else:
+                username = "anonymous"
+            
             data = {
                 "data": json.loads(getattr(user_profile, scope)),
-                "username": user_profile.user.username,
+                "username": username,
             }
 
             return data
         except AttributeError:
             return None
     else:
-        return user_profile.user.username
+        if hasattr(user_profile, "user"):
+            return  user_profile.user.username
+        else:
+            return "anonymous"
