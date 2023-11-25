@@ -60,11 +60,19 @@ def login_submit(request):
         try:
             user = User.objects.get(username=username.lower())
         except User.DoesNotExist:
+            prevData = None
             if request.user.is_authenticated or request.user.is_anonymous:
+                if request.user.is_anonymous:
+                    current_profile, created = profile_operations.get_profile(request)
+                    prevData = current_profile.get_robin_clicker()
+
                 logout(request)
 
             user = User.objects.create_user(username=username, password=password)
             user_profile = UserProfile.objects.create(user=user)
+
+            if prevData:
+                user_profile.robin_clicker = json.dumps(prevData)
 
             user_profile.save()
             user.save()
