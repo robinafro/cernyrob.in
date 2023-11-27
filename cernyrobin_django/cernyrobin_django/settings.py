@@ -23,10 +23,18 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-bu*i=5)h^-!x+)(46vuib%2kon(l960wq#l)6mz&eyj%&w@)+h'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["127.0.0.1", "localhost", "cernyrob.in", "dev.cernyrob.in", "callme.cernyrob.in", "callme.localhost"]
 
+CSRF_TRUSTED_ORIGINS = [
+    "https://cernyrob.in",
+    "http://localhost",    
+    "https://*.cernyrob.in",
+    "https://*.localhost",
+    "http://*.cernyrob.in",
+    "http://*.localhost"
+]
 
 # Application definition
 
