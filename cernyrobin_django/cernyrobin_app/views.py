@@ -28,23 +28,17 @@ def go_back(request):
 # Pages
 
 def home(request):
-    context = {
-        "page": "home",
-    }
+    context = {}
 
     return render(request, "cernyrobin/home.html", context)
 
 def clicker_page(request):
-    context = {
-        "page": "clicker",
-    }
+    context = {}
 
     return render(request, "cernyrobin/clicker.html", context)
    
 def login_page(request):
-    context = {
-        "page": "login",
-    }
+    context = {}
 
     return render(request, "cernyrobin/login.html", context)
 
