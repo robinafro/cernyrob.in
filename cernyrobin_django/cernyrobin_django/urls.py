@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path
 
 from cernyrobin_app import views as cernyrobin
+from api import views as api
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -30,4 +31,6 @@ urlpatterns = [
     path("clicker/add_click", cernyrobin.add_click, name="add_click"),
     path("get_user_data/", cernyrobin.get_user_data, name="get_user_data"),
     path("get_all_data/", cernyrobin.get_all_data, name="get_all_data"),
+
+    path("api/kafka/", api.kafka, name="kafka") # i want this to have a subdomain called api
 ]
