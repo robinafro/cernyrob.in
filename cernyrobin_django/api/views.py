@@ -6,10 +6,65 @@ from api.yt_transcriptor import main as yt_transcriptor
 
 import datetime
 
-GENERATE_RATE_LIMIT = 10 # 60 * 60 * 24 * 7 - 60 * 60 * 6 # 7 days minus six hours to prevent it from shifting too far forward
+GENERATE_RATE_LIMIT = 60 * 60 * 24 * 7 - 60 * 60 * 6 # 7 days minus six hours to prevent it from shifting too far forward
 
 def kafka(request, subdomain):
     return HttpResponse("Hello, world. You're at the api index.")
+
+def kafka_get(request, subdomain):
+    response = {"code": 200, "message": "OK"}
+
+    video_url = request.GET.get("video_url")
+
+    if not video_url:
+        response["code"] = 400
+        response["message"] = "Bad request"
+
+        return JsonResponse(response)
+
+    video_url = video_url.replace("\"", "")
+
+    try:
+        kafka = Kafka.objects.get(video_url=video_url)
+
+        response["code"] = 200
+        response["message"] = "OK"
+        response["data"] = {
+            "answers": kafka.answers,
+            "transcript": kafka.transcript,
+            "language": kafka.language,
+        }
+
+        return JsonResponse(response)
+    except Kafka.DoesNotExist:
+        response["code"] = 404
+        response["message"] = "Not found"
+
+        return JsonResponse(response)
+    except Exception as e:
+        print(e)
+        response["code"] = 500
+        response["message"] = "Internal server error"
+
+        return JsonResponse(response)
+
+def kafka_list(request, subdomain):
+    response = {"code": 200, "message": "OK", "list": {}}
+
+    try:
+        for kafka in Kafka.objects.all():
+            response["list"]["video_url"] = {
+                "answers": kafka.answers,
+                "transcript": kafka.transcript,
+                "language": kafka.language,
+            }
+    except Exception as e:
+        print(e)
+        response["code"] = 500
+        response["list"] = {}
+        response["message"] = "Internal server error"
+
+    return JsonResponse(response)
 
 def kafka_answer(request, subdomain):
     response = {"code": 200, "message": "OK"}
@@ -54,7 +109,11 @@ def kafka_answer(request, subdomain):
 
         response["code"] = 200
         response["message"] = "OK"
-        response["answers"] = answers
+        response["data"] = {
+            "answers": answers,
+            "transcript": transcript,
+            "language": language,
+        }
 
         return JsonResponse(response)
     except Exception as e:
