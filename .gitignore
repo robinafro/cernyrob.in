@@ -4,6 +4,8 @@ cernyrobin_django/api/yt_transcriptor/output/*
 
 !cernyrobin_django/api
 
+.env
+
 *.un
 *.un~
 .*
