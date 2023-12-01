@@ -3,3 +3,10 @@
     height: auto;
     text-align: center;
 }
+
+.title {
+    font-size: 50px;
+    font-weight: bold;
+    color: #000000;
+    margin-top: 50px;
+}
