@@ -1,12 +1,73 @@
-.title-container {
+.background {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#title-container {
     width: 100%;
     height: auto;
     text-align: center;
 }
 
 .title {
-    font-size: 50px;
+    font-size: 3rem;
     font-weight: bold;
     color: #000000;
     margin-top: 50px;
+}
+
+.subtitle {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #000000;
+}
+
+#page-container {
+    width: 80%;
+    height: auto;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    align-items: center;
+}
+
+.kafka-list-element {
+    width: 100%;
+    aspect-ratio: 5;
+    padding: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    vertical-align: middle;
+}
+
+.kafka-list-element-image {
+    height: 80%;
+    aspect-ratio: 16/9;
+    margin: auto;
+}
+
+.kafka-list-element-text-container {
+    height: 80%;
+    aspect-ratio: 4;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    vertical-align: top;
+}
+
+.kafka-list-element-text {
+    margin: auto;
+    margin-left: 0px;
+    text-align: left;
+}
+
+.kafka-list-element-title {
+    font-size: 2rem;
+}
+
+.kafka-list-element-description {
+    font-size: 1rem;
+    vertical-align: text-top;
 }

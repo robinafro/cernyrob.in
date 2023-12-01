@@ -1,25 +1,36 @@
 <!DOCTYPE html>
 <html>
 
-    {% load static %}
+{% load static %}
 
 <head>
     <link href="{% static 'kafka.css' %}" rel="stylesheet">
+    <script src="{% static 'kafka-list.js' %}"></script>
 
     <title>My Webpage</title>
 </head>
 
 <body>
-    <div class="title-container">
-        <h1 class="title">kafka</h1>
-        <h2 class="subtitle">všechny odpovědi na samostudium z dějepisu, automaticky generované AI</h2>
-    </div>
+    <div class="background">
+        <div id="title-container">
+            <h1 class="title">kafka</h1>
+            <h2 class="subtitle">všechny odpovědi na samostudia z dějepisu, automaticky generované pomocí AI</h2>
+        </div>
 
-    <div class="page-container">
-        <div id="kafka-list-container">
-            <div id="kafka-list-element">KAFKA</div>
-            <div id="kafka-list-element">KAFKA</div>
-            <div id="kafka-list-element">KAFKA</div>
+        <div id="page-container">
+            <div class="kafka-list-element" id="element-template" style="display: none">
+                <img class="kafka-list-element-image"></img>
+
+                <div class="kafka-list-element-text-container">
+                    <h3 class="kafka-list-element-text kafka-list-element-title">
+                        This is a template
+                    </h3>
+
+                    <p class="kafka-list-element-text kafka-list-element-description">
+                        The template will be cloned by the JS script.
+                    </p>
+                </div>
+            </div>
         </div>
     </div>
 </body>
