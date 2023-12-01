@@ -74,8 +74,6 @@ def chatbot(questions_path, transcript_path, save_path, youtube_url=None):
     print("Transcript: " + transcript)
     print("Questions: " + questions)
 
-    return "This would be the response"
-
     messages = [
         {"role": "system", "content": "Jsi AI asistent, který odpovídá na otázky z dějepisu, češtiny, nebo jiných školních předmětů. Odpověz na tyto otázky stručně a jednoduše. Je velmi důležité, že každá odpověď je správná. Informace získáš z přiloženého výkladu."},
     ]
@@ -90,7 +88,7 @@ def chatbot(questions_path, transcript_path, save_path, youtube_url=None):
         model=MODEL,
         messages=messages
     )
-    
+    print(response)
     print("Sending prompt with questions...")
 
     messages.append({"role": "user", "content": questions})
