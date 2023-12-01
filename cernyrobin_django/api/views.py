@@ -42,7 +42,15 @@ def kafka_answer(request, subdomain):
         system_data[0].last_generated = datetime.datetime.now().replace(tzinfo=None)
         system_data[0].save()
 
-        answers = yt_transcriptor.run(video_url, language)
+        answers, transcript = yt_transcriptor.run(video_url, language)
+
+        # Save to database
+        kafka, created = Kafka.objects.get_or_create(video_url=video_url)
+
+        kafka.answers = answers
+        kafka.transcript = transcript
+        kafka.language = language
+        kafka.save()
 
         response["code"] = 200
         response["message"] = "OK"

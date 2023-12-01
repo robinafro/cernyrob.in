@@ -146,10 +146,10 @@ def run(video_url, language="en-US"):
 
     # return "These would be the answers if OpenAI was enabled." # Disabled for now
 
-    answer.chatbot(None, os.path.join(get_folder('output_dir'), f'{name}.txt'), os.path.join(get_folder('output_dir'), f'{name}_answers.txt'), youtube_url=video_url)
+    # answer.chatbot(None, os.path.join(get_folder('output_dir'), f'{name}.txt'), os.path.join(get_folder('output_dir'), f'{name}_answers.txt'), youtube_url=video_url)
 
     answers_path = os.path.join(get_folder('output_dir'), f'{name}_answers.txt')
 
-    return open_transcript(f'{name}_answers', only_return=True)
+    return open_transcript(f'{name}_answers', only_return=True), open_transcript(name, only_return=True)
 
 initialize_folders()
