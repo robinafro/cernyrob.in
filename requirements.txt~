@@ -1,6 +1,7 @@
 django
 whitenoise
 
+youtube_dl
 pytube
 moviepy
 SpeechRecognition
@@ -8,4 +9,3 @@ pydub
 colorama
 openai
 python-dotenv
-requests

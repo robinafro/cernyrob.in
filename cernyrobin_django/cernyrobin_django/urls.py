@@ -32,5 +32,6 @@ urlpatterns = [
     path("get_user_data/", cernyrobin.get_user_data, name="get_user_data"),
     path("get_all_data/", cernyrobin.get_all_data, name="get_all_data"),
 
-    path("api/kafka/", api.kafka, name="kafka") # i want this to have a subdomain called api
+    path("kafka/", api.kafka, {"subdomain": "api"}, name="kafka"),
+    path("kafka/answer", api.kafka_answer, {"subdomain": "api"}, name="kafka_answer")
 ]
