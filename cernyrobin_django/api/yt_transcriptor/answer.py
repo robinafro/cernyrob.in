@@ -9,7 +9,7 @@ try:
 except ImportError as e:
   print("Missing dependencies detected. Run pip install -r requirements.txt to install...")
 
-MODEL = "gpt-3.5-turbo-16k-0613"
+MODEL = "gpt-3.5-turbo-16k-0613" # The best model for this application - large text, but stay cheap
 
 dotenv.load_dotenv()
 
@@ -71,11 +71,18 @@ def chatbot(questions_path, transcript_path, save_path, youtube_url=None):
     with open(transcript_path, encoding="utf-8") as txt:
        transcript = txt.read()
 
+    system_message_path = os.path.join(os.path.dirname(__file__), "system_message.txt")
+    system_message = ""
+    if os.path.exists(system_message_path):
+        with open(system_message_path, encoding="utf-8") as txt:    
+            system_message = txt.read()
+
+    print("System message: " + system_message)
     print("Transcript: " + transcript)
     print("Questions: " + questions)
 
     messages = [
-        {"role": "system", "content": "Jsi AI asistent, který odpovídá na otázky z dějepisu, češtiny, nebo jiných školních předmětů. Odpověz na tyto otázky stručně a jednoduše. Je velmi důležité, že každá odpověď je správná. Informace získáš z přiloženého výkladu."},
+        {"role": "system", "content": system_message},
     ]
 
     messages.append({"role": "user", "content": transcript})
