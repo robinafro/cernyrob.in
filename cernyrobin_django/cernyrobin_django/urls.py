@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path
 
 from cernyrobin_app import views as cernyrobin
+from kafka import views as kafka
 from api import views as api
 
 urlpatterns = [
@@ -36,4 +37,7 @@ urlpatterns = [
     path("kafka/answer", api.kafka_answer, {"subdomain": "api"}, name="kafka_answer"),
     path("kafka/list", api.kafka_list, {"subdomain": "api"}, name="kafka_list"),
     path("kafka/get", api.kafka_get, {"subdomain": "api"}, name="kafka_get"),
+
+    path("kafka/index", kafka.index, name="kafka_index"),
+    path("kafka/view", kafka.view, name="kafka_view"),
 ]
