@@ -7,7 +7,7 @@ from api.yt_transcriptor import main as yt_transcriptor
 import datetime, json
 
 GENERATE_RATE_LIMIT = 60 * 60 * 24 * 7 - 60 * 60 * 6 # 7 days minus six hours to prevent it from shifting too far forward
-KAFKA_CHANNEL = "https://www.youtube.com/channel/@jankafka1535"
+KAFKA_CHANNEL = "https://www.youtube.com/@jankafka1535"
 
 def kafka(request, subdomain):
     return HttpResponse("Hello, world. You're at the api index.")
@@ -87,7 +87,7 @@ def kafka_answer(request, subdomain):
 
     if not video_info:
         return HttpResponse("Video not found")
-    
+    print(json.loads(video_info)["author_url"])
     if json.loads(video_info)["author_url"] != KAFKA_CHANNEL:
         return HttpResponse("Invalid video channel")
 
