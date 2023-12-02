@@ -58,6 +58,7 @@
 }
 
 .kafka-list-element-text {
+    height: auto;
     margin: auto;
     margin-left: 0px;
     text-align: left;
@@ -68,6 +69,11 @@
 }
 
 .kafka-list-element-description {
-    font-size: 1rem;
+    font-size: 1.5rem;
     vertical-align: text-top;
+    overflow: hidden;
+    background-clip: text;
+    background: linear-gradient(to bottom, #000000, #000000, #ffffff);
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
 }

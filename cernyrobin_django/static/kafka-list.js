@@ -1,5 +1,3 @@
-var DESCRIPTION_MAX_LENGTH = 270;
-
 function getLocation(path, subdomain) {
     var currentHostname = window.location.hostname;
     var currentPort = window.location.port;
@@ -57,10 +55,8 @@ document.addEventListener("DOMContentLoaded", function() {
             for (var key in list) {
                 var element = list[key];
                 var videoInfo = element["video_info"];
-                
-                var shortedDescription = videoInfo.description.substring(0, DESCRIPTION_MAX_LENGTH) + (videoInfo.description.length > DESCRIPTION_MAX_LENGTH ? "..." : "");
 
-                cloneElement(key.split("v=")[1], videoInfo.title, shortedDescription, videoInfo.thumbnail_url);
+                cloneElement(key.split("v=")[1], videoInfo.title, videoInfo.description, videoInfo.thumbnail_url);
             }
         })
 })
