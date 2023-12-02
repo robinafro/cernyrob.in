@@ -12,43 +12,58 @@
 </head>
 
 <body>
-    <div class="background">
-        <div class="title-container">
-            <div class="title">Submit</div>
+
+    <div class="title-container">
+        <div class="title">Submit</div>
+    </div>
+
+
+    <div id="page-container">
+        <div id="submit-form-container">
+            <div id="submit-form-title" class="subtitle">Video URL</div>
+
+            <form id="submit-form" action="/kafka/submit/" method="post">
+                {% csrf_token %}
+
+                <input type="text" name="video_url" id="submit-video-url" class="submit-form-input" required>
+            </form>
+
+            <button id="submit-button">Odeslat</button>
         </div>
 
+        <div id="submit-info-container">
+            <div class="subtitle">Jak to funguje?</div>
 
-        <div id="page-container">
-            <div id="submit-form-container">
-                <div id="submit-form-title" class="subtitle">Video URL</div>
+            <p class="submit-info-text">
+                Tento web používá umělou inteligenci, která dokáže odpovědět na otázky.
+                Pokud chcete přidat nové video, stačí napsat jeho URL do formuláře nahoře.
+                Odpovědi se automaticky vygenerují a přidají na web.
+            </p>
 
-                <form id="submit-form" action="/kafka/submit/" method="post">
-                    {% csrf_token %}
+            <div class="subtitle">Rate limit?</div>
 
-                    <input type="text" name="video_url" id="submit-video-url" class="submit-form-input" required>
-                </form>
+            <p class="submit-info-text">
+                Z finančních důvodů (jsme chudí studenti) je na webu rate limit jednoho videa za týden.
+                To stačí akorát na to, aby se na web dostala všechna Kafkova videa.
+                Pokud myslíte, že něco nefunguje správně, napište nám na Discordu.
+            </p>
+        </div>
+    </div>
+    <div id="loadingContainer">
 
-                <button id="submit-button">Odeslat</button>
-            </div>
-
-            <div id="submit-info-container">
-                <div class="subtitle">Jak to funguje?</div>
-
-                <p class="submit-info-text">
-                    Tento web používá umělou inteligenci, která dokáže odpovědět na otázky.
-                    Pokud chcete přidat nové video, stačí napsat jeho URL do formuláře nahoře.
-                    Odpovědi se automaticky vygenerují a přidají na web.
-                </p>
-
-                <div class="subtitle">Rate limit?</div>
-
-                <p class="submit-info-text">
-                    Z finančních důvodů (jsme chudí studenti) je na webu rate limit jednoho videa za týden.
-                    To stačí akorát na to, aby se na web dostala všechna Kafkova videa.
-                    Pokud myslíte, že něco nefunguje správně, napište nám na Discordu.
-                </p>
+        <div class="loadingio-spinner-double-ring-j59a65f3r6g">
+            <div class="ldio-l462ev5otdb">
+                <div></div>
+                <div></div>
+                <div>
+                    <div></div>
+                </div>
+                <div>
+                    <div></div>
+                </div>
             </div>
         </div>
+    </div>
 </body>
 
 </html>

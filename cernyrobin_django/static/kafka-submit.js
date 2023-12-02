@@ -1,7 +1,9 @@
 document.addEventListener('DOMContentLoaded', function() {
     var submitButton = document.getElementById('submit-button');
+    var loadingContainer = document.getElementById('loadingContainer');
 
     submitButton.addEventListener('click', function() {
+        loadingContainer.style.visibility = 'visible';
         var video_url = document.getElementById('submit-video-url').value;
         
         var url = '/kafka/submit/';
