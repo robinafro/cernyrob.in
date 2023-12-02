@@ -1,3 +1,5 @@
+var DESCRIPTION_MAX_LENGTH = 270;
+
 function cloneElement(id, name, description, image) {
     var container = document.getElementById("page-container");
     var originalElement = document.getElementById("element-template");
@@ -17,18 +19,31 @@ function cloneElement(id, name, description, image) {
     clonedDescription.textContent = description;
 
     if (image != null) {
-        clonedImage.textContent = image;
+        clonedImage.src = image;
     }
 
     container.appendChild(clonedElement);
 }
 
 document.addEventListener("DOMContentLoaded", function() {
-    fetch("http://api.localhost:8000/kafka/list", {
-        mode: "no-cors"
-    })
+    fetch("http://api.localhost:8000/kafka/list")
         .then(data => {
-            console.log(data);
-            data = data["list"];
+            if (data.status == 200) {
+                return data.json();
+            } else {
+                throw new Error("Something went wrong");
+            }
+        })
+        .then(data => {
+            var list = data["list"];
+
+            for (var key in list) {
+                var element = list[key];
+                var videoInfo = element["video_info"];
+                
+                var shortedDescription = videoInfo.description.substring(0, DESCRIPTION_MAX_LENGTH) + (videoInfo.description.length > DESCRIPTION_MAX_LENGTH ? "..." : "");
+
+                cloneElement(videoInfo.id, videoInfo.title, shortedDescription, videoInfo.thumbnail_url);
+            }
         })
 })
