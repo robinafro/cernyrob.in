@@ -45,14 +45,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # "corsheaders",
+    "corsheaders",
     'cernyrobin_app',
     'api',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    # 'corsheaders.middleware.CorsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -82,6 +82,17 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'cernyrobin_django.wsgi.application'
 
+# CORS
+# CORS_ALLOWED_ORIGINS = [
+#     "https://cernyrob.in",
+#     "http://localhost",    
+#     "https://.cernyrob.in",
+#     "https://.localhost",
+#     "http://.cernyrob.in",
+#     "http://.localhost"
+# ]
+
+CORS_ALLOW_ALL_ORIGINS = True
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
