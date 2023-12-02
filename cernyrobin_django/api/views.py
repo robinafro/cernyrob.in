@@ -48,12 +48,16 @@ def generate_answers(video_url, language):
         # Always use a rate limit when dealing with OpenAI API requests!
 
         system_data = System.objects.get_or_create(key="SYSTEM_DATA")
+
+        if not system_data[0].last_generated:
+            system_data[0].last_generated = datetime.datetime.now().replace(tzinfo=None)
+            system_data[0].save()
         
         if False and (datetime.datetime.now().replace(tzinfo=None) - system_data[0].last_generated.replace(tzinfo=None)).total_seconds() < GENERATE_RATE_LIMIT:
             return HttpResponse("Rate limit exceeded")
         
         system_data[0].last_generated = datetime.datetime.now().replace(tzinfo=None)
-        # system_data[0].save()
+        system_data[0].save()
 
         answers, transcript = yt_transcriptor.run(video_url, language)
 
