@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: auto;
 }
 
 #title-container {
@@ -23,9 +24,38 @@
     color: #000000;
 }
 
-#page-container {
-    width: 80%;
+#content {
+    width: 100%;
     height: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.side-ad-container {
+    width: 10%;
+    height: auto;
+    margin-left: 3rem;
+    margin-right: 3rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.side-ad {
+    width: 100%;
+    aspect-ratio: 1/2;
+    margin: 2rem;
+    overflow: hidden;
+    object-fit: cover;
+}
+
+#page-container {
+    width: 65%;
+    height: auto;
+    margin-bottom: 3rem;
     padding-top: 1rem;
     padding-bottom: 1rem;
     align-items: center;
@@ -33,8 +63,8 @@
 
 .kafka-list-element {
     width: 100%;
-    aspect-ratio: 5;
-    padding: auto;
+    aspect-ratio: 4;
+    padding: 1rem;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -44,13 +74,13 @@
 .kafka-list-element-image {
     height: 80%;
     aspect-ratio: 16/9;
-    margin: auto;
+    margin: 0.5rem;
 }
 
 .kafka-list-element-text-container {
     height: 80%;
-    aspect-ratio: 4;
-    margin: auto;
+    width: auto;
+    margin: 0.5rem;
     display: flex;
     flex-direction: column;
     justify-content: left;
@@ -76,4 +106,80 @@
     background: linear-gradient(to bottom, #000000, #000000, #ffffff);
     -webkit-text-fill-color: transparent;
     -webkit-background-clip: text;
+}
+
+#kafka-list-add-video-container {
+    width: 100%;
+    height: auto;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
+
+#view-answers-container {
+    width: 100%;
+    height: auto;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    align-items: center;
+    white-space: pre-wrap;
+}
+
+#submit-form-container {
+    width: 100%;
+    height: auto;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
+
+#submit-form {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+#submit-form-title {
+    margin-bottom: 1rem;
+}
+
+#submit-video-url {
+    width: 100%;
+}
+
+#submit-button {
+    margin: 1rem;
+}
+
+.submit-info-text {
+    font-size: 1.5rem;
+    text-align: left;
+}
+
+#disclaimer-footer {
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    margin: 0px;
+    width: 100vw;
+    height: auto;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    text-align: center;
+    background-color: #000000;
+    color: #ffffff;
+}
+
+.disclaimer-highlight {
+    color: #ff0000;
+    font-weight: bold;
 }

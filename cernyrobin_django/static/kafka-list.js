@@ -1,3 +1,12 @@
+var ads = [
+    "kytara.png",
+    "kytara2.png",
+    "kytara3.png",
+    "kytara4.png",
+    "robot.png",
+    "robot2.png",
+]
+
 function getLocation(path, subdomain) {
     var currentHostname = window.location.hostname;
     var currentPort = window.location.port;
@@ -8,6 +17,10 @@ function getLocation(path, subdomain) {
     } else {
         return currentScheme + "//" + subdomain + "." + currentHostname + ":" + currentPort + path;
     }
+}
+
+function convertRemToPixels(rem) {    
+    return rem * parseFloat(getComputedStyle(document.documentElement).fontSize);
 }
 
 function cloneElement(id, name, description, image) {
@@ -32,15 +45,46 @@ function cloneElement(id, name, description, image) {
         clonedImage.src = image;
     }
 
-    container.appendChild(clonedElement);
+    container.insertBefore(clonedElement, originalElement);
 
     clonedElement.addEventListener("click", function() {
         window.location.href = getLocation("/kafka/view?id=" + id);
     })
 }
 
+function cloneAd(templateId) {
+    var template = document.getElementById(templateId);
+    var container = template.parentNode;
+
+    var cloned = template.cloneNode(true);
+
+    cloned.id = "";
+    cloned.style.display = "block";
+    cloned.src = "/static/assets/kafka/" + ads[Math.floor(Math.random() * ads.length)];
+
+    container.appendChild(cloned);
+}
+
+function loadAds() {
+    var contentHeight = document.getElementById("page-container").clientHeight;
+    var ad = document.getElementsByClassName("side-ad")[0];
+    var adContainer = document.getElementById("ad-container");
+    var adHeight = adContainer.clientWidth / (1/2) + convertRemToPixels(4);
+    var amountOfAds = Math.floor(contentHeight / adHeight);
+
+    console.log(contentHeight);
+    console.log(adHeight);
+    console.log(amountOfAds);
+
+    for (var i = 0; i < amountOfAds; i++) {
+        cloneAd("ad-left");
+        cloneAd("ad-right");
+    }
+}
+
 document.addEventListener("DOMContentLoaded", function() {
-    console.log(getLocation("/kafka/list", "api"))
+    var addVideoButton = document.getElementById("kafka-list-add-video-button");
+
     fetch(getLocation("/kafka/list", "api"))
         .then(data => {
             if (data.status == 200) {
@@ -58,5 +102,11 @@ document.addEventListener("DOMContentLoaded", function() {
 
                 cloneElement(key.split("v=")[1], videoInfo.title, videoInfo.description, videoInfo.thumbnail_url);
             }
+
+            loadAds();
         })
+
+    addVideoButton.addEventListener("click", function() {
+        window.location.href = getLocation("/kafka/submit");
+    })
 })

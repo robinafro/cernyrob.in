@@ -9,9 +9,9 @@ document.addEventListener("DOMContentLoaded", function () {
             const formData = new FormData();
             formData.append("username", username.value);
             formData.append("password", password.value);
-	        formData.append("next", getQueryStringParameter("next") || "/");
-            
-	    var headers = new Headers({
+            formData.append("next", getQueryStringParameter("next") || "/");
+
+            var headers = new Headers({
                 "X-CSRFToken": getCookie("csrftoken"),
             });
 
@@ -54,10 +54,10 @@ document.addEventListener("DOMContentLoaded", function () {
             if (parts.length == 2) return parts.pop().split(";").shift();
         }
 
-	function getQueryStringParameter(name) {
-	    var urlParams = new URLSearchParams(window.location.search);
-	    return urlParams.get(name);
-	}
+        function getQueryStringParameter(name) {
+            var urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
     });
 
     username.addEventListener('input', function () {

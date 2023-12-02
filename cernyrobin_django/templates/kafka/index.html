@@ -8,31 +8,57 @@
     <link rel="icon" type="image/x-icon" href="/static/assets/kafka.ico">
     <script src="{% static 'kafka-list.js' %}"></script>
 
-    <title>Kafka AI</title>
+    <title>Kafka Bot</title>
 </head>
 
 <body>
     <div class="background">
         <div id="title-container">
-            <h1 class="title">kafka</h1>
+            <h1 class="title">Kafka Bot</h1>
             <h2 class="subtitle">všechny odpovědi na samostudia z dějepisu, automaticky generované pomocí AI</h2>
         </div>
 
-        <div id="page-container">
-            <button class="kafka-list-element" id="element-template" style="display: none">
-                <img class="kafka-list-element-image"></img>
+        <div id="content">
+            <div class="side-ad-container" id="ad-container">
+                <img src="{% static 'assets/kafka/robot.png' %}" class="side-ad" id="ad-left" style="display: none"></img>
+            </div>
 
-                <div class="kafka-list-element-text-container">
-                    <h3 class="kafka-list-element-text kafka-list-element-title">
-                        This is a template
-                    </h3>
+            <div id="page-container">
+                <button class="kafka-list-element" id="element-template" style="display: none">
+                    <img class="kafka-list-element-image"></img>
 
-                    <p class="kafka-list-element-text kafka-list-element-description">
-                        The template will be cloned by the JS script.
-                    </p>
+                    <div class="kafka-list-element-text-container">
+                        <h3 class="kafka-list-element-text kafka-list-element-title">
+                            This is a template
+                        </h3>
+
+                        <p class="kafka-list-element-text kafka-list-element-description">
+                            The template will be cloned by the JS script.
+                        </p>
+                    </div>
+                </button>
+
+                <div id="kafka-list-add-video-container">
+                    <div>Nemůžete najít video?</div>
+
+                    <button id="kafka-list-add-video-button">
+                        <span class="subtitle">Přidat video</span>
+                    </button>
                 </div>
-            </button>
+            </div>
+
+            <div class="side-ad-container">
+                <img src="{% static 'assets/kafka/kytara.png' %}" class="side-ad" id="ad-right" style="display: none"></img>
+            </div>
         </div>
+    </div>
+
+    <div id="disclaimer-footer">
+        <span class="disclaimer-highlight">VAROVÁNÍ:</span> Tento web je pouze pro zábavu.
+        Všechny odpovědi jsou generovány pomocí <span class="disclaimer-highlight">umělé inteligence</span>
+        a nemusí být správné. Používat AI na domácí úkoly je
+        <span class="disclaimer-highlight">podvod</span> a může mít vážné následky.
+        Autor tohoto webu za vás nenese <span class="disclaimer-highlight">žádnou</span> zodpovědnost!
     </div>
 </body>
 

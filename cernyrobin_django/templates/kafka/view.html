@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<html>
+{% load static %}
+
+<head>
+    <link href="{% static 'kafka.css' %}" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="/static/assets/kafka.ico">
+
+    <title>Kafka Bot</title>
+</head>
+
+<body>
+    <div class="background">
+        <div class="title-container">
+            <div class="title">{{ title }}</div>
+        </div>
+
+        <div id="page-container">
+            <div id="view-video-url">
+                <div class="subtitle">Video: <a href="{{ video_url }}">{{ video_url }}</a></div>
+            </div>
+
+            <div id="view-answers-container">
+                <div class="subtitle">Odpovědi:</div>{{ answers }}
+            </div>
+        </div>
+    </div>
+
+    <div id="disclaimer-footer">
+        <span class="disclaimer-highlight">VAROVÁNÍ:</span> Tento web je pouze pro zábavu.
+        Všechny odpovědi jsou generovány pomocí <span class="disclaimer-highlight">umělé inteligence</span>
+        a nemusí být správné. Používat AI na domácí úkoly je
+        <span class="disclaimer-highlight">podvod</span> a může mít vážné následky.
+        Autor tohoto webu za vás nenese <span class="disclaimer-highlight">žádnou</span> zodpovědnost!
+    </div>
+</body>
+
+</html>

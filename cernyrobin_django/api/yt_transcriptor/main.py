@@ -6,9 +6,6 @@ try:
     from api.yt_transcriptor import answer
 
     import textwrap
-    import urllib.request
-    import urllib
-    import pprint
 
     from colorama import Fore
 except ImportError:
@@ -137,22 +134,7 @@ def get_transcript(url_or_path, language, return_if_exists=False):
 
     return name, transcript
 
-def get_video_info(url):
-    params = {"format": "json", "url": url}
-    request_url = "https://www.youtube.com/oembed"
-    query_string = urllib.parse.urlencode(params)
-    request_url = request_url + "?" + query_string
-    with urllib.request.urlopen(request_url) as response:
-        response_text = response.read()
-        data = response_text.decode()
 
-        data = json.loads(data)
-
-        data["description"] = answer.get_video_description(url)
-
-        data = json.dumps(data)
-        
-        return data
 
 def format_transcript(transcript):
     return textwrap.fill(transcript, width=140)
