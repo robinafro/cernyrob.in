@@ -30,7 +30,7 @@ def view(request):
 def submit(request):
     if request.method == "GET":
         return render(request, "kafka/submit.html", context={
-            "last_generated": api_views.get_last_generated().timestamp(),
+            "last_generated": api_views.get_last_generated(),
             "generate_rate_limit": api_views.GENERATE_RATE_LIMIT,
         })
     elif request.method == "POST":

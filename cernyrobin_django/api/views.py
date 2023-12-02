@@ -23,10 +23,10 @@ def get_last_generated():
     try:
         system_data = System.objects.get_or_create(key="SYSTEM_DATA")
 
-        return system_data[0].last_generated.replace(tzinfo=None)
+        return system_data[0].last_generated.replace(tzinfo=None).timestamp()
     except Exception as e:
         print(e)
-        return None
+        return 0
 
 def generate_answers(video_url, language):
     response = {"code": 200, "message": "OK"}
