@@ -104,9 +104,9 @@ document.addEventListener("DOMContentLoaded", function() {
             }
 
             loadAds();
-        })
+        }) 
 
     addVideoButton.addEventListener("click", function() {
-        window.location.href = getLocation("/kafka/submit");
+        window.location.href = getLocation("/kafka/submit"); 
     })
 })
