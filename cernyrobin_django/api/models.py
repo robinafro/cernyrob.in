@@ -2,7 +2,7 @@ from django.db import models
 
 class System(models.Model):
     key = models.CharField(max_length=20, unique=True)
-    last_generated = models.DateTimeField()
+    last_generated = models.IntegerField(default=0)
 
 class Kafka(models.Model):
     video_url = models.CharField(max_length=70, unique=True)
