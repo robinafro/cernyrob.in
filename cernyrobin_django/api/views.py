@@ -24,6 +24,8 @@ def get_last_generated():
         system_data = System.objects.get_or_create(key="SYSTEM_DATA")
 
         return system_data[0].last_generated.replace(tzinfo=None).timestamp()
+    except System.DoesNotExist:
+        return 0
     except Exception as e:
         print(e)
         return 0
