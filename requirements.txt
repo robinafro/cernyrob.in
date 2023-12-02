@@ -1,6 +1,7 @@
 django
 whitenoise
 
+urllib
 pytube
 moviepy
 SpeechRecognition
