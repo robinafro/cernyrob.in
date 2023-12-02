@@ -1,5 +1,17 @@
 var DESCRIPTION_MAX_LENGTH = 270;
 
+function getLocation(path, subdomain) {
+    var currentHostname = window.location.hostname;
+    var currentPort = window.location.port;
+    var currentScheme = window.location.protocol;
+
+    if (subdomain == null) {
+        return currentScheme + "//" + currentHostname + ":" + currentPort + path;
+    } else {
+        return currentScheme + "//" + subdomain + "." + currentHostname + ":" + currentPort + path;
+    }
+}
+
 function cloneElement(id, name, description, image) {
     var container = document.getElementById("page-container");
     var originalElement = document.getElementById("element-template");
@@ -25,12 +37,13 @@ function cloneElement(id, name, description, image) {
     container.appendChild(clonedElement);
 
     clonedElement.addEventListener("click", function() {
-        window.location.href = "/kafka/view?id=" + id;
+        window.location.href = getLocation("/kafka/view?id=" + id);
     })
 }
 
 document.addEventListener("DOMContentLoaded", function() {
-    fetch("http://api.localhost:8000/kafka/list")
+    console.log(getLocation("/kafka/list", "api"))
+    fetch(getLocation("/kafka/list", "api"))
         .then(data => {
             if (data.status == 200) {
                 return data.json();
