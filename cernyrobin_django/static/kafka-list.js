@@ -23,6 +23,10 @@ function cloneElement(id, name, description, image) {
     }
 
     container.appendChild(clonedElement);
+
+    clonedElement.addEventListener("click", function() {
+        window.location.href = "/kafka/view?id=" + id;
+    })
 }
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -43,7 +47,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 
                 var shortedDescription = videoInfo.description.substring(0, DESCRIPTION_MAX_LENGTH) + (videoInfo.description.length > DESCRIPTION_MAX_LENGTH ? "..." : "");
 
-                cloneElement(videoInfo.id, videoInfo.title, shortedDescription, videoInfo.thumbnail_url);
+                cloneElement(key.split("v=")[1], videoInfo.title, shortedDescription, videoInfo.thumbnail_url);
             }
         })
 })
