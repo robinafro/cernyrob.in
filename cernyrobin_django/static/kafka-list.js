@@ -66,7 +66,7 @@ function cloneAd(templateId) {
 }
 
 function loadAds() {
-    var contentHeight = document.getElementById("page-container").clientHeight;
+    var contentHeight = document.getElementById("content").clientHeight;
     var ad = document.getElementsByClassName("side-ad")[0];
     var adContainer = document.getElementById("ad-container");
     var adHeight = adContainer.clientWidth / (1/2) + convertRemToPixels(4);

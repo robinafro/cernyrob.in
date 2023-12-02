@@ -45,3 +45,17 @@ document.addEventListener('DOMContentLoaded', function() {
         if (parts.length == 2) return parts.pop().split(";").shift();
     }
 })
+
+function showLoading() {
+    document.getElementById('loadContainer').style.visibility = 'visible';
+
+}
+
+
+
+
+document.addEventListener('DOMContentLoaded', function() { //Code that only gets executed after the html load
+    document.getElementById('submit-button').addEventListener('click', showLoading);
+    
+});
+
