@@ -1,3 +1,21 @@
+:root {
+    --textCr: #dbdde4;
+    --bgCr: #101216;
+    --highLightCr: #080131;
+    --blockCr: #141c49;
+    --bannerBgCr: #ffff00;
+    --headerCr: #6575d2;
+  }
+  
+
+body{
+    background-color: var(--bgCr);
+}
+
+a{
+    text-decoration: none;
+}
+
 .background {
     display: flex;
     flex-direction: column;
@@ -14,14 +32,14 @@
 .title {
     font-size: 3rem;
     font-weight: bold;
-    color: #000000;
+    color: var(--headerCr);
     margin-top: 50px;
 }
 
 .subtitle {
     font-size: 1.5rem;
     font-weight: bold;
-    color: #000000;
+    color: var(--headerCr);
 }
 
 #content {
@@ -69,6 +87,8 @@
     flex-direction: row;
     align-items: center;
     vertical-align: middle;
+    background-color: var(--highLightCr);
+    color: var(--textCr);
 }
 
 .kafka-list-element-image {
@@ -103,9 +123,10 @@
     vertical-align: text-top;
     overflow: hidden;
     background-clip: text;
-    background: linear-gradient(to bottom, #000000, #000000, #ffffff);
+    color: var(--textCr);
     -webkit-text-fill-color: transparent;
-    -webkit-background-clip: text;
+        background: linear-gradient(to bottom, var(--textCr), var(--textCr), var(--textCr), #dbdde414, #dbdde400);
+    -webkit-background-clip: text; 
 }
 
 #kafka-list-add-video-container {
@@ -138,6 +159,7 @@
     justify-content: center;
     display: flex;
     flex-direction: column;
+
 }
 
 #submit-form {
@@ -164,6 +186,7 @@
 .submit-info-text {
     font-size: 1.5rem;
     text-align: left;
+    color: var(--textCr);
 }
 
 #disclaimer-footer {
@@ -176,8 +199,8 @@
     padding-top: 1rem;
     padding-bottom: 1rem;
     text-align: center;
-    background-color: #000000;
-    color: #ffffff;
+    background-color: var(--bannerBgCr);
+    color: var(--bgCr);
 }
 
 .disclaimer-highlight {
