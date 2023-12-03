@@ -140,6 +140,10 @@ a{
     flex-direction: column;
 }
 
+#cantfindvideo {
+  color: rgb(214, 214, 214);
+}
+
 #view-answers-container {
     width: 100%;
     height: auto;
@@ -148,7 +152,10 @@ a{
     align-items: center;
     white-space: pre-wrap;
 }
- 
+
+.view-answers-text {
+  color: rgb(214, 214, 214);
+} 
 
 #submit-form-container {
     width: 100%;

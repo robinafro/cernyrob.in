@@ -7,7 +7,7 @@ import json
 
 
 def index(request):
-    context = []
+    context = {}
     return render(request, "kafka/index.html", context)
 
 
@@ -22,6 +22,7 @@ def view(request):
     video_info = json.loads(get_video_info.get_video_info(video_url))
 
     answers = api_views.get_answers(video_url).strip()
+    transcript = api_views.get_transcript(video_url).strip()
 
     return render(
         request,
@@ -31,6 +32,7 @@ def view(request):
             "video_url": video_url,
             "questions": video_info["description"],
             "answers": answers,
+            "transcript": transcript,
         },
     )
 

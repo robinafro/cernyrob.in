@@ -18,6 +18,14 @@ def get_answers(video_url):
         return kafka.answers
     except Kafka.DoesNotExist:
         return None
+    
+def get_transcript(video_url):
+    try:
+        kafka = Kafka.objects.get(video_url=video_url)
+
+        return kafka.transcript
+    except Kafka.DoesNotExist:
+        return None
 
 def get_last_generated():
     try:
