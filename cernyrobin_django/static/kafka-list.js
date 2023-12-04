@@ -1,12 +1,14 @@
 var ads = [
-    "kytara.png",
-    "kytara2.png",
-    "kytara3.png",
-    "kytara4.png",
-    "robot.png",
-    "robot2.png",
-    "clicker_ad.jpg",
-]
+    { image: "kytara.png", link: "https://www.youtube.com/watch?v=I0XACay6e3w" },
+    { image: "kytara2.png", link: "https://www.youtube.com/watch?v=QjAn2aMh3ug" },
+    { image: "kytara3.png", link: "https://www.youtube.com/watch?v=-YI6MRuBDrg" },
+    { image: "kytara4.png", link: "https://www.youtube.com/watch?v=qgbPi627zMU" },
+    { image: "robot.png", link: "https://www.youtube.com/watch?v=dQw4w9WgXcQ" },
+    { image: "robot2.png", link: "https://www.youtube.com/watch?v=QjAn2aMh3ug" },
+    { image: "clicker_ad.jpg", link: "https://cernyrob.in/clicker" },
+    { image: "slovak.png", link: "https://slovakje.best/minesweeper" },
+    { image: "slovak2.png", link: "https://slovakje.best/clicker" },
+];
 
 function getLocation(path, subdomain) {
     var currentHostname = window.location.hostname;
@@ -25,16 +27,24 @@ function convertRemToPixels(rem) {
 }
 
 function cloneAd(templateId) {
+    let ad = ads[Math.floor(Math.random() * ads.length)]
+    console.log(ad);
     var template = document.getElementById(templateId);
     var container = template.parentNode;
 
     var cloned = template.cloneNode(true);
+    
+    let img = cloned.getElementsByClassName("ad-image")[0];
 
     cloned.id = "";
     cloned.style.display = "block";
-    cloned.src = "/static/assets/kafka/" + ads[Math.floor(Math.random() * ads.length)];
+    img.src = "/static/assets/kafka/" + ad.image;
 
     container.appendChild(cloned);
+
+    cloned.addEventListener("click", function() {
+        window.location.href = ad.link;
+    })
 }
 
 function loadAds() {
