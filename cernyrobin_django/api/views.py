@@ -63,37 +63,6 @@ def get_all_to_be_displayed():
                     "description": video_info["description"],
                     "title": video_info["title"],
                 })
-        all_data.append({
-                    "video_id": id_from_url(kafka.video_url),
-                    "description": video_info["description"],
-                    "title": video_info["title"],
-                })
-        all_data.append({
-                    "video_id": id_from_url(kafka.video_url),
-                    "description": video_info["description"],
-                    "title": video_info["title"],
-                })
-        all_data.append({
-                    "video_id": id_from_url(kafka.video_url),
-                    "description": video_info["description"],
-                    "title": video_info["title"],
-                })
-        all_data.append({
-                    "video_id": id_from_url(kafka.video_url),
-                    "description": video_info["description"],
-                    "title": video_info["title"],
-                })
-        all_data.append({
-                    "video_id": id_from_url(kafka.video_url),
-                    "description": video_info["description"],
-                    "title": video_info["title"],
-                })
-        all_data.append({
-                    "video_id": id_from_url(kafka.video_url),
-                    "description": video_info["description"],
-                    "title": video_info["title"],
-                })
-        
     
     return all_data
 

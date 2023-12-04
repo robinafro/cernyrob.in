@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     "corsheaders",
     'cernyrobin_app',
     'api',
+    "kafka",
 ]
 
 MIDDLEWARE = [

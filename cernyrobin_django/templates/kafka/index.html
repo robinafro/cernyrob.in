@@ -26,8 +26,9 @@
 
             <div id="page-container">
                 {% for object in videos %}
-                <button class="kafka-list-element" id="element-template">
-                    <img src="https://img.youtube.com/vi/{{ object.video_id }}/mqdefault.jpg" class="kafka-list-element-image"></img>
+                <a href="/kafka/view?id={{ object.video_id }}" class="kafka-list-element" id="element-template">
+                    <img src="https://img.youtube.com/vi/{{ object.video_id }}/mqdefault.jpg"
+                        class="kafka-list-element-image"></img>
 
                     <div class="kafka-list-element-text-container">
                         <h3 class="kafka-list-element-text kafka-list-element-title">
@@ -38,15 +39,15 @@
                             {{ object.description }}
                         </p>
                     </div>
-                </button>
+                </a>
                 {% endfor %}
 
                 <div id="kafka-list-add-video-container">
                     <div id="cantfindvideo">Nemůžete najít video?</div>
 
-                    <button id="kafka-list-add-video-button">
+                    <div id="kafka-list-add-video-button">
                         <a href="/kafka/submit/" class="subtitle">Přidat video</a>
-                    </button>
+                    </div>
                 </div>
             </div>
 
@@ -57,13 +58,7 @@
         </div>
     </div>
 
-    <div id="disclaimer-footer">
-        <span class="disclaimer-highlight">VAROVÁNÍ:</span> Tento web je pouze pro zábavu.
-        Všechny odpovědi jsou generovány pomocí <span class="disclaimer-highlight">umělé inteligence</span>
-        a nemusí být správné. Používat AI na domácí úkoly je
-        <span class="disclaimer-highlight">podvod</span> a může mít vážné následky.
-        Autor tohoto webu za vás nenese <span class="disclaimer-highlight">žádnou</span> zodpovědnost!
-    </div>
+    {% include "disclaimer.html" %}
 
 
 

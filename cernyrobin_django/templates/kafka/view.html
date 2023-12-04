@@ -17,9 +17,10 @@
         </div>
 
         <div id="page-container">
-            <div id="view-video-url">
-                <div class="subtitle">Video: <a href="{{ video_url }}">{{ video_url }}</a></div>
-            </div>
+            <iframe id="video-embed" src="https://www.youtube.com/embed/mlUjjXTZBMM" title="Pařížská mírová konference"
+                frameborder="0"
+                allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen></iframe>
 
             <div id="view-answers-container">
                 <div class="subtitle">Odpovědi:</div><span class="view-answers-text">{{ answers }}</span>
@@ -31,13 +32,7 @@
         </div>
     </div>
 
-    <div id="disclaimer-footer">
-        <span class="disclaimer-highlight">VAROVÁNÍ:</span> Tento web je pouze pro zábavu.
-        Všechny odpovědi jsou generovány pomocí <span class="disclaimer-highlight">umělé inteligence</span>
-        a nemusí být správné. Používat AI na domácí úkoly je
-        <span class="disclaimer-highlight">podvod</span> a může mít vážné následky.
-        Autor tohoto webu za vás nenese <span class="disclaimer-highlight">žádnou</span> zodpovědnost!
-    </div>
+    {% include "disclaimer.html" %}
 </body>
 
 </html>
