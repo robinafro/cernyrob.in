@@ -125,6 +125,10 @@ def generate_answers(video_url, language, runbackground=False):
 
         job, created = Job.objects.get_or_create(id=id_from_url(video_url))  
 
+        if not created and (datetime.datetime.now().replace(tzinfo=None).timestamp() - job.created.replace(tzinfo=None).timestamp() < 30 * 60):
+            job.delete()
+            job, created = Job.objects.get_or_create(id=id_from_url(video_url))
+
         if created:
             job.video_url = video_url
             job.percent_completed = 0
@@ -176,7 +180,7 @@ def generate_answers(video_url, language, runbackground=False):
 
             daemon.start()
 
-            return HttpResponse("OK")
+            return HttpResponse(id_from_url(video_url))
         
     except Exception as e:
         print(e)
@@ -278,6 +282,8 @@ def kafka_job(request, subdomain):
             return JsonResponse(data={
                 "video_url": job.video_url,
                 "percent_completed": job.percent_completed,
+                "chunks_completed": job.chunks_completed,
+                "total_chunks": job.total_chunks,
                 "finished": job.finished,
             })
         except Job.DoesNotExist:
