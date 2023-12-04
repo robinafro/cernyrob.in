@@ -31,7 +31,7 @@ def get_last_generated():
     try:
         system_data = System.objects.get_or_create(key="SYSTEM_DATA")
 
-        return system_data[0].last_generated.replace(tzinfo=None).timestamp()
+        return system_data[0].last_generated
     except System.DoesNotExist:
         return 0
     except Exception as e:
@@ -139,7 +139,6 @@ def generate_answers(video_url, language, runbackground=False):
 
         def run():
             def progress_callback(chunk, max_chunks):
-                print("Finished chunk " + str(chunk) + "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
                 job.percent_completed = round((chunk + 1) / max_chunks * 100)
                 job.chunks_completed = chunk + 1
                 job.total_chunks = max_chunks
