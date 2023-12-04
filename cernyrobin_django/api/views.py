@@ -117,7 +117,7 @@ def generate_answers(video_url, language):
         except Kafka.DoesNotExist:
             kafka = None
         
-        if (datetime.datetime.now().replace(tzinfo=None).timestamp() - system_data[0].last_generated).total_seconds() < GENERATE_RATE_LIMIT:
+        if False and (datetime.datetime.now().replace(tzinfo=None).timestamp() - system_data[0].last_generated) < GENERATE_RATE_LIMIT:
             return HttpResponse("Rate limit exceeded")
         
         system_data[0].last_generated = datetime.datetime.now().replace(tzinfo=None).timestamp()
