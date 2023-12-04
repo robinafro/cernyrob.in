@@ -74,6 +74,6 @@ def submit(request):
 
         video_url = "https://www.youtube.com/watch?v=" + video_id
 
-        response = api_views.generate_answers(video_url, "cs-CZ")
+        response = api_views.generate_answers(video_url, "cs-CZ", runbackground=True)
 
         return response

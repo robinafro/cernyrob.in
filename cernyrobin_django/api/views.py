@@ -1,11 +1,11 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
-from api.models import System, Kafka
+from api.models import System, Kafka, Job
 
 from api.yt_transcriptor import main as yt_transcriptor
 from api import get_video_info
 
-import datetime, json, re
+import datetime, json, re, threading
 
 GENERATE_RATE_LIMIT = 60 * 60 * 24 * 7 - 60 * 60 * 6 # 7 days minus six hours to prevent it from shifting too far forward
 KAFKA_CHANNEL = "https://www.youtube.com/@jankafka1535"
@@ -79,7 +79,7 @@ def get_all_to_be_displayed():
     
     return all_data
 
-def generate_answers(video_url, language):
+def generate_answers(video_url, language, runbackground=False):
     response = {"code": 200, "message": "OK"}
 
     video_info = get_video_info.get_video_info(video_url)
@@ -123,29 +123,61 @@ def generate_answers(video_url, language):
         system_data[0].last_generated = datetime.datetime.now().replace(tzinfo=None).timestamp()
         system_data[0].save()
 
-        answers, transcript = yt_transcriptor.run(video_url, language)
+        job, created = Job.objects.get_or_create(id=id_from_url(video_url))  
 
-        # Save to database
-        kafka, created = Kafka.objects.get_or_create(video_url=video_url)
+        if created:
+            job.video_url = video_url
+            job.percent_completed = 0
+            job.finished = False
+            job.save()
+        else:
+            return HttpResponse("Job already running")
 
-        kafka.answers = answers
-        kafka.transcript = transcript
-        kafka.language = language
-        kafka.video_info = video_info
+        def run():
+            def progress_callback(chunk, max_chunks):
+                print("Finished chunk " + str(chunk) + "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+                job.percent_completed = round((chunk + 1) / max_chunks * 100)
+                job.chunks_completed = chunk + 1
+                job.total_chunks = max_chunks
+                job.save()
+            
+            answers, transcript = yt_transcriptor.run(video_url, language, callback=progress_callback)
+
+            # Save to database
+            kafka, created = Kafka.objects.get_or_create(video_url=video_url)
+
+            kafka.answers = answers
+            kafka.transcript = transcript
+            kafka.language = language
+            kafka.video_info = video_info
+            
+            kafka.save()
+
+            job.percent_completed = 100
+            job.finished = True
+            job.save()
+
+            if not runbackground:
+                response["code"] = 200
+                response["message"] = "OK"
+                response["data"] = {
+                    "answers": answers,
+                    "transcript": transcript,
+                    "language": language,
+                    "video_info": json.loads(kafka.video_info),
+                    "video_url": video_url,
+                }
+
+            
+                return JsonResponse(data=response)
         
-        kafka.save()
+        if runbackground:
+            daemon = threading.Thread(target=run, daemon=True)
 
-        response["code"] = 200
-        response["message"] = "OK"
-        response["data"] = {
-            "answers": answers,
-            "transcript": transcript,
-            "language": language,
-            "video_info": json.loads(kafka.video_info),
-            "video_url": video_url,
-        }
+            daemon.start()
 
-        return JsonResponse(data=response)
+            return HttpResponse("OK")
+        
     except Exception as e:
         print(e)
         response["code"] = 500
@@ -232,3 +264,24 @@ def kafka_answer(request, subdomain):
     video_url = video_url.replace("\"", "")
 
     return generate_answers(video_url, language)
+
+def kafka_job(request, subdomain):
+    if request.method == "GET":
+        job_id = request.GET.get("id")
+
+        if not job_id:
+            return HttpResponse("Bad request")
+        
+        try:
+            job = Job.objects.get(id=job_id)
+
+            return JsonResponse(data={
+                "video_url": job.video_url,
+                "percent_completed": job.percent_completed,
+                "finished": job.finished,
+            })
+        except Job.DoesNotExist:
+            return HttpResponse("Job not found")
+        except Exception as e:
+            print(e)
+            return HttpResponse("Internal server error")

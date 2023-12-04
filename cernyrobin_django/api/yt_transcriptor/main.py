@@ -81,7 +81,7 @@ def open_transcript(name, only_return=False):
     else:
         os.startfile(file_path)
 
-def get_transcript(url_or_path, language, return_if_exists=False):
+def get_transcript(url_or_path, language, return_if_exists=False, callback=None):
     existing_name = ""
 
     if url_or_path.startswith('http'):
@@ -128,7 +128,7 @@ def get_transcript(url_or_path, language, return_if_exists=False):
     else:
         audio = url
 
-    transcript = transcribe.transcribe_large_audio(audio, temp_path=get_folder('temp_dir'), language=language)
+    transcript = transcribe.transcribe_large_audio(audio, temp_path=get_folder('temp_dir'), language=language, callback=callback)
 
     clear_dir('temp_dir')
 
@@ -139,10 +139,10 @@ def get_transcript(url_or_path, language, return_if_exists=False):
 def format_transcript(transcript):
     return textwrap.fill(transcript, width=140)
 
-def run(video_url, language="en-US"):
+def run(video_url, language="en-US", callback=None):
     clear_dir('temp_dir')
     
-    name, transcript = get_transcript(video_url, language, return_if_exists=True)
+    name, transcript = get_transcript(video_url, language, return_if_exists=True, callback=callback)
 
     save_transcript(name, transcript, format=False)
 

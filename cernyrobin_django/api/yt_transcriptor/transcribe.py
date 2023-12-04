@@ -12,7 +12,7 @@ if not os.path.exists(config_path):
 config = json.load(open(config_path))
 
 
-def transcribe_large_audio(audio_file_path, temp_path="", language=config["default_lang"], chunk_duration_ms=60000):
+def transcribe_large_audio(audio_file_path, temp_path="", language=config["default_lang"], chunk_duration_ms=60000, callback=None):
     temp_chunk = os.path.join(temp_path, "temp_chunk.wav")
 
     recognizer = sr.Recognizer()
@@ -38,6 +38,9 @@ def transcribe_large_audio(audio_file_path, temp_path="", language=config["defau
             
             text = recognizer.recognize_google(chunk_audio_data, language=language)
             transcriptions.append(text)
+
+            if callback is not None:
+                callback(i, num_chunks)
 
         except sr.UnknownValueError:
             print(f"{Fore.YELLOW}Speech Recognition could not understand chunk {i + 1}.{Fore.RESET}")
