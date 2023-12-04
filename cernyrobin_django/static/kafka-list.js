@@ -5,6 +5,7 @@ var ads = [
     "kytara4.png",
     "robot.png",
     "robot2.png",
+    "clicker_ad.jpg",
 ]
 
 function getLocation(path, subdomain) {
