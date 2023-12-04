@@ -146,7 +146,6 @@ def run(video_url, language="en-US"):
 
     save_transcript(name, transcript, format=False)
 
-
     answer.chatbot(None, os.path.join(get_folder('output_dir'), f'{name}.txt'), os.path.join(get_folder('output_dir'), f'{name}_answers.txt'), youtube_url=video_url)
 
     answers_path = os.path.join(get_folder('output_dir'), f'{name}_answers.txt')
