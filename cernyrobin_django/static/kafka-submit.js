@@ -6,6 +6,10 @@ async function fetchData(id) {
         }
         const data = await response.json();
         console.log(data); // Process and use your data here
+
+        if (data.percent_completed == 100) {
+            return true
+        }
     } catch (error) {
         console.error('There has been a problem with your fetch operation:', error);
     }
@@ -108,7 +112,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
                     async function continuousFetch(id) {
                         while (true) {
-                            await fetchData(id);
+                            let status = await fetchData(id);
+
+                            if (status == true) {
+                                // Redirect to view page
+
+                                break
+                            }
+
                             await sleep(1000); // Sleep for 1000 milliseconds
                         }
                     }
