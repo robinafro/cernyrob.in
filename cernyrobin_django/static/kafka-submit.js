@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // loadingContainer.style.visibility = 'visible';
         // document.getElementById('loadContainer').style.visibility = 'visible';
         submitButton.style.display = 'none';
+        document.getElementById('submit-response').style.visibility = 'hidden';
 
         var video_url = document.getElementById('submit-video-url').value;
         

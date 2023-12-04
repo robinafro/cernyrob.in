@@ -68,8 +68,9 @@ def submit(request):
             video_id = video_url.split("v=")[1]
         elif video_url.find("youtu.be/") != -1:
             video_id = video_url.split("youtu.be/")[1]
-        else:
-            video_id = video_url
+ 
+        if video_id is None:
+            return HttpResponse("Invalid video URL")
 
         video_url = "https://www.youtube.com/watch?v=" + video_id
 
