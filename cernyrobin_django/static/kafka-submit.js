@@ -1,6 +1,12 @@
 document.addEventListener('DOMContentLoaded', function() {
     var submitButton = document.getElementById('submit-button');
     var loadingContainer = document.getElementById('loadingContainer');
+    var loadingBar = document.getElementById('loadingBar');
+
+
+
+
+
 
     submitButton.addEventListener('click', function() {
         // loadingContainer.style.visibility = 'visible';
@@ -71,6 +77,7 @@ document.addEventListener('DOMContentLoaded', function() {
             } else {
                 response.text().then(function(text) {
                     console.log(text);
+                    let id = text
                     // document.getElementById('loadContainer').style.visibility = 'hidden';
                     // loadingContainer.style.visibility = 'hidden';
                     //shit
@@ -78,6 +85,27 @@ document.addEventListener('DOMContentLoaded', function() {
                     document.getElementById('submit-button').style.display = 'block';
                     document.getElementById('submit-response').textContent = text;
                     document.getElementById('submit-response').style.visibility = 'visible';
+
+                    // make the bar visibble
+                    
+                    while(true){
+
+                        async function fetchData() {
+                            try {
+                            const response = await fetch(getLocation("/kafka/job?id=", "api") + id);
+                            if (!response.ok) {
+                                throw new Error('Network response was not ok');
+                            }
+                            const data = await response.json();
+                            console.log(data); // Process and use your data here
+                            } catch (error) {
+                            console.error('There has been a problem with your fetch operation:', error);
+                            }
+                        }
+
+
+
+                    } 
                 });
 
                 return null;
@@ -100,3 +128,28 @@ document.addEventListener('DOMContentLoaded', function() {
         if (parts.length == 2) return parts.pop().split(";").shift();
     }
 })
+function updateLoadingBar(percent) {
+    console.log("defined")
+    if(percent > 100 || percent < 0)
+    {
+        console.warn("Incorrect percentage value")
+    }
+    else
+    {
+    loadingBar.style.width = percent + '%';
+    }
+ 
+}
+
+
+function getLocation(path, subdomain) {
+    var currentHostname = window.location.hostname;
+    var currentPort = window.location.port;
+    var currentScheme = window.location.protocol;
+
+    if (subdomain == null) {
+        return currentScheme + "//" + currentHostname + ":" + currentPort + path;
+    } else {
+        return currentScheme + "//" + subdomain + "." + currentHostname + ":" + currentPort + path;
+    }
+}

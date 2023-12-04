@@ -31,6 +31,12 @@ a {
   text-align: center;
 }
 
+#barContainer{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;  
+}
+
 .title {
   font-size: 3rem;
   font-weight: bold;
@@ -281,6 +287,50 @@ a {
 #submitBody {
   display: flex;
 }
+
+
+
+#loadingBarContainer {
+  width: 80%;
+  max-width: 600px;
+  background-color: #ddd;
+  border-radius: 25px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+#loadingBar {
+  width: 0%;
+  height: 30px;
+  background-color: #4CAF50;
+  background-image: linear-gradient(
+      45deg,
+      rgba(255, 255, 255, 0.2) 25%,
+      transparent 25%,
+      transparent 50%,
+      rgba(255, 255, 255, 0.2) 50%,
+      rgba(255, 255, 255, 0.2) 75%,
+      transparent 75%,
+      transparent
+  );
+  background-size: 50px 50px;
+  animation: moveBackground 2s linear infinite;
+  text-align: center;
+  line-height: 30px;
+  color: white;
+  border-radius: 25px;
+  transition: width 0.4s ease-in-out;
+}
+
+@keyframes moveBackground {
+  from {
+      background-position: 0 0;
+  }
+  to {
+      background-position: 50px 50px;
+  }
+}
+
 
 
 
