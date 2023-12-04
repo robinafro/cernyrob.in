@@ -286,7 +286,11 @@ a {
 
 /*Loding animation code*/
 #loadingContainer {
-  visibility: hidden;
+  display: none;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+
 }
 
 @keyframes ldio-l462ev5otdb {

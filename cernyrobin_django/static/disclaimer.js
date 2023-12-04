@@ -24,14 +24,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if(getCookie("hideDisclaimer") === "true"){
         document.getElementById('disclaimer-footer').style.visibility = 'hidden';
-        console.log("hidden auto")
     }
 
     document.getElementById('disclaimer-button').addEventListener('click', function() {
 
         document.getElementById('disclaimer-footer').style.visibility = 'hidden';
         setCookie("hideDisclaimer", "true", 3); 
-        console.log("hidden man")
 
 })})
 
