@@ -74,6 +74,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     // document.getElementById('loadContainer').style.visibility = 'hidden';
                     // loadingContainer.style.visibility = 'hidden';
                     //shit
+                    document.getElementById('loadingContainer').style.display = 'none';
                     document.getElementById('submit-button').style.display = 'block';
                     document.getElementById('submit-response').textContent = text;
                     document.getElementById('submit-response').style.visibility = 'visible';
@@ -85,6 +86,8 @@ document.addEventListener('DOMContentLoaded', function() {
             if (jsonData && jsonData.answers != undefined) {
                 var id = jsonData.video_url.split('v=')[1];
                 var view = '/kafka/view?id=' + id;
+                
+                document.getElementById('loadingContainer').style.display = 'none';
 
                 window.location.href = view
             }
