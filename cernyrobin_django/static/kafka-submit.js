@@ -95,8 +95,8 @@ document.addEventListener('DOMContentLoaded', function() {
             } else {
                 response.text().then(function(text) {
                     console.log(text);
-                    let id = text
-                    // document.getElementById('loadContainer').style.visibility = 'hidden';
+                    var vid = text
+                    // document.getElementBSyId('loadContainer').style.visibility = 'hidden';
                     // loadingContainer.style.visibility = 'hidden';
                     //shit
                     document.getElementById('loadingContainer').style.display = 'none';
@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                     async function continuousFetch() {
                         while(true) {
-                            await fetchData();
+                            await console.log(fetchData());
                             await sleep(100); // Sleep for 100 milliseconds
                         }
                     }
