@@ -78,8 +78,8 @@ def chatbot(questions_path, transcript_path, save_path, youtube_url=None):
             system_message = txt.read()
 
     print("System message: " + system_message)
-    print("Transcript: " + transcript)
-    print("Questions: " + questions)
+    print("Transcript: " + transcript[0:100])
+    print("Questions: " + questions[0:100])
 
     messages = [
         {"role": "system", "content": system_message},
