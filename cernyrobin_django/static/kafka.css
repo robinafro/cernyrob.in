@@ -293,7 +293,7 @@ a {
 
 }
 
-@keyframes ldio-l462ev5otdb {
+@keyframes spinner {
   0% {
     transform: rotate(0)
   }
@@ -303,11 +303,11 @@ a {
   }
 }
 
-.ldio-l462ev5otdb div {
+.spinner div {
   box-sizing: border-box !important
 }
 
-.ldio-l462ev5otdb>div {
+.spinner>div {
   position: absolute;
   width: 144px;
   height: 144px;
@@ -316,35 +316,35 @@ a {
   border-radius: 50%;
   border: 16px solid #000;
   border-color: #43bfe8 transparent #43bfe8 transparent;
-  animation: ldio-l462ev5otdb 1s linear infinite;
+  animation: spinner 1s linear infinite;
 }
 
-.ldio-l462ev5otdb>div:nth-child(2),
-.ldio-l462ev5otdb>div:nth-child(4) {
+.spinner>div:nth-child(2),
+.spinner>div:nth-child(4) {
   width: 108px;
   height: 108px;
   top: 46px;
   left: 46px;
-  animation: ldio-l462ev5otdb 1s linear infinite reverse;
+  animation: spinner 1s linear infinite reverse;
 }
 
-.ldio-l462ev5otdb>div:nth-child(2) {
+.spinner>div:nth-child(2) {
   border-color: transparent #53c316 transparent #53c316
 }
 
-.ldio-l462ev5otdb>div:nth-child(3) {
+.spinner>div:nth-child(3) {
   border-color: transparent
 }
 
-.ldio-l462ev5otdb>div:nth-child(3) div {
+.spinner>div:nth-child(3) div {
   position: absolute;
   width: 100%;
   height: 100%;
   transform: rotate(45deg);
 }
 
-.ldio-l462ev5otdb>div:nth-child(3) div:before,
-.ldio-l462ev5otdb>div:nth-child(3) div:after {
+.spinner>div:nth-child(3) div:before,
+.spinner>div:nth-child(3) div:after {
   content: "";
   display: block;
   position: absolute;
@@ -357,25 +357,25 @@ a {
   box-shadow: 0 128px 0 0 #43bfe8;
 }
 
-.ldio-l462ev5otdb>div:nth-child(3) div:after {
+.spinner>div:nth-child(3) div:after {
   left: -16px;
   top: 48px;
   box-shadow: 128px 0 0 0 #43bfe8;
 }
 
-.ldio-l462ev5otdb>div:nth-child(4) {
+.spinner>div:nth-child(4) {
   border-color: transparent;
 }
 
-.ldio-l462ev5otdb>div:nth-child(4) div {
+.spinner>div:nth-child(4) div {
   position: absolute;
   width: 100%;
   height: 100%;
   transform: rotate(45deg);
 }
 
-.ldio-l462ev5otdb>div:nth-child(4) div:before,
-.ldio-l462ev5otdb>div:nth-child(4) div:after {
+.spinner>div:nth-child(4) div:before,
+.spinner>div:nth-child(4) div:after {
   content: "";
   display: block;
   position: absolute;
@@ -388,13 +388,13 @@ a {
   box-shadow: 0 92px 0 0 #53c316;
 }
 
-.ldio-l462ev5otdb>div:nth-child(4) div:after {
+.spinner>div:nth-child(4) div:after {
   left: -16px;
   top: 30px;
   box-shadow: 92px 0 0 0 #53c316;
 }
 
-.loadingio-spinner-double-ring-j59a65f3r6g {
+.spinnerContainer {
   width: 200px;
   height: 200px;
   display: inline-block;
@@ -402,7 +402,7 @@ a {
   background: #00000000;
 }
 
-.ldio-l462ev5otdb {
+.spinner {
   width: 100%;
   height: 100%;
   position: relative;
@@ -412,7 +412,7 @@ a {
   /* see note above */
 }
 
-.ldio-l462ev5otdb div {
+.spinner div {
   box-sizing: content-box;
 }
 
@@ -423,7 +423,7 @@ Loading circle icon code:
   visibility: hidden;
 }
 
-@keyframes ldio-l462ev5otdb {
+@keyframes spinner {
   0% {
     transform: rotate(0)
   }
@@ -433,11 +433,11 @@ Loading circle icon code:
   }
 }
 
-.ldio-l462ev5otdb div {
+.spinner div {
   box-sizing: border-box !important
 }
 
-.ldio-l462ev5otdb>div {
+.spinner>div {
   position: absolute;
   width: 144px;
   height: 144px;
@@ -446,35 +446,35 @@ Loading circle icon code:
   border-radius: 50%;
   border: 16px solid #000;
   border-color: #43bfe8 transparent #43bfe8 transparent;
-  animation: ldio-l462ev5otdb 1s linear infinite;
+  animation: spinner 1s linear infinite;
 }
 
-.ldio-l462ev5otdb>div:nth-child(2),
-.ldio-l462ev5otdb>div:nth-child(4) {
+.spinner>div:nth-child(2),
+.spinner>div:nth-child(4) {
   width: 108px;
   height: 108px;
   top: 46px;
   left: 46px;
-  animation: ldio-l462ev5otdb 1s linear infinite reverse;
+  animation: spinner 1s linear infinite reverse;
 }
 
-.ldio-l462ev5otdb>div:nth-child(2) {
+.spinner>div:nth-child(2) {
   border-color: transparent #53c316 transparent #53c316
 }
 
-.ldio-l462ev5otdb>div:nth-child(3) {
+.spinner>div:nth-child(3) {
   border-color: transparent
 }
 
-.ldio-l462ev5otdb>div:nth-child(3) div {
+.spinner>div:nth-child(3) div {
   position: absolute;
   width: 100%;
   height: 100%;
   transform: rotate(45deg);
 }
 
-.ldio-l462ev5otdb>div:nth-child(3) div:before,
-.ldio-l462ev5otdb>div:nth-child(3) div:after {
+.spinner>div:nth-child(3) div:before,
+.spinner>div:nth-child(3) div:after {
   content: "";
   display: block;
   position: absolute;
@@ -487,25 +487,25 @@ Loading circle icon code:
   box-shadow: 0 128px 0 0 #43bfe8;
 }
 
-.ldio-l462ev5otdb>div:nth-child(3) div:after {
+.spinner>div:nth-child(3) div:after {
   left: -16px;
   top: 48px;
   box-shadow: 128px 0 0 0 #43bfe8;
 }
 
-.ldio-l462ev5otdb>div:nth-child(4) {
+.spinner>div:nth-child(4) {
   border-color: transparent;
 }
 
-.ldio-l462ev5otdb>div:nth-child(4) div {
+.spinner>div:nth-child(4) div {
   position: absolute;
   width: 100%;
   height: 100%;
   transform: rotate(45deg);
 }
 
-.ldio-l462ev5otdb>div:nth-child(4) div:before,
-.ldio-l462ev5otdb>div:nth-child(4) div:after {
+.spinner>div:nth-child(4) div:before,
+.spinner>div:nth-child(4) div:after {
   content: "";
   display: block;
   position: absolute;
@@ -518,13 +518,13 @@ Loading circle icon code:
   box-shadow: 0 92px 0 0 #53c316;
 }
 
-.ldio-l462ev5otdb>div:nth-child(4) div:after {
+.spinner>div:nth-child(4) div:after {
   left: -16px;
   top: 30px;
   box-shadow: 92px 0 0 0 #53c316;
 }
 
-.loadingio-spinner-double-ring-j59a65f3r6g {
+.spinnerContainer {
   width: 200px;
   height: 200px;
   display: inline-block;
@@ -532,7 +532,7 @@ Loading circle icon code:
   background: #00000000;
 }
 
-.ldio-l462ev5otdb {
+.spinner {
   width: 100%;
   height: 100%;
   position: relative;
@@ -542,6 +542,6 @@ Loading circle icon code:
   /* see note above */
 }
 
-.ldio-l462ev5otdb div {
+.spinner div {
   box-sizing: content-box;
 }
