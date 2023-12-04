@@ -8,6 +8,7 @@ try:
     from docx import Document
 except ImportError as e:
   print("Missing dependencies detected. Run pip install -r requirements.txt to install...")
+  print(e)
 
 MODEL = "gpt-3.5-turbo-16k-0613" # The best model for this application - large text, but stay cheap
 
