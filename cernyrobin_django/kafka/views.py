@@ -7,7 +7,17 @@ import json
 
 
 def index(request):
-    context = {}
+    context = {"videos": []}
+
+    for video in api_views.get_all_to_be_displayed():
+        context["videos"].append(
+            {
+                "title": video["title"],
+                "video_id": video["video_id"],
+                "description": video["description"],
+            }
+        )
+
     return render(request, "kafka/index.html", context)
 
 

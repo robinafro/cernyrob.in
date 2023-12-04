@@ -15,7 +15,7 @@
     <div class="background">
         <div id="title-container">
             <h1 class="title">Kafka Bot</h1>
-            <h2 class="subtitle">Automatizovaný systém na řešení odpovědí z videí pa</h2>
+            <h2 class="subtitle">Automatizovaný systém na řešení odpovědí z videí pana Kafky</h2>
         </div>
 
         <div id="content">
@@ -25,19 +25,21 @@
             </div>
 
             <div id="page-container">
-                <button class="kafka-list-element" id="element-template" style="display: none">
-                    <img class="kafka-list-element-image"></img>
+                {% for object in videos %}
+                <button class="kafka-list-element" id="element-template">
+                    <img src="https://img.youtube.com/vi/{{ object.video_id }}/mqdefault.jpg" class="kafka-list-element-image"></img>
 
                     <div class="kafka-list-element-text-container">
                         <h3 class="kafka-list-element-text kafka-list-element-title">
-                            This is a template
+                            {{ object.title }}
                         </h3>
 
                         <p class="kafka-list-element-text kafka-list-element-description">
-                            The template will be cloned by the JS script.
+                            {{ object.description }}
                         </p>
                     </div>
                 </button>
+                {% endfor %}
 
                 <div id="kafka-list-add-video-container">
                     <div id="cantfindvideo">Nemůžete najít video?</div>

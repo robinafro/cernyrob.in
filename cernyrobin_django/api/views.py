@@ -37,6 +37,65 @@ def get_last_generated():
     except Exception as e:
         print(e)
         return 0
+    
+def id_from_url(url):
+    if url.find("watch?v=") != -1:
+        id = url.split("watch?v=")[1]
+        if id.find("&") != -1:
+            id = id.split("&")[0]
+
+        return id
+    elif url.find("youtu.be/") != -1:
+        id = url.split("youtu.be/")[1]
+        if id.find("?") != -1:
+            id = id.split("?")[0]
+
+        return id
+
+def get_all_to_be_displayed():
+    all_data = []
+
+    for kafka in Kafka.objects.all():
+        video_info = json.loads(kafka.video_info)
+
+        all_data.append({
+                    "video_id": id_from_url(kafka.video_url),
+                    "description": video_info["description"],
+                    "title": video_info["title"],
+                })
+        all_data.append({
+                    "video_id": id_from_url(kafka.video_url),
+                    "description": video_info["description"],
+                    "title": video_info["title"],
+                })
+        all_data.append({
+                    "video_id": id_from_url(kafka.video_url),
+                    "description": video_info["description"],
+                    "title": video_info["title"],
+                })
+        all_data.append({
+                    "video_id": id_from_url(kafka.video_url),
+                    "description": video_info["description"],
+                    "title": video_info["title"],
+                })
+        all_data.append({
+                    "video_id": id_from_url(kafka.video_url),
+                    "description": video_info["description"],
+                    "title": video_info["title"],
+                })
+        all_data.append({
+                    "video_id": id_from_url(kafka.video_url),
+                    "description": video_info["description"],
+                    "title": video_info["title"],
+                })
+        all_data.append({
+                    "video_id": id_from_url(kafka.video_url),
+                    "description": video_info["description"],
+                    "title": video_info["title"],
+                })
+        
+    
+    return all_data
 
 def generate_answers(video_url, language):
     response = {"code": 200, "message": "OK"}
@@ -141,6 +200,9 @@ def kafka_get(request, subdomain):
         return JsonResponse(data=response)
 
 def kafka_list(request, subdomain):
+    if request.method != "GET":
+        return HttpResponse("Bad request")
+
     response = {"code": 200, "message": "OK", "list": {}}
 
     try:
