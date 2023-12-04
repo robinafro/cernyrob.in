@@ -252,6 +252,12 @@ a {
   font-weight: bold;
 }
 
+.disclaimer-hidden {
+  opacity: 0.7;
+  color: #000000;
+  font-weight: bolder;
+}
+
 #disclaimer-button {
   height: 80%;
   aspect-ratio: 1;
