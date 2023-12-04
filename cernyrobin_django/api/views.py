@@ -51,11 +51,24 @@ def id_from_url(url):
             id = id.split("?")[0]
 
         return id
+    
+def is_json(js):
+    try:
+        json.loads(js)
+    except:
+        return False
+    
+    return True
 
 def get_all_to_be_displayed():
     all_data = []
 
     for kafka in Kafka.objects.all():
+        if kafka.video_info is None:
+            continue
+        elif not is_json(kafka.video_info):
+            continue
+        
         video_info = json.loads(kafka.video_info)
 
         all_data.append({
