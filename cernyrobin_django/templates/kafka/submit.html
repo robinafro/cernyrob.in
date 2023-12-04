@@ -22,11 +22,11 @@
             <div id="submit-form-container">
                 <div id="submit-form-title" class="subtitle">Video URL</div>
 
-                <form id="submit-form" action="/kafka/submit/" method="post">
+                <div id="submit-form">
                     {% csrf_token %}
 
                     <input type="text" name="video_url" id="submit-video-url" class="submit-form-input" required>
-                </form>
+                </div>
 
                 <button id="submit-button">Odeslat</button>
             </div>
