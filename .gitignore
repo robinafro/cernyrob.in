@@ -2,7 +2,7 @@
 /cernyrobin_django/api/yt_transcriptor/temp/*
 /cernyrobin_django/api/yt_transcriptor/output/*
 
-*/__pycache__
+**/__pycache__/
 *.pyc
 __pycache__/
 
