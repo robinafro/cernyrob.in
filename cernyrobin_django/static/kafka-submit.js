@@ -1,3 +1,21 @@
+async function fetchData() {
+    try {
+    const response = await fetch(getLocation("/kafka/job?id=", "api") + id);
+    if (!response.ok) {
+        throw new Error('Network response was not ok');
+    }
+    const data = await response.json();
+    console.log(data); // Process and use your data here
+    } catch (error) {
+    console.error('There has been a problem with your fetch operation:', error);
+    }
+}
+
+function sleep(milliseconds) {
+    return new Promise(resolve => setTimeout(resolve, milliseconds));
+  }
+
+
 document.addEventListener('DOMContentLoaded', function() {
     var submitButton = document.getElementById('submit-button');
     var loadingContainer = document.getElementById('loadingContainer');
@@ -88,24 +106,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
                     // make the bar visibble
                     
-                    while(true){
 
-                        async function fetchData() {
-                            try {
-                            const response = await fetch(getLocation("/kafka/job?id=", "api") + id);
-                            if (!response.ok) {
-                                throw new Error('Network response was not ok');
-                            }
-                            const data = await response.json();
-                            console.log(data); // Process and use your data here
-                            } catch (error) {
-                            console.error('There has been a problem with your fetch operation:', error);
-                            }
+                    async function continuousFetch() {
+                        while(true) {
+                            await fetchData();
+                            await sleep(100); // Sleep for 100 milliseconds
                         }
+                    }
 
-
-
-                    } 
                 });
 
                 return null;
