@@ -4,6 +4,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     submitButton.addEventListener('click', function() {
         loadingContainer.style.visibility = 'visible';
+        document.getElementById('loadContainer').style.visibility = 'visible';
+
         var video_url = document.getElementById('submit-video-url').value;
         
         var url = '/kafka/submit/';
@@ -45,17 +47,3 @@ document.addEventListener('DOMContentLoaded', function() {
         if (parts.length == 2) return parts.pop().split(";").shift();
     }
 })
-
-function showLoading() {
-    document.getElementById('loadContainer').style.visibility = 'visible';
-
-}
-
-
-
-
-document.addEventListener('DOMContentLoaded', function() { //Code that only gets executed after the html load
-    document.getElementById('submit-button').addEventListener('click', showLoading);
-    
-});
-
