@@ -36,6 +36,7 @@ urlpatterns = [
     path("kafka/answer", api.kafka_answer, {"subdomain": "api"}, name="kafka_answer"),
     path("kafka/list", api.kafka_list, {"subdomain": "api"}, name="kafka_list"),
     path("kafka/get", api.kafka_get, {"subdomain": "api"}, name="kafka_get"),
+    path("kafka/job", api.kafka_job, {"subdomain": "api"}, name="kafka_job"),
 
     path("kafka/", kafka.index, name="kafka_index"),
     path("kafka/view/", kafka.view, name="kafka_view"),
