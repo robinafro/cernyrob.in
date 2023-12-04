@@ -71,7 +71,7 @@ def generate_answers(video_url, language):
 
     video_info = get_video_info.get_video_info(video_url)
 
-    if not video_info:
+    if video_info is None:
         return HttpResponse("Video not found")
     
     if json.loads(video_info)["author_url"] != KAFKA_CHANNEL:
@@ -88,6 +88,21 @@ def generate_answers(video_url, language):
         if not system_data[0].last_generated:
             system_data[0].last_generated = datetime.datetime.now().replace(tzinfo=None).timestamp()
             system_data[0].save()
+
+        try:
+            kafka = Kafka.objects.get(video_url=video_url)
+
+            response["code"] = 200
+            response["message"] = "OK"
+            response["data"] = {
+                "answers": kafka.answers,
+                "transcript": kafka.transcript,
+                "language": language,
+                "video_info": json.loads(kafka.video_info),
+                "video_url": video_url,
+            }
+        except Kafka.DoesNotExist:
+            kafka = None
         
         if False and (datetime.datetime.now().replace(tzinfo=None).timestamp() - system_data[0].last_generated).total_seconds() < GENERATE_RATE_LIMIT:
             return HttpResponse("Rate limit exceeded")
