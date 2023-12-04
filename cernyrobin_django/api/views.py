@@ -7,7 +7,7 @@ from api import get_video_info
 
 import datetime, json, re, threading
 
-GENERATE_RATE_LIMIT = 105 #60 * 60 * 24 * 7 - 60 * 60 * 6 # 7 days minus six hours to prevent it from shifting too far forward
+GENERATE_RATE_LIMIT = 15 #60 * 60 * 24 * 7 - 60 * 60 * 6 # 7 days minus six hours to prevent it from shifting too far forward
 KAFKA_CHANNEL = "https://www.youtube.com/@jankafka1535"
 DESCRIPTION_FORMAT = r"Výklad na dálku\s+Otázky k videu:(?:\s+\d+\.\s+.*?)+(?=\n\n|\Z)"
 
@@ -120,13 +120,10 @@ def generate_answers(video_url, language, runbackground=False):
         rate_limited = False
         if (datetime.datetime.now().replace(tzinfo=None).timestamp() - system_data[0].last_generated) < GENERATE_RATE_LIMIT:
             rate_limited = True
-        
-        system_data[0].last_generated = datetime.datetime.now().replace(tzinfo=None).timestamp()
-        system_data[0].save()
 
         job, created = Job.objects.get_or_create(id=id_from_url(video_url))  
-        
-        if (not created) and (datetime.datetime.now().replace(tzinfo=None).timestamp() - job.created.replace(tzinfo=None).timestamp() >= 60 * 60 * 1000) or job.video_url == "": # Reset old jobs
+        print((datetime.datetime.now().replace(tzinfo=None).timestamp() - job.created.replace(tzinfo=None).timestamp()))
+        if (not created) and (datetime.datetime.now().replace(tzinfo=None).timestamp() - job.created.replace(tzinfo=None).timestamp() >= 60 * 60) or job.video_url == "": # Reset old jobs
             job.delete()
             job, created = Job.objects.get_or_create(id=id_from_url(video_url))
 
@@ -134,9 +131,13 @@ def generate_answers(video_url, language, runbackground=False):
             if rate_limited:
                 return JsonResponse(data={"code": 400, "message": "Rate limit exceeded"})
             
+            system_data[0].last_generated = datetime.datetime.now().replace(tzinfo=None).timestamp()
+            system_data[0].save()
+
             job.video_url = video_url
             job.percent_completed = 0
             job.finished = False
+            job.created = datetime.datetime.now()
             job.save()
         else:
             return JsonResponse(data={"code": 200, "message": id_from_url(video_url)})
