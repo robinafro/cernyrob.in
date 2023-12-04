@@ -1,10 +1,11 @@
 document.addEventListener('DOMContentLoaded', function() {
     var submitButton = document.getElementById('submit-button');
-    var loadingContainer = document.getElementById('loadingContainer');
+    // var loadingContainer = document.getElementById('loadingContainer');
 
     submitButton.addEventListener('click', function() {
-        loadingContainer.style.visibility = 'visible';
-        document.getElementById('loadContainer').style.visibility = 'visible';
+        // loadingContainer.style.visibility = 'visible';
+        // document.getElementById('loadContainer').style.visibility = 'visible';
+        submitButton.style.display = 'none';
 
         var video_url = document.getElementById('submit-video-url').value;
         
@@ -27,6 +28,11 @@ document.addEventListener('DOMContentLoaded', function() {
             } else {
                 response.text().then(function(text) {
                     console.log(text);
+                    // document.getElementById('loadContainer').style.visibility = 'hidden';
+                    // loadingContainer.style.visibility = 'hidden';
+                    document.getElementById('submit-button').style.display = 'block';
+                    document.getElementById('submit-response').textContent = text;
+                    document.getElementById('submit-response').style.visibility = 'visible';
                 });
 
                 return null;

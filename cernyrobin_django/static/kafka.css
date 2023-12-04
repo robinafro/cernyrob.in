@@ -196,6 +196,18 @@ a{
     color: var(--textCr);
 }
 
+#submit-response-container {
+  width: auto;
+  height: auto;
+  align-items: center;
+}
+
+#submit-response {
+  color: rgb(214, 214, 214);
+  font-size: 1.5rem;
+  text-align: center;
+}
+
 #disclaimer-footer {
     position: fixed;
     bottom: 0px;
