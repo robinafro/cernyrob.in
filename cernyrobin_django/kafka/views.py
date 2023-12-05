@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 
 from api import get_video_info
 from api import views as api_views
@@ -61,7 +61,7 @@ def submit(request):
         video_url = request.POST.get("video_url")
 
         if video_url is None:
-            return HttpResponse("Invalid video URL")
+            return JsonResponse({"code": 400, "message": "Invalid video URL"})
 
         video_id = None
         if video_url.find("watch?v=") != -1:
@@ -70,7 +70,7 @@ def submit(request):
             video_id = video_url.split("youtu.be/")[1]
  
         if video_id is None:
-            return HttpResponse("Invalid video URL")
+            return JsonResponse({"code": 400, "message": "Invalid video URL"})
 
         video_url = "https://www.youtube.com/watch?v=" + video_id
 

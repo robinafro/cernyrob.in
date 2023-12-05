@@ -7,7 +7,7 @@ from api import get_video_info
 
 import datetime, json, re, threading
 
-GENERATE_RATE_LIMIT = 60 * 60 * 24 * 7 - 60 * 60 * 6 # 7 days minus six hours to prevent it from shifting too far forward
+GENERATE_RATE_LIMIT = 15 #60 * 60 * 24 * 7 - 60 * 60 * 6 # 7 days minus six hours to prevent it from shifting too far forward
 KAFKA_CHANNEL = "https://www.youtube.com/@jankafka1535"
 DESCRIPTION_FORMAT = r"Výklad na dálku\s+Otázky k videu:(?:\s+\d+\.\s+.*?)+(?=\n\n|\Z)"
 
@@ -85,13 +85,13 @@ def generate_answers(video_url, language, runbackground=False):
     video_info = get_video_info.get_video_info(video_url)
 
     if video_info is None:
-        return HttpResponse("Video not found")
+        return JsonResponse(data={"code": 400, "message": "Video not found"})
     
     if json.loads(video_info)["author_url"] != KAFKA_CHANNEL:
-        return HttpResponse("Invalid video channel")
+        return JsonResponse(data={"code": 400, "message": "Invalid video channel"})
     
     if not re.search(DESCRIPTION_FORMAT, json.loads(video_info)["description"]):
-        return HttpResponse("Invalid video description")
+        return JsonResponse(data={"code": 400, "message": "Invalid video description"})
 
     try:
         # Always use a rate limit when dealing with OpenAI API requests!
@@ -117,25 +117,30 @@ def generate_answers(video_url, language, runbackground=False):
         except Kafka.DoesNotExist:
             kafka = None
         
-        if False and (datetime.datetime.now().replace(tzinfo=None).timestamp() - system_data[0].last_generated) < GENERATE_RATE_LIMIT:
-            return HttpResponse("Rate limit exceeded")
-        
-        system_data[0].last_generated = datetime.datetime.now().replace(tzinfo=None).timestamp()
-        system_data[0].save()
+        rate_limited = False
+        if (datetime.datetime.now().replace(tzinfo=None).timestamp() - system_data[0].last_generated) < GENERATE_RATE_LIMIT:
+            rate_limited = True
 
         job, created = Job.objects.get_or_create(id=id_from_url(video_url))  
-
-        if not created and (datetime.datetime.now().replace(tzinfo=None).timestamp() - job.created.replace(tzinfo=None).timestamp() < 30 * 60):
+        print((datetime.datetime.now().replace(tzinfo=None).timestamp() - job.created.replace(tzinfo=None).timestamp()))
+        if (not created) and (datetime.datetime.now().replace(tzinfo=None).timestamp() - job.created.replace(tzinfo=None).timestamp() >= 60 * 60) or job.video_url == "": # Reset old jobs
             job.delete()
             job, created = Job.objects.get_or_create(id=id_from_url(video_url))
 
         if created:
+            if rate_limited:
+                return JsonResponse(data={"code": 400, "message": "Rate limit exceeded"})
+            
+            system_data[0].last_generated = datetime.datetime.now().replace(tzinfo=None).timestamp()
+            system_data[0].save()
+
             job.video_url = video_url
             job.percent_completed = 0
             job.finished = False
+            job.created = datetime.datetime.now()
             job.save()
         else:
-            return HttpResponse("Job already running")
+            return JsonResponse(data={"code": 200, "message": id_from_url(video_url)})
 
         def run():
             def progress_callback(chunk, max_chunks):
@@ -179,10 +184,18 @@ def generate_answers(video_url, language, runbackground=False):
 
             daemon.start()
 
-            return HttpResponse(id_from_url(video_url))
+            return JsonResponse(data={"code": 200, "message": id_from_url(video_url)})
+        else:
+            return run()
         
     except Exception as e:
         print(e)
+
+        try:
+            job.delete()
+        except:
+            pass
+
         response["code"] = 500
         response["message"] = "Internal server error"
 

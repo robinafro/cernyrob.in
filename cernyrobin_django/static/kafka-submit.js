@@ -7,7 +7,16 @@ async function fetchData(id) {
         const data = await response.json();
         console.log(data); // Process and use your data here
 
-        if (data.percent_completed == 100) {
+        if (data.percent_completed == 0 || data.percent_completed == 100) {
+            document.getElementById('loadingContainer').style.display = 'flex';
+            loadingBar.style.display = 'none';
+        } else {
+            document.getElementById('loadingContainer').style.display = 'none';
+            loadingBar.style.display = 'block';
+            updateLoadingBar(data.percent_completed)
+        }
+
+        if (data.finished == true) {
             return true
         }
     } catch (error) {
@@ -25,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var loadingContainer = document.getElementById('loadingContainer');
     var loadingBar = document.getElementById('loadingBar');
 
-
+    loadingBar.style.display = 'none';
 
 
 
@@ -33,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function () {
     submitButton.addEventListener('click', function () {
         // loadingContainer.style.visibility = 'visible';
         // document.getElementById('loadContainer').style.visibility = 'visible';
-        submitButton.style.display = 'none';
+        submitButton.style.visibility = 'hidden';
         document.getElementById('submit-response').style.visibility = 'hidden';
 
         var video_url = document.getElementById('submit-video-url').value;
@@ -68,11 +77,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         if (idValid(video_url)) {
-            console.log("gg")
             document.getElementById('loadingContainer').style.display = 'flex';
-        }
-        else {
-            console.log("cap")
         }
 
 
@@ -93,9 +98,11 @@ document.addEventListener('DOMContentLoaded', function () {
             body: formData,
             headers: headers
         }).then(function (response) {
+            console.log(response);
             if (response.headers.get('Content-Type').includes('application/json')) {
                 return response.json();
             } else {
+<<<<<<< HEAD
                 response.text().then(function (text) {
                     console.log(text);
                     var vid = text
@@ -129,8 +136,42 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
 
                 return null;
+=======
+                return response.json();
+>>>>>>> 2d3a2ff239dca269d45f09303bd84a98171184e8
             }
-        })
+        }).then(function (jsonData) {
+            if (jsonData.code == 200) {
+                let id = jsonData.message;
+
+                async function continuousFetch(id) {
+                    while (true) {
+                        let status = await fetchData(id);
+
+                        if (status == true) {
+                            // Redirect to view page
+                            var view = '/kafka/view?id=' + id;
+
+                            window.location.href = view;
+
+                            break
+                        }
+
+                        await sleep(10000); // Sleep for 1000 milliseconds
+                    }
+                }
+
+                continuousFetch(id)
+            } else {
+                document.getElementById('submit-response').style.visibility = 'visible';
+                document.getElementById('submit-response').textContent = jsonData.message;
+
+                submitButton.style.visibility = 'visible';
+                document.getElementById('loadingContainer').style.display = 'none';
+                document.getElementById('loadingBar').style.display = 'none';
+            }
+        });
+
         // .then(jsonData => jsonData.data).then(function(jsonData) {
         //     if (jsonData && jsonData.answers != undefined) {
         //         var id = jsonData.video_url.split('v=')[1];
