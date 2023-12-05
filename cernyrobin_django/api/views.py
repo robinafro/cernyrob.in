@@ -121,26 +121,58 @@ def generate_answers(video_url, language, runbackground=False):
         if (datetime.datetime.now().replace(tzinfo=None).timestamp() - system_data[0].last_generated) < GENERATE_RATE_LIMIT:
             rate_limited = True
 
-        job, created = Job.objects.get_or_create(id=id_from_url(video_url))  
-        print((datetime.datetime.now().replace(tzinfo=None).timestamp() - job.created.replace(tzinfo=None).timestamp()))
-        if (not created) and (datetime.datetime.now().replace(tzinfo=None).timestamp() - job.created.replace(tzinfo=None).timestamp() >= 60 * 60) or job.video_url == "": # Reset old jobs
-            job.delete()
-            job, created = Job.objects.get_or_create(id=id_from_url(video_url))
+        job_already_exists = False
+        job = None
+        try:
+            job = Job.objects.get(video_url=video_url)
+            job_already_exists = True
+        except Job.DoesNotExist:
+            job = None
 
-        if created:
+        # Make the job expire here
+        if job_already_exists and (datetime.datetime.now().replace(tzinfo=None).timestamp() - job.created.replace(tzinfo=None).timestamp() >= 60 * 60) or job.video_url == "": # Reset old jobs
+            job.delete()
+
+        if job_already_exists:
+            return JsonResponse(data={"code": 200, "message": id_from_url(video_url)})
+        else:
             if rate_limited:
                 return JsonResponse(data={"code": 400, "message": "Rate limit exceeded"})
             
             system_data[0].last_generated = datetime.datetime.now().replace(tzinfo=None).timestamp()
             system_data[0].save()
 
-            job.video_url = video_url
-            job.percent_completed = 0
-            job.finished = False
-            job.created = datetime.datetime.now()
-            job.save()
-        else:
-            return JsonResponse(data={"code": 200, "message": id_from_url(video_url)})
+            job = Job.objects.create(
+                id=id_from_url(video_url),
+                video_url=video_url,
+                percent_completed=0,
+                chunks_completed=0,
+                total_chunks=0,
+                finished=False,
+            )
+
+            job.save() # The script will continue running below
+
+        # job, created = Job.objects.get_or_create(id=id_from_url(video_url))  
+        
+        # if (not created) and (datetime.datetime.now().replace(tzinfo=None).timestamp() - job.created.replace(tzinfo=None).timestamp() >= 60 * 60) or job.video_url == "": # Reset old jobs
+        #     job.delete()
+        #     job, created = Job.objects.get_or_create(id=id_from_url(video_url))
+
+        # if created:
+        #     if rate_limited:
+        #         return JsonResponse(data={"code": 400, "message": "Rate limit exceeded"})
+            
+        #     system_data[0].last_generated = datetime.datetime.now().replace(tzinfo=None).timestamp()
+        #     system_data[0].save()
+
+        #     job.video_url = video_url
+        #     job.percent_completed = 0
+        #     job.finished = False
+        #     job.created = datetime.datetime.now()
+        #     job.save()
+        # else:
+        #     return JsonResponse(data={"code": 200, "message": id_from_url(video_url)})
 
         def run():
             def progress_callback(chunk, max_chunks):
