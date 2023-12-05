@@ -68,6 +68,11 @@ def submit(request):
             video_id = video_url.split("v=")[1]
         elif video_url.find("youtu.be/") != -1:
             video_id = video_url.split("youtu.be/")[1]
+
+        if video_id.find("&") != -1:
+            video_id = video_id.split("&")[0]
+        elif video_id.find("?") != -1:
+            video_id = video_id.split("?")[0]
  
         if video_id is None:
             return JsonResponse({"code": 400, "message": "Invalid video URL"})
