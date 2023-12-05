@@ -66,14 +66,17 @@ def get_all_to_be_displayed():
     for kafka in Kafka.objects.all():
         if kafka is None:
             continue
-
+        print(kafka.video_info)
+        print(type(kafka.video_info))
         if kafka.video_info is None:
             continue
-        elif not is_json(kafka.video_info):
-            continue
+        # elif not is_json(kafka.video_info):
+        #     continue
         
-        video_info = json.loads(kafka.video_info)
+        video_info = kafka.video_info
+        
         print(video_info)
+        
         all_data.append({
                     "video_id": id_from_url(kafka.video_url),
                     "description": video_info["description"],
@@ -124,7 +127,7 @@ def generate_answers(video_url, language, runbackground=False):
                 "answers": kafka.answers,
                 "transcript": kafka.transcript,
                 "language": language,
-                "video_info": json.dumps(kafka.video_info),
+                "video_info": (kafka.video_info),
                 "video_url": video_url,
             }
             print("Aaa")
@@ -140,7 +143,7 @@ def generate_answers(video_url, language, runbackground=False):
         job = None
         try:
             print("Finding job")
-            job = Job.objects.get(job_id=id_from_url(video_url))
+            job = Job.objects.get(job_id=id_from_url(video_url).strip(" "))
             
             job_already_exists = True
         except Exception as e:
@@ -152,7 +155,7 @@ def generate_answers(video_url, language, runbackground=False):
             job.delete()
 
             job = Job.objects.create(
-                job_id = id_from_url(video_url),
+                job_id = id_from_url(video_url).strip(" "),
                 video_url=video_url,
                 created = datetime.datetime.now().replace(tzinfo=None).timestamp()
             )
@@ -169,7 +172,7 @@ def generate_answers(video_url, language, runbackground=False):
             print("Set last generated")
             print("Creating job with id " + id_from_url(video_url))
             job = Job.objects.create(
-                job_id = id_from_url(video_url),
+                job_id = id_from_url(video_url).strip(" "),
                 video_url=video_url,
                 created = datetime.datetime.now().replace(tzinfo=None).timestamp()
             )
@@ -201,8 +204,8 @@ def generate_answers(video_url, language, runbackground=False):
 
         def run():
             def progress_callback(chunk, max_chunks):
-                job.percent_completed = round((chunk + 1) / max_chunks * 100)
-                job.chunks_completed = chunk + 1
+                job.percent_completed = round(chunk / max_chunks * 100)
+                job.chunks_completed = chunk
                 job.total_chunks = max_chunks
                 job.save()
             
@@ -217,11 +220,12 @@ def generate_answers(video_url, language, runbackground=False):
             kafka.answers = answers
             kafka.transcript = transcript
             kafka.language = language
-            kafka.video_info = json.dumps(video_info)
+            kafka.video_info = json.loads(video_info)
             
             kafka.save()
 
             job.percent_completed = 100
+            job.chunks_completed = job.total_chunks
             job.finished = True
             job.save()
 
@@ -232,7 +236,7 @@ def generate_answers(video_url, language, runbackground=False):
                     "answers": answers,
                     "transcript": transcript,
                     "language": language,
-                    "video_info": json.loads(kafka.video_info),
+                    "video_info": kafka.video_info,
                     "video_url": video_url,
                 }
 
@@ -287,7 +291,7 @@ def kafka_get(request, subdomain):
             "answers": kafka.answers,
             "transcript": kafka.transcript,
             "language": kafka.language,
-            "video_info": json.loads(kafka.video_info),
+            "video_info": kafka.video_info,
             "video_url": video_url,
         }
 
@@ -316,7 +320,7 @@ def kafka_list(request, subdomain):
                 "answers": kafka.answers,
                 "transcript": kafka.transcript,
                 "language": kafka.language,
-                "video_info": json.loads(kafka.video_info),
+                "video_info": kafka.video_info,
                 "video_url": kafka.video_url,
             }
     except Exception as e:
@@ -343,13 +347,13 @@ def kafka_answer(request, subdomain):
 
 def kafka_job(request, subdomain):
     if request.method == "GET":
-        job_id = request.GET.get("id")
+        job_id = request.GET.get("id").strip(" ")
 
         if not job_id:
             return HttpResponse("Bad request")
         
         try:
-            job = Job.objects.get(job_id=job_id)
+            job = Job.objects.get(job_id=job_id.strip(" "))
 
             return JsonResponse(data={
                 "video_url": job.video_url,

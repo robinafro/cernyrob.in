@@ -38,14 +38,13 @@ def transcribe_large_audio(audio_file_path, temp_path="", language=config["defau
             
             text = recognizer.recognize_google(chunk_audio_data, language=language)
             transcriptions.append(text)
-
-            if callback is not None:
-                callback(i, num_chunks)
-
         except sr.UnknownValueError:
             print(f"{Fore.YELLOW}Speech Recognition could not understand chunk {i + 1}.{Fore.RESET}")
         except sr.RequestError as e:
             print(f"{Fore.RED}Could not request results from Speech Recognition service; {e}{Fore.RESET}")
+
+        if callback is not None:
+                callback(i + 1, num_chunks)
 
     if os.path.exists(temp_chunk):
         os.remove(temp_chunk)
