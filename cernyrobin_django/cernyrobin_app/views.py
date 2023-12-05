@@ -142,9 +142,3 @@ def get_all_data(request):
         return JsonResponse(data=all_users_data, safe=False)
     else:
         return HttpResponse("405 Method Not Allowed")
-
-
-def kalista(request):
-    context = {}
-
-    return render(request, "cernyrobin/kalista.html", context)
