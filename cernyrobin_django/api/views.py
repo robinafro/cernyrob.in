@@ -15,17 +15,17 @@ def get_answers(video_url):
     try:
         kafka = Kafka.objects.get(video_url=video_url)
 
-        return kafka.answers
+        return kafka.answers or "Unable to get answers"
     except Kafka.DoesNotExist:
-        return None
+        return "Unable to get answers"
     
 def get_transcript(video_url):
     try:
         kafka = Kafka.objects.get(video_url=video_url)
 
-        return kafka.transcript
+        return kafka.transcript or "Unable to get transcript"
     except Kafka.DoesNotExist:
-        return None
+        return "Unable to get transcript"
 
 def get_last_generated():
     try:
@@ -64,13 +64,16 @@ def get_all_to_be_displayed():
     all_data = []
 
     for kafka in Kafka.objects.all():
+        if kafka is None:
+            continue
+
         if kafka.video_info is None:
             continue
         elif not is_json(kafka.video_info):
             continue
         
         video_info = json.loads(kafka.video_info)
-
+        print(video_info)
         all_data.append({
                     "video_id": id_from_url(kafka.video_url),
                     "description": video_info["description"],
@@ -95,26 +98,38 @@ def generate_answers(video_url, language, runbackground=False):
 
     try:
         # Always use a rate limit when dealing with OpenAI API requests!
-
+        print("Creating system data")
         system_data = System.objects.get_or_create(key="SYSTEM_DATA")
-
+        print("Created system data")
+        
         if not system_data[0].last_generated:
+            print("B")
             system_data[0].last_generated = datetime.datetime.now().replace(tzinfo=None).timestamp()
             system_data[0].save()
-
+            print("C")
+        
         try:
-            kafka = Kafka.objects.get(video_url=video_url)
-
+            print("Getting kafak object")
+            print("video_url", video_url)
+            print(type(video_url))
+            kafka = Kafka.objects.get(video_url=video_url) 
+            print("done")
+            if kafka.video_info is None or kafka.video_info == {} or kafka.video_info is {}:
+                print("A") 
+                kafka.video_info = json.loads(video_info)
+            print(kafka.video_info)
             response["code"] = 200
             response["message"] = "OK"
             response["data"] = {
                 "answers": kafka.answers,
                 "transcript": kafka.transcript,
                 "language": language,
-                "video_info": json.loads(kafka.video_info),
+                "video_info": json.dumps(kafka.video_info),
                 "video_url": video_url,
             }
-        except Kafka.DoesNotExist:
+            print("Aaa")
+        except Exception as e:
+            print(e)
             kafka = None
         
         rate_limited = False
@@ -124,34 +139,44 @@ def generate_answers(video_url, language, runbackground=False):
         job_already_exists = False
         job = None
         try:
-            job = Job.objects.get(video_url=video_url)
+            print("Finding job")
+            job = Job.objects.get(job_id=id_from_url(video_url))
+            
             job_already_exists = True
-        except Job.DoesNotExist:
+        except Exception as e:
+            print(e)
             job = None
 
         # Make the job expire here
-        if job_already_exists and (datetime.datetime.now().replace(tzinfo=None).timestamp() - job.created.replace(tzinfo=None).timestamp() >= 60 * 60) or job.video_url == "": # Reset old jobs
+        if job_already_exists and (datetime.datetime.now().replace(tzinfo=None).timestamp() - job.created >= 60 * 60 or job.video_url == ""): # Reset old jobs
             job.delete()
 
+            job = Job.objects.create(
+                job_id = id_from_url(video_url),
+                video_url=video_url,
+                created = datetime.datetime.now().replace(tzinfo=None).timestamp()
+            )
+            
         if job_already_exists:
             return JsonResponse(data={"code": 200, "message": id_from_url(video_url)})
         else:
             if rate_limited:
                 return JsonResponse(data={"code": 400, "message": "Rate limit exceeded"})
             
+            print("Setting last generated")
             system_data[0].last_generated = datetime.datetime.now().replace(tzinfo=None).timestamp()
             system_data[0].save()
-
+            print("Set last generated")
+            print("Creating job with id " + id_from_url(video_url))
             job = Job.objects.create(
-                id=id_from_url(video_url),
+                job_id = id_from_url(video_url),
                 video_url=video_url,
-                percent_completed=0,
-                chunks_completed=0,
-                total_chunks=0,
-                finished=False,
+                created = datetime.datetime.now().replace(tzinfo=None).timestamp()
             )
-
+            print("Created job")
+            print("Saving job")
             job.save() # The script will continue running below
+            print("Done")
 
         # job, created = Job.objects.get_or_create(id=id_from_url(video_url))  
         
@@ -182,14 +207,17 @@ def generate_answers(video_url, language, runbackground=False):
                 job.save()
             
             answers, transcript = yt_transcriptor.run(video_url, language, callback=progress_callback)
-
+            print(answers, transcript)
             # Save to database
             kafka, created = Kafka.objects.get_or_create(video_url=video_url)
 
+            if created:
+                kafka.timestamp=datetime.datetime.now().replace(tzinfo=None).timestamp()
+            
             kafka.answers = answers
             kafka.transcript = transcript
             kafka.language = language
-            kafka.video_info = video_info
+            kafka.video_info = json.dumps(video_info)
             
             kafka.save()
 
@@ -321,7 +349,7 @@ def kafka_job(request, subdomain):
             return HttpResponse("Bad request")
         
         try:
-            job = Job.objects.get(id=job_id)
+            job = Job.objects.get(job_id=job_id)
 
             return JsonResponse(data={
                 "video_url": job.video_url,

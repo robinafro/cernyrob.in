@@ -146,10 +146,13 @@ def run(video_url, language="en-US", callback=None):
 
     save_transcript(name, transcript, format=False)
 
-    # answer.chatbot(None, os.path.join(get_folder('output_dir'), f'{name}.txt'), os.path.join(get_folder('output_dir'), f'{name}_answers.txt'), youtube_url=video_url)
+    answer.chatbot(None, os.path.join(get_folder('output_dir'), f'{name}.txt'), os.path.join(get_folder('output_dir'), f'{name}_answers.txt'), youtube_url=video_url)
 
     answers_path = os.path.join(get_folder('output_dir'), f'{name}_answers.txt')
 
-    return open_transcript(f'{name}_answers', only_return=True), open_transcript(name, only_return=True)
+    if os.path.exists(answers_path):
+        return open_transcript(f'{name}_answers', only_return=True), open_transcript(name, only_return=True)
+    else:
+        return "Couldn't get answers", "Couldn't get transcript"
 
 initialize_folders()
