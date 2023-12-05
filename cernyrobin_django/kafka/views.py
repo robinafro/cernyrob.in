@@ -69,14 +69,14 @@ def submit(request):
         elif video_url.find("youtu.be/") != -1:
             video_id = video_url.split("youtu.be/")[1]
 
+        if video_id is None:
+            return JsonResponse({"code": 400, "message": "Invalid video URL"})
+        
         if video_id.find("&") != -1:
             video_id = video_id.split("&")[0]
         elif video_id.find("?") != -1:
             video_id = video_id.split("?")[0]
  
-        if video_id is None:
-            return JsonResponse({"code": 400, "message": "Invalid video URL"})
-
         video_url = "https://www.youtube.com/watch?v=" + video_id
 
         response = api_views.generate_answers(video_url, "cs-CZ", runbackground=True)
