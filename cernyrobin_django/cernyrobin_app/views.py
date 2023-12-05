@@ -18,31 +18,38 @@ from django.db.models.fields.related import ForeignKey
 
 import json
 
+
 # Utils
 def go_back(request):
-    next_url = request.POST.get('next', request.GET.get('next', ''))
-    response_data = {'redirect_url': next_url}
+    next_url = request.POST.get("next", request.GET.get("next", ""))
+    response_data = {"redirect_url": next_url}
 
     return JsonResponse(response_data) if next_url else HttpResponse("200 OK")
 
+
 # Pages
+
 
 def home(request):
     context = {}
 
     return render(request, "cernyrobin/home.html", context)
 
+
 def clicker_page(request):
     context = {}
 
     return render(request, "cernyrobin/clicker.html", context)
-   
+
+
 def login_page(request):
     context = {}
 
     return render(request, "cernyrobin/login.html", context)
 
+
 # API
+
 
 def login_submit(request):
     if request.method == "POST":
@@ -77,7 +84,7 @@ def login_submit(request):
 
         if user.check_password(password):
             user = authenticate(request, username=username, password=password)
-            
+
             if user is not None:
                 login(request, user)
 
@@ -89,12 +96,14 @@ def login_submit(request):
     else:
         return HttpResponse("405 Method Not Allowed")
 
+
 def add_click(request):
     if request.method == "POST":
         return clicker.add_click(request)
     else:
         return HttpResponse("405 Method Not Allowed")
-    
+
+
 def get_user_data(request):
     if request.method == "GET":
         scope = request.GET.get("scope")
@@ -109,24 +118,25 @@ def get_user_data(request):
             return HttpResponse("400 Bad Request")
     else:
         return HttpResponse("405 Method Not Allowed")
-    
+
+
 def get_all_data(request):
     if request.method == "GET":
         scope = request.GET.get("scope")
 
         if not scope:
             return HttpResponse("400 Bad Request")
-        
+
         all_user_profiles = profile_operations.get_all_profiles()
-        
+
         all_users_data = []
-        
+
         for user_profile in all_user_profiles:
             user_data = profile_operations.get_data(user_profile, scope)
-            
+
             if not user_data:
                 continue
-            
+
             all_users_data.append(user_data)
 
         return JsonResponse(data=all_users_data, safe=False)

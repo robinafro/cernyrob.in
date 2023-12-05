@@ -27,17 +27,14 @@ urlpatterns = [
     path("home/", cernyrobin.home),
     path("clicker/", cernyrobin.clicker_page),
     path("login/", cernyrobin.login_page),
-
     path("login/submit/", cernyrobin.login_submit, name="login_submit"),
     path("clicker/add_click", cernyrobin.add_click, name="add_click"),
     path("get_user_data/", cernyrobin.get_user_data, name="get_user_data"),
     path("get_all_data/", cernyrobin.get_all_data, name="get_all_data"),
-
     path("kafka/answer", api.kafka_answer, {"subdomain": "api"}, name="kafka_answer"),
     path("kafka/list", api.kafka_list, {"subdomain": "api"}, name="kafka_list"),
     path("kafka/get", api.kafka_get, {"subdomain": "api"}, name="kafka_get"),
     path("kafka/job", api.kafka_job, {"subdomain": "api"}, name="kafka_job"),
-
     path("kafka/", kafka.index, name="kafka_index"),
     path("kafka/view/", kafka.view, name="kafka_view"),
     path("kafka/submit/", kafka.submit, name="kafka_submit"),
