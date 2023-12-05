@@ -102,43 +102,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if (response.headers.get('Content-Type').includes('application/json')) {
                 return response.json();
             } else {
-<<<<<<< HEAD
-                response.text().then(function (text) {
-                    console.log(text);
-                    var vid = text
-                    // document.getElementBSyId('loadContainer').style.visibility = 'hidden';
-                    // loadingContainer.style.visibility = 'hidden';
-                    //shit
-                    document.getElementById('loadingContainer').style.display = 'none';
-                    document.getElementById('submit-button').style.display = 'block';
-                    document.getElementById('submit-response').textContent = text;
-                    document.getElementById('submit-response').style.visibility = 'visible';
-
-                    // make the bar visibble
-
-
-                    async function continuousFetch(id) {
-                        while (true) {
-                            let status = await fetchData(id);
-
-                            if (status == true) {
-                                // Redirect to view page
-
-                                break
-                            }
-
-                            await sleep(1000); // Sleep for 1000 milliseconds
-                        }
-                    }
-
-                    continuousFetch(id)
-
-                });
-
-                return null;
-=======
                 return response.json();
->>>>>>> 2d3a2ff239dca269d45f09303bd84a98171184e8
             }
         }).then(function (jsonData) {
             if (jsonData.code == 200) {
