@@ -365,5 +365,5 @@ def kafka_job(request, subdomain):
         except Job.DoesNotExist:
             return HttpResponse("Job not found")
         except Exception as e:
-            print(e)
+            print("Error: " + e)
             return HttpResponse("Internal server error")
