@@ -179,7 +179,7 @@ function updateLoadingBar(percent) {
 
 
 function updateLoadingBarAndTime(totalC, doneC) {
-    let percent
+    let percent = 0
     if (totalC > 0) {
         percent = doneC / totalC * 100
     }
