@@ -32,7 +32,7 @@ a {
 }
 
 #barContainer{
-  display: none;
+  display: flex;
   flex-direction: row;
   justify-content: center;  
 }
