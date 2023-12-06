@@ -43,8 +43,11 @@ def initialize_folders():
         os.mkdir(get_folder('temp_dir'))
 
 def clear_dir(dir):
-    for file in os.listdir(get_folder(dir)):
-        os.remove(os.path.join(get_folder(dir), file))
+    try:
+        for file in os.listdir(get_folder(dir)):
+            os.remove(os.path.join(get_folder(dir), file))
+    except Exception as e:
+        print(f"{Fore.YELLOW}Warning: Failed to clear directory {dir}. Error: {e}{Fore.RESET}")
 
 def save_transcript(name, transcript, format=False):
     if format:
