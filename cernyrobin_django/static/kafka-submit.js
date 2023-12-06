@@ -19,7 +19,7 @@ async function fetchData(id) {
 
 
 
-// {"video_url": "https://www.youtube.com/watch?v=-WJnehvTnK4", "percent_completed": 14, "chunks_completed": 4, "total_chunks": 29, "finished": false}
+        // {"video_url": "https://www.youtube.com/watch?v=-WJnehvTnK4", "percent_completed": 14, "chunks_completed": 4, "total_chunks": 29, "finished": false}
 
         if (data.finished == true) {
             return true
@@ -131,6 +131,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
 
                 continuousFetch(id)
+            } else if (jsonData.code == 201) {
+                let id = jsonData.message;
+
+                window.location.href = '/kafka/view?id=' + id;
             } else {
                 document.getElementById('submit-response').style.visibility = 'visible';
                 document.getElementById('submit-response').textContent = jsonData.message;
@@ -176,12 +180,10 @@ function updateLoadingBar(percent) {
 
 function updateLoadingBarAndTime(totalC, doneC) {
     let percent
-    if (totalC > 0)
-    {
-        percent = doneC / totalC  * 100
+    if (totalC > 0) {
+        percent = doneC / totalC * 100
     }
-    else
-    {
+    else {
         console.log("bullshit passed in")
         percent = -1
     }

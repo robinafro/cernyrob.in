@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
+from django.shortcuts import redirect
 from api.models import System, Kafka, Job
 
 from api.yt_transcriptor import main as yt_transcriptor
@@ -130,16 +131,17 @@ def generate_answers(video_url, language, runbackground=False):
                 print("A") 
                 kafka.video_info = json.loads(video_info)
             print(kafka.video_info)
-            response["code"] = 200
-            response["message"] = "OK"
-            response["data"] = {
-                "answers": kafka.answers,
-                "transcript": kafka.transcript,
-                "language": language,
-                "video_info": (kafka.video_info),
-                "video_url": video_url,
-            }
-            print("Aaa")
+            response["code"] = 201
+            response["message"] = id_from_url(video_url)
+            # response["data"] = {
+            #     "answers": kafka.answers,
+            #     "transcript": kafka.transcript,
+            #     "language": language,
+            #     "video_info": (kafka.video_info),
+            #     "video_url": video_url,
+            # }
+
+            return JsonResponse(data=response)
         except Exception as e:
             print(e)
             kafka = None
