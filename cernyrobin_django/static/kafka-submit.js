@@ -187,9 +187,12 @@ function updateLoadingBarAndTime(totalC, doneC) {
         console.log("bullshit passed in")
         percent = -1
     }
+
     console.log("defined")
     if (percent > 100 || percent < 0) {
         console.warn("Incorrect percentage value")
+        document.getElementById("remainingTime").innerText = "thinking bro.."
+        document.getElementById("percentage").innerText = percent + "%"
     }
     else {
         loadingBar.style.width = percent + '%';
