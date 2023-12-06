@@ -16,6 +16,9 @@ dotenv.load_dotenv()
 
 STUCKINVIM_KEY = os.getenv("STUCKINVIM_KEY")
 
+TEMPERATURE = 0.35 # Tweaked manually
+MAX_TOKENS = 1000
+
 if not STUCKINVIM_KEY:
     print("Missing API key. Please set the STUCKINVIM_KEY environment variable.")
     exit(1)
@@ -94,7 +97,9 @@ def chatbot(questions_path, transcript_path, save_path, youtube_url=None):
 
     response = openai.chat.completions.create(
         model=MODEL,
-        messages=messages
+        messages=messages,
+        temperature=TEMPERATURE,
+        max_tokens=MAX_TOKENS
     )
     print(response)
     print("Sending prompt with questions...")
@@ -103,7 +108,9 @@ def chatbot(questions_path, transcript_path, save_path, youtube_url=None):
     print(messages)
     response = openai.chat.completions.create(
         model=MODEL,
-        messages=messages
+        messages=messages,
+        temperature=TEMPERATURE,
+        max_tokens=MAX_TOKENS
     )
 
     try:
