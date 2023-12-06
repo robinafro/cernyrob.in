@@ -159,8 +159,7 @@ def generate_answers(video_url, language, runbackground=False):
             print(e)
             job = None
 
-        # Make the job expire here
-        print(datetime.datetime.now().replace(tzinfo=None).timestamp() - job.created)
+        # Make the job expire
         if job_already_exists and (datetime.datetime.now().replace(tzinfo=None).timestamp() - job.created >= 60 * 45 or job.video_url == ""): # Reset old jobs
             job.delete()
 
