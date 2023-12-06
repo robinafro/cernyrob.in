@@ -20,6 +20,8 @@ def get_answers(video_url):
         return "Unable to get answers"
     
 def get_transcript(video_url):
+    video_url = video_url.strip(" ")
+
     try:
         kafka = Kafka.objects.get(video_url=video_url)
 
@@ -86,6 +88,8 @@ def get_all_to_be_displayed():
     return all_data
 
 def generate_answers(video_url, language, runbackground=False):
+    video_url = video_url.strip(" ")
+    
     response = {"code": 200, "message": "OK"}
 
     video_info = get_video_info.get_video_info(video_url)
@@ -341,7 +345,7 @@ def kafka_answer(request, subdomain):
     if not language:
         language = "cs-CZ"
 
-    video_url = video_url.replace("\"", "")
+    video_url = video_url.replace("\"", "").strip(" ")
 
     return generate_answers(video_url, language)
 
