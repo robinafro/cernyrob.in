@@ -19,6 +19,7 @@ async function fetchData(id) {
 
 
 
+
         // {"video_url": "https://www.youtube.com/watch?v=-WJnehvTnK4", "percent_completed": 14, "chunks_completed": 4, "total_chunks": 29, "finished": false}
 
         if (data.finished == true) {
@@ -34,10 +35,40 @@ function sleep(milliseconds) {
 }
 
 
+
+
+
+
+function updateLoadingBarAndTime(totalC, doneC) {
+    let percent = 0
+    if (totalC > 0) {
+        percent = doneC / totalC * 100
+    }
+    else {
+        console.log("bullshit passed in")
+        percent = -1
+    }
+
+    if (percent > 100 || percent < 0) {
+        console.warn("Incorrect percentage value")
+    }
+    else {
+        loadingBar.style.width = percent + '%';
+        remainingPar.innerText = "thinking bro.."
+        percentagePar.innerText = percent + "%"
+        console.log("trying to chnage values")
+        console.log(percent)
+    }
+
+}
+
+
 document.addEventListener('DOMContentLoaded', function () {
     var submitButton = document.getElementById('submit-button');
     var loadingContainer = document.getElementById('loadingContainer');
     var loadingBar = document.getElementById('loadingBar');
+    var percentagePar = document.getElementById("percentage")
+    var remainingPar = document.getElementById("remainingTime")
 
     loadingBar.style.display = 'none';
 
@@ -45,28 +76,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-    function updateLoadingBarAndTime(totalC, doneC) {
-        let percent = 0
-        if (totalC > 0) {
-            percent = doneC / totalC * 100
-        }
-        else {
-            console.log("bullshit passed in")
-            percent = -1
-        }
-    
-        if (percent > 100 || percent < 0) {
-            console.warn("Incorrect percentage value")
-        }
-        else {
-            loadingBar.style.width = percent + '%';
-            document.getElementById("remainingTime").innerText = "thinking bro.."
-            document.getElementById("percentage").innerText = percent + "%"
-            console.log("trying to chnage values")
-            console.log(percent)
-        }
-    
-    }
 
 
 
