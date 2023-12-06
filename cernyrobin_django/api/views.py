@@ -160,14 +160,11 @@ def generate_answers(video_url, language, runbackground=False):
             job = None
 
         # Make the job expire here
-        if job_already_exists and (datetime.datetime.now().replace(tzinfo=None).timestamp() - job.created >= 60 * 60 or job.video_url == ""): # Reset old jobs
+        print(datetime.datetime.now().replace(tzinfo=None).timestamp() - job.created)
+        if job_already_exists and (datetime.datetime.now().replace(tzinfo=None).timestamp() - job.created >= 60 * 45 or job.video_url == ""): # Reset old jobs
             job.delete()
 
-            job = Job.objects.create(
-                job_id = id_from_url(video_url).strip(" "),
-                video_url=video_url,
-                created = datetime.datetime.now().replace(tzinfo=None).timestamp()
-            )
+            job_already_exists = False
             
         if job_already_exists:
             return JsonResponse(data={"code": 200, "message": id_from_url(video_url)})
