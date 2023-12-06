@@ -22,7 +22,7 @@ def index(request):
 
 
 def view(request):
-    id = request.GET.get("id")
+    id = request.GET.get("id").strip(" ")
 
     if id is None:
         return HttpResponse("Invalid video ID")
@@ -40,6 +40,7 @@ def view(request):
         context={
             "title": video_info["title"],
             "video_url": video_url,
+            "video_id": id,
             "questions": video_info["description"],
             "answers": answers,
             "transcript": transcript,
