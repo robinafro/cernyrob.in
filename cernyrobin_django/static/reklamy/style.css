@@ -1,0 +1,13 @@
+#background {
+    width: 100%;
+    height: auto;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#reklamy-container {
+    width: 100%;
+    height: auto;
+}

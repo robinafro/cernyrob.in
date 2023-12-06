@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import dotenv, os
+
+dotenv.load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -49,6 +52,7 @@ INSTALLED_APPS = [
     'cernyrobin_app',
     'api',
     "kafka",
+    "ads",
 ]
 
 MIDDLEWARE = [
@@ -124,6 +128,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# Delete the SESSION_COOKIE_DOMAIN code below if logging in seems to be broken
+SESSION_COOKIE_DOMAIN = ".cernyrob.in"
+
+if os.getenv("LOCAL") == "1":
+    SESSION_COOKIE_DOMAIN = None
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
