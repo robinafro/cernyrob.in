@@ -13,8 +13,13 @@ async function fetchData(id) {
         } else {
             document.getElementById('loadingContainer').style.display = 'none';
             loadingBar.style.display = 'block';
-            updateLoadingBar(data.percent_completed)
+            //updateLoadingBar(data.percent_completed)
+            updateLoadingBarAndTime(data.total_chunks, data.chunks_completed)
         }
+
+
+
+// {"video_url": "https://www.youtube.com/watch?v=-WJnehvTnK4", "percent_completed": 14, "chunks_completed": 4, "total_chunks": 29, "finished": false}
 
         if (data.finished == true) {
             return true
@@ -165,6 +170,31 @@ function updateLoadingBar(percent) {
 
 }
 
+
+
+
+
+function updateLoadingBarAndTime(totalC, doneC) {
+    let percent
+    if (totalC > 0)
+    {
+        percent = doneC / totalC  * 100
+    }
+    else
+    {
+        console.log("bullshit passed in")
+        percent = -1
+    }
+    console.log("defined")
+    if (percent > 100 || percent < 0) {
+        console.warn("Incorrect percentage value")
+    }
+    else {
+        loadingBar.style.width = percent + '%';
+    }
+
+}
+// {"video_url": "https://www.youtube.com/watch?v=-WJnehvTnK4", "percent_completed": 14, "chunks_completed": 4, "total_chunks": 29, "finished": false}
 
 function getLocation(path, subdomain) {
     var currentHostname = window.location.hostname;
