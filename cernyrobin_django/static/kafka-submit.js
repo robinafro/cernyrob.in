@@ -44,6 +44,33 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
+
+    function updateLoadingBarAndTime(totalC, doneC) {
+        let percent = 0
+        if (totalC > 0) {
+            percent = doneC / totalC * 100
+        }
+        else {
+            console.log("bullshit passed in")
+            percent = -1
+        }
+    
+        if (percent > 100 || percent < 0) {
+            console.warn("Incorrect percentage value")
+        }
+        else {
+            loadingBar.style.width = percent + '%';
+            document.getElementById("remainingTime").innerText = "thinking bro.."
+            document.getElementById("percentage").innerText = percent + "%"
+            console.log("trying to chnage values")
+            console.log(percent)
+        }
+    
+    }
+
+
+
+
     submitButton.addEventListener('click', function () {
         // loadingContainer.style.visibility = 'visible';
         // document.getElementById('loadContainer').style.visibility = 'visible';
@@ -178,27 +205,7 @@ function updateLoadingBar(percent) {
 
 
 
-function updateLoadingBarAndTime(totalC, doneC) {
-    let percent = 0
-    if (totalC > 0) {
-        percent = doneC / totalC * 100
-    }
-    else {
-        console.log("bullshit passed in")
-        percent = -1
-    }
 
-    console.log("defined")
-    if (percent > 100 || percent < 0) {
-        console.warn("Incorrect percentage value")
-    }
-    else {
-        loadingBar.style.width = percent + '%';
-        document.getElementById("remainingTime").innerText = "thinking bro.."
-        document.getElementById("percentage").innerText = percent + "%"
-    }
-
-}
 // {"video_url": "https://www.youtube.com/watch?v=-WJnehvTnK4", "percent_completed": 14, "chunks_completed": 4, "total_chunks": 29, "finished": false}
 
 function getLocation(path, subdomain) {
