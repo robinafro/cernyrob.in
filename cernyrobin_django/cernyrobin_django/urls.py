@@ -47,5 +47,6 @@ urlpatterns = [
     path("me/", ads.my_ads, {"subdomain": "reklamy"}, name="my_ads"),
     path("manage/", ads.manage, {"subdomain": "reklamy"}, name="manage"),
     path("manage/submit/", ads.manage_submit, {"subdomain": "reklamy"}, name="manage_submit"),
+    path("manage/delete/", ads.manage_delete, {"subdomain": "reklamy"}, name="manage_delete"),
     path("a/", ads.ad, {"subdomain": "reklamy"}, name="ad"),
 ]
