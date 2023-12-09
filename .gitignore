@@ -1,3 +1,5 @@
+/media/*
+
 /cernyrobin_django/api/__pycache__
 /cernyrobin_django/api/yt_transcriptor/temp/*
 /cernyrobin_django/api/yt_transcriptor/output/*

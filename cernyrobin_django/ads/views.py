@@ -3,6 +3,15 @@ from django.http import HttpResponse, JsonResponse
 from django.shortcuts import redirect
 
 from .models import Ad
+from cdn import views as cdn
+
+import re
+
+def is_valid_string(s):
+    pattern = re.compile("^[a-zA-Z0-9_ ]*$")
+    match = pattern.match(s)
+
+    return bool(match)
 
 def get_ad(id):
     try:
@@ -29,7 +38,9 @@ def get_ad_json(ad):
         "image_link": ad.image_link
     }
 
-def create_ad(owner_name, name, image_link, link):
+def create_ad(owner_name, name, image_file, link):
+    image_link = cdn.upload_image(image_file)
+
     ad = Ad(owner_name=owner_name, name=name, image_link=image_link, link=link)
 
     ad.save()
@@ -40,6 +51,10 @@ def delete_ad(id):
     ad = get_ad(id)
 
     if ad is not None:
+        image_path = ad.image_link
+        image_name = image_path.split("/")[-1]
+
+        cdn.delete_image(image_name)
         ad.delete()
 
 def get_owner_name(request):
@@ -71,38 +86,32 @@ def manage(request, subdomain):
 def manage_submit(request, subdomain):
     if request.method == "POST":
         owner_name = get_owner_name(request)
-
-        if owner_name is not None:
+        print(request.FILES)
+        if owner_name is not None and request.FILES["image_file"]:
             name = request.POST.get("name")
-            image_link = request.POST.get("image_link")
+            image_file = request.FILES["image_file"]
             link = request.POST.get("link")
 
-            if name is not None and image_link is not None and link is not None:
-                # Validate and process data
+            if name is not None and image_file is not None and link is not None:
+                # Validate if image file is an image
 
-                if name.len() > 30:
+                if len(name) > 30:
                     return JsonResponse({"error": "name cannot be longer than 30 characters"}, status=400)
                 
-                if image_link.len() > 400:
-                    return JsonResponse({"error": "image_link cannot be longer than 400 characters"}, status=400)
-                
-                if link.len() > 400:
+                if len(link) > 400:
                     return JsonResponse({"error": "link cannot be longer than 400 characters"}, status=400)
-
-                if not image_link.startswith("http://") and not image_link.startswith("https://"):
-                    image_link = "https://" + image_link
 
                 if not link.startswith("http://") and not link.startswith("https://"):
                     link = "https://" + link
 
-                if not name.isalnum():
+                if not is_valid_string(name):
                     return JsonResponse({"error": "name can only contain letters and numbers"}, status=400)
 
-                ad = create_ad(owner_name, name, image_link, link)
+                ad = create_ad(owner_name, name, image_file, link)
 
                 return redirect("/me/")
 
-            return JsonResponse({"error": "name, image_link and link required"}, status=400)
+            return JsonResponse({"error": "name, image_file and link required"}, status=400)
 
         return JsonResponse({"error": "you must be logged in"}, status=400)
 

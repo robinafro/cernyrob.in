@@ -11,7 +11,7 @@
 
 <body>
     <div id="background">
-        <form action="/manage/submit/" method="POST">
+        <form action="/manage/submit/" enctype="multipart/form-data" method="POST">
             {% csrf_token %}
 
             <input type="text" name="name" placeholder="Název reklamy" id="ads-name-input" class="ads-manage-input"
@@ -20,7 +20,7 @@
             <input type="text" name="link" placeholder="Odkaz" id="ads-link-input" class="ads-manage-input"
                 required></input>
 
-            <input type="text" name="image_link" placeholder="Odkaz na obrázek" id="ads-image-link-input"
+            <input type="file" name="image_file" id="ads-image-link-input"
                 class="ads-manage-input" required></input>
 
             <div id="ads-submit-container">
