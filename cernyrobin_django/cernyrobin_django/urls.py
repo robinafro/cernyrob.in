@@ -51,6 +51,9 @@ urlpatterns = [
     path("manage/submit/", ads.manage_submit, {"subdomain": "reklamy"}, name="manage_submit"),
     path("manage/delete/", ads.manage_delete, {"subdomain": "reklamy"}, name="manage_delete"),
     path("a/", ads.ad, {"subdomain": "reklamy"}, name="ad"),
+    path("pending/", ads.admin_pending, {"subdomain": "reklamy"}, name="admin_pending"),
+    path("accept/", ads.admin_accept, {"subdomain": "reklamy"}, name="admin_accept"),
+    path("reject/", ads.admin_reject, {"subdomain": "reklamy"}, name="admin_reject"),
 ]
 
 if settings.DEBUG:

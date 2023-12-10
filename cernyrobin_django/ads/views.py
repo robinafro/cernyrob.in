@@ -23,10 +23,15 @@ def get_ads_by_owner(owner_name):
     return Ad.objects.filter(owner_name=owner_name)
 
 def get_random_ad():
-    return Ad.objects.order_by('?').first()
+    all_active_ads = Ad.objects.filter(status="active")
+
+    return all_active_ads.order_by('?').first()
 
 def get_all_ads():
     return Ad.objects.all()
+
+def get_pending_ads():
+    return Ad.objects.filter(status="pending")
 
 def get_ad_json(ad):
     return {
@@ -86,7 +91,7 @@ def manage(request, subdomain):
 def manage_submit(request, subdomain):
     if request.method == "POST":
         owner_name = get_owner_name(request)
-        print(request.FILES)
+        
         if owner_name is not None and request.FILES["image_file"]:
             name = request.POST.get("name")
             image_file = request.FILES["image_file"]
@@ -172,6 +177,9 @@ def get_ads(length=3):
         def add_random(t):
             ad = get_random_ad()
 
+            if ad is None:
+                return
+
             t.append(
                 {
                     "name": ad.name,
@@ -184,3 +192,68 @@ def get_ads(length=3):
         add_random(context["ads_right"])
 
     return context
+
+def admin_pending(request, subdomain):
+    if request.method == "GET":
+        if request.user.is_staff == False:
+            return JsonResponse({"error": "you must be an admin"}, status=400)
+        
+        context = {
+            "ads": get_pending_ads(),
+        }
+
+        return render(request, "ads/admin_pending.html", context)
+
+    return JsonResponse({"error": "GET method required"}, status=400)
+
+def admin_accept(request, subdomain):
+    if request.method == "GET":
+        if request.user.is_staff == False:
+            return JsonResponse({"error": "you must be an admin"}, status=400)
+        
+        id = request.GET.get("id")
+
+        if id is not None:
+            id = int(id)
+
+            if id is None:
+                return JsonResponse({"error": "id is not a number"})
+            ad = get_ad(id)
+
+            if ad is not None:
+                ad.status = "active"
+                ad.save()
+
+                return redirect("/pending/")
+
+            return JsonResponse({"error": "ad not found"}, status=404)
+
+        return JsonResponse({"error": "id required"}, status=400)
+
+    return JsonResponse({"error": "GET method required"}, status=400)
+
+def admin_reject(request, subdomain):
+    if request.method == "GET":
+        if request.user.is_staff == False:
+            return JsonResponse({"error": "you must be an admin"}, status=400)
+        
+        id = request.GET.get("id")
+
+        if id is not None:
+            id = int(id)
+
+            if id is None:
+                return JsonResponse({"error": "id is not a number"})
+            ad = get_ad(id)
+
+            if ad is not None:
+                ad.status = "rejected"
+                ad.save()
+
+                return redirect("/pending/")
+
+            return JsonResponse({"error": "ad not found"}, status=404)
+
+        return JsonResponse({"error": "id required"}, status=400)
+
+    return JsonResponse({"error": "GET method required"}, status=400)

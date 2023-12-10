@@ -10,7 +10,7 @@ def index(request):
     all_videos = api_views.get_all_to_be_displayed()
 
     context = ads_views.get_ads(length=len(all_videos))
-    
+
     context["videos"] = []
 
     for video in all_videos:

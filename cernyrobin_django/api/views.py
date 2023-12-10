@@ -73,16 +73,13 @@ def get_all_to_be_displayed():
     for kafka in Kafka.objects.all():
         if kafka is None:
             continue
-        print(kafka.video_info)
-        print(type(kafka.video_info))
+        
         if kafka.video_info is None:
             continue
         # elif not is_json(kafka.video_info):
         #     continue
         
         video_info = kafka.video_info
-        
-        print(video_info)
         
         all_data.append({
                     "video_id": id_from_url(kafka.video_url),
