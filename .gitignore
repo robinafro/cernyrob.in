@@ -2,6 +2,9 @@
 /cernyrobin_django/api/yt_transcriptor/temp/*
 /cernyrobin_django/api/yt_transcriptor/output/*
 
+/cernyrobin_django/api/yt_transcriptor/ffmpeg.exe
+/cernyrobin_django/api/yt_transcriptor/ffprobe.exe
+
 **/__pycache__/
 **/__pycache__/*
 **.pyc

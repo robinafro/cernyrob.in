@@ -13,11 +13,13 @@ config = json.load(open(config_path))
 
 
 def transcribe_large_audio(audio_file_path, temp_path="", language=config["default_lang"], chunk_duration_ms=60000, callback=None):
+    audio_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), audio_file_path)
+    print(audio_file_path)
     temp_chunk = os.path.join(temp_path, "temp_chunk.wav")
 
     recognizer = sr.Recognizer()
     audio = AudioSegment.from_wav(audio_file_path)
-
+    print("success")
     num_chunks = len(audio) // chunk_duration_ms + 1
 
     transcriptions = []

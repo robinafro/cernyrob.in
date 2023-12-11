@@ -2,6 +2,7 @@ django
 whitenoise
 
 pytube
+yt-dlp
 moviepy
 SpeechRecognition
 pydub
