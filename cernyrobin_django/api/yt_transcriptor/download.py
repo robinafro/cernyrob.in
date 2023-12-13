@@ -38,6 +38,12 @@ def download_and_convert_audio(youtube_url, output_dir, name, output_format="wav
     # video = youtube.streams.filter().first()
     # video.download(output_path=output_dir, filename=f"temp_video.{temp_format}")´
     ffmpeg_path = "/usr/bin/ffmpeg"
+
+    if not os.path.exists(ffmpeg_path):
+        ffmpeg_path = os.path.join(os.path.abspath(os.path.dirname(__file__)), "ffmpeg.exe")
+
+        if not os.path.exists(ffmpeg_path):
+            print("FFMPEG NOT FOUND!")
     
     options = {
         'format': 'bestaudio/best',
