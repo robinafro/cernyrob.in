@@ -12,7 +12,7 @@ dotenv.load_dotenv()
 
 GENERATE_RATE_LIMIT = 60 * 60 #60 * 60 * 24 * 7 - 60 * 60 * 6 # 7 days minus six hours to prevent it from shifting too far forward
 KAFKA_CHANNEL = "https://www.youtube.com/@jankafka1535"
-DESCRIPTION_FORMAT = r"(?:\s+\d+.\s+.*?)+(?=\n\n|\Z)"
+DESCRIPTION_FORMAT = r".*/s(?:\s+\d+.\s+.*?)+(?=\n\n|\Z)" #r"\d+\.\s(?:.+?\?)" # chatgpt
 
 if os.getenv("NORATELIMIT") == "1":
     GENERATE_RATE_LIMIT = 0
