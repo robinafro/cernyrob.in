@@ -106,7 +106,7 @@ def generate_answers(video_url, language, runbackground=False):
     if json.loads(video_info)["author_url"] != KAFKA_CHANNEL:
         return JsonResponse(data={"code": 400, "message": "Invalid video channel"})
     
-    if not re.search(DESCRIPTION_FORMAT, json.loads(video_info)["description"]):
+    if json.loads(video_info)["description"].find("Otázky k videu") == -1:
         return JsonResponse(data={"code": 400, "message": "Invalid video description"})
 
     try:
