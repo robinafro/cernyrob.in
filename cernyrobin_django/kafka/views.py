@@ -3,13 +3,17 @@ from django.http import HttpResponse, JsonResponse
 
 from api import get_video_info
 from api import views as api_views
+from ads import views as ads_views
 import json
 
-
 def index(request):
-    context = {"videos": []}
+    all_videos = api_views.get_all_to_be_displayed()
 
-    for video in api_views.get_all_to_be_displayed():
+    context = ads_views.get_ads(length=len(all_videos))
+
+    context["videos"] = []
+
+    for video in all_videos:
         context["videos"].append(
             {
                 "title": video["title"],
@@ -34,6 +38,8 @@ def view(request):
     answers = api_views.get_answers(video_url).strip()
     transcript = api_views.get_transcript(video_url).strip()
 
+    ads = ads_views.get_ads(length=2)
+
     return render(
         request,
         "kafka/view.html",
@@ -44,6 +50,8 @@ def view(request):
             "questions": video_info["description"],
             "answers": answers,
             "transcript": transcript,
+            "ads_left": ads["ads_left"],
+            "ads_right": ads["ads_right"],
         },
     )
 

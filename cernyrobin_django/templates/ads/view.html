@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+<html>
+
+{% load static %}
+
+<head>
+    <title>Ads manager</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'reklamy/style.css' %}">
+</head>
+
+<body>
+    <div class="background">
+        <div class="reklamy-container">
+            {% for ad in ads %}
+            <div class="reklama-container">
+                <div class="reklama-image-container">
+                    <img class="reklama-image" src="{{ ad.image_url }}"></img>
+                </div>
+
+                <div class="reklama-text-container">
+                    <div class="reklama-title">{{ ad.name }}</div>
+                    <div class="reklama-link"><a href="{{ ad.link }}">{{ ad.link }}</a></div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+
+</html>

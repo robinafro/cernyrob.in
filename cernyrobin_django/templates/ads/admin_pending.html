@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <title>Admin - Pending Ads</title>
+    <link rel="stylesheet" href="/static/reklamy/style.css">
+</head>
+
+<body>
+    <div class="background">
+        <div class="reklamy-container">
+            {% for ad in ads %}
+            <div class="reklama-element">
+                <div class="reklama-element-image-container">
+                    <img class="reklama-element-image" src="{{ ad.image_link }}" />
+                </div>
+
+                <div class="reklama-element-text-container">
+                    <div class="reklama-element-text">
+                        {{ ad.name }}
+                    </div>
+
+                    <a class="reklama-element-text" href="{{ ad.link }}">
+                        {{ ad.link }}
+                    </a>
+                </div>
+
+                <div class="reklama-element-buttons-container">
+                    <a class="reklama-element-button" href="/accept?id={{ ad.ad_id }}">Accept</a>
+                    <a class="reklama-element-button" href="/reject?id={{ ad.ad_id }}">Reject</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+
+</html>
