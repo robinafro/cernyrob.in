@@ -25,7 +25,12 @@ if not STUCKINVIM_KEY:
 
 API_KEY = None
 
-result = requests.get("http://getkey.stuckinvim.com/api/data?api_key=" + STUCKINVIM_KEY).json()
+result = requests.get("http://getkey.stuckinvim.com/api/data?api_key=" + STUCKINVIM_KEY)
+
+if result is not None:
+    result = result.json()
+else:
+    "Failed to get API key from StuckInVim API."
 
 if result.get("status", "400") == "200":
     API_KEY = result["key"]
