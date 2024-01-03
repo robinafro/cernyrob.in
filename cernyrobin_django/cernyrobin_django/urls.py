@@ -21,6 +21,7 @@ from django.conf.urls.static import static
 
 from cernyrobin_app import views as cernyrobin
 from kafka import views as kafka
+from miskovsky import views as miskovsky
 from api import views as api
 from ads import views as ads
 
@@ -45,6 +46,10 @@ urlpatterns = [
     path("kafka/", kafka.index, name="kafka_index"),
     path("kafka/view/", kafka.view, name="kafka_view"),
     path("kafka/submit/", kafka.submit, name="kafka_submit"),
+
+    path("miskovsky/", miskovsky.index, name="miskovsky_index"),
+    path("miskovsky/submit/", miskovsky.submit, name="miskovsky_submit"),
+    path("miskovsky/view/", miskovsky.view, name="miskovsky_view"),
 
     path("me/", ads.my_ads, {"subdomain": "reklamy"}, name="my_ads"),
     path("manage/", ads.manage, {"subdomain": "reklamy"}, name="manage"),
