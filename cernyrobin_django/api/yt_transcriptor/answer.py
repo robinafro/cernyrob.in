@@ -25,19 +25,22 @@ if not STUCKINVIM_KEY:
 
 API_KEY = None
 
-result = requests.get("http://getkey.stuckinvim.com/api/data?api_key=" + STUCKINVIM_KEY)
+try:
+    result = requests.get("http://getkey.stuckinvim.com/api/data?api_key=" + STUCKINVIM_KEY)
 
-if result is not None:
-    result = result.json()
-else:
-    "Failed to get API key from StuckInVim API."
+    if result is not None:
+        result = result.json()
+    else:
+        "Failed to get API key from StuckInVim API."
 
-if result.get("status", "400") == "200":
-    API_KEY = result["key"]
-else:
-    raise Exception("Failed to get API key from StuckInVim API.")
+    if result.get("status", "400") == "200":
+        API_KEY = result["key"]
+    else:
+        raise Exception("Failed to get API key from StuckInVim API.")
 
-openai.api_key = API_KEY
+    openai.api_key = API_KEY
+except Exception as e:
+    print("Failed to get OpenAI API key. Script will continue to run with limited features")
 
 def get_video_description(video_url):
     if video_url.startswith("C:") or video_url.startswith("\\") or video_url.startswith("/"):
