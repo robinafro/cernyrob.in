@@ -295,18 +295,43 @@ p{
 
 #info {
   position: fixed;
+  display: none;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  padding: 20px;
+  padding: 10px;
   background-color: rgb(255, 0, 0);
   box-shadow: 0px 0px 10px rgba(0,0,0,1);
   border-radius: 10px;
   border: #000000 solid 2px;
-  display: none;
   color: #fff200;
+  flex-direction: column;
+  align-items: center;
+  width: 30%;
+  transform: width 0.5s ease-in-out;
 }
 
+#infoImg {
+  width: 50%;
+  border: #eaff00 solid 2px;
+  margin: 5px;
+
+}
+#infoText {
+margin: 0px;
+font-size: 200%;
+
+}
+
+#imageGallery{
+display: flex;
+flex-direction: row;
+justify-content: space-around;
+}
+#header{
+  display: flex;
+  flex-direction: row;
+}
 
 /*loooooolololololol*/
 
