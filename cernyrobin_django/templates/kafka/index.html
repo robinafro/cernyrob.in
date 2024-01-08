@@ -6,8 +6,7 @@
 <head>
     <link href="{% static 'kafka.css' %}" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="/static/assets/kafka.ico">
-    <script src="{% static 'kafka-list.js' %}"></script>
-    <script src="{% static 'porn.js' %}"></script>
+    <!-- <script src="{% static 'kafka-list.js' %}"></script> -->
 
     <title>Kafka Bot</title>
 </head>
@@ -24,9 +23,11 @@
 
         <div id="content">
             <div class="side-ad-container" id="ad-container">
-                <button class="side-ad" id="ad-left" style="display: none">
-                    <img class="ad-image" src="{% static 'assets/kafka/robot.png' %}"></img>
-                </button>
+                {% for ad in ads_left %}
+                <a class="side-ad" id="ad-left" href="{{ ad.link }}">
+                    <img class="ad-image" src="{{ ad.image_link }}"></img>
+                </a>
+                {% endfor %}
             </div>
 
             <div id="page-container">
@@ -57,9 +58,11 @@
             </div>
 
             <div class="side-ad-container">
-                <button class="side-ad" id="ad-right" style="display: none">
-                    <img class="ad-image" src="{% static 'assets/kafka/robot.png' %}"></img>
-                </button>
+                {% for ad in ads_right %}
+                <a class="side-ad" id="ad-right", href="{{ ad.link }}">
+                    <img class="ad-image" src="{{ ad.image_link }}"></img>
+                </a>
+                {% endfor %}
             </div>
         </div>
     </div>

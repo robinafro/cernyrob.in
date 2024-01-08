@@ -57,6 +57,14 @@ def login_submit(request):
         password = request.POST.get("password")
 
         # add checks for username and password format
+        if not username or not password:
+            return HttpResponse("400 Bad Request")
+        elif len(username) > 30 or len(password) > 30:
+            return HttpResponse("400 Bad Request")
+        elif len(username) < 3 or len(password) < 3:
+            return HttpResponse("400 Bad Request")
+        elif not username.isalnum() or not password.isalnum():
+            return HttpResponse("400 Bad Request")
 
         try:
             user = User.objects.get(username=username.lower())

@@ -82,8 +82,6 @@ def get_all_to_be_displayed():
         
         video_info = kafka.video_info
         
-        print(video_info)
-        
         all_data.append({
                     "video_id": id_from_url(kafka.video_url),
                     "description": video_info["description"],
