@@ -298,11 +298,13 @@ p{
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  border: 1px solid #ddd;
   padding: 20px;
-  background-color: white;
-  box-shadow: 0px 0px 10px rgba(0,0,0,0.5);
+  background-color: rgb(255, 0, 0);
+  box-shadow: 0px 0px 10px rgba(0,0,0,1);
+  border-radius: 10px;
+  border: #000000 solid 2px;
   display: none;
+  color: #fff200;
 }
 
 
