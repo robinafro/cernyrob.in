@@ -1,8 +1,12 @@
 document.addEventListener("DOMContentLoaded", function() {
+
+
+
     setTimeout(function() {
         document.getElementById("info").style.display = "flex";
 
         document.getElementById("rButton").style.visibility = "visible";
+        document.getElementById("rButtonCont").style.visibility = "visible";
     }, 500);
 
 
@@ -25,4 +29,19 @@ setInterval(toggleSize, 100); // Adjust the size every 1 second
 
 function closePopup() {
     document.getElementById("info").style.display = "none";
+}
+function buttonClick(number) {
+  if (number == 1 ){
+    console.log("bruh")
+    document.getElementById("lButton").style.visibility = "visible";
+    document.getElementById("info").style.display = "none";
+
+  }
+  else if (number == 2) {
+    document.getElementById("rButton").style.visibility = "hidden";
+    console.log("idk")
+    document.getElementById("lButton").style.visibility = "visible";
+  }
+
+  
 }

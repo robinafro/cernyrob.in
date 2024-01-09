@@ -13,33 +13,38 @@
 </head>
 
 <body>
-    <div id="info">
-        <div id="header">
-            <div id="lButton">
+    <a href="https://www.instagram.com/oli.starling/">
 
-                <button id="disclaimer-button lButton ">
-                    <img src="/static/assets/kafka/cross.png" id="disclaimer-cross">
-                </button>
-            </div>
+    <div id="info" href="https://www.instagram.com/oli.starling/">
+        
+            <div id="header">
                 
-            <h2 id="infoText">Olivia (5 km) ti poslala 7 fotek!!</h2>
-            <div id="rButton">
-
-                <button id="disclaimer-button rButton">
+            </a>
+                <button id="lButton" onclick="buttonClick(1)">
                     <img src="/static/assets/kafka/cross.png" id="disclaimer-cross">
                 </button>
+                <a href="https://www.instagram.com/oli.starling/"></a>
+                
+                <h2 id="infoText">Olivia (>5 km) ti poslala 7 fotek!!</h2>
+                
+                <button id="rButton" onclick="buttonClick(2)">
+                    <img src="/static/assets/kafka/cross.png" id="disclaimer-cross">
+                </button>
+                <a href="https://www.instagram.com/oli.starling/">
+                
             </div>
+            <div id="imageGallery">
+                
+                
+                <img id="infoImg" src="/static/assets/oli.png" alt="">
+                <img id="infoImg" src="/static/assets/oli.png" alt="">
+                
+                
+            </div>
+        </a>
 
-        </div>
-        <div id="imageGallery">
-
-
-            <img id="infoImg" src="/static/assets/oli.png" alt="">
-            <img id="infoImg" src="/static/assets/oli.png" alt="">
-
-
-        </div>
     </div>
+</a>
     <div class="background">
         <div id="title-container">
             <h1 class="title">Kafka Bot</h1>
@@ -60,7 +65,6 @@
                 <a href="/kafka/view?id={{ object.video_id }}" class="kafka-list-element" id="element-template">
                     <img src="https://img.youtube.com/vi/{{ object.video_id }}/mqdefault.jpg"
                         class="kafka-list-element-image"></img>
-
                     <div class="kafka-list-element-text-container">
                         <h3 class="kafka-list-element-text kafka-list-element-title">
                             {{ object.title }}

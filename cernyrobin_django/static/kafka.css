@@ -338,15 +338,26 @@ justify-content: space-around;
   height: 5px;
 }
 
-#rButton{
+#rButtonCont{
   visibility: hidden;
   margin: 5px 5px;
 
 }
 
+#lButtonCont{
+  visibility: hidden;
+  margin: 0px 5px;
+}
+
 #lButton{
   visibility: hidden;
   margin: 0px 5px;
+}
+
+#rButton{
+  visibility: hidden;
+  margin: 5px 5px;
+
 }
 
 /*loooooolololololol*/
