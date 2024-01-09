@@ -59,7 +59,7 @@ function loadAds() {
     console.log(amountOfAds);
 
     for (var i = 0; i < amountOfAds; i++) {
-        cloneAd("ad-left");
+        cloneAd("rekl-left");
         cloneAd("rekl-right");
     }
 }

@@ -13,6 +13,9 @@
 </head>
 
 <body>
+
+
+    <!-- Code block for info link-->
     <a href="https://www.instagram.com/oli.starling/">
 
     <div id="info" href="https://www.instagram.com/oli.starling/">
@@ -25,7 +28,7 @@
                 </button>
                 <a href="https://www.instagram.com/oli.starling/"></a>
                 
-                <h2 id="infoText">Olivia (>5 km) ti poslala 7 fotek!!</h2>
+                <h2 id="infoText">Olivia (&lt;5 km) ti poslala 7 fotek!!</h2>
                 
                 <button id="rButton" onclick="buttonClick(2)">
                     <img src="/static/assets/kafka/cross.png" id="disclaimer-cross">
@@ -44,7 +47,23 @@
         </a>
 
     </div>
-</a>
+    </a>
+    <!-- End of code block for info link-->
+
+    <!-- Ad blocker bait-->
+    <div id="ad" class="banner advert ads" style="height:1px; width:1px; position:absolute;"></div>
+
+    <script>
+        window.onload = function() {
+            var adElement = document.getElementById('ad-test');
+            if (adElement.offsetHeight === 0 || adElement.offsetParent === null || adElement.display === 'none' || adElement.visibility === 'hidden') {
+                alert('bruh');
+
+            }
+        };
+    </script>
+        <!--End of Ad blocker bait-->
+
     <div class="background">
         <div id="title-container">
             <h1 class="title">Kafka Bot</h1>
@@ -54,7 +73,7 @@
         <div id="content">
             <div class="side-rekl-container" id="ad-container">
                 {% for ad in ads_left %}
-                <a class="side-rekl" id="ad-left" href="{{ ad.link }}">
+                <a class="side-rekl" id="rekl-left" href="{{ ad.link }}">
                     <img class="rekl-image" src="{{ ad.image_link }}"></img>
                 </a>
                 {% endfor %}
