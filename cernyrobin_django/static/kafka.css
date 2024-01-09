@@ -62,7 +62,7 @@ p{
   justify-content: center;
 }
 
-.side-ad-container {
+.side-rekl-container {
   width: 7.5%;
   height: auto;
   margin-left: 3rem;
@@ -74,7 +74,7 @@ p{
   align-items: center;
 }
 
-.side-ad {
+.side-rekl {
   width: 100%;
   aspect-ratio: 1/2;
   margin: 2rem;
@@ -83,7 +83,7 @@ p{
   border: none;
 }
 
-.ad-image {
+.rekl-image {
   width: 100%;
   height: 100%;
   object-fit: cover;

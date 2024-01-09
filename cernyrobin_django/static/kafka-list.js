@@ -34,7 +34,7 @@ function cloneAd(templateId) {
 
     var cloned = template.cloneNode(true);
     
-    let img = cloned.getElementsByClassName("ad-image")[0];
+    let img = cloned.getElementsByClassName("rekl-image")[0];
 
     cloned.id = "";
     cloned.style.display = "block";
@@ -49,7 +49,7 @@ function cloneAd(templateId) {
 
 function loadAds() {
     var contentHeight = document.getElementById("content").clientHeight;
-    var ad = document.getElementsByClassName("side-ad")[0];
+    var ad = document.getElementsByClassName("side-rekl")[0];
     var adContainer = document.getElementById("ad-container");
     var adHeight = adContainer.clientWidth / (1/2) + convertRemToPixels(4);
     var amountOfAds = Math.floor(contentHeight / adHeight);
@@ -60,7 +60,7 @@ function loadAds() {
 
     for (var i = 0; i < amountOfAds; i++) {
         cloneAd("ad-left");
-        cloneAd("ad-right");
+        cloneAd("rekl-right");
     }
 }
 
