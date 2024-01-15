@@ -6,6 +6,7 @@
 <head>
     <link href="{% static 'kafka.css' %}" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="/static/assets/kafka.ico">
+    <script src="{% static 'editor.js' %}"></script>
 
     <title>Kafka Bot</title>
 </head>
@@ -26,14 +27,40 @@
 
             <div id="view-answers-container">
                 <div class="subtitle">Odpovědi:</div>
+                <span id="answers" class="view-answers-text">{{ answers }}</span> 
+                <img onclick="enterEditMode()" style="width: 50px; padding: 1px; margin: 1px;" id="edit-button" src="/static/assets/Untitled.png" alt="">
 
-                {%if is_staff%}
-                <img style="width: 50px; padding: 1px; margin: 1px;" id="edit-button" src="/static/assets/Untitled.png" alt="">
-                {%endif%}
-                
-                <span class="view-answers-text">{{ answers }}</span> 
+
+                    {%if is_staff%}
+                    
+                    
+                    
+                    {%endif%}
+                    
+                    
+                    <textarea name="edited_answers" id="text-area" rows="12" cols="100" form="edit-form"> 
+                        {{answers}}
+                    </textarea>
+                    <textarea readonly form="edit-form" style="display: none;" name="video_id" id="text-area-id" cols="15" rows="4">
+
+                    {{video_id}}
+                    </textarea>
+
+                    <form method="POST" action="" id="edit-form">
+                        <input type="submit">
+                        {%csrf_token%}
+                        
+                    </form>
+
 
             </div>
+                
+                <!--             <script>
+                    function changeColor() {
+                   document.getElementById("my-div").style.backgroundColor = "green";
+                }
+              </script>
+              <button onclick="changeColor()">Change color</button> -->
 
             <div id="view-transcript-container">
                 <div class="subtitle">Transkript:</div><span class="view-answers-text">{{ transcript }}

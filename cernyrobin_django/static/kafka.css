@@ -291,6 +291,13 @@ p{
 #submitBody {
   display: flex;
 }
+#edit-form{
+  display: none;
+}
+#text-area{
+  display: none;
+font-size: 18px;
+}
 
 #invite{
   background-image: linear-gradient(to bottom right, rgb(55, 0, 157), #404eed);
@@ -304,10 +311,18 @@ p{
   margin: 10px;
   padding: 10px;
   transition: 0.25s;
+  border: rgb(8, 0, 101) solid 2px; 
+
 }
+
+
 
 #invite:hover{
 padding: 18px;
+border: rgb(255, 255, 255) solid 2px; 
+}
+
+
 
 #edit-button {
   height: 50px;
@@ -315,7 +330,7 @@ padding: 18px;
 }
 
 
-}
+
 
 #logo{
   width: 50px;
