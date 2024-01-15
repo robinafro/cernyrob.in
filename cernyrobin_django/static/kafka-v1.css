@@ -323,6 +323,11 @@ padding: 18px;
 border: rgb(255, 255, 255) solid 2px; 
 }
 
+#logo{
+  width: 50px;
+  margin: 5px;
+  margin-left: 10px;
+}
 
 
 #edit-button {
@@ -333,11 +338,6 @@ border: rgb(255, 255, 255) solid 2px;
 
 
 
-#logo{
-  width: 50px;
-  margin: 5px;
-  margin-left: 10px;
-}
 
 
 #info {
