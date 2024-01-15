@@ -309,6 +309,11 @@ p{
 #invite:hover{
 padding: 18px;
 
+#edit-button {
+  height: 50px;
+  width: 50px;
+}
+
 
 }
 
