@@ -57,12 +57,14 @@ def view(request):
             },
         )
     elif request.method == "POST":
-        questions = request.POST.get("questions")
-        video_url = request.POST.get("video_url")
+        questions = request.POST.get("edited_answers")
+        video_url = "https://www.youtube.com/watch?v=" + request.POST.get("video_id")
 
         print(questions)
+        
+        return api_views.modify_questions(video_url, questions)
 
-        api_views.modify_questions(video_url, questions)
+
 
 
 def submit(request):
