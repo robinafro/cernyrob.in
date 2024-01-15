@@ -15,7 +15,7 @@ def index(request):
 
     for video in all_videos:
         context["videos"].append(
-            {
+    {
                 "title": video["title"],
                 "video_id": video["video_id"],
                 "description": video["description"],
@@ -26,34 +26,42 @@ def index(request):
 
 
 def view(request):
-    id = request.GET.get("id").strip(" ")
+    if request.method == "GET":
+        id = request.GET.get("id").strip(" ")
 
-    if id is None:
-        return HttpResponse("Invalid video ID")
+        if id is None:
+            return HttpResponse("Invalid video ID")
 
-    video_url = "https://www.youtube.com/watch?v=" + id
+        video_url = "https://www.youtube.com/watch?v=" + id
 
-    video_info = json.loads(get_video_info.get_video_info(video_url))
+        video_info = json.loads(get_video_info.get_video_info(video_url))
 
-    answers = api_views.get_answers(video_url).strip()
-    transcript = api_views.get_transcript(video_url).strip()
+        answers = api_views.get_answers(video_url).strip()
+        transcript = api_views.get_transcript(video_url).strip()
 
-    ads = ads_views.get_ads(length=2)
+        ads = ads_views.get_ads(length=2)
 
-    return render(
-        request,
-        "kafka/view.html",
-        context={
-            "title": video_info["title"],
-            "video_url": video_url,
-            "video_id": id,
-            "questions": video_info["description"],
-            "answers": answers,
-            "transcript": transcript,
-            "ads_left": ads["ads_left"],
-            "ads_right": ads["ads_right"],
-        },
-    )
+        return render(
+            request,
+            "kafka/view.html",
+            context={
+                "title": video_info["title"],
+                "video_url": video_url,
+                "video_id": id,
+                "questions": video_info["description"],
+                "answers": answers,
+                "transcript": transcript,
+                "ads_left": ads["ads_left"],
+                "ads_right": ads["ads_right"],
+            },
+        )
+    elif request.method == "POST":
+        questions = request.POST.get("questions")
+        video_url = request.POST.get("video_url")
+
+        print(questions)
+
+        api_views.modify_questions(video_url, questions)
 
 
 def submit(request):
