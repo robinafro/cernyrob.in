@@ -292,6 +292,33 @@ p{
   display: flex;
 }
 
+#invite{
+  background-image: linear-gradient(to bottom right, rgb(55, 0, 157), #404eed);
+  border-radius: 10px;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 320px;
+  height: 55px;
+  display: flex;
+  margin: 10px;
+  padding: 10px;
+  transition: 0.25s;
+  font-size: 17px;
+
+}
+
+#invite:hover{
+padding: 18px;
+
+}
+
+#logo{
+  width: 50px;
+  margin: 5px;
+  margin-left: 10px;
+}
+
 
 #info {
   position: fixed;
