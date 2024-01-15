@@ -17,6 +17,17 @@ DESCRIPTION_FORMAT = r".*/s(?:\s+\d+.\s+.*?)+(?=\n\n|\Z)" #r"\d+\.\s(?:.+?\?)" #
 if os.getenv("NORATELIMIT") == "1":
     GENERATE_RATE_LIMIT = 0
 
+def modify_questions(video_url, questions):
+    try:
+        kafka = Kafka.objects.get(video_url=video_url)
+        kafka.answers = questions
+
+        kafka.save()
+
+        return "Success"
+    except Kafka.DoesNotExist:
+        return "Failed"
+
 def get_answers(video_url):
     try:
         kafka = Kafka.objects.get(video_url=video_url)
@@ -103,7 +114,7 @@ def generate_answers(video_url, language, runbackground=False):
     if json.loads(video_info)["author_url"] != KAFKA_CHANNEL:
         return JsonResponse(data={"code": 400, "message": "Invalid video channel"})
     
-    regexp = re.compile(r'\n|^\d. ?[\w,?\s\??.?]+')
+    regexp = re.compile(r'\n|^\d. ?[\w,?\s\?]+')
     
     if regexp.search(json.loads(video_info)["description"]) is None:
         return JsonResponse(data={"code": 400, "message": "Invalid video description"})
