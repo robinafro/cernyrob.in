@@ -53,6 +53,7 @@ def view(request):
                 "transcript": transcript,
                 "ads_left": ads["ads_left"],
                 "ads_right": ads["ads_right"],
+                "is_staff" : request.user.is_staff
             },
         )
     elif request.method == "POST":
