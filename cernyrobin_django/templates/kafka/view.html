@@ -27,7 +27,7 @@
 
             <div id="view-answers-container">
                 <div class="subtitle">Odpovědi:</div>
-                <span id="answers" class="view-answers-text">{{ answers }}</span> 
+                <span id="answers" class="view-answers-text">{{is_staff%}}{{ answers }}</span> 
                 {%if is_staff%}
                 <img onclick="enterEditMode()" style="width: 50px; padding: 1px; margin: 1px;" id="edit-button" src="/static/assets/Untitled.png" alt="">
 
