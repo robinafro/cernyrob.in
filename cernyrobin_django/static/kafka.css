@@ -1,3 +1,4 @@
+/* css version 1 */
 :root {
   --textCr: #dbdde4;
   --bgCr: #101216;
@@ -298,7 +299,7 @@ p{
   display: none;
 font-size: 18px;
 }
-
+/* invite code starts here */
 #invite{
   background-image: linear-gradient(to bottom right, rgb(55, 0, 157), #404eed);
   border-radius: 10px;
