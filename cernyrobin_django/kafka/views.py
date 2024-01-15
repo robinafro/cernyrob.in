@@ -53,16 +53,17 @@ def view(request):
                 "transcript": transcript,
                 "ads_left": ads["ads_left"],
                 "ads_right": ads["ads_right"],
-                "is_staff" : request.user.is_staff or True
+                "is_staff" : request.user.is_staff
             },
         )
     elif request.method == "POST":
         questions = request.POST.get("edited_answers")
-        video_url = "https://www.youtube.com/watch?v=" + request.POST.get("video_id")
+        video_url = "https://www.youtube.com/watch?v=" + request.POST.get("video_id").strip()
 
         print(questions)
+        api_views.modify_questions(video_url, questions)
         
-        return api_views.modify_questions(video_url, questions)
+        return HttpResponse("lol")
 
 
 

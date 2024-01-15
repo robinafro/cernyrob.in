@@ -28,29 +28,29 @@
             <div id="view-answers-container">
                 <div class="subtitle">Odpovědi:</div>
                 <span id="answers" class="view-answers-text">{{ answers }}</span> 
+                {%if is_staff%}
                 <img onclick="enterEditMode()" style="width: 50px; padding: 1px; margin: 1px;" id="edit-button" src="/static/assets/Untitled.png" alt="">
 
 
-                    {%if is_staff%}
                     
                     
                     
-                    {%endif%}
+                
+                
+                <textarea name="edited_answers" id="text-area" rows="12" cols="100" form="edit-form"> 
+                    {{answers}}
+                </textarea>
+                <textarea readonly form="edit-form" style="display: none;" name="video_id" id="text-area-id" cols="15" rows="4">
                     
-                    
-                    <textarea name="edited_answers" id="text-area" rows="12" cols="100" form="edit-form"> 
-                        {{answers}}
-                    </textarea>
-                    <textarea readonly form="edit-form" style="display: none;" name="video_id" id="text-area-id" cols="15" rows="4">
-
                     {{video_id}}
-                    </textarea>
-
-                    <form method="POST" action="" id="edit-form">
-                        <input type="submit">
-                        {%csrf_token%}
-                        
-                    </form>
+                </textarea>
+                
+                <form method="POST" action="" id="edit-form">
+                    <input type="submit">
+                    {%csrf_token%}
+                    
+                </form>
+                {%endif%}
 
 
             </div>

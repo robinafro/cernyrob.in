@@ -18,15 +18,14 @@ if os.getenv("NORATELIMIT") == "1":
     GENERATE_RATE_LIMIT = 0
 
 def modify_questions(video_url, questions):
-    try:
-        kafka = Kafka.objects.get(video_url=video_url)
-        kafka.answers = questions
+    print(video_url)
+    kafka = Kafka.objects.get(video_url=video_url)
+    print(kafka)
+    kafka.answers = questions
+    print(kafka.answers)
+    kafka.save()
 
-        kafka.save()
-
-        return "Success"
-    except Kafka.DoesNotExist:
-        return "Failed"
+    return "Success"
 
 def get_answers(video_url):
     try:
