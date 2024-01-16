@@ -92,6 +92,8 @@ p{
 }
 
 #page-container {
+  display: flex;
+  flex-direction: column;
   width: 65%;
   height: auto;
   margin-bottom: 3rem;
@@ -300,6 +302,16 @@ p{
 
 /* kafka-view code here */
 
+.view-subheading{
+  color: var(--textCr);
+  font-size: 26px;
+  margin-top: 50px
+}
+
+.transcript-text{
+  text-align: justify;
+}
+
 p{
   line-height: 1.4;
 }
@@ -319,7 +331,7 @@ p{
   flex-direction: column;
   justify-content: center;
   align-items: start;
-  padding: 10px;
+  padding: 10px 15px;
   box-shadow: 6px 6px 5px rgb(0, 0, 0)
 }
 

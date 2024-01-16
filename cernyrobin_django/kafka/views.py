@@ -97,6 +97,7 @@ def view(request):
         print(type(video_info["description"]))
         print(type(strip_yapping(video_info["description"])))
         print(type(parse_numbered_text(strip_yapping(video_info["description"]))))
+        
         print(type(answers))
         print(type(parse_numbered_text(answers)))
 
