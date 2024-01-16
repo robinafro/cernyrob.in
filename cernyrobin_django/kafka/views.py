@@ -5,6 +5,27 @@ from api import get_video_info
 from api import views as api_views
 from ads import views as ads_views
 import json
+import re
+
+
+def add_br(text):
+    segments = re.split(r'(\d+\.)', text)
+
+    modified_text = ""
+    last_number = 0
+
+    for segment in segments:
+
+        if re.match(r'\d+\.', segment):
+            current_number = int(segment.split('.')[0])
+            if current_number == last_number + 1:
+                modified_text += '<br>'
+                last_number = current_number
+        modified_text += segment
+
+    return modified_text
+
+
 
 def index(request):
     all_videos = api_views.get_all_to_be_displayed()
@@ -49,7 +70,7 @@ def view(request):
                 "video_url": video_url,
                 "video_id": id,
                 "questions": video_info["description"],
-                "answers": answers,
+                "answers": add_br(answers),
                 "transcript": transcript,
                 "ads_left": ads["ads_left"],
                 "ads_right": ads["ads_right"],
