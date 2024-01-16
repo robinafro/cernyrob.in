@@ -290,6 +290,9 @@ def kafka_get(request, subdomain):
 
     video_url = request.GET.get("video_url")
 
+    if not "=" in video_url or not "/" in video_url: # Lmao
+        video_url = "https://www.youtube.com/watch?v=" + video_url
+
     if not video_url:
         response["code"] = 400
         response["message"] = "Bad request"
