@@ -249,6 +249,8 @@ p{
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.3s ease-in-out;
+/*   transition: max-height 0.3s cubic-bezier(.87,.02,.13,.97); */
+/*   transition: max-height 0.3s cubic-bezier(1,.15,.4,.56) */
 }
 
 #disclaimer-footer {
