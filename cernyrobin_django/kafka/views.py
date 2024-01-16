@@ -8,22 +8,32 @@ import json
 import re
 
 
-def add_br(text):
+def parse_answers(text):
+
+
     segments = re.split(r'(\d+\.)', text)
 
-    modified_text = ""
+    extracted_parts = []
     last_number = 0
+    current_part = ''
 
     for segment in segments:
-
         if re.match(r'\d+\.', segment):
             current_number = int(segment.split('.')[0])
             if current_number == last_number + 1:
-                modified_text += '<br>'
+                if current_part:
+                    extracted_parts.append(current_part.strip())
+                current_part = segment
                 last_number = current_number
-        modified_text += segment
+            else:
+                current_part += segment
+        else:
+            current_part += segment
 
-    return modified_text
+    if current_part:
+        extracted_parts.append(current_part.strip())
+
+    return extracted_parts
 
 
 
@@ -70,7 +80,7 @@ def view(request):
                 "video_url": video_url,
                 "video_id": id,
                 "questions": video_info["description"],
-                "answers": add_br(answers),
+                "answers": parse_answers(answers),
                 "transcript": transcript,
                 "ads_left": ads["ads_left"],
                 "ads_right": ads["ads_right"],
