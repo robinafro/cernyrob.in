@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 
 from api import get_video_info
@@ -64,7 +64,7 @@ def view(request):
             print(questions)
             api_views.modify_questions(video_url, questions)
             
-            return HttpResponse("lol")
+            return redirect("kafka_list")
         else:
             return HttpResponse("no lol")
 
