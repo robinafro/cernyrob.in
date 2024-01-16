@@ -354,6 +354,9 @@ def kafka_answer(request, subdomain):
     video_url = request.GET.get("video_url")
     language = request.GET.get("language")
 
+    if not "=" in video_url or not "/" in video_url: # Lmao
+        video_url = "https://www.youtube.com/watch?v=" + video_url
+
     if not video_url:
         return HttpResponse("Bad request") # Not returning JSON to prevent bots
     
