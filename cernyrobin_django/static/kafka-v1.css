@@ -292,6 +292,11 @@ p{
 #submitBody {
   display: flex;
 }
+
+/*DO NOT TOUCH OR IT REALLY FUCKS UP!*/
+
+
+/* invite code starts here */
 #edit-form{
   display: none;
 }
@@ -299,7 +304,6 @@ p{
   display: none;
 font-size: 18px;
 }
-/* invite code starts here */
 #invite{
   background-image: linear-gradient(to bottom right, rgb(55, 0, 157), #404eed);
   border-radius: 10px;
@@ -406,6 +410,21 @@ justify-content: space-around;
   margin: 5px 5px;
 
 }
+
+.subtle-link{
+  color: var(--headerCr);
+}
+
+.subtle-link:hover{
+  color: var(--headerCr);
+}
+
+.subtle-link:visited{
+  color: var(--headerCr);
+}
+
+/* end of: DO NOT TOUCH OR IT REALLY FUCKS UP!*/
+
 
 /*loooooolololololol*/
 
