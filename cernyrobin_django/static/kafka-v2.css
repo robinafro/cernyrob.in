@@ -245,6 +245,12 @@ p{
   text-align: center;
 }
 
+.answer-text{
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-in-out;
+}
+
 #disclaimer-footer {
   position: fixed;
   bottom: 0px;
@@ -335,12 +341,41 @@ p{
   box-shadow: 6px 6px 5px rgb(0, 0, 0)
 }
 
-.question-container{
-border-bottom: solid 1px var(--borderCr);
-width: 100%
+.pair-container-heading{
+  border-bottom: solid 1px var(--borderCr);
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-bottom: 0px;
+  
+}
 
-;
-padding-bottom: 5px;
+.wrapping-button{
+  margin-bottom: 0px;
+}
+
+
+.transcript-container{
+  background-color: var(--blockCr);
+  border: var(--borderCr) solid 2.5px;
+  border-radius: 10px;
+  padding: 2px;
+  margin: 10px;
+  padding: 10px 15px;
+  box-shadow: 6px 6px 5px rgb(0, 0, 0)
+}
+
+.text-color{
+  color: var(--textCr);
+}
+
+.question-container{
+
+
+
+padding-bottom: 2px;
+margin-bottom: 0px;
 }
 
 /* invite code starts here */

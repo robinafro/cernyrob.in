@@ -7,6 +7,8 @@
     <link href="{% static 'kafka-v2.css' %}" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="/static/assets/kafka.ico">
     <script src="{% static 'editor.js' %}"></script>
+    <script src="/static/view.js"></script>
+
 
     <title>Kafka Bot</title>
 </head>
@@ -31,13 +33,18 @@
             <div id="view-answers-container">
                 {% for question, answer in qa_pairs %}
                 <div class="pair-container">
+                    <div class="pair-container-heading">
 
-                    <p class="question-container">
                         
-                      Otázka  {{question}}
-                    </p>
+                        <p class="question-container">
+                            Otázka  {{question}}
+                            
+                        </p>
+                        <p class="wrapping-button" onclick="changeOpenStatus()">Rozbalit ⮟⮝</p>
+                    </div>
+
                     
-                    <p>
+                    <p class="answer-text">
                         Odpověd {{answer}}
 
                     </p>
@@ -77,14 +84,14 @@
 
             <h2 class="view-subheading">Transkript videa</h2>
 
-            <div id="view-transcript-container">
-                <div class="pair-container">
+<!--             <div id="view-transcript-container"> -->
+                <div class="transcript-container">
                     <p class="transcript-text">{{transcript}}</p>
                 </div>
 
 
 
-            </div>
+<!--             </div> -->
 
         </div>
     </div>
