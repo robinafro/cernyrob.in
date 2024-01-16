@@ -6,6 +6,7 @@
   --blockCr: #141c49;
   --bannerBgCr: #ffff00;
   --headerCr: #6575d2;
+  --borderCr: #7ea5ff;
 
 }
 
@@ -175,6 +176,7 @@ p{
   width: 100%;
   aspect-ratio: 16/9;
   margin: 1rem;
+  border-radius: 10px;
 }
 
 #view-answers-container {
@@ -293,8 +295,41 @@ p{
   display: flex;
 }
 
-/*DO NOT TOUCH OR IT REALLY FUCKS UP!*/
+/*DO NOT TOUCH THIS OR IT REALLY FUCKS UP!*/
 
+
+/* kafka-view code here */
+
+p{
+  line-height: 1.4;
+}
+
+#video-name{
+  color: var(--textCr);
+}
+
+.pair-container{
+  background-color: var(--blockCr);
+  border: var(--borderCr) solid 2.5px;
+  border-radius: 10px;
+  padding: 2px;
+  margin: 10px;
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  padding: 10px;
+  box-shadow: 6px 6px 5px rgb(0, 0, 0)
+}
+
+.question-container{
+border-bottom: solid 1px var(--borderCr);
+width: 100%
+
+;
+padding-bottom: 5px;
+}
 
 /* invite code starts here */
 #edit-form{

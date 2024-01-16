@@ -7,8 +7,14 @@ from ads import views as ads_views
 import json
 import re
 
+def strip_yapping(s):
 
-def parse_answers(text):
+    for i, char in enumerate(s):
+        if char.isdigit():
+            return s[i:]
+    return s
+
+def parse_numbered_text(text):
 
 
     segments = re.split(r'(\d+\.)', text)
@@ -72,6 +78,37 @@ def view(request):
 
         ads = ads_views.get_ads(length=2)
 
+
+        parsed_questions = parse_numbered_text(strip_yapping(video_info["description"]))
+
+        parsed_answers = parse_numbered_text(strip_yapping(answers))
+        # questions = ["otázka 1", "otázka 2"]
+        # answers = ["odpověď 1", "odpověď 2"]
+
+  #      qa_pairs = zip(parsed_questions, parsed_answers)
+        
+
+        # ˇˇˇˇ DO NOT EVER FUCKING TOUCH THIS GODDAMN LINE OR THE WHOLE THING FALLS APART
+        qa_pairs = zip(parse_numbered_text(strip_yapping(video_info["description"])), parse_numbered_text(strip_yapping(answers)))
+        # ^^^^ DO NOT EVER FUCKING TOUCH THIS GODDAMN LINE OR THE WHOLE THING FALLS APART
+
+        # print(parsed_answers)
+        # print(parsed_questions)
+        print(type(video_info["description"]))
+        print(type(strip_yapping(video_info["description"])))
+        print(type(parse_numbered_text(strip_yapping(video_info["description"]))))
+        print(type(answers))
+        print(type(parse_numbered_text(answers)))
+
+
+        # for q, a in qa_pairs:
+        #     print(q)
+        #     print(a)
+        #     print("---------------------")
+        
+#        print(video_info)
+        # for question in answers:
+        #     print("1111 " + question))
         return render(
             request,
             "kafka/view.html",
@@ -79,8 +116,10 @@ def view(request):
                 "title": video_info["title"],
                 "video_url": video_url,
                 "video_id": id,
-                "questions": video_info["description"],
-                "answers": parse_answers(answers),
+                "video_title" :video_info["title"],
+#                "questions": parse_numbered_text(video_info["description"]),
+#                "answers": parse_numbered_text(answers),
+                "qa_pairs" : qa_pairs,
                 "transcript": transcript,
                 "ads_left": ads["ads_left"],
                 "ads_right": ads["ads_right"],
@@ -92,7 +131,7 @@ def view(request):
             questions = request.POST.get("edited_answers")
             video_url = "https://www.youtube.com/watch?v=" + request.POST.get("video_id").strip()
 
-            print(questions)
+#            print(questions)
             api_views.modify_questions(video_url, questions)
             
             return redirect("kafka_list")

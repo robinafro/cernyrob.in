@@ -20,20 +20,34 @@
         </div>
 
         <div id="page-container">
+            <center>
+
+                <h1 id="video-name">{{title}}</h1>
+            </center>
             <iframe id="video-embed" src="https://www.youtube.com/embed/{{ video_id }}" title="{{ title}}"
                 frameborder="0"
                 allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowfullscreen></iframe>
 
             <div id="view-answers-container">
-                <div class="subtitle">Odpovědi:</div>
-                <span id="answers" class="view-answers-text">
-                    {% for answer in answers %}
-                    {{answer}}
-                    <br>
-                    {%endfor%}
+                {% for question, answer in qa_pairs %}
+                <div class="pair-container">
 
-                </span> 
+                    <p class="question-container">
+                        
+                      Otázka  {{question}}
+                    </p>
+                    
+                    <p>
+                        Odpověd {{answer}}
+
+                    </p>
+
+
+                </div>
+                {%endfor%}
+
+
                 {%if is_staff%}
                 <img onclick="enterEditMode()" style="width: 50px; padding: 1px; margin: 1px;" id="edit-button" src="/static/assets/Untitled.png" alt="">
 
