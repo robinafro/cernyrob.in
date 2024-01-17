@@ -81,19 +81,23 @@
 
             <div id="page-container">
                 {% for object in videos %}
-                <a href="/kafka/view?id={{ object.video_id }}" class="kafka-list-element" id="element-template">
-                    <img src="https://img.youtube.com/vi/{{ object.video_id }}/mqdefault.jpg"
-                        class="kafka-list-element-image"></img>
-                    <div class="kafka-list-element-text-container">
-                        <h3 class="kafka-list-element-text kafka-list-element-title">
-                            {{ object.title }}
-                        </h3>
 
-                        <p class="kafka-list-element-text kafka-list-element-description">
-                            {{ object.description }}
+
+                <div class="video-container">
+                    <div class="video-heading-container">
+                        Velká říjnová socialistická revoluce, speciál
+                    </div>
+                    <div class="video-content-container">
+                        <img src="https://img.youtube.com/vi/{{ object.video_id }}/mqdefault.jpg">
+                        <p class="video-description-container">
+                            {% for question in object.questions%}
+                            {{question}}
+                            <br>
+                            {%endfor%}
+                            <!-- {{questions}} -->
                         </p>
                     </div>
-                </a>
+                </div>
                 {% endfor %}
 
                 <div id="kafka-list-add-video-container">

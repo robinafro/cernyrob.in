@@ -307,6 +307,28 @@ p{
 
 /*DO NOT TOUCH THIS OR IT REALLY FUCKS UP!*/
 
+/* kafka-index code here */
+
+.video-container{
+  background-color: var(--blockCr);
+  border: var(--borderCr) solid 2.5px;
+  border-radius: 10px;
+  padding: 2px;
+  margin: 10px;
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  padding: 10px 15px;
+  box-shadow: 6px 6px 5px rgb(0, 0, 0);
+  aspect-ratio: 3/1;
+}
+
+.video-content-container{
+  display: flex;
+  flex-direction: row;
+}
 
 /* kafka-view code here */
 

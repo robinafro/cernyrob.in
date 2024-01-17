@@ -47,7 +47,6 @@ def index(request):
     all_videos = api_views.get_all_to_be_displayed()
 
     context = ads_views.get_ads(length=len(all_videos))
-
     context["videos"] = []
 
     for video in all_videos:
@@ -55,9 +54,11 @@ def index(request):
     {
                 "title": video["title"],
                 "video_id": video["video_id"],
-                "description": video["description"],
+                # "description": video["description"],
+                "questions" : parse_numbered_text(strip_yapping(video["description"])),
             }
         )
+    print(context)
 
     return render(request, "kafka/index.html", context)
 
@@ -94,12 +95,12 @@ def view(request):
 
         # print(parsed_answers)
         # print(parsed_questions)
-        print(type(video_info["description"]))
-        print(type(strip_yapping(video_info["description"])))
-        print(type(parse_numbered_text(strip_yapping(video_info["description"]))))
+        # print(type(video_info["description"]))
+        # print(type(strip_yapping(video_info["description"])))
+        # print(type(parse_numbered_text(strip_yapping(video_info["description"]))))
         
-        print(type(answers))
-        print(type(parse_numbered_text(answers)))
+        # print(type(answers))
+        # print(type(parse_numbered_text(answers)))
 
 
         # for q, a in qa_pairs:
