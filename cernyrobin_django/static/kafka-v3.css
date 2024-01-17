@@ -3,10 +3,12 @@
   --textCr: #dbdde4;
   --bgCr: #101216;
   --highLightCr: #080131;
-  --blockCr: #141c49;
+/*   --blockCr: #141c49; old color */
+  --blockCr: #040d40;
   --bannerBgCr: #ffff00;
   --headerCr: #6575d2;
-  --borderCr: #7ea5ff;
+/*   --borderCr: #7ea5ff; old color */
+  --borderCr: #344397;
 
 }
 
@@ -115,7 +117,8 @@ p{
 }
 
 .kafka-list-element-image {
-  height: 80%;
+  height: 80%; /* 537 */
+
   aspect-ratio: 16/9;
   margin: 0.5rem;
 }
@@ -313,7 +316,7 @@ p{
   background-color: var(--blockCr);
   border: var(--borderCr) solid 2.5px;
   border-radius: 10px;
-  padding: 2px;
+/*   padding: 2px; */
   margin: 10px;
   margin-bottom: 30px;
   display: flex;
@@ -322,12 +325,90 @@ p{
   align-items: start;
   padding: 10px 15px;
   box-shadow: 6px 6px 5px rgb(0, 0, 0);
-  aspect-ratio: 3/1;
+  width: 100%;
+  overflow: hidden;
+/*   white-space: nowrap; */
+  position: relative;
+/*   aspect-ratio: 3/1; */
+z-index: 1;
+transition: border 0.2s ease-in-out;
 }
+
+.video-container:hover{
+  border: rgb(255, 255, 255) solid 2.5px; 
+}
+
+.video-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50px; /* Width of the fade effect */
+  height: 100%;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0), var(--blockCr));
+  pointer-events: none; /* Allows interaction with the text underneath */
+  
+}
+
 
 .video-content-container{
   display: flex;
   flex-direction: row;
+  justify-content: start;
+  width: 100%;
+}
+
+.video-heading-text{
+    font-size: 24px;
+    font-weight: bold;
+    
+}
+
+.thumbnail{
+  border-radius: 10px;
+  border: solid var(--borderCr) 1.5px;
+/*   aspect-ratio: 16 / 9; */
+/*   width: 50%;
+  height: 28%; */
+width: 537px;
+height: 302px;
+  
+
+  /* 537 */
+
+  aspect-ratio: 16/9;
+}
+
+.video-description-container{
+  /* width: 50%; */
+  position: relative;
+   width: 50%; 
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 18px;
+  line-height: 1.6;
+  margin-left: 20px;
+  margin-top: 0px;
+}
+.video-description-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50px; /* Width of the fade effect */
+  height: 100%;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0), var(--blockCr));
+  pointer-events: none; /* Allows interaction with the text underneath */
+}
+
+
+
+
+.video-heading-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
 }
 
 /* kafka-view code here */
@@ -423,6 +504,7 @@ font-size: 18px;
   padding: 10px;
   transition: 0.25s;
   border: rgb(8, 0, 101) solid 2px; 
+  z-index: 2;
 
 }
 

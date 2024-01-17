@@ -401,6 +401,7 @@ font-size: 18px;
   padding: 10px;
   transition: 0.25s;
   border: rgb(8, 0, 101) solid 2px; 
+  z-index: 1;
 
 }
 

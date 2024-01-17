@@ -85,10 +85,11 @@
 
                 <div class="video-container">
                     <div class="video-heading-container">
-                        Velká říjnová socialistická revoluce, speciál
+                        <p class="video-heading-text">Velká říjnová socialistická revoluce, speciál</p>
                     </div>
                     <div class="video-content-container">
-                        <img src="https://img.youtube.com/vi/{{ object.video_id }}/mqdefault.jpg">
+                        <img class="thumbnail" src="https://img.youtube.com/vi/{{ object.video_id }}/maxresdefault.jpg">
+                        <!-- <img class="thumbnail" src="https://img.youtube.com/vi/{{ object.video_id }}/mqdefault.jpg"> -->
                         <p class="video-description-container">
                             {% for question in object.questions%}
                             {{question}}
