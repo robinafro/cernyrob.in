@@ -10,7 +10,7 @@
     <script src="{% static 'kafka-list.js' %}"></script>
     <script src="{% static 'porn.js' %}"></script>
 
-    <title>Kafka Bot</title>
+    <title>Kafka AI</title>
 </head>
 
 <body>
@@ -65,7 +65,7 @@
 
     <div class="background">
         <div id="title-container">
-            <h1 class="title">Kafka Bot</h1>
+            <h1 class="title">Kafka AI</h1>
             <h2 class="subtitle">Automatizovaný systém na řešení odpovědí z videí pana Kafky</h2>
             <p class="subtle-link">Jsi ověřený editor? &nbsp; <a class="subtle-link" href="{% url 'login'%}">Přihlaš se</a></p>
         </div>
@@ -91,7 +91,7 @@
                         <img class="thumbnail" src="https://img.youtube.com/vi/{{ object.video_id }}/maxresdefault.jpg">
                         <!-- <img class="thumbnail" src="https://img.youtube.com/vi/{{ object.video_id }}/mqdefault.jpg"> -->
                         <p class="video-description-container">
-                            {% for question in object.questions%}
+                            {% for question in object.questions %}
                             {{question}}
                             <br>
                             {%endfor%}
