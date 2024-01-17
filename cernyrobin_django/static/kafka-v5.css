@@ -312,6 +312,47 @@ p{
 
 /* kafka-index code here */
 
+.centering-container{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0px;
+  padding: 0px;
+
+}
+
+body{
+  margin: 0px;
+  padding: 0px;
+}
+
+.nav-item{
+  padding: 5px;
+  border-radius: 5px;
+  background-color: #53c316;
+}
+
+nav{
+/*   background-image: linear-gradient(to bottom right, rgb(55, 0, 157), #404eed); */
+background-color: var(--blockCr);
+  border-radius: 0px 0px 25px 25px ;
+/*   position: fixed; */
+/*   top: 0;
+  right: 0; */
+  width: 95%;
+  height: 55px;
+  display: flex;
+  margin: 0px;
+  padding: 10px;
+  transition: 0.25s;
+  border: rgb(8, 0, 101) solid 2px; 
+  z-index: 2;
+
+
+}
+
 .video-container{
   background-color: var(--blockCr);
   border: var(--borderCr) solid 2.5px;
@@ -361,6 +402,7 @@ transition: border 0.2s ease-in-out;
 .video-heading-text{
     font-size: 24px;
     font-weight: bold;
+    margin-top: 8px;
     
 }
 
@@ -500,7 +542,7 @@ font-size: 18px;
   background-image: linear-gradient(to bottom right, rgb(55, 0, 157), #404eed);
   border-radius: 10px;
   position: fixed;
-  top: 0;
+  bottom: 0;
   right: 0;
   width: 320px;
   height: 55px;
