@@ -11,4 +11,5 @@ openai
 python-dotenv
 python-docx
 requests
+shortuuid
 django-cors-headers
