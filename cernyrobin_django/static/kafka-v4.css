@@ -379,6 +379,11 @@ height: 302px;
   aspect-ratio: 16/9;
 }
 
+
+.width-100{
+  width: 100%;
+}
+
 .video-description-container{
   /* width: 50%; */
   position: relative;
