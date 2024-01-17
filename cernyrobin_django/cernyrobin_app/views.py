@@ -16,7 +16,7 @@ from django.core.serializers import serialize
 from django.db.models import IntegerField
 from django.db.models.fields.related import ForeignKey
 
-import json
+import json, re, shortuuid
 
 
 # Utils
@@ -49,7 +49,53 @@ def login_page(request):
 
 
 # API
+verification_codes = {}
 
+def verify_submit(request):
+    if request.method == "POST":
+        if not request.user.is_authenticated:
+            return HttpResponse("401 Unauthorized")
+        
+        email = request.POST.get("email")
+
+        #! Check if the email is already verified (not just owned)
+
+        if not email:
+            return HttpResponse("400 Bad Request")
+        
+        if not re.match(r"\w+\.[\w]{2,4}\.[\d]{4}@skola\.ssps\.cz", email): # There might be an issue with the escape characters near the dots. Look into this first if the verification seems to be broken.
+            return HttpResponse("400 Bad Request")
+        
+        request.user.email = email
+
+        code = shortuuid.uuid()
+        
+        verification_codes[code] = request.user.username
+
+        #! Send email with code
+
+def verify_code(request):
+    if request.method == "GET":
+        code = request.GET.get("code")
+
+        if not code:
+            return HttpResponse("400 Bad Request")
+        
+        if code not in verification_codes:
+            return HttpResponse("400 Bad Request")
+        
+        username = verification_codes[code]
+
+        if request.user.username != username:
+            return HttpResponse("401 Unauthorized")
+
+        request.user.email_verified = True
+
+        request.user.save()
+
+        del verification_codes[code]
+
+        return HttpResponse("200 OK")
 
 def login_submit(request):
     if request.method == "POST":
