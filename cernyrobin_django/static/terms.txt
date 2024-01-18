@@ -17,4 +17,5 @@ Při maintenance breaku nebo výpadku je dostupný záložní server
 Žádný goofy ass pop-ups, reklamy nebo discord invite
 Zdvojnásobený kliky v Robin Clickeru
 
+Celý web je open source, tekže se můžete podívat na přesné fungování.
 Pokud máš jakýkoliv otázky můžeš se připojit na náš discord server, pingnout @StuckInVim a zeptat se mě na cokoliv

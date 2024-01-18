@@ -103,16 +103,10 @@
     </a>
     <!-- End of code block for info link-->
 
-    <!-- Ad blocker bait-->
-    <div id="ad" class="banner advert ads" style="height:1px; width:1px; position:absolute;"></div>
-
-        <!--End of Ad blocker bait-->
-
     <div class="background">
         <div id="title-container">
             <h1 class="title">Kafka AI</h1>
-            <h2 class="subtitle">Automatizovaný systém na řešení odpovědí z videí pana Kafky</h2>
-            <p class="subtle-link">Jsi ověřený editor? &nbsp; <a class="subtle-link" href="{% url 'login'%}">Přihlaš se</a></p>
+            <h2 class="subtitle">Využijte sílu umělé inteligence pro jednodušší učení se a přípravu na testy z dějepisu!</h2>
         </div>
 
         <div id="content">
@@ -131,7 +125,14 @@
 
                 <div class="video-container" >
                     <div class="video-heading-container">
+                        <div class="video-heading-left" onclick="event.stopPropagation();">
+                            date
+                        </div>
+                        
                         <p class="video-heading-text">{{object.title}}</p>
+                        <div class="video-heading-right" onclick="event.preventDefault();">
+                            context menu
+                        </div>
                     </div>
                     <div class="video-content-container">
                         <img class="thumbnail" src="https://img.youtube.com/vi/{{ object.video_id }}/maxresdefault.jpg">
@@ -151,9 +152,9 @@
                 <div id="kafka-list-add-video-container">
                     <div id="cantfindvideo">Nemůžete najít video?</div>
 
-                    <div id="kafka-list-add-video-button">
-                        <a href="/kafka/submit/" class="subtitle">Přidat video</a>
-                    </div>
+                    <!-- <div id="add-button"> -->
+                        <a href="/kafka/submit/" class="add-button">Přidat video</a>
+                    <!-- </div> -->
                 </div>
             </div>
 
