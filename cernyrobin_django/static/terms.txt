@@ -1,0 +1,20 @@
+Pro získání ověřenýho účtu je potřeba školní email, abychom zabránili spamování webu botama. 
+
+Nikde nebudeme tvůj mail ukazovat. 
+Nikdy ti nebudeme posílat žádnej zasranej spam. (Jedinej mail co ti pošleme je verification.)
+Nikam se tvůj mail nedostane, protože je uloženej jenom v naší databázi, nikam ho neposíláme ani neprodáváme!
+Vždycky máš možnost si odebrat email z účtu nebo účet úplně smazat a to tvůj email z databáze trvale smažeme.
+
+Výhody pro uživatele s ověřenym účtem:
+
+Máš přístup k více verzím odpovědí, aby se vaše odpovědi lišily od ostatních.
+[VOLITELNÉ] Můžeš se přihlásit k oznámení nově odpovězených videí do mailu.
+Můžeš používat různý color themes, kromě defaultního vzhledu
+Můžeš si změnit heslo, pokud jsi ho zapomněl
+Máš přístup ke krátkýmu shrnutí každýho videa
+Můžeš nahlašovat špatně vygenerovaný odpovědi
+Při maintenance breaku nebo výpadku je dostupný záložní server
+Žádný goofy ass pop-ups, reklamy nebo discord invite
+Zdvojnásobený kliky v Robin Clickeru
+
+Pokud máš jakýkoliv otázky můžeš se připojit na náš discord server, pingnout @StuckInVim a zeptat se mě na cokoliv
