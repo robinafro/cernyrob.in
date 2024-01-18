@@ -28,13 +28,15 @@ from ads import views as ads
 urlpatterns = [
     path("admin/", admin.site.urls),
 
-    path("", cernyrobin.home),
-    path("home/", cernyrobin.home),
+    path("", cernyrobin.home, name="root"),
+    path("home/", cernyrobin.home, name="home"),
 
     path("login/", cernyrobin.login_page, name="login"),
+    path("register/", cernyrobin.login_page, name="register"),
     path("login/submit/", cernyrobin.login_submit, name="login_submit"),
+    path("account/", cernyrobin.account, name="account"),
 
-    path("clicker/", cernyrobin.clicker_page),
+    path("clicker/", cernyrobin.clicker_page, name="clicker"),
     path("clicker/add_click", cernyrobin.add_click, name="add_click"),
     path("get_user_data/", cernyrobin.get_user_data, name="get_user_data"),
     path("get_all_data/", cernyrobin.get_all_data, name="get_all_data"),

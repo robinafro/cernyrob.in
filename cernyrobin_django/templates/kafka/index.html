@@ -15,13 +15,58 @@
 
 <body>
 
-<a href="https://discord.gg/mQDSWR7ttB">
+<!-- <a href="https://discord.gg/mQDSWR7ttB">
 
 
     <div id="invite">
         <p> <b>Připojte se na náš discord server!</b></p> <img id="logo" src="/static/assets/discord.svg" alt="">
     </div>
-</a>
+</a> -->
+{%include "cernyrobin/invite.html"%}
+
+<div class="centering-container">
+    <nav> 
+        <!-- <a class="nav-item" href="">Login</a> <a class="nav-item" href="">Kafka</a> <a class="nav-item" href="home"></a> -->
+        <div id="nav-left" class="nav-spacer">
+            <a href="{% url 'root'%}" class="nav-button">
+                Home
+            </a>
+            <a href="{% url 'kafka_index'%}" class="nav-button">
+                Kafka
+            </a>
+            <a href="tohle jsem jeste nevymyslel" class="nav-button">
+                Nové vid
+            </a>
+            <a href="{% url 'clicker'%}" class="nav-button">
+                Clicker
+            </a>
+            <a href="https://instagram.com/oli.starling" class="nav-button">
+                Olivia
+            </a>
+        </div>
+        <div class="nav-spacer" id="nav-center">
+            <p>
+                
+
+            </p>
+        </div>
+        <div id="nav-right" class="nav-spacer">
+            {% if logged_in %}
+            {{current_user}}
+            <a href="{% url 'account'%}"></a>
+            {%else%}
+            
+            <a href="{%url 'login'%}" class="nav-button" id="login-button">
+                P5ihl8sit se
+            </a>
+            <a href="{%url 'register'%}" class="nav-button" id="register-button">
+                Vytvo5it ucet
+            </a>
+            {%endif%}
+
+        </div>
+    </nav>
+</div>
 
     <!-- Code block for info link-->
     <a href="https://www.instagram.com/oli.starling/">
@@ -36,7 +81,7 @@
                 </button>
                 <a href="https://www.instagram.com/oli.starling/"></a>
                 
-                <h2 id="infoText">Olivia (&gt;5 km) ti poslala 7 fotek!!</h2>
+                <h2 id="infoText">Olivia (&lt;5 km) ti poslala 7 fotek!!</h2>
                 
                 <button id="rButton" onclick="buttonClick(2)">
                     <img src="/static/assets/kafka/cross.png" id="disclaimer-cross">
@@ -58,16 +103,10 @@
     </a>
     <!-- End of code block for info link-->
 
-    <!-- Ad blocker bait-->
-    <div id="ad" class="banner advert ads" style="height:1px; width:1px; position:absolute;"></div>
-
-        <!--End of Ad blocker bait-->
-
     <div class="background">
         <div id="title-container">
             <h1 class="title">Kafka AI</h1>
-            <h2 class="subtitle">Automatizovaný systém na řešení odpovědí z videí pana Kafky</h2>
-            <p class="subtle-link">Jsi ověřený editor? &nbsp; <a class="subtle-link" href="{% url 'login'%}">Přihlaš se</a></p>
+            <h2 class="subtitle">Využijte sílu umělé inteligence pro jednodušší učení se a přípravu na testy z dějepisu!</h2>
         </div>
 
         <div id="content">
@@ -86,7 +125,14 @@
 
                 <div class="video-container" >
                     <div class="video-heading-container">
+                        <div class="video-heading-left" onclick="event.stopPropagation();">
+                            date
+                        </div>
+                        
                         <p class="video-heading-text">{{object.title}}</p>
+                        <div class="video-heading-right" onclick="event.preventDefault();">
+                            context menu
+                        </div>
                     </div>
                     <div class="video-content-container">
                         <img class="thumbnail" src="https://img.youtube.com/vi/{{ object.video_id }}/maxresdefault.jpg">
@@ -106,9 +152,9 @@
                 <div id="kafka-list-add-video-container">
                     <div id="cantfindvideo">Nemůžete najít video?</div>
 
-                    <div id="kafka-list-add-video-button">
-                        <a href="/kafka/submit/" class="subtitle">Přidat video</a>
-                    </div>
+                    <!-- <div id="add-button"> -->
+                        <a href="/kafka/submit/" class="add-button">Přidat video</a>
+                    <!-- </div> -->
                 </div>
             </div>
 
