@@ -27,11 +27,26 @@ def modify_questions(video_url, questions):
 
     return "Success"
 
-def get_answers(video_url):
+def get_answers(video_url, user):
     try:
         kafka = Kafka.objects.get(video_url=video_url)
 
-        return kafka.answers or "Unable to get answers"
+        if user.is_anonymous or kafka.custom_answers == "":
+            return kafka.answers or "Unable to get answers"
+        else:
+            try:
+                custom_answers = json.loads(kafka.custom_answers)
+
+                return custom_answers.get(user.username) or kafka.answers or "Unable to get answers"
+            except Exception as e:
+                print("-"*60)
+                print(e)
+                print("-"*60)
+                print("The error above is not fatal, but custom generated answers will not be used (either an error or there aren't any yet).") # At se vitek neboji tracebacku lol
+                print("-"*60)
+
+                return kafka.answers or "Unable to get answers"
+            
     except Kafka.DoesNotExist:
         return "Unable to get answers"
     

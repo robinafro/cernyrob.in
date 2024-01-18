@@ -12,6 +12,7 @@ class Kafka(models.Model):
     transcript = models.CharField(max_length=999999, null=True)
     answers = models.CharField(max_length=99999, null=True)
     timestamp = models.FloatField(default=0, null=True)
+    custom_answers = models.JSONField(default=str, null=True)
 
 class Job(models.Model):
     job_id = models.CharField(max_length=20, unique=True, primary_key=True, default="")

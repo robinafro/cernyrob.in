@@ -58,7 +58,8 @@ def index(request):
                 "questions" : parse_numbered_text(strip_yapping(video["description"])),
             }
         )
-    print(context)
+
+    context["current_user"] = request.user
 
     return render(request, "kafka/index.html", context)
 
@@ -74,7 +75,7 @@ def view(request):
 
         video_info = json.loads(get_video_info.get_video_info(video_url))
 
-        answers = api_views.get_answers(video_url).strip()
+        answers = api_views.get_answers(video_url, request.user).strip()
         transcript = api_views.get_transcript(video_url).strip()
 
         ads = ads_views.get_ads(length=2)
@@ -89,6 +90,7 @@ def view(request):
   #      qa_pairs = zip(parsed_questions, parsed_answers)
         
 
+        # Bro stop waffling stupid ass shit
         # ˇˇˇˇ DO NOT EVER FUCKING TOUCH THIS GODDAMN LINE OR THE WHOLE THING FALLS APART
         qa_pairs = zip(parse_numbered_text(strip_yapping(video_info["description"])), parse_numbered_text(strip_yapping(answers)))
         # ^^^^ DO NOT EVER FUCKING TOUCH THIS GODDAMN LINE OR THE WHOLE THING FALLS APART
@@ -125,7 +127,8 @@ def view(request):
                 "transcript": transcript,
                 "ads_left": ads["ads_left"],
                 "ads_right": ads["ads_right"],
-                "is_staff" : request.user.is_staff
+                "is_staff" : request.user.is_staff,
+                "current_user" : request.user,
             },
         )
     elif request.method == "POST":
@@ -138,10 +141,7 @@ def view(request):
             
             return redirect("kafka_list")
         else:
-            return HttpResponse("no lol")
-
-
-
+            return HttpResponse("Nuh uh")
 
 def submit(request):
     if request.method == "GET":
@@ -151,6 +151,7 @@ def submit(request):
             context={
                 "last_generated": api_views.get_last_generated(),
                 "generate_rate_limit": api_views.GENERATE_RATE_LIMIT,
+                "current_user" : request.user,
             },
         )
     elif request.method == "POST":
