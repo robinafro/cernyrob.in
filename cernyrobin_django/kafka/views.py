@@ -58,6 +58,8 @@ def index(request):
                 "questions" : parse_numbered_text(strip_yapping(video["description"])),
             }
         )
+    context["current_user"] = request.user
+    context["logged_in"] = request.user.is_authenticated
     print(context)
 
     return render(request, "kafka/index.html", context)

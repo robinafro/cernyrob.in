@@ -15,14 +15,14 @@
 
 <body>
 
-<a href="https://discord.gg/mQDSWR7ttB">
+<!-- <a href="https://discord.gg/mQDSWR7ttB">
 
 
     <div id="invite">
         <p> <b>Připojte se na náš discord server!</b></p> <img id="logo" src="/static/assets/discord.svg" alt="">
     </div>
-</a>
-
+</a> -->
+{%include "cernyrobin/invite.html"%}
 
 <div class="centering-container">
     <nav> 
@@ -35,7 +35,7 @@
                 Kafka
             </div>
             <div class="nav-button">
-                Nejnovější video
+                Nové vid
             </div>
             <div class="nav-button">
                 Clicker
@@ -51,10 +51,18 @@
             </p>
         </div>
         <div id="nav-right" class="nav-spacer">
-            <p>
-                liggen in as
+            {% if logged_in %}
+            {{current_user}}
+            {%else%}
+            
+            <div class="nav-button" id="login-button">
+                P5ihl8sit se
+            </div>
+            <div class="nav-button" id="register-button">
+                Vytvo5it ucet
+            </div>
+            {%endif%}
 
-            </p>
         </div>
     </nav>
 </div>
