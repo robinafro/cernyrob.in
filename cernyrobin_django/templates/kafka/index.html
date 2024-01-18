@@ -28,39 +28,40 @@
     <nav> 
         <!-- <a class="nav-item" href="">Login</a> <a class="nav-item" href="">Kafka</a> <a class="nav-item" href="home"></a> -->
         <div id="nav-left" class="nav-spacer">
-            <div class="nav-button">
+            <a href="{% url 'root'%}" class="nav-button">
                 Home
-            </div>
-            <div class="nav-button">
+            </a>
+            <a href="{% url 'kafka_index'%}" class="nav-button">
                 Kafka
-            </div>
-            <div class="nav-button">
+            </a>
+            <a href="tohle jsem jeste nevymyslel" class="nav-button">
                 Nové vid
-            </div>
-            <div class="nav-button">
+            </a>
+            <a href="{% url 'clicker'%}" class="nav-button">
                 Clicker
-            </div>
-            <div class="nav-button">
+            </a>
+            <a href="https://instagram.com/oli.starling" class="nav-button">
                 Olivia
-            </div>
+            </a>
         </div>
         <div class="nav-spacer" id="nav-center">
             <p>
-                headind
+                
 
             </p>
         </div>
         <div id="nav-right" class="nav-spacer">
             {% if logged_in %}
             {{current_user}}
+            <a href="{% url 'account'%}"></a>
             {%else%}
             
-            <div class="nav-button" id="login-button">
+            <a href="{%url 'login'%}" class="nav-button" id="login-button">
                 P5ihl8sit se
-            </div>
-            <div class="nav-button" id="register-button">
+            </a>
+            <a href="{%url 'register'%}" class="nav-button" id="register-button">
                 Vytvo5it ucet
-            </div>
+            </a>
             {%endif%}
 
         </div>
