@@ -1,14 +1,78 @@
-/* css version 1 */
 :root {
-  --textCr: #dbdde4;
-  --bgCr: #101216;
+  /*   --blockCr: #141c49; old color */
+  /*   --borderCr: #7ea5ff; old color */
+
+  /* NewUI static colors backup:
+    DO NOT DELETE
+  
+  
+  
+  --textCr: rgb(219, 221, 228);
+  --bgCr: rgb(16, 18, 22);
   --highLightCr: #080131;
-/*   --blockCr: #141c49; old color */
   --blockCr: #040d40;
   --bannerBgCr: #ffff00;
-  --headerCr: #6575d2;
-/*   --borderCr: #7ea5ff; old color */
-  --borderCr: #344397;
+  --headerCr: rgb(101, 117, 210);
+  --borderCr: rgb(52, 67, 151);
+  --addButtonTriggerCr: rgb(73, 91, 193); 
+  --warniningTextCr: #ff0000;
+  --navButtonTextCr: #ffffff;
+  --spinnerOuterCr: rgb(10, 25, 111);
+  --spinnerInnerCr: rgb(21, 41, 153);
+  --loadingBarCr: rgb(0, 80, 255);
+
+  */
+/*
+source backup --sourceColor: #221FC7;
+*/
+
+  
+  /* source 221FC7 */
+  /*Base color sorces for mixin into the theme colors*/
+--sourceColor: hsl(241, 73%, 45%);
+--headerCrSource: #D6D6D6;
+--borderCrSource: #474747;
+--addButtonTriggerCrSource: #8A8A8A;
+--spinnerOuterCrSource: #000000;
+--spinnerInnerCrSource: #0D0D0D;
+--textCrSource: #F2F2F2;
+--bgCrSource: #0F0F0F;
+--highLightCrSource:#000000;
+--blockCrSource:#000000;
+
+/*Colors with weak source*/
+--textCr: color-mix(in srgb-linear, var(--sourceColor) 10%,#F2F2F2);
+--spinnerOuterCr: color-mix(in srgb-linear, var(--sourceColor) 50%,#000000);
+--bgCr: color-mix(in srgb-linear, var(--sourceColor) 0.1%,#0F0F0F);
+--highLightCr:color-mix(in srgb-linear, var(--sourceColor) 5%,#000000);
+--blockCr: color-mix(in srgb-linear, var(--sourceColor) 9%,#000000);
+
+/*Colors with equal ratio*/
+--borderCr: color-mix(in srgb-linear, var(--sourceColor),#474747);
+
+/*Colors with dominant source*/
+--spinnerInnerCr: color-mix(in srgb-linear,#0D0D0D 75%, var(--sourceColor));
+--headerCr: color-mix(in srgb-linear,#D6D6D6 33%,  var(--sourceColor));
+--addButtonTriggerCr: color-mix(in srgb-linear,#8A8A8A 33%, var(--sourceColor));
+
+/*Colors identical to source color*/
+--loadingBarCr: var(--sourceColor);
+
+/* Unrelated colors */
+--bannerBgCr: #ffff00;
+--warniningTextCr: #ff0000;
+--navButtonTextCr: #ffffff;
+
+/*   --textCr: rgb(219, 221, 228); */
+/*   --bgCr: rgb(16, 18, 22);
+  --highLightCr: rgb(8, 1, 49);
+  --blockCr: rgb(4, 13, 64); */
+/*   --headerCr: rgb(101, 117, 210); */
+/*   --borderCr: rgb(52, 67, 151); */
+/*   --addButtonTriggerCr: rgb(73, 91, 193);  */
+/*   --spinnerOuterCr: rgb(10, 25, 111);
+  --spinnerInnerCr: rgb(21, 41, 153);
+  --loadingBarCr: rgb(0, 80, 255); */
 
 }
 
@@ -68,6 +132,12 @@ p{
   justify-content: center;
   align-items: center;
   margin: 15px;
+  /* transition: background-color 0.2 ease-in-out; */
+  transition: 0.2s ease-in-out
+}
+
+.add-button:hover{
+  background-color: var(--addButtonTriggerCr);
 }
 #content {
   width: 100%;
@@ -177,15 +247,9 @@ p{
   flex-direction: column;
 }
 
-#kafka-list-add-video-button {
-  background-color: rgb(214, 214, 214);
-  padding: 0.5rem;
-  margin: 0.5rem;
-  border-radius: 0.5rem;
-}
 
 #cantfindvideo {
-  color: rgb(214, 214, 214);
+  color: var(--textCr)
 }
 
 #video-embed {
@@ -205,7 +269,7 @@ p{
 }
 
 .view-answers-text {
-  color: rgb(214, 214, 214);
+  color: var(--textCr)
 }
 
 #submit-form-container {
@@ -254,7 +318,7 @@ p{
 }
 
 #submit-response {
-  color: rgb(214, 214, 214);
+  color: var(--textCr);
   font-size: 1.5rem;
   text-align: center;
 }
@@ -286,15 +350,11 @@ p{
 }
 
 .disclaimer-highlight {
-  color: #ff0000;
+  color: var(--warniningTextCr);
   font-weight: bold;
 }
 
-.disclaimer-hidden {
-  opacity: 0.7;
-  color: #000000;
-  font-weight: bolder;
-}
+
 
 #disclaimer-button {
   height: 80%;
@@ -307,7 +367,7 @@ p{
 }
 
 #disclaimer-cross {
-  max-height: 2rem;
+  max-height: 4rem;
 }
 
 #disclaimer-text {
@@ -344,21 +404,16 @@ body{
   padding: 10px;
   border-radius: 5px;
   margin: 5px;
-  /* background-color: #53c316; */
+
 }
 
 nav{
-  /*   background-image: linear-gradient(to bottom right, rgb(55, 0, 157), #404eed); */
   background-color: var(--blockCr);
-  /* border-radius: 0px 0px 25px 25px ; */
-  /*   position: fixed; */
-  /*   top: 0;
-  right: 0; */
+
   width: 100%;
   height: 65px;
   display: flex;
   margin: 0px;
-  /* padding: 10px 20%; */
   transition: 0.25s;
   border-bottom: var(--borderCr) solid 2px; 
   background-color: var(--blockCr);
@@ -394,11 +449,11 @@ nav{
 }
 
 .nav-button{
-  color: rgb(255, 255, 255);
+  color: var(--navButtonTextCr);
 
   margin: 5px 5px;
   padding: 15px 7.5px;
-  width: 150px;
+  /* width: 150px;    CONSTANT NAVBAR BUTTON WIDTH*/
   height: 30%;
   display: flex;
   justify-content: center;
@@ -418,7 +473,6 @@ nav{
   background-color: var(--blockCr);
   border: var(--borderCr) solid 2.5px;
   border-radius: 10px;
-/*   padding: 2px; */
   margin: 10px;
   margin-bottom: 30px;
   display: flex;
@@ -427,14 +481,11 @@ nav{
   align-items: start;
   padding: 10px 15px;
   box-shadow: 6px 6px 5px rgb(0, 0, 0);
-  /* width: 100%; */
   width: calc(100% - 50px);
   overflow: hidden;
-/*   white-space: nowrap; */
   position: relative;
-/*   aspect-ratio: 3/1; */
-z-index: 1;
-transition: border 0.2s ease-in-out;
+  z-index: 1;
+  transition: border 0.2s ease-in-out;
 }
 
 .video-container:hover{
@@ -444,13 +495,12 @@ transition: border 0.2s ease-in-out;
 .video-container::after {
   content: '';
   position: absolute;
-  top: 0;
+  top: 15%;
   right: 0;
-  width: 50px; /* Width of the fade effect */
+  width: 50px;
   height: 100%;
   background: linear-gradient(to right, rgba(255, 255, 255, 0), var(--blockCr));
-  pointer-events: none; /* Allows interaction with the text underneath */
-  
+  pointer-events: none; 
 }
 
 
@@ -471,15 +521,8 @@ transition: border 0.2s ease-in-out;
 .thumbnail{
   border-radius: 10px;
   border: solid var(--borderCr) 1.5px;
-/*   aspect-ratio: 16 / 9; */
-/*   width: 50%;
-  height: 28%; */
-width: 537px;
-height: 302px;
-  
-
-  /* 537 */
-
+  width: 537px;
+  height: 302px;
   aspect-ratio: 16/9;
 }
 
@@ -489,9 +532,8 @@ height: 302px;
 }
 
 .video-description-container{
-  /* width: 50%; */
   position: relative;
-   width: 50%; 
+  width: 50%; 
   overflow: hidden;
   white-space: nowrap;
   font-size: 18px;
@@ -504,16 +546,12 @@ height: 302px;
   position: absolute;
   top: 0;
   right: 0;
-  width: 50px; /* Width of the fade effect */
+  width: 50px;
   height: 100%;
   background: linear-gradient(to right, rgba(255, 255, 255, 0), var(--blockCr));
-  pointer-events: none; /* Allows interaction with the text underneath */
+  pointer-events: none;
 }
 
-/* .video-heading-right, video-heading-left{
-  
-}
- */
 
 .video-heading-container{
   display: flex;
@@ -604,7 +642,7 @@ margin-bottom: 0px;
 font-size: 18px;
 }
 #invite{
-  background-image: linear-gradient(to bottom right, rgb(55, 0, 157), #404eed);
+  background-image: linear-gradient(to bottom right, #37009d, #404eed);
   border-radius: 10px;
   position: fixed;
   bottom: 0;
@@ -641,33 +679,6 @@ border: rgb(255, 255, 255) solid 2px;
 
 
 
-
-
-
-#info {
-  position: fixed;
-  display: none;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  padding: 10px;
-  background-color: rgb(255, 0, 0);
-  box-shadow: 0px 0px 10px rgba(0,0,0,1);
-  border-radius: 10px;
-  border: #000000 solid 2px;
-  color: #fff200;
-  flex-direction: column;
-  align-items: center;
-  width: 30%;
-  transform: width 0.5s ease-in-out;
-}
-
-#infoImg {
-  width: 50%;
-  border: #eaff00 solid 2px;
-  margin: 5px;
-
-}
 #infoText {
 margin: 0px;
 font-size: 200%;
@@ -741,7 +752,7 @@ justify-content: space-around;
 #loadingBar {
   width: 0%;
   height: 30px;
-  background-color: #4CAF50;
+  background-color: var(--loadingBarCr);
   background-color: var(--borderCr);
   background-image: linear-gradient(
       135deg,
@@ -805,7 +816,7 @@ justify-content: space-around;
   left: 28px;
   border-radius: 50%;
   border: 16px solid #000;
-  border-color: #43bfe8 transparent #43bfe8 transparent;
+  border-color: var(--spinnerInnerCr) transparent var(--spinnerInnerCr) transparent;
   animation: spinner 1s linear infinite;
 }
 
@@ -819,7 +830,7 @@ justify-content: space-around;
 }
 
 .spinner>div:nth-child(2) {
-  border-color: transparent #53c316 transparent #53c316
+  border-color: var(--spinnerOuterCr) transparent var(--spinnerOuterCr) transparent;
 }
 
 .spinner>div:nth-child(3) {
@@ -842,15 +853,15 @@ justify-content: space-around;
   height: 16px;
   top: -16px;
   left: 48px;
-  background: #43bfe8;
+  background: var(--spinnerOuterCr);
   border-radius: 50%;
-  box-shadow: 0 128px 0 0 #43bfe8;
+  box-shadow: 0 128px 0 0 var(--spinnerOuterCr);
 }
 
 .spinner>div:nth-child(3) div:after {
   left: -16px;
   top: 48px;
-  box-shadow: 128px 0 0 0 #43bfe8;
+  box-shadow: 128px 0 0 0 var(--spinnerOuterCr);
 }
 
 .spinner>div:nth-child(4) {
@@ -873,15 +884,15 @@ justify-content: space-around;
   height: 16px;
   top: -16px;
   left: 30px;
-  background: #53c316;
+  background: var(--spinnerInnerCr);
   border-radius: 50%;
-  box-shadow: 0 92px 0 0 #53c316;
+  box-shadow: 0 92px 0 0 var(--spinnerInnerCr);
 }
 
 .spinner>div:nth-child(4) div:after {
   left: -16px;
   top: 30px;
-  box-shadow: 92px 0 0 0 #53c316;
+  box-shadow: 92px 0 0 0 var(--spinnerInnerCr);
 }
 
 .spinnerContainer {
@@ -899,16 +910,12 @@ justify-content: space-around;
   transform: translateZ(0) scale(1);
   backface-visibility: hidden;
   transform-origin: 0 0;
-  /* see note above */
 }
 
 .spinner div {
   box-sizing: content-box;
 }
 
-/*
-Loading circle icon code:
-*/
 #loadContainer {
   visibility: hidden;
 }
@@ -935,7 +942,7 @@ Loading circle icon code:
   left: 28px;
   border-radius: 50%;
   border: 16px solid #000;
-  border-color: #43bfe8 transparent #43bfe8 transparent;
+  border-color: var(--spinnerOuterCr) transparent var(--spinnerOuterCr) transparent;
   animation: spinner 1s linear infinite;
 }
 
@@ -949,7 +956,7 @@ Loading circle icon code:
 }
 
 .spinner>div:nth-child(2) {
-  border-color: transparent #53c316 transparent #53c316
+  border-color: transparent var(--spinnerInnerCr) transparent var(--spinnerInnerCr)
 }
 
 .spinner>div:nth-child(3) {
@@ -972,15 +979,15 @@ Loading circle icon code:
   height: 16px;
   top: -16px;
   left: 48px;
-  background: #43bfe8;
+  background: var(--spinnerOuterCr);
   border-radius: 50%;
-  box-shadow: 0 128px 0 0 #43bfe8;
+  box-shadow: 0 128px 0 0 var(--spinnerOuterCr);
 }
 
 .spinner>div:nth-child(3) div:after {
   left: -16px;
   top: 48px;
-  box-shadow: 128px 0 0 0 #43bfe8;
+  box-shadow: 128px 0 0 0 var(--spinnerOuterCr);
 }
 
 .spinner>div:nth-child(4) {
@@ -1003,15 +1010,15 @@ Loading circle icon code:
   height: 16px;
   top: -16px;
   left: 30px;
-  background: #53c316;
+  background: var(--spinnerInnerCr);
   border-radius: 50%;
-  box-shadow: 0 92px 0 0 #53c316;
+  box-shadow: 0 92px 0 0 var(--spinnerInnerCr);
 }
 
 .spinner>div:nth-child(4) div:after {
   left: -16px;
   top: 30px;
-  box-shadow: 92px 0 0 0 #53c316;
+  box-shadow: 92px 0 0 0 var(--spinnerInnerCr);
 }
 
 .spinnerContainer {
@@ -1029,7 +1036,6 @@ Loading circle icon code:
   transform: translateZ(0) scale(1);
   backface-visibility: hidden;
   transform-origin: 0 0;
-  /* see note above */
 }
 
 .spinner div {
