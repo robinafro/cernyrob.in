@@ -5,8 +5,6 @@
   /* NewUI static colors backup:
     DO NOT DELETE
   
-  
-  
   --textCr: rgb(219, 221, 228);
   --bgCr: rgb(16, 18, 22);
   --highLightCr: #080131;
@@ -24,10 +22,8 @@
   */
 /*
 source backup --sourceColor: #221FC7;
-*/
+*//* source 221FC7 */
 
-  
-  /* source 221FC7 */
   /*Base color sorces for mixin into the theme colors*/
 --sourceColor: hsl(241, 73%, 45%);
 --headerCrSource: #D6D6D6;
@@ -63,16 +59,12 @@ source backup --sourceColor: #221FC7;
 --warniningTextCr: #ff0000;
 --navButtonTextCr: #ffffff;
 
-/*   --textCr: rgb(219, 221, 228); */
-/*   --bgCr: rgb(16, 18, 22);
-  --highLightCr: rgb(8, 1, 49);
-  --blockCr: rgb(4, 13, 64); */
-/*   --headerCr: rgb(101, 117, 210); */
-/*   --borderCr: rgb(52, 67, 151); */
-/*   --addButtonTriggerCr: rgb(73, 91, 193);  */
-/*   --spinnerOuterCr: rgb(10, 25, 111);
-  --spinnerInnerCr: rgb(21, 41, 153);
-  --loadingBarCr: rgb(0, 80, 255); */
+
+
+  /*NON color variables*/
+  --dropdownBorderRadius: 20px;
+  --mediumBorderSize: 2px;
+  --thickBorderSize: 2.5px;
 
 }
 
@@ -385,6 +377,144 @@ p{
 
 /*DO NOT TOUCH THIS OR IT REALLY FUCKS UP!*/
 
+
+/*Dropdown flex code*/
+
+.dropdown-flex{
+  display: flex;
+  flex-direction: row;
+}
+
+/*NAV subdropdown code*/
+
+.subdropdown {
+  position: relative;
+  display: inline-block;
+  }
+  
+  .subdropdown-content {
+  
+  display: none;
+  position: absolute;
+  background-color: var(--blockCr);
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  box-shadow: 8px 8px 10px -4px rgb(0, 0, 0);
+  z-index: 1;
+  border: solid var(--mediumBorderSize) var(--borderCr);
+  border-radius: 0px var(--dropdownBorderRadius) var(--dropdownBorderRadius) var(--dropdownBorderRadius);
+  color: var(--navButtonTextCr);
+  margin-left: 165px;
+  margin-top: -55px;
+
+  
+  }
+  
+  .subdropdown-content a {
+  
+    padding: 15px 0px 15px 15px;
+  width: 150px; 
+  height: 30%;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+  transition: 0.3s;
+  font-size: 18px;
+  cursor: pointer;
+  
+  
+  
+  color: rgb(255, 255, 255);
+  /* padding: 12px 16px; */
+  text-decoration: none;
+  display: flex;
+  }
+  
+  .first-subdropdown-item{
+    border-radius: 0px calc(var(--subdropdownBorderRadius) - var(--mediumBorderSize)) 0px 0px ;
+  }
+  
+  .last-subdropdown-item{
+    /* border-radius: 0px 0px (var(--subdropdownBorderRadius) - var(--mediumBorderSize)) (var(--subdropdownBorderRadius) - var(--mediumBorderSize)) ; */
+    border-bottom-left-radius: calc(var(--subdropdownBorderRadius) - var(--mediumBorderSize));
+    border-bottom-right-radius: calc(var(--subdropdownBorderRadius) - var(--mediumBorderSize));
+  }
+  
+  .subdropdown-content a:hover {background-color: var(--addButtonTriggerCr);}
+  
+  .subdropdown:hover .subdropdown-content {display: block;}
+  
+   .subdropdown:hover #subdropdown-head {background-color: var(--addButtonTriggerCr);}
+  
+
+/*NAV dropdown code*/
+
+
+.dropdown {
+position: relative;
+display: inline-block;
+}
+
+.dropdown-content {
+
+display: none;
+position: absolute;
+background-color: var(--blockCr);
+box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+box-shadow: 8px 8px 10px -4px rgb(0, 0, 0);
+z-index: 1;
+border: solid var(--mediumBorderSize) var(--borderCr);
+border-radius: 0px var(--dropdownBorderRadius) var(--dropdownBorderRadius) var(--dropdownBorderRadius);
+margin-top: -8px;
+color: var(--navButtonTextCr);
+margin-left: 5px;
+
+}
+
+.dropdown-content a {
+
+  padding: 15px 0px 15px 15px;
+width: 150px; 
+height: 30%;
+flex-direction: row;
+justify-content: start;
+align-items: center;
+transition: 0.3s;
+font-size: 18px;
+cursor: pointer;
+
+
+
+color: rgb(255, 255, 255);
+/* padding: 12px 16px; */
+text-decoration: none;
+display: flex;
+}
+
+.first-dropdown-item{
+  border-radius: 0px calc(var(--dropdownBorderRadius) - var(--mediumBorderSize)) 0px 0px ;
+}
+
+.last-dropdown-item{
+  /* border-radius: 0px 0px (var(--dropdownBorderRadius) - var(--mediumBorderSize)) (var(--dropdownBorderRadius) - var(--mediumBorderSize)) ; */
+  border-bottom-left-radius: calc(var(--dropdownBorderRadius) - var(--mediumBorderSize));
+  border-bottom-right-radius: calc(var(--dropdownBorderRadius) - var(--mediumBorderSize));
+}
+
+.dropdown-content a:hover {background-color: var(--addButtonTriggerCr);}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown:hover #dropdown-head {
+  
+  background-color: var(--borderCr);
+  padding-bottom: 12px;
+  box-shadow: 5px 5px 10px -4px rgb(0, 0, 0);
+}
+
+
+
+
+
 /* kafka-index code here */
 
 .centering-container{
@@ -418,7 +548,7 @@ nav{
   display: flex;
   margin: 0px;
   transition: 0.25s;
-  border-bottom: var(--borderCr) solid 2px; 
+  border-bottom: var(--borderCr) solid var(--mediumBorderSize); 
   background-color: var(--blockCr);
   z-index: 2;
   
@@ -474,7 +604,7 @@ nav{
 }
 .video-container{
   background-color: var(--blockCr);
-  border: var(--borderCr) solid 2.5px;
+  border: var(--borderCr) solid var(--thickBorderSize);
   border-radius: 10px;
   margin: 10px;
   margin-bottom: 30px;
@@ -488,11 +618,11 @@ nav{
   overflow: hidden;
   position: relative;
   z-index: 1;
-  transition: border 0.2s ease-in-out;
+  transition: background-color, border 0.2s ease-in-out;
 }
 
 .video-container:hover{
-  border: rgb(255, 255, 255) solid 2.5px; 
+  border: rgb(255, 255, 255) solid var(--thickBorderSize); 
 }
 
 .video-container::after {
@@ -586,7 +716,7 @@ p{
 
 .pair-container{
   background-color: var(--blockCr);
-  border: var(--borderCr) solid 2.5px;
+  border: var(--borderCr) solid var(--thickBorderSize);
   border-radius: 10px;
   padding: 2px;
   margin: 10px;
