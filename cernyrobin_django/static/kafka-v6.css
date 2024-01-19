@@ -347,6 +347,7 @@ p{
   display: flex;
   flex-direction: row;
   align-items: center;
+  z-index: 3;
 }
 
 .disclaimer-highlight {
@@ -357,17 +358,19 @@ p{
 
 
 #disclaimer-button {
-  height: 80%;
   aspect-ratio: 1;
   margin-left: 1rem;
   margin-right: 1rem;
   background: none;
-  color: inherit;
+  /* color: inherit; */
   border: none;
+  height: 20px;
+  width: 20px;
 }
 
 #disclaimer-cross {
-  max-height: 4rem;
+  height: 20px;
+  width: 20px;
 }
 
 #disclaimer-text {
@@ -695,10 +698,6 @@ justify-content: space-around;
   flex-direction: row;
 }
 
-#disclaimer-cross {
-  width: 5px;
-  height: 5px;
-}
 
 #rButtonCont{
   visibility: hidden;
