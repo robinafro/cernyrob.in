@@ -385,6 +385,12 @@ p{
   flex-direction: row;
 }
 
+.dropdown-image{
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}
+
 /*NAV subdropdown code*/
 
 .subdropdown {
