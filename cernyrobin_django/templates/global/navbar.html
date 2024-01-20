@@ -6,15 +6,14 @@
                 Home
             </a>
             <div class="dropdown">
-                <div class="dropbtn nav-button" id="dropdown-head">Kafka</div>
+                <a href="{% url 'kafka_index'%}" class="dropbtn nav-button" id="dropdown-head">Kafka</a>
                 <div class="dropdown-content">
                   <a class="first-dropdown-item plain-dropdown" href="#">Nejnovější video</a>
-                  <a class="plain-dropdown" href="#">Přidat video</a>
+                  <a class="plain-dropdown" href="{% url 'kafka_submit'%}">Přidat video</a>
                   <a class="plain-dropdown" href="#">video 1</a>
                   <a class="plain-dropdown" href="#">video 2</a>
                   <a class="plain-dropdown" href="#">video 3</a>
-                  <a class="plain-dropdown" href="#">Přidat video</a>
-                  <a class="last-dropdown-item plain-dropdown" href="#">Všechna videa</a>
+                  <a class="last-dropdown-item plain-dropdown" href="{%url 'kafka_index'%}">Všechna videa</a>
                 </div>
               </div>
               <a href="{% url 'clicker'%}" class="nav-button">
@@ -23,22 +22,22 @@
               <div class="dropdown">
                 <div class="dropbtn nav-button" id="dropdown-head">Unethical AI</div>
                 <div class="dropdown-content">
-                  <a class="first-dropdown-item plain-dropdown" href="#">Knihy scraper</a>
+                  <a class="first-dropdown-item plain-dropdown" target="_blank" href="https://github.com/Actulurus/knihy-scraper">Knihy scraper</a>
 
                     <div class="subdropdown">
-                        <a class="subdropbtn plain-dropdown" id="subdropdown-head" href="#">AI Influencers</a>
+                        <a class="subdropbtn plain-dropdown" id="subdropdown-head" target="_blank" href="https://linktr.ee/unethical.ai">AI Influencers</a>
                         <div class="subdropdown-content">
-                            <a class="first-dropdown-item dropdown-flex long-dropdwn-item" href="#"><img class="dropdown-image" src="/static/assets/olivia.png"><p>Oli Starling</p></a>
-                            <a class="dropdown-flex long-dropdwn-item" href="#"><img class="dropdown-image" src="/static/assets/olivia.png"><p>Sabrina Simmons</p></a>
-                            <a class="dropdown-flex long-dropdwn-item" href="#"><img class="dropdown-image" src="/static/assets/olivia.png"><p>Ema Gibson</p></a>
-                            <a class="dropdown-flex long-dropdwn-item" href="#"><img class="dropdown-image" src="/static/assets/olivia.png"><p>Sophia Volker</p></a>
-                            <a class="dropdown-flex long-dropdwn-item" href="#"><img class="dropdown-image" src="/static/assets/olivia.png"><p>Greta Cooked</p></a>
-                            <a class="last-dropdown-item dropdown-flex long-dropdwn-item" href="#"><img class="dropdown-image" src="/static/assets/olivia.png"><p>Martina Guárez</p></a>
+                            <a class="first-dropdown-item dropdown-flex long-dropdwn-item" target="_blank" href="https://www.instagram.com/oli.starling/"><img class="dropdown-image" src="/static/assets/olivia.png"><p>Oli Starling</p></a>
+                            <a class="dropdown-flex long-dropdwn-item" target="_blank" href="https://www.instagram.com/sabri.simmons/"><img class="dropdown-image" src="/static/assets/olivia.png"><p>Sabrina Simmons</p></a>
+                            <a class="dropdown-flex long-dropdwn-item" target="_blank" href="https://www.instagram.com/ema_gibs"><img class="dropdown-image" src="/static/assets/olivia.png"><p>Ema Gibson</p></a>
+                            <a class="dropdown-flex long-dropdwn-item" target="_blank" href="https://www.instagram.com/sophia.volker/"><img class="dropdown-image" src="/static/assets/olivia.png"><p>Sophia Volker</p></a>
+                            <a class="dropdown-flex long-dropdwn-item" target="_blank" href="https://www.instagram.com/martina.guarez/"><img class="dropdown-image" src="/static/assets/olivia.png"><p>Greta Cooked</p></a>
+                            <a class="last-dropdown-item dropdown-flex long-dropdwn-item" target="_blank" href="https://www.instagram.com/gretacooked/"><img class="dropdown-image" src="/static/assets/olivia.png"><p>Martina Guárez</p></a>
                         </div>
                         </div>
                         
 
-                  <a class="last-dropdown-item plain-dropdown" href="#">Discord Server</a>
+                  <a class="last-dropdown-item plain-dropdown" href="https://discord.gg/mQDSWR7ttB">Discord Server</a>
                 </div>
               </div>
               
@@ -61,10 +60,10 @@
             <a href="{% url 'account'%}"></a>
             {%else%}
             
-            <a href="{%url 'login'%}" class="nav-button" id="login-button">
+            <a href="{%url 'login'%}" class="nav-button" id="goto-login-button">
                 Přihlásit se
             </a>
-            <a href="{%url 'register'%}" class="nav-button" id="register-button">
+            <a href="{%url 'register'%}" class="nav-button" id="goto-register-button">
                 Vytvořit účet
             </a>
             {%endif%}
