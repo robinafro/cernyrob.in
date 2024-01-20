@@ -115,7 +115,7 @@ def get_all_to_be_displayed():
     
     return all_data
 
-def generate_answers(video_url, language, runbackground=False):
+def generate_answers(video_url, language, user=None, runbackground=False):
     video_url = video_url.strip(" ")
     
     response = {"code": 200, "message": "OK"}
@@ -248,10 +248,20 @@ def generate_answers(video_url, language, runbackground=False):
             if created:
                 kafka.timestamp=datetime.datetime.now().replace(tzinfo=None).timestamp()
             
-            kafka.answers = answers
-            kafka.transcript = transcript
-            kafka.language = language
-            kafka.video_info = json.loads(video_info)
+            if user is None:
+                kafka.answers = answers
+                kafka.transcript = transcript
+                kafka.language = language
+                kafka.video_info = json.loads(video_info)
+            else:
+                try:
+                    custom_answers = json.loads(kafka.custom_answers)
+                except:
+                    custom_answers = {}
+
+                custom_answers[user.username] = answers
+
+                kafka.custom_answers = json.dumps(custom_answers)
             
             kafka.save()
 

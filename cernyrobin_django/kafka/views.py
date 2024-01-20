@@ -8,15 +8,12 @@ import json
 import re
 
 def strip_yapping(s):
-
     for i, char in enumerate(s):
         if char.isdigit():
             return s[i:]
     return s
 
 def parse_numbered_text(text):
-
-
     segments = re.split(r'(\d+\.)', text)
 
     extracted_parts = []
@@ -178,5 +175,34 @@ def submit(request):
         video_url = "https://www.youtube.com/watch?v=" + video_id
 
         response = api_views.generate_answers(video_url, "cs-CZ", runbackground=True)
+
+        return response
+
+def renegerate(request):
+    if request.method == "POST":
+        #! Check if the user has a verified email
+        
+        video_url = request.POST.get("video_url")
+
+        if video_url is None:
+            return JsonResponse({"code": 400, "message": "Invalid video URL"})
+
+        video_id = None
+        if video_url.find("watch?v=") != -1:
+            video_id = video_url.split("v=")[1]
+        elif video_url.find("youtu.be/") != -1:
+            video_id = video_url.split("youtu.be/")[1]
+
+        if video_id is None:
+            return JsonResponse({"code": 400, "message": "Invalid video URL"})
+        
+        if video_id.find("&") != -1:
+            video_id = video_id.split("&")[0]
+        elif video_id.find("?") != -1:
+            video_id = video_id.split("?")[0]
+ 
+        video_url = "https://www.youtube.com/watch?v=" + video_id
+
+        response = api_views.generate_answers(video_url, "cs-CZ", runbackground=True, user=request.user)
 
         return response
