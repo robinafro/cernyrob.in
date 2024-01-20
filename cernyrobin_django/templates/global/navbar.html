@@ -28,11 +28,11 @@
                         <a class="subdropbtn plain-dropdown" id="subdropdown-head" target="_blank" href="https://linktr.ee/unethical.ai">AI Influencers</a>
                         <div class="subdropdown-content">
                             <a class="dropdown-flex long-dropdwn-item" target="_blank" href="https://www.instagram.com/oli.starling/"><img class="dropdown-image" src="/static/assets/olivia.png"><p>Oli Starling</p></a>
-                            <a class="dropdown-flex long-dropdwn-item" target="_blank" href="https://www.instagram.com/sabri.simmons/"><img class="dropdown-image" src="/static/assets/olivia.png"><p>Sabrina Simmons</p></a>
-                            <a class="dropdown-flex long-dropdwn-item" target="_blank" href="https://www.instagram.com/ema_gibs"><img class="dropdown-image" src="/static/assets/olivia.png"><p>Ema Gibson</p></a>
-                            <a class="dropdown-flex long-dropdwn-item" target="_blank" href="https://www.instagram.com/sophia.volker/"><img class="dropdown-image" src="/static/assets/olivia.png"><p>Sophia Volker</p></a>
-                            <a class="dropdown-flex long-dropdwn-item" target="_blank" href="https://www.instagram.com/martina.guarez/"><img class="dropdown-image" src="/static/assets/olivia.png"><p>Greta Cooked</p></a>
-                            <a class="dropdown-flex long-dropdwn-item" target="_blank" href="https://www.instagram.com/gretacooked/"><img class="dropdown-image" src="/static/assets/olivia.png"><p>Martina Guárez</p></a>
+                            <a class="dropdown-flex long-dropdwn-item" target="_blank" href="https://www.instagram.com/sabri.simmons/"><img class="dropdown-image" src="/static/assets/sabrina.png"><p>Sabrina Simmons</p></a>
+                            <a class="dropdown-flex long-dropdwn-item" target="_blank" href="https://www.instagram.com/ema_gibs"><img class="dropdown-image" src="/static/assets/ema.png"><p>Ema Gibson</p></a>
+                            <a class="dropdown-flex long-dropdwn-item" target="_blank" href="https://www.instagram.com/sophia.volker/"><img class="dropdown-image" src="/static/assets/sofia.png"><p>Sophia Volker</p></a>
+                            <a class="dropdown-flex long-dropdwn-item" target="_blank" href="https://www.instagram.com/martina.guarez/"><img class="dropdown-image" src="/static/assets/greta.png"><p>Greta Cooked</p></a>
+                            <a class="dropdown-flex long-dropdwn-item" target="_blank" href="https://www.instagram.com/gretacooked/"><img class="dropdown-image" src="/static/assets/martina.png"><p>Martina Guárez</p></a>
                         </div>
                         </div>
                         
@@ -55,8 +55,12 @@
             </p>
         </div>
         <div id="nav-right" class="nav-spacer">
-            {% if current_user.is_authenticated %}
-            <p>Neverifikovaný uživatel {{current_user}}</p>
+            {% if current_user.is_authenticated or True %}
+            <div class="user-info-container">
+                <p>Neverifikovaný uživatel </p>
+                <p> {{current_user}}</p>
+
+            </div>
             <a href="{%url 'account'%}" class="nav-button" id="goto-account-button">
                 Můj účet
             </a>

@@ -387,15 +387,15 @@ p{
 }
 
 .dropdown-image{
-  width: 20px;
-  height: 20px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
 }
 
-.long-dropdwn-item{
+/* .long-dropdwn-item{
   padding: 0px;
   padding-left: 15px;
-}
+} */
 
 /*NAV subdropdown code*/
 
@@ -546,6 +546,15 @@ display: flex;
   padding: 0px;
 
 }
+.user-info-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.user-info-container > p {
+  margin: 0px;
+}
 
 
 .nav-item{
@@ -666,7 +675,7 @@ nav{
     
 }
 
-.thumbnail{
+.kafka-thumbnail{
   border-radius: 10px;
   border: solid var(--borderCr) 1.5px;
   width: 537px;
@@ -936,7 +945,7 @@ justify-content: space-around;
 .long-dropdwn-item{
 /*   padding: 0px;
   padding-left: 15px; */
-  width: 185px;
+  width: 195px;
 
   padding: 12px 0px 12px 12px;  
   flex-direction: row;
@@ -955,6 +964,10 @@ justify-content: space-around;
 .long-dropdwn-item > p{
   margin: 0px 0px 0px 10px;
 }
+
+
+
+
 
 
 
@@ -1222,11 +1235,262 @@ justify-content: space-around;
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
 ##############################################################################################################
 ##############################################################################################################
 ##############################################################################################################
-                                        OLD universal2.css
+                                        OLD style.css
 ##############################################################################################################
 ##############################################################################################################
 ##############################################################################################################
@@ -1665,7 +1929,7 @@ height: 32%;
   font-size: 4vh;
   text-align: right;
 }
-
+/* 
 #invite{
   background-image: linear-gradient(to bottom right, rgb(55, 0, 157), #404eed);
   border-radius: 10px;
@@ -1694,3 +1958,4 @@ border: rgb(255, 255, 255) solid 2px;
   margin: 5px;
   margin-left: 10px;
 }
+ */
