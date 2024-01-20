@@ -6498,9 +6498,9 @@ var rtrimCSS = new RegExp(
 			return;
 		}
 
-		container.universal.cssText = "position:absolute;left:-11111px;width:60px;" +
+		container.universal2.cssText = "position:absolute;left:-11111px;width:60px;" +
 			"margin-top:1px;padding:0;border:0";
-		div.universal.cssText =
+		div.universal2.cssText =
 			"position:relative;display:block;box-sizing:border-box;overflow:scroll;" +
 			"margin:auto;border:1px;padding:1px;" +
 			"width:60%;top:1%";
@@ -6593,8 +6593,8 @@ var rtrimCSS = new RegExp(
 				tr = document.createElement( "tr" );
 				trChild = document.createElement( "div" );
 
-				table.universal.cssText = "position:absolute;left:-11111px;border-collapse:separate";
-				tr.universal.cssText = "border:1px solid";
+				table.universal2.cssText = "position:absolute;left:-11111px;border-collapse:separate";
+				tr.universal2.cssText = "border:1px solid";
 
 				// Support: Chrome 86+
 				// Height set through cssText does not get applied.
