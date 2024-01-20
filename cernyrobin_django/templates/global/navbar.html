@@ -37,7 +37,7 @@
                         </div>
                         
 
-                  <a class="last-dropdown-item plain-dropdown" href="https://discord.gg/mQDSWR7ttB">Discord Server</a>
+                  <a class="plain-dropdown" target="_blank" href="https://discord.gg/mQDSWR7ttB">Discord Server</a>
                 </div>
               </div>
               
@@ -50,13 +50,16 @@
 
         <div class="nav-spacer" id="nav-center">
             <p>
-                
+
 
             </p>
         </div>
         <div id="nav-right" class="nav-spacer">
             {% if logged_in %}
-            {{current_user}}
+            <p>Neverifikovaný uživatel {{current_user}}</p>
+            <a href="{%url 'account'%}" class="nav-button" id="goto-account-button">
+                Můj účet
+            </a>
             <a href="{% url 'account'%}"></a>
             {%else%}
             
