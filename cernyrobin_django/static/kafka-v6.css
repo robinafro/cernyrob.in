@@ -930,8 +930,26 @@ justify-content: space-around;
 
 
 .long-dropdwn-item{
-  padding: 0px;
-  padding-left: 15px;
+/*   padding: 0px;
+  padding-left: 15px; */
+  width: 185px;
+
+  padding: 12px 0px 12px 12px;  
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+  transition: 0.3s;
+  font-size: 18px;
+  cursor: pointer;
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+  display: flex;
+  height: 29px;
+
+}
+
+.long-dropdwn-item > p{
+  margin: 0px 0px 0px 10px;
 }
 
 
