@@ -1,5 +1,5 @@
 {
-    "temp_dir": ".\\temp",
-    "output_dir": ".\\output",
+    "temp_dir": "temp",
+    "output_dir": "output",
     "default_lang": "en-US"
 }
