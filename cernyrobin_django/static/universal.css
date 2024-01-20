@@ -441,15 +441,14 @@ p{
   display: flex;
   }
   
-  .first-subdropdown-item{
+/*   .first-subdropdown-item{
     border-radius: 0px calc(var(--subdropdownBorderRadius) - var(--mediumBorderSize)) 0px 0px ;
   }
   
   .last-subdropdown-item{
-    /* border-radius: 0px 0px (var(--subdropdownBorderRadius) - var(--mediumBorderSize)) (var(--subdropdownBorderRadius) - var(--mediumBorderSize)) ; */
     border-bottom-left-radius: calc(var(--subdropdownBorderRadius) - var(--mediumBorderSize));
     border-bottom-right-radius: calc(var(--subdropdownBorderRadius) - var(--mediumBorderSize));
-  }
+  } */
   
   .subdropdown-content a:hover {background-color: var(--addButtonTriggerCr);}
   
@@ -502,15 +501,23 @@ text-decoration: none;
 display: flex;
 }
 
-.first-dropdown-item{
+
+
+.dropdown > div > a:first-child{
   border-radius: 0px calc(var(--dropdownBorderRadius) - var(--mediumBorderSize)) 0px 0px ;
 }
-
-.last-dropdown-item{
-  /* border-radius: 0px 0px (var(--dropdownBorderRadius) - var(--mediumBorderSize)) (var(--dropdownBorderRadius) - var(--mediumBorderSize)) ; */
+.subdropdown > div > a:first-child{
+  border-radius: 0px calc(var(--dropdownBorderRadius) - var(--mediumBorderSize)) 0px 0px ;
+}
+.dropdown > div > a:last-child{
   border-bottom-left-radius: calc(var(--dropdownBorderRadius) - var(--mediumBorderSize));
   border-bottom-right-radius: calc(var(--dropdownBorderRadius) - var(--mediumBorderSize));
 }
+.subdropdown > div > a:last-child{
+  border-bottom-left-radius: calc(var(--dropdownBorderRadius) - var(--mediumBorderSize));
+  border-bottom-right-radius: calc(var(--dropdownBorderRadius) - var(--mediumBorderSize));
+}
+
 
 .dropdown-content a:hover {background-color: var(--addButtonTriggerCr);}
 
