@@ -53,11 +53,14 @@ def login_page(request):
 
     return render(request, "cernyrobin/login.html", context)
 def account(request):
-    context = {
-        "logged_in" : request.user.is_authenticated,
-        "current_user" : request.user
-    }
-    return render(request, "cernyrobin/account.html", context)
+    if request.user.is_authenticated:
+
+        context = {
+
+            "current_user" : request.user
+        }
+        return render(request, "cernyrobin/account.html", context)
+    return redirect("login")
 
 # API
 verification_codes = {}
