@@ -31,19 +31,25 @@ def go_back(request):
 
 
 def home(request):
-    context = {}
+    context = {
+                "current_user" : request.user,
+    }
 
     return render(request, "cernyrobin/home.html", context)
 
 
 def clicker_page(request):
-    context = {}
+    context = {
+        "current_user" : request.user,
+    }
 
     return render(request, "cernyrobin/clicker.html", context)
 
 
 def login_page(request):
-    context = {}
+    context = {
+        "current_user" : request.user,
+    }
 
     return render(request, "cernyrobin/login.html", context)
 def account(request):
