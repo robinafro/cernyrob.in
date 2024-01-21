@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <form method="POST" action="">
+            {%csrf_token%}
+    
+          <!-- {{form.as_p}} you can do this, but it has a lot of bloat, so the below is debloated-->  
+    
+    
+    
+    
+    
+          <p>
+            <label for="id_username">Username:</label>
+            <input type="text" name="username" maxlength="150" autocapitalize="none" autocomplete="username" autofocus required id="id_username">
+            
+              <span class="helptext"> 150 characters or fewer. Letters, digits and @/./+/-/_ only.</span>
+            
+            
+          </p>
+        
+          
+          <p>
+            <label for="id_password1">Password:</label>
+            
+            <input type="password" name="password1" autocomplete="new-password" required id="id_password1">
+            <br>
+            <label for="id_password2">Password confirmation:</label>
+            <input type="password" name="password2" autocomplete="new-password" required id="id_password2">
+            
+              <span class="helptext"><ul><li>Your password can’t be too similar to your other personal information.</li><li>Your password must contain at least 8 characters.</li><li>Your password can’t be a commonly used password.</li><li>Your password can’t be entirely numeric.</li></ul></span>
+            
+            
+          </p>
+        
+          
+          <p>
+          
+            
+           
+    
+    
+    
+    
+    
+    
+            <input type="submit" value="Register">
+    
+    
+    
+    
+        </form>
+        <a href="{% url 'login'%}">Already have an account?</a>
+            
+    </div>
+</body>
+</html>

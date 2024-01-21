@@ -201,3 +201,43 @@ def get_all_data(request):
         return JsonResponse(data=all_users_data, safe=False)
     else:
         return HttpResponse("405 Method Not Allowed")
+def new_login(request):
+    page = "login"
+    if request.user.is_authenticated:
+        return redirect("home")
+    else:
+        if request.method == "POST":
+            username = request.POST.get("username").lower()
+            password = request.POST.get("password")
+            try:
+                user = User.objects.get(username=username)
+
+            except:
+                return  HttpResponse("username not found")
+
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect("home")
+            else:
+                messages.error(request, "Password wrong")
+
+    context = {
+        "page": page,
+    }
+    return render(request, "cernyrobin/new_login.html", context)
+def new_register(request):
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.username = user.username.lower()
+            user.save()
+            login(request, user)
+            return redirect("home")
+        else:
+            messages.error(request, "error happened")
+    page = "register"
+    form = UserCreationForm()
+    context = {"page": page, "form": form}
+    return render(request, "cernyrobin/new_register.html", context)
