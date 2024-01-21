@@ -55,7 +55,7 @@
             </p>
         </div>
         <div id="nav-right" class="nav-spacer">
-            {% if current_user.is_authenticated or True %}
+            {% if current_user.is_authenticated %}
             <div class="user-info-container">
                 <p>Neverifikovaný uživatel </p>
                 <p> {{current_user}}</p>
