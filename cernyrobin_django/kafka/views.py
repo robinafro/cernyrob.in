@@ -178,7 +178,7 @@ def submit(request):
 
         return response
 
-def renegerate(request):
+def regenerate(request):
     if request.method == "POST":
         #! Check if the user has a verified email
         

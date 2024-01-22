@@ -378,6 +378,10 @@ p{
 
 /*DO NOT TOUCH THIS OR IT REALLY FUCKS UP!*/
 
+/*Verify page code*/
+.contrast-heading{
+  color: var(--textCr);
+}
 
 /*Account page code*/
 #username-heading{
