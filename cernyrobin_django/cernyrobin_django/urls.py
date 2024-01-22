@@ -37,6 +37,7 @@ urlpatterns = [
     path("account/", cernyrobin.account, name="account"),
     path("new_login/", cernyrobin.new_login, name="new_login"),
     path("new_register/", cernyrobin.new_register, name="new_register"),
+    path("verify_account/", cernyrobin.verify_account_page, name="verify_page"),
 
     path("clicker/", cernyrobin.clicker_page, name="clicker"),
     path("clicker/add_click", cernyrobin.add_click, name="add_click"),

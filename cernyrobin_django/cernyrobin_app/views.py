@@ -250,3 +250,7 @@ def new_register(request):
     form = UserCreationForm()
     context = {"page": page, "form": form}
     return render(request, "cernyrobin/new_register.html", context)
+
+def verify_account_page(request):
+    context = {}
+    return render(request, "cernyrobin/verify-page.html", context)
