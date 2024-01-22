@@ -1,0 +1,51 @@
+/* 
+    openStatus = true
+    function changeOpenStatus() {
+        var article = document.getElementsByClassName("answer-text")
+        if (article.style.maxHeight){
+          article.style.maxHeight = null;
+        } else {
+          article.style.maxHeight = article.scrollHeight + "px";
+        } 
+      }
+    
+ */
+
+  console.log("loaded")
+
+
+  function changeOpenStatusE() {
+    console.log(document.getElementById("email-text"))
+    var article = document.getElementById("email-text");
+
+
+      if (article.style.maxHeight) {
+        article.style.maxHeight = null;
+/*         article.style.margin = "0px 0px -5.5px 0px" */
+      } else {
+        article.style.maxHeight = article.scrollHeight + "px";
+/*         article.style.margin = "3px 3px 3px 3px" */
+      }
+    }
+  
+
+  function changeOpenStatusB() {
+    console.log(document.getElementById("benefits-text"))
+    var article = document.getElementById("benefits-text");
+
+      if (article.style.maxHeight) {
+        article.style.maxHeight = null;
+/*         article.style.margin = "0px 0px -5.5px 0px" */
+      } else {
+        article.style.maxHeight = article.scrollHeight + "px";
+/*         article.style.margin = "3px 3px 3px 3px" */
+      }
+    }
+  
+
+
+
+
+  document.addEventListener("DOMContentLoaded", function () {
+    changeOpenStatusB()
+  });
