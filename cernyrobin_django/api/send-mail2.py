@@ -3,6 +3,7 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import random
 import string
+import os
 
 def generate_verify_code(length):
     letters = string.ascii_letters
@@ -49,6 +50,6 @@ def verify_mail(receiver_email, username, password):
         status["error_message"] = str(e)
         return status
 
-
-response = verify_mail(input("receiver_email "), input("cernyrobin_username "), input("password "),)
+password = os.getenv("SMTP_AUTH")
+response = verify_mail(input("receiver_email "), input("cernyrobin_username "), password)
 print(response)
