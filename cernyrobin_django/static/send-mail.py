@@ -7,16 +7,26 @@ import string
 
 
 
-def verify_mail(receiver_email, username, body, smtp_server, smtp_port, password):
+def generate_verify_code(length):
+    letters = string.ascii_letters
+    return ''.join(random.choice(letters) for i in range(length))
+
+
+def verify_mail(receiver_email, username, password):
     #Static info:
     login = "verify@cernyrob.in"
     smtp_server = "smtp.seznam.cz"
     smtp_port = 465
     sender_email = login
     subject = "Ověř svůj mail mail"
-    body = f"""Klikni na tento odkaz, pokud chceš ověřit svůj účet {username}
-            Pokud si o potvrzení nežádal, můžeš tenhle mail ignorovat."""
-    verify_url = "https://cernyrob.in/verify_email"
+    body_template = f"""Klikni na tento odkaz, pokud chceš ověřit svůj účet {username}<br>
+            Pokud si o potvrzení nežádal, můžeš tenhle mail ignorovat.<br>"""
+    base_verify_url = "https://cernyrob.in/verify_email/"
+
+    verification_code = generate_verify_code(16)
+
+    whole_verify_url = base_verify_url + "?code=" + verification_code
+    body = body_template + whole_verify_url
     
     status = { 
         "sent_successfully" : False,
