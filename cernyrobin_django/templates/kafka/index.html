@@ -37,7 +37,7 @@
             <div id="page-container">
                 {% for object in videos %}
 
-            <a class="width-100" href="https://cernyrob.in/kafka/view/?id={{object.video_id}}">
+            <a class="width-100" href="/kafka/view/?id={{object.video_id}}">
 
                 <div class="video-container" >
                     <div class="video-heading-container">
@@ -51,9 +51,7 @@
                         </div>
                     </div>
                     <div class="video-content-container">
-                        <img class="kafka-thumbnail" src="https://img.youtube.com/vi/{{ object.video_id }}/maxresdefault.jpg">
-                        <!-- <img class="thumbnail" src="https://img.youtube.com/vi/{{ object.video_id }}/mqdefault.jpg"> -->
-                        <p class="video-description-container">
+                        <img class="kafka-thumbnail" src="https://img.youtube.com/vi/{{ object.video_id }}/maxresdefault.jpg">                        <p class="video-description-container">
                             {% for question in object.questions %}
                             {{question}}
                             <br>
