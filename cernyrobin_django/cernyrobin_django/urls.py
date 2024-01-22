@@ -50,6 +50,7 @@ urlpatterns = [
     path("kafka/", kafka.index, name="kafka_index"),
     path("kafka/view/", kafka.view, name="kafka_view"),
     path("kafka/submit/", kafka.submit, name="kafka_submit"),
+    path("kafka/regenerate/", kafka.regenerate, name="kafka_regenerate"),
 
     # path("miskovsky/", miskovsky.index, name="miskovsky_index"),
     # path("miskovsky/submit/", miskovsky.submit, name="miskovsky_submit"),
