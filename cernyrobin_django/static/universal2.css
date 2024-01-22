@@ -379,6 +379,18 @@ p{
 /*DO NOT TOUCH THIS OR IT REALLY FUCKS UP!*/
 
 
+/*Account page code*/
+#username-heading{
+  color: var(--textCr);
+
+}
+#member-since{
+  color: var(--textCr);
+}
+#account-info{
+  color: var(--textCr);
+}
+
 /*Dropdown flex code*/
 
 .dropdown-flex{

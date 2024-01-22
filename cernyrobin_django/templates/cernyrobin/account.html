@@ -6,8 +6,9 @@
     <link rel="stylesheet" href="/static/universal2.css">
 </head>
 <body>
-    <h1>{{current_user}}</h1>
-    <p>Člen od {{current_user.date_joined}}</p>
+    {% include "navbar.html"%}
+    <h1 id="username-heading">{{current_user}}</h1>
+    <p id="meber-since">Už jsi člen {{current_user.date_joined|timesince}}</p>
     {%if current_user.is_verified%}
     Jsi verifikovaný člen cernyrob.in, můžete využívat všechny služby naplno!
     {%else%}
