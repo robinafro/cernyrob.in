@@ -6,7 +6,10 @@
     <link rel="stylesheet" href="/static/universal2.css">
 </head>
 <body>
-    {% include "navbar.html"%}
+
+    {% include "global/navbar.html"%}
+
+    
     <h1 id="username-heading">{{current_user}}</h1>
     <p id="meber-since">Už jsi člen {{current_user.date_joined|timesince}}</p>
     {%if current_user.is_verified%}
