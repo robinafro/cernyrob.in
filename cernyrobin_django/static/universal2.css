@@ -376,10 +376,18 @@ p{
   display: flex;
 }
 
-/*DO NOT TOUCH THIS OR IT REALLY FUCKS UP!*/
+/*DO NOT TOUCH THIS OR IT REALLY FUCKS UP!###################################################################*/
 
 /*Verify page code*/
 .contrast-heading{
+  color: var(--textCr);
+}
+
+.centered-text{
+  text-align: center;
+}
+
+.contrast-text{
   color: var(--textCr);
 }
 
