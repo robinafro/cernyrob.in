@@ -28,7 +28,7 @@ def verify_mail(receiver_email, username, password):
     status["verifier_string"] = verification_code
 
     whole_verify_url = base_verify_url + "?code=" + verification_code
-    body = body_template + f"""<a href="{whole_verify_url}">{whole_verify_url}</auWWx30fLFsnvFBCD0sVcYLgKFYqSc5JNYdyGHGwHgfr0hzzdv>"""
+    body = body_template + f"""<a href="{whole_verify_url}">{whole_verify_url}</a>"""
 
 
     msg = MIMEMultipart()
