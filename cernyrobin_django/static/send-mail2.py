@@ -19,17 +19,17 @@ def verify_mail(receiver_email, username, password):
             Pokud si o potvrzení nežádal, můžeš tento email ignorovat.<br>"""
     base_verify_url = "https://cernyrob.in/verify_email/"
 
-    verification_code= generate_verify_code(16)
-    status[verification_code] = verification_code
-
-    whole_verify_url = base_verify_url + "?code=" + verification_code
-    body = body_template + f"""<a href="{whole_verify_url}">{whole_verify_url}</auWWx30fLFsnvFBCD0sVcYLgKFYqSc5JNYdyGHGwHgfr0hzzdv>"""
-
     status = {
         "sent_successfully": False,
         "error_message": "",
         "verifier_string": ""
     }
+    verification_code= generate_verify_code(16)
+    status["verifier_string"] = verification_code
+
+    whole_verify_url = base_verify_url + "?code=" + verification_code
+    body = body_template + f"""<a href="{whole_verify_url}">{whole_verify_url}</auWWx30fLFsnvFBCD0sVcYLgKFYqSc5JNYdyGHGwHgfr0hzzdv>"""
+
 
     msg = MIMEMultipart()
     msg['From'] = sender_email
