@@ -89,7 +89,7 @@ def verify_submit(request):
         #! Send email with code
 
 def verify_code(request):
-    if request.method == "GET":
+    if request.method == "GET" and request.user.is_authenticated:
         code = request.GET.get("code")
 
         if not code:

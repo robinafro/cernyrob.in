@@ -1,2 +1,2 @@
 # cernyrob.in
-a portfolio website used to practice my coding skills
+a portfolio website used to practice my coding skills <-- outdated af description
