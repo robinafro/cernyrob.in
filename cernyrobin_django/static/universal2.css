@@ -78,6 +78,18 @@ body {
   color: var(--warniningTextCr);
 }
 
+#content-wrapper{
+
+/*   padding: 0% 20% 0% 20%;
+ */  padding-left: 20%;
+  padding-right: 20%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: fit-content;
+  min-height: 100vh;
+}
+
 a {
   text-decoration: none;
 }
@@ -326,9 +338,6 @@ p{
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.5s cubic-bezier(.77,0,.18,1);
-  /* transition: max-height 0.3s ease-in-out; */
-/*   transition: max-height 0.3s cubic-bezier(.87,.02,.13,.97); */
-/*   transition: max-height 0.3s cubic-bezier(1,.15,.4,.56) */
 }
 
 #disclaimer-footer {
@@ -383,6 +392,87 @@ p{
 }
 
 /*DO NOT TOUCH THIS OR IT REALLY FUCKS UP!###################################################################*/
+
+/*Redirect page code*/
+#animation-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 90vw;
+}
+
+.animation-icon{
+  width: 100px;
+  height: 100px;
+}
+
+#flying-area{
+  width: 100%;
+}
+
+
+
+#flying-file {
+  position: absolute;
+  width: 50px; /* Adjust as needed */
+  height: auto; /* Maintain aspect ratio */
+  animation: flyAcross 2s cubic-bezier(.77,0,.18,1) infinite
+}
+
+/* @keyframes flyAcross { 
+  0%, 100% {
+      left: 0;
+      animation-timing-function: ease-out;
+  }
+  50% {
+      left: calc(100% - 50px); 
+      animation-timing-function: ease-in;
+  }
+}   version1*/
+
+
+
+/* @keyframes flyAcross {
+  0%, 100% {
+      left: -50px; 
+  }
+  50% {
+      left: 100%; 
+  }
+}
+ */
+
+
+@keyframes flyAcross {
+  0%, 100% {
+      left: 20%; /* Start slightly off-screen (adjust to your image width) */
+  }
+  50% {
+      left: 80%; /* Move completely across the container */
+  }
+}
+
+
+#icon-1 {
+  animation: changeFill 2s infinite; /* Total duration is 2s */
+  transition: fill 0.1s cubic-bezier(.77,0,.18,1);
+  animation-delay: 0.25s;
+ /*  animation-fill-mode: forwards; */ /* Makes sure the new color sticks after the animation */
+}
+
+
+
+@keyframes changeFill {
+  0%, 80% { fill: blue; }
+  90% { fill: red; }
+  100% { fill: blue; }
+}
+
+
+
+
+
 
 /*Verify page code*/
 

@@ -301,3 +301,9 @@ def verify_account_page(request):
     
 def get_captcha_image(request):
     return HttpResponse(user_captcha_images[request.user.username], content_type="image/png")
+
+def simulate_redirect(request):
+    context = {
+        "target_url" : "https://status.stuckinvim.com"
+    }
+    return render(request, "global/redirecting.html", context)

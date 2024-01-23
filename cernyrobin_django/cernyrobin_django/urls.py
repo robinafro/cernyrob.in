@@ -41,6 +41,9 @@ urlpatterns = [
     path("verify/", cernyrobin.verify_code, name="verify_code"),
     path("captchaimg/", cernyrobin.get_captcha_image, name="captchaimg"),
 
+    # vvv Remove in production
+    path("simulate_redirect/", cernyrobin.simulate_redirect,name="simulate_redirect"),
+
     path("clicker/", cernyrobin.clicker_page, name="clicker"),
     path("clicker/add_click", cernyrobin.add_click, name="add_click"),
     path("get_user_data/", cernyrobin.get_user_data, name="get_user_data"),
