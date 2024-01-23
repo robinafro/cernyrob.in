@@ -251,6 +251,8 @@ def verify_submit(request):
         send_mail.verify_mail(email, request.user.username, code)
 
         return HttpResponse("200 OK")
+    else:
+        return HttpResponse("Invalid captcha")
 
 def verify_code(request):
     if request.method == "GET" and request.user.is_authenticated:
@@ -260,7 +262,7 @@ def verify_code(request):
             return HttpResponse("400 Bad Request")
         
         if code not in verification_codes:
-            return HttpResponse("400 Bad Request")
+            return HttpResponse("Invalid code")
         
         username = verification_codes[code]
 
@@ -274,6 +276,10 @@ def verify_code(request):
         del verification_codes[code]
 
         return HttpResponse("200 OK")
+    elif not request.user.is_authenticated:
+        return HttpResponse("401 Unauthorized")
+    
+    return HttpResponse("What?")
 
 def verify_account_page(request):
     context = {
