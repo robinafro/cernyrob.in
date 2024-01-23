@@ -39,7 +39,7 @@ urlpatterns = [
     path("new_register/", cernyrobin.new_register, name="new_register"),
     path("verify_account/", cernyrobin.verify_account_page, name="verify_page"),
     path("verify/", cernyrobin.verify_code, name="verify_code"),
-    path("captchaimg/", cernyrobin.get_captcha_image, name="get_captcha_image"),
+    path("captchaimg/", cernyrobin.get_captcha_image, name="captchaimg"),
 
     path("clicker/", cernyrobin.clicker_page, name="clicker"),
     path("clicker/add_click", cernyrobin.add_click, name="add_click"),
