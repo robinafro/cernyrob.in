@@ -49,7 +49,3 @@ def verify_mail(receiver_email, username, verify_code, password=os.getenv("SMTP_
     except Exception as e:
         status["error_message"] = str(e)
         return status
-
-password = os.getenv("SMTP_AUTH")
-response = verify_mail(input("receiver_email "), input("cernyrobin_username "), password)
-print(response)
