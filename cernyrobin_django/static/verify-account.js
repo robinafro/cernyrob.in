@@ -44,6 +44,7 @@
   
 function showVerifyContainer(){
   document.getElementById("tldr-button").style.display = "none"
+  document.getElementById("goto-verify").style.display = "none"
   document.getElementById("verification-container").style.display = "block"
   document.getElementById("verify-form").scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
 
