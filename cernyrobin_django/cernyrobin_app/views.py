@@ -15,9 +15,9 @@ from django.contrib.auth import authenticate, login, logout
 from django.core.serializers import serialize
 from django.db.models import IntegerField
 from django.db.models.fields.related import ForeignKey
+from api import captcha
 
-import json, re, shortuuid
-
+import json, re, shortuuid, datetime
 
 # Utils
 def go_back(request):
@@ -63,54 +63,6 @@ def account(request):
     return redirect("login")
 
 # API
-verification_codes = {}
-
-def verify_submit(request):
-    if request.method == "POST":
-        if not request.user.is_authenticated:
-            return HttpResponse("401 Unauthorized")
-        
-        email = request.POST.get("email")
-
-        #! Check if the email is already verified (not just owned)
-
-        if not email:
-            return HttpResponse("400 Bad Request")
-        
-        if not re.match(r"\w+\.[\w]{2,4}\.[\d]{4}@skola\.ssps\.cz", email): # There might be an issue with the escape characters near the dots. Look into this first if the verification seems to be broken.
-            return HttpResponse("400 Bad Request")
-        
-        request.user.email = email
-
-        code = shortuuid.uuid()
-        
-        verification_codes[code] = request.user.username
-
-        #! Send email with code
-
-def verify_code(request):
-    if request.method == "GET" and request.user.is_authenticated:
-        code = request.GET.get("code")
-
-        if not code:
-            return HttpResponse("400 Bad Request")
-        
-        if code not in verification_codes:
-            return HttpResponse("400 Bad Request")
-        
-        username = verification_codes[code]
-
-        if request.user.username != username:
-            return HttpResponse("401 Unauthorized")
-
-        request.user.email_verified = True
-
-        request.user.save()
-
-        del verification_codes[code]
-
-        return HttpResponse("200 OK")
-
 def login_submit(request):
     if request.method == "POST":
         username = request.POST.get("username")
@@ -251,8 +203,91 @@ def new_register(request):
     context = {"page": page, "form": form}
     return render(request, "cernyrobin/new_register.html", context)
 
+user_captchas = {}
+user_captcha_images = {}
+verification_codes = {}
+
+def get_current_school_year():
+    now = datetime.datetime.now()
+
+    if now.month >= 9:
+        return now.year
+    else:
+        return now.year - 1
+
+def verify_submit(request):
+    if not request.user.is_authenticated:
+        return HttpResponse("401 Unauthorized")
+    
+    entered_captcha = request.POST.get("captcha")
+
+    if entered_captcha.strip() == user_captchas[request.user.username]:
+        password = request.POST.get("password")
+
+        if not request.user.check_password(password):
+            return HttpResponse("401 Unauthorized")
+        
+        email = request.POST.get("email")
+
+        if not email:
+            return HttpResponse("400 Bad Request")
+        
+        if not re.match(r"\w+\.[\w]{2,4}\." + str(get_current_school_year()) + "@skola\.ssps\.cz", email): # There might be an issue with the escape characters near the dots. Look into this first if the verification seems to be broken.
+            return HttpResponse("400 Bad Request")
+    
+        #! Check if the email is already being used
+        
+        request.user.email = email
+
+        code = shortuuid.uuid()
+        
+        verification_codes[code] = request.user.username
+
+        user_captchas.pop(request.user.username)
+        user_captcha_images.pop(request.user.username)
+
+        #! Send email with code
+
+def verify_code(request):
+    if request.method == "GET" and request.user.is_authenticated:
+        code = request.GET.get("code")
+
+        if not code:
+            return HttpResponse("400 Bad Request")
+        
+        if code not in verification_codes:
+            return HttpResponse("400 Bad Request")
+        
+        username = verification_codes[code]
+
+        if request.user.username != username:
+            return HttpResponse("401 Unauthorized")
+
+        request.user.email_verified = True
+
+        request.user.save()
+
+        del verification_codes[code]
+
+        return HttpResponse("200 OK")
+
 def verify_account_page(request):
     context = {
         "current_user" : request.user
     }
-    return render(request, "cernyrobin/verify-page.html", context)
+
+    if request.method == 'POST':
+        if not request.user.is_authenticated:
+            return HttpResponse("401 Unauthorized")
+        
+        return verify_submit(request)
+    else:
+        image, correct = captcha.gen_captcha()
+
+        user_captchas[request.user.username] = correct
+        user_captcha_images[request.user.username] = image
+
+        return render(request, "cernyrobin/verify-page.html", context)
+    
+def get_captcha_image(request):
+    return HttpResponse(user_captcha_images[request.user.username], content_type="image/png")

@@ -1,6 +1,7 @@
 django
 whitenoise
 
+captcha
 pytube
 yt-dlp
 moviepy
