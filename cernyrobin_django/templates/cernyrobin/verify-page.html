@@ -120,9 +120,15 @@
     <form id="verify-form" action="" method="POST">
         <h2 class="contrast-heading">Verifikace</h2>
         <p id="verify-text" class="contrast-text">Ověřuješ si svůj účet <b>{{current_user}}</b></p>
-        
+        {%csrf_token%}
+
         <label class="contrast-text margin-label" for="email-field">Zadej email:</label>
         <input type="text" name="email" id="email-field">
+
+        <label for="kafca-field"></label>
+        <input name="captcha" id="kafca-field" type="text">
+
+        <img src="{% url 'captchaimg'%}" alt="">
 
         <label class="contrast-text margin-label" for="password-field">Pro potvrzení zadejte heslo:</label>
         <input type="password" name="password" id="password-field">
