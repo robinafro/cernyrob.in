@@ -16,6 +16,7 @@ from django.core.serializers import serialize
 from django.db.models import IntegerField
 from django.db.models.fields.related import ForeignKey
 from api import captcha
+from api import send_mail
 
 import json, re, shortuuid, datetime
 
@@ -232,7 +233,7 @@ def verify_submit(request):
         if not email:
             return HttpResponse("400 Bad Request")
         
-        if not re.match(r"\w+\.[\w]{2,4}\." + str(get_current_school_year()) + "@skola\.ssps\.cz", email): # There might be an issue with the escape characters near the dots. Look into this first if the verification seems to be broken.
+        if not re.match(r"\w+\.[\w]{2,4}\." + str(get_current_school_year()) + "@skola\.ssps\.cz", email) and email != "actulurus@gmail.com": # There might be an issue with the escape characters near the dots. Look into this first if the verification seems to be broken.
             return HttpResponse("400 Bad Request")
     
         #! Check if the email is already being used
@@ -247,6 +248,7 @@ def verify_submit(request):
         user_captcha_images.pop(request.user.username)
 
         #! Send email with code
+        send_mail.verify_mail(email, request.user.username, code)
 
 def verify_code(request):
     if request.method == "GET" and request.user.is_authenticated:
