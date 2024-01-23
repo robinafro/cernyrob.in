@@ -81,6 +81,9 @@ body {
 a {
   text-decoration: none;
 }
+a:visited{
+  color: var(--textCr);
+}
 
 p{
   color: var(--textCr);
