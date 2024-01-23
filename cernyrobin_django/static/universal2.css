@@ -74,6 +74,9 @@ body {
   font-family: 'Roboto', sans-serif;
   margin: 0px;
 }
+.warning{
+  color: var(--warniningTextCr);
+}
 
 a {
   text-decoration: none;
@@ -631,6 +634,17 @@ display: flex;
   border-radius: 5px;
   margin: 5px;
 
+}
+
+.flashing-text{
+
+  animation: flash 0.5s linear 0s 10; /* Will flash for 5 seconds (0.5s * 10) */
+  
+  
+}
+@keyframes flash {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }
 
 nav{
