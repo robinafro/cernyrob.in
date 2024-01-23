@@ -379,6 +379,21 @@ p{
 /*DO NOT TOUCH THIS OR IT REALLY FUCKS UP!###################################################################*/
 
 /*Verify page code*/
+#email-field{
+  width: 230px;
+}
+
+#verification-container{
+  display: none;
+}
+
+.tldr-button{
+  background-color: rgb(184, 0, 0);
+  padding: 10px;
+  border-radius: 10px;
+  color: var(--textCr);
+}
+
 .contrast-heading{
   color: var(--textCr);
 }

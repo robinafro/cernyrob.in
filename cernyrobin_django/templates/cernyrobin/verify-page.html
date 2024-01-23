@@ -9,11 +9,15 @@
 </head>
 <body>
     <div class="background-center">
+        {%  include "global/navbar.html"%}
 
 
         <div id="page-container">
             <h1 class="contrast-heading">Verifikuj si svůj účet</h1>
-            <h2 class="contrast-heading">Pomož nám orchánit tenhle web před botama</h2>
+<!--             <h2 class="contrast-heading">Pomož nám orchánit tenhle web před botama</h2>
+ -->
+            <a onclick="showVerifyContainer()" href="#verify-container" class="tldr-button" > Nechce se mi to všechno číst, přejít na verifikaci</a>
+
             <p class="centered-text">Je to hodně jednoduchý, potřebujeme něco, co můžeme použít na ověření, že nejsi bot. <br>
                 Nechtělo se nám používat čísla, tak jsme udělali ověření přes školní mail
             </p>
@@ -107,8 +111,18 @@
     Pokud máš jakýkoliv otázky můžeš se připojit na náš discord server, pingnout @StuckInVim a zeptat se mě na cokoliv
 </p>
 
+<div id="verification-container">
 
 
+    
+    <h2 class="contrast-heading">Verifikace</h2>
+    <p id="verify-text" class="contrast-text">Ověřuješ si svůj účet <b>{{current_account}}</b></p>
+    <form action="" method="POST">
+        <input type="text" name="email" id="email-field">
+    </form>
+    
+    
+</div>
 
         </div>
     </div>

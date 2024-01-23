@@ -42,7 +42,9 @@
       }
     }
   
-
+function showVerifyContainer(){
+  document.getElementById("verification-container").style.display = "block"
+}
 
 
 
