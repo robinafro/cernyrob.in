@@ -250,6 +250,8 @@ def verify_submit(request):
         #! Send email with code
         send_mail.verify_mail(email, request.user.username, code)
 
+        return HttpResponse("200 OK")
+
 def verify_code(request):
     if request.method == "GET" and request.user.is_authenticated:
         code = request.GET.get("code")
