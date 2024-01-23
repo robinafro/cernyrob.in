@@ -18,7 +18,6 @@ from django.db.models.fields.related import ForeignKey
 
 import json, re, shortuuid
 
-
 # Utils
 def go_back(request):
     next_url = request.POST.get("next", request.GET.get("next", ""))
@@ -255,4 +254,7 @@ def verify_account_page(request):
     context = {
         "current_user" : request.user
     }
+
+    if request.method == 'POST':
+        pass
     return render(request, "cernyrobin/verify-page.html", context)
