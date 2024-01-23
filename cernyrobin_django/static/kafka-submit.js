@@ -18,10 +18,6 @@ async function fetchData(id) {
         }
 
 
-
-
-        // {"video_url": "https://www.youtube.com/watch?v=-WJnehvTnK4", "percent_completed": 14, "chunks_completed": 4, "total_chunks": 29, "finished": false}
-
         if (data.finished == true) {
             return true
         }
@@ -75,14 +71,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-
-
-
-
-
     submitButton.addEventListener('click', function () {
-        // loadingContainer.style.visibility = 'visible';
-        // document.getElementById('loadContainer').style.visibility = 'visible';
         submitButton.style.visibility = 'hidden';
         document.getElementById('submit-response').style.visibility = 'hidden';
 
@@ -209,8 +198,6 @@ function updateLoadingBar(percent) {
     }
 
 }
-
-
 
 
 
