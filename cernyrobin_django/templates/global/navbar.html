@@ -55,16 +55,23 @@
             </p>
         </div>
         <div id="nav-right" class="nav-spacer">
-            {% if current_user.is_authenticated %}
-            <div class="user-info-container">
-                <p>Neverifikovaný uživatel </p>
-                <p> {{current_user}}</p>
-
-            </div>
-            <a href="{%url 'account'%}" class="nav-button" id="goto-account-button">
-                Můj účet
+            {% if current_user.is_authenticated or True %}
+            {% if current_user.email_verified%}
+            {%else%}
+            <a href="{% url 'account'%}">
+                
+                <div class="user-info-container nav-button">
+                    <small class="warning flashing-text">Neverifikovaný uživatel </small>
+                    <p> {{current_user}}</p>
+                </div>
             </a>
-            <a href="{% url 'account'%}"></a>
+                {%endif%}
+            
+
+               
+
+            </a>
+<!--             <a href="{% url 'account'%}"></a> -->
             {%else%}
             
             <a href="{%url 'login'%}" class="nav-button" id="goto-login-button">
