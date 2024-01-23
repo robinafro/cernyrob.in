@@ -252,5 +252,7 @@ def new_register(request):
     return render(request, "cernyrobin/new_register.html", context)
 
 def verify_account_page(request):
-    context = {}
+    context = {
+        "current_user" : request.user
+    }
     return render(request, "cernyrobin/verify-page.html", context)

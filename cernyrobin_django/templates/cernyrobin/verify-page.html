@@ -16,7 +16,7 @@
             <h1 class="contrast-heading">Verifikuj si svůj účet</h1>
 <!--             <h2 class="contrast-heading">Pomož nám orchánit tenhle web před botama</h2>
  -->
-            <a onclick="showVerifyContainer()" href="#verify-container" class="tldr-button" > Nechce se mi to všechno číst, přejít na verifikaci</a>
+            <a onclick="showVerifyContainer()" id="tldr-button" > Nechce se mi to všechno číst, přejít na verifikaci</a>
 
             <p class="centered-text">Je to hodně jednoduchý, potřebujeme něco, co můžeme použít na ověření, že nejsi bot. <br>
                 Nechtělo se nám používat čísla, tak jsme udělali ověření přes školní mail
@@ -108,17 +108,24 @@
 </div>
 <p class="contrast-text">
 
-    Pokud máš jakýkoliv otázky můžeš se připojit na náš discord server, pingnout @StuckInVim a zeptat se mě na cokoliv
+    Pokud máš jakýkoliv otázky můžeš se připojit na náš discord server, pingnout mě @StuckInVim a zeptat se mě na cokoliv
 </p>
 
 <div id="verification-container">
+    <hr style="width: 90vw;">
 
 
     
-    <h2 class="contrast-heading">Verifikace</h2>
-    <p id="verify-text" class="contrast-text">Ověřuješ si svůj účet <b>{{current_account}}</b></p>
-    <form action="" method="POST">
+    <form id="verify-form" action="" method="POST">
+        <h2 class="contrast-heading">Verifikace</h2>
+        <p id="verify-text" class="contrast-text">Ověřuješ si svůj účet <b>{{current_user}}</b></p>
+        
+        <label class="contrast-text margin-label" for="email-field">Zadej email:</label>
         <input type="text" name="email" id="email-field">
+
+        <label class="contrast-text margin-label" for="password-field">Pro potvrzení zadejte heslo:</label>
+        <input type="password" name="password" id="password-field">
+        <input type="submit" class="green-button" value="Ověřit">
     </form>
     
     

@@ -379,19 +379,48 @@ p{
 /*DO NOT TOUCH THIS OR IT REALLY FUCKS UP!###################################################################*/
 
 /*Verify page code*/
+
+.green-button{
+  border: none;
+  background-color: rgb(88, 255, 28);
+  padding: 10px;
+  border-radius: 10px;
+  width: 10%;
+  margin: 20px;
+  cursor: pointer;
+}
+#verify-form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 #email-field{
-  width: 230px;
+  width: 300px;
+  margin-bottom: 3%;
+  font-size: 16px;
+}
+#password-field{
+  width: 300px;
+  font-size: 16px;
+
+}
+
+.margin-label{
+  margin-bottom: 1%;
 }
 
 #verification-container{
   display: none;
+  font-size: 20px;
 }
 
-.tldr-button{
+#tldr-button{
   background-color: rgb(184, 0, 0);
   padding: 10px;
   border-radius: 10px;
   color: var(--textCr);
+  cursor: pointer;
 }
 
 .contrast-heading{
