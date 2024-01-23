@@ -56,16 +56,17 @@
         </div>
         <div id="nav-right" class="nav-spacer">
             {% if current_user.is_authenticated or True %}
-            {% if current_user.email_verified%}
-            {%else%}
             <a href="{% url 'account'%}">
                 
+                
+                
                 <div class="user-info-container nav-button">
+                    {% if not current_user.email_verified %}
                     <small class="warning flashing-text">Neverifikovaný uživatel </small>
+                    {%endif%}
                     <p> {{current_user}}</p>
                 </div>
             </a>
-                {%endif%}
             
 
                

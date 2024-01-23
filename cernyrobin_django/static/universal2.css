@@ -638,7 +638,7 @@ display: flex;
 
 .flashing-text{
 
-  animation: flash 0.5s linear 0s 10; /* Will flash for 5 seconds (0.5s * 10) */
+  animation: flash 0.5s cubic-bezier(1,-0.33,0,1.5) 0s 2
   
   
 }
