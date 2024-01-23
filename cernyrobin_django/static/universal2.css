@@ -385,9 +385,10 @@ p{
   background-color: rgb(88, 255, 28);
   padding: 10px;
   border-radius: 10px;
-  width: 10%;
+  width: 35%;
   margin: 20px;
   cursor: pointer;
+  font-size: 2vh;
 }
 #verify-form{
   display: flex;
