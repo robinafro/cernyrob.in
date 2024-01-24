@@ -446,6 +446,22 @@ p{
  /*  animation-fill-mode: forwards; */ /* Makes sure the new color sticks after the animation */
 }
 
+#icon-2 {
+  animation: doubleChangeFill 2s infinite; /* Total duration is 2s */
+  transition: fill 0.1s cubic-bezier(.77,0,.18,1);
+
+  animation-delay: 0.75s;
+ /*  animation-fill-mode: forwards; */ /* Makes sure the new color sticks after the animation */
+}
+
+#icon-3 {
+  animation: changeFill 2s infinite; /* Total duration is 2s */
+  transition: fill 0.1s cubic-bezier(.77,0,.18,1);
+
+  animation-delay: 1.25s;
+ /*  animation-fill-mode: forwards; */ /* Makes sure the new color sticks after the animation */
+}
+
 
 
 @keyframes changeFill {
@@ -453,7 +469,13 @@ p{
   90% { fill: var(--amimationIconTriggeredCr); }
   100% { fill: var(--animationIconOffCr); }
 }
-
+@keyframes doubleChangeFill {
+  0%, 40% { fill: var(--animationIconOffCr); }
+  45% { fill: var(--amimationIconTriggeredCr); }
+  50%, 85% { fill: var(--animationIconOffCr); }
+  90% { fill: var(--amimationIconTriggeredCr); }
+  100% { fill: var(--animationIconOffCr); }
+}
 
 
 
