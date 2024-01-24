@@ -27,13 +27,20 @@ def go_back(request):
 
     return JsonResponse(response_data) if next_url else HttpResponse("200 OK")
 
+def get_user(request):
+    try:
+        user = UserProfile.objects.get_or_create(user=request.user)[0]
+    except Exception as e:
+        user = None
+
+    return user or request.user
 
 # Pages
 
-
 def home(request):
     context = {
-                "current_user" : request.user,
+        "current_user" : request.user,
+        "cernyrobin_user": get_user(request),
     }
 
     return render(request, "cernyrobin/home.html", context)
@@ -42,6 +49,7 @@ def home(request):
 def clicker_page(request):
     context = {
         "current_user" : request.user,
+        "cernyrobin_user": get_user(request),
     }
 
     return render(request, "cernyrobin/clicker.html", context)
@@ -50,6 +58,7 @@ def clicker_page(request):
 def login_page(request):
     context = {
         "current_user" : request.user,
+        "cernyrobin_user": get_user(request),
     }
 
     return render(request, "cernyrobin/login.html", context)
@@ -57,8 +66,8 @@ def account(request):
     if request.user.is_authenticated:
 
         context = {
-
-            "current_user" : request.user
+            "current_user" : request.user,
+            "cernyrobin_user": get_user(request),
         }
         return render(request, "cernyrobin/account.html", context)
     return redirect("login")
@@ -238,7 +247,11 @@ def verify_submit(request):
     
         #! Check if the email is already being used
         
-        request.user.email = email
+        cernyrobin_user, created = UserProfile.objects.get_or_create(user=request.user)
+
+        cernyrobin_user.email = email
+
+        cernyrobin_user.save()
 
         code = shortuuid.uuid()
         
@@ -256,7 +269,10 @@ def verify_submit(request):
 
 def verify_code(request):
     if request.method == "GET" and request.user.is_authenticated:
+        cernyrobin_user, created = UserProfile.objects.get_or_create(user=request.user)
         code = request.GET.get("code")
+
+        print(cernyrobin_user.email_verified)
 
         if not code:
             return HttpResponse("400 Bad Request")
@@ -269,9 +285,11 @@ def verify_code(request):
         if request.user.username != username:
             return HttpResponse("401 Unauthorized")
 
-        request.user.email_verified = True
+        cernyrobin_user.email_verified = True
 
-        request.user.save()
+        cernyrobin_user.save()
+
+        print(cernyrobin_user.email_verified)
 
         del verification_codes[code]
 
@@ -285,6 +303,9 @@ def verify_account_page(request):
     context = {
         "current_user" : request.user
     }
+
+    # if request.user.email_verified:
+    #     return HttpResponse("Already verified")
 
     if request.method == 'POST':
         if not request.user.is_authenticated:

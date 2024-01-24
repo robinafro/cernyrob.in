@@ -26,13 +26,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv("SECRET_KEY")
 
 
-RECAPTCHA_PUBLIC_KEY = 'your_site_key'
-RECAPTCHA_PRIVATE_KEY = 'your_secret_key'
-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [".localhost", ".cernyrob.in", "localhost", "cernyrob.in", "me",]
+ALLOWED_HOSTS = [".localhost", ".cernyrob.in", "localhost", "cernyrob.in", "me", "10.1.2.6"]
 
 CSRF_TRUSTED_ORIGINS = [
     "https://cernyrob.in",
@@ -43,6 +40,7 @@ CSRF_TRUSTED_ORIGINS = [
     "http://.localhost",
     "http://127.0.0.1",
     "http://me",
+    "http://10.1.2.6"
 ]
 
 # Application definition

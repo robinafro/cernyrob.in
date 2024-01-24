@@ -61,10 +61,10 @@
                 
                 
                 <div class="user-info-container nav-button">
-                    {% if not current_user.email_verified %}
+                    {% if not cernyrobin_user.email_verified %}
                     <small class="warning flashing-text">Neverifikovaný uživatel </small>
                     {%endif%}
-                    <p> {{current_user}}</p>
+                    <p>{{current_user}}</p>
                 </div>
             </a>
             

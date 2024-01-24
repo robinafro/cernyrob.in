@@ -34,12 +34,12 @@ def gen_captcha():
 
 # Function to generate a random string
 def random_string(length=6):
-    if random.random() <= 0.8:
+    if random.random() <= 0.3:
         word = random.choice(words)
         new = ""
 
         for letter in word:
-            if random.random(0, 1) == 1:
+            if random.random() < random.random():
                 new = new + letter.lower()
             else:
                 new = new + letter.upper()
