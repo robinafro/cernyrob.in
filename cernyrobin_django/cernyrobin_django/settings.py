@@ -32,7 +32,7 @@ RECAPTCHA_PRIVATE_KEY = 'your_secret_key'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [".localhost", ".cernyrob.in", "localhost", "cernyrob.in"]
+ALLOWED_HOSTS = [".localhost", ".cernyrob.in", "localhost", "cernyrob.in", "http://me",]
 
 CSRF_TRUSTED_ORIGINS = [
     "https://cernyrob.in",
