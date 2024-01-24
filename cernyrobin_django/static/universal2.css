@@ -50,9 +50,9 @@ source backup --sourceColor: https://colordesigner.io/color-mixer;
 
 /*Colors with equal ratio*/
 --borderCr: color-mix(in srgb-linear, var(--sourceColor),#474747);
+--animationIconOffCr: color-mix(in srgb-linear,#ffffff, var(--sourceColor));
 
 /*Colors with dominant source*/
---animationIconOffCr: color-mix(in srgb-linear,#ffffff 10%, var(--sourceColor));
 --amimationIconTriggeredCr: color-mix(in srgb-linear,#ffffff 3%, var(--sourceColor));
 --spinnerInnerCr: color-mix(in srgb-linear,#0D0D0D 75%, var(--sourceColor));
 --headerCr: color-mix(in srgb-linear,#D6D6D6 33%,  var(--sourceColor));
@@ -423,14 +423,20 @@ p{
   position: absolute;
   width: 5vw; /* Adjust as needed */
   height: auto; /* Maintain aspect ratio */
-  animation: flyAcross 2s cubic-bezier(.77,0,.18,1) infinite
+  animation: flyAcross 2s cubic-bezier(.77,0,.18,1) infinite;
+  fill: var(--textCr);
+
+/*   animation: doubleChangeFill 2s infinite;
+  transition: fill 0.1s cubic-bezier(.77,0,.18,1);
+
+ */
 }
 
 
 
 @keyframes flyAcross {
   0%, 100% {
-      left: 20vw; /* Start slightly off-screen (adjust to your image width) */
+      left: 16vw; /* Start slightly off-screen (adjust to your image width) */
   }
   50% {
       left: 80vw; /* Move completely across the container */
@@ -439,27 +445,20 @@ p{
 
 
 #icon-1 {
-  animation: changeFill 2s infinite; /* Total duration is 2s */
+  animation: changeFillMoveRight 2s infinite; 
   transition: fill 0.1s cubic-bezier(.77,0,.18,1);
 
   animation-delay: 0.25s;
- /*  animation-fill-mode: forwards; */ /* Makes sure the new color sticks after the animation */
+
 }
 
-#icon-2 {
-  animation: doubleChangeFill 2s infinite; /* Total duration is 2s */
-  transition: fill 0.1s cubic-bezier(.77,0,.18,1);
-
-  animation-delay: 0.75s;
- /*  animation-fill-mode: forwards; */ /* Makes sure the new color sticks after the animation */
-}
 
 #icon-3 {
-  animation: changeFill 2s infinite; /* Total duration is 2s */
+  animation: changeFillMoveLeft 2s infinite;
   transition: fill 0.1s cubic-bezier(.77,0,.18,1);
 
   animation-delay: 1.25s;
- /*  animation-fill-mode: forwards; */ /* Makes sure the new color sticks after the animation */
+
 }
 
 
@@ -469,6 +468,21 @@ p{
   90% { fill: var(--amimationIconTriggeredCr); }
   100% { fill: var(--animationIconOffCr); }
 }
+
+@keyframes changeFillMoveLeft {
+  0%, 80% { fill: var(--animationIconOffCr);  transform: translate(0, 0); }
+  90% { fill: var(--amimationIconTriggeredCr); transform: translate(10px, 0); }
+  100% { fill: var(--animationIconOffCr); transform: translate(0, 0);  }
+}
+
+
+@keyframes changeFillMoveRight {
+  0%, 80% { fill: var(--animationIconOffCr);  transform: translate(0, 0); }
+  90% { fill: var(--amimationIconTriggeredCr); transform: translate(-10px, 0); }
+  100% { fill: var(--animationIconOffCr); transform: translate(0, 0);  }
+}
+
+/* 
 @keyframes doubleChangeFill {
   0%, 40% { fill: var(--animationIconOffCr); }
   45% { fill: var(--amimationIconTriggeredCr); }
@@ -477,7 +491,7 @@ p{
   100% { fill: var(--animationIconOffCr); }
 }
 
-
+ */
 
 
 
