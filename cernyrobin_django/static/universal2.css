@@ -435,6 +435,7 @@ p{
 #icon-1 {
   animation: changeFill 2s infinite; /* Total duration is 2s */
   transition: fill 0.1s cubic-bezier(.77,0,.18,1);
+
   animation-delay: 0.25s;
  /*  animation-fill-mode: forwards; */ /* Makes sure the new color sticks after the animation */
 }
