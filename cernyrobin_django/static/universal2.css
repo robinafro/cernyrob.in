@@ -420,28 +420,6 @@ p{
   animation: flyAcross 2s cubic-bezier(.77,0,.18,1) infinite
 }
 
-/* @keyframes flyAcross { 
-  0%, 100% {
-      left: 0;
-      animation-timing-function: ease-out;
-  }
-  50% {
-      left: calc(100% - 50px); 
-      animation-timing-function: ease-in;
-  }
-}   version1*/
-
-
-
-/* @keyframes flyAcross {
-  0%, 100% {
-      left: -50px; 
-  }
-  50% {
-      left: 100%; 
-  }
-}
- */
 
 
 @keyframes flyAcross {
