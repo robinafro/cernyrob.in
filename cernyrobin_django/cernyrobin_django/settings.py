@@ -26,9 +26,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv("SECRET_KEY")
 
 
-RECAPTCHA_PUBLIC_KEY = 'your_site_key'
-RECAPTCHA_PRIVATE_KEY = 'your_secret_key'
-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
