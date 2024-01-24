@@ -7,6 +7,23 @@ import string
 
 # PORT = 8002
 
+words = [
+    'negr',
+    'nigga',
+    'nigger',
+    'bitch',
+    'robin',
+    'cernoch',
+    'kafka',
+    'negro',
+    'black',
+    '?^1/2.'
+    'kokot',
+    'cimli',
+    'retard',
+    'hitler',
+]
+
 def gen_captcha():
     # Generate CAPTCHA
     text = random_string()
@@ -17,8 +34,20 @@ def gen_captcha():
 
 # Function to generate a random string
 def random_string(length=6):
-    letters = string.ascii_uppercase
-    return ''.join(random.choice(letters) for i in range(length))
+    if random.random() <= 0.8:
+        word = random.choice(words)
+        new = ""
+
+        for letter in word:
+            if random.random(0, 1) == 1:
+                new = new + letter.lower()
+            else:
+                new = new + letter.upper()
+                
+        return new
+    else:
+        letters = string.ascii_uppercase
+        return ''.join(random.choice(letters) for i in range(length))
 
 # class MyServer(http.server.SimpleHTTPRequestHandler):
 #     def do_GET(self):
