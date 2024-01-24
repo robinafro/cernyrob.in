@@ -28,7 +28,10 @@ def go_back(request):
     return JsonResponse(response_data) if next_url else HttpResponse("200 OK")
 
 def get_user(request):
-    user = UserProfile.objects.get_or_create(user=request.user)[0]
+    try:
+        user = UserProfile.objects.get_or_create(user=request.user)[0]
+    except Exception as e:
+        user = None
 
     return user or request.user
 

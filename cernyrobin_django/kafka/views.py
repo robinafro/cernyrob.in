@@ -9,7 +9,10 @@ import json
 import re
 
 def get_user(request):
-    user = UserProfile.objects.get_or_create(user=request.user)[0]
+    try:
+        user = UserProfile.objects.get_or_create(user=request.user)[0]
+    except Exception as e:
+        user = None
 
     return user or request.user
 
