@@ -21,11 +21,16 @@
 
   */
 /*
-source backup --sourceColor: #221FC7;
+
+
+source backup --sourceColor: https://colordesigner.io/color-mixer;
 *//* source 221FC7 */
 
+
+/*Colors cooked with: https://colordesigner.io/color-mixer */
+
   /*Base color sorces for mixin into the theme colors*/
---sourceColor: hsl(241, 73%, 45%);
+--sourceColor: #221fc7;
 --headerCrSource: #D6D6D6;
 --borderCrSource: #474747;
 --addButtonTriggerCrSource: #8A8A8A;
@@ -47,6 +52,8 @@ source backup --sourceColor: #221FC7;
 --borderCr: color-mix(in srgb-linear, var(--sourceColor),#474747);
 
 /*Colors with dominant source*/
+--animationIconOffCr: color-mix(in srgb-linear,#ffffff 10%, var(--sourceColor));
+--amimationIconTriggeredCr: color-mix(in srgb-linear,#ffffff 3%, var(--sourceColor));
 --spinnerInnerCr: color-mix(in srgb-linear,#0D0D0D 75%, var(--sourceColor));
 --headerCr: color-mix(in srgb-linear,#D6D6D6 33%,  var(--sourceColor));
 --addButtonTriggerCr: color-mix(in srgb-linear,#8A8A8A 33%, var(--sourceColor));
@@ -399,23 +406,22 @@ p{
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  width: 90vw;
+  width: 92vw;
+  padding: 0vw 4vw;
 }
 
 .animation-icon{
-  width: 100px;
-  height: 100px;
+  width: 10vw;
+  height: 10vw;
 }
 
-#flying-area{
-  width: 100%;
-}
+
 
 
 
 #flying-file {
   position: absolute;
-  width: 50px; /* Adjust as needed */
+  width: 5vw; /* Adjust as needed */
   height: auto; /* Maintain aspect ratio */
   animation: flyAcross 2s cubic-bezier(.77,0,.18,1) infinite
 }
@@ -424,10 +430,10 @@ p{
 
 @keyframes flyAcross {
   0%, 100% {
-      left: 20%; /* Start slightly off-screen (adjust to your image width) */
+      left: 20vw; /* Start slightly off-screen (adjust to your image width) */
   }
   50% {
-      left: 80%; /* Move completely across the container */
+      left: 80vw; /* Move completely across the container */
   }
 }
 
@@ -443,9 +449,9 @@ p{
 
 
 @keyframes changeFill {
-  0%, 80% { fill: blue; }
-  90% { fill: red; }
-  100% { fill: blue; }
+  0%, 80% { fill: var(--animationIconOffCr); }
+  90% { fill: var(--amimationIconTriggeredCr); }
+  100% { fill: var(--animationIconOffCr); }
 }
 
 
