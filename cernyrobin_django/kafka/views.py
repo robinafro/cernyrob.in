@@ -1,11 +1,17 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 
+from cernyrobin_app.models import UserProfile
 from api import get_video_info
 from api import views as api_views
 from ads import views as ads_views
 import json
 import re
+
+def get_user(request):
+    user = UserProfile.objects.get_or_create(user=request.user)[0]
+
+    return user or request.user
 
 def strip_yapping(s):
     for i, char in enumerate(s):
@@ -56,6 +62,7 @@ def index(request):
             }
         )
     context["current_user"] = request.user
+    context["cernyrobin_user"] = get_user(request)
     context["logged_in"] = request.user.is_authenticated
     print(context)
 
@@ -127,6 +134,7 @@ def view(request):
                 "ads_right": ads["ads_right"],
                 "is_staff" : request.user.is_staff,
                 "current_user" : request.user,
+                "cernyrobin_user": get_user(request),
             },
         )
     elif request.method == "POST":
@@ -150,6 +158,7 @@ def submit(request):
                 "last_generated": api_views.get_last_generated(),
                 "generate_rate_limit": api_views.GENERATE_RATE_LIMIT,
                 "current_user" : request.user,
+                "cernyrobin_user": get_user(request),
             },
         )
     elif request.method == "POST":

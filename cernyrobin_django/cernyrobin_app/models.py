@@ -21,6 +21,9 @@ class BaseUserProfile(models.Model):
 
     email_verified = models.BooleanField(default=False)
 
+    def __str__(self):
+        return str(self.user)
+
     class Meta:
         abstract = True
 
