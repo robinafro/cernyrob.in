@@ -449,6 +449,8 @@ p{
   transition: fill 0.1s cubic-bezier(.77,0,.18,1);
 
   animation-delay: 0.25s;
+  fill: var(--animationIconOffCr);
+
 
 }
 
@@ -458,6 +460,7 @@ p{
   transition: fill 0.1s cubic-bezier(.77,0,.18,1);
 
   animation-delay: 1.25s;
+  fill: var(--animationIconOffCr);
 
 }
 
@@ -471,14 +474,14 @@ p{
 
 @keyframes changeFillMoveLeft {
   0%, 80% { fill: var(--animationIconOffCr);  transform: translate(0, 0); }
-  90% { fill: var(--amimationIconTriggeredCr); transform: translate(10px, 0); }
+  90% { fill: var(--amimationIconTriggeredCr); transform: translate(0.8vw, 0); }
   100% { fill: var(--animationIconOffCr); transform: translate(0, 0);  }
 }
 
 
 @keyframes changeFillMoveRight {
   0%, 80% { fill: var(--animationIconOffCr);  transform: translate(0, 0); }
-  90% { fill: var(--amimationIconTriggeredCr); transform: translate(-10px, 0); }
+  90% { fill: var(--amimationIconTriggeredCr); transform: translate(-0.8vw, 0); }
   100% { fill: var(--animationIconOffCr); transform: translate(0, 0);  }
 }
 
