@@ -204,6 +204,11 @@ def new_register(request):
             user = form.save(commit=False)
             user.username = user.username.lower()
             user.save()
+
+            #! Create UserProfile
+            user_profile = UserProfile.objects.create(user=user)
+            user_profile.save()
+
             login(request, user)
             return redirect("home")
         else:
