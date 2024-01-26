@@ -123,7 +123,7 @@
         {%csrf_token%}
 
         <label class="contrast-text margin-label" for="email-field">Zadej email:</label>
-        <input type="text" name="email" id="email-field">
+        <input type="text" name="email" id="email-field" value={{cernyrobin_user.email}}>
 
         <label for="kafca-field"></label>
         <input name="captcha" id="kafca-field" type="text">

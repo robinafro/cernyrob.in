@@ -31,8 +31,9 @@ urlpatterns = [
     path("", cernyrobin.home, name="root"),
     path("home/", cernyrobin.home, name="home"),
 
-    path("login/", cernyrobin.login_page, name="login"),
-    path("register/", cernyrobin.login_page, name="register"),
+    path("login/", cernyrobin.new_login, name="login"),
+    path("register/", cernyrobin.new_register, name="register"),
+    path("legacy_login/", cernyrobin.login_page),
     path("login/submit/", cernyrobin.login_submit, name="login_submit"),
     path("account/", cernyrobin.account, name="account"),
     path("new_login/", cernyrobin.new_login, name="new_login"),
@@ -40,6 +41,7 @@ urlpatterns = [
     path("verify_account/", cernyrobin.verify_account_page, name="verify_page"),
     path("verify/", cernyrobin.verify_code, name="verify_code"),
     path("captchaimg/", cernyrobin.get_captcha_image, name="captchaimg"),
+    path("email_sent/", cernyrobin.email_sent, name="email_sent"),
 
     # vvv Remove in production
     path("simulate_redirect/", cernyrobin.simulate_redirect,name="simulate_redirect"),

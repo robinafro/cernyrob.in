@@ -368,6 +368,11 @@ p{
   z-index: 3;
 }
 
+.minimal-link{
+  text-decoration: underline;
+  color: var(--textCr);
+}
+
 .disclaimer-highlight {
   color: var(--warniningTextCr);
   font-weight: bold;
@@ -418,7 +423,6 @@ label{
   border-radius: 10px;
   padding: 2px;
   margin: 10px;
-  margin-bottom: 30px;
   display: flex;
   flex-direction: column;
   justify-content: center;

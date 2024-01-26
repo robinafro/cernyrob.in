@@ -3,14 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link href="/static/universal2v3.css" rel="stylesheet">
+    <title>Registrace</title>
 </head>
 <body>
+
+
+
+
+
+  <div class="background-center">
+
+        
+    <!-- <div id=""> -->
+        <form method="POST" action="" id="login-block">
+            {%csrf_token%}
+            
+<!--                 <label for="">Username</label> -->
+<input class="login-field" type="text" placeholder="Uživatelké jméno*" name="username" maxlength="150" autocapitalize="none" autocomplete="username" autofocus required id="id_username">
+<input type="text" class="login-field" name="email" placeholder="Školní Email (dobrovolný)">
+<input class="login-field" placeholder="Heslo*" type="password" name="password1" autocomplete="new-password" required id="id_password1">
+            
+            
+<!--                 <label for="">Password</label> -->
+<!--             <input class="login-field" type="password" name="password" placeholder="Heslo">
+ -->            <input class="login-field" placeholder="Potvrzení hesla*" type="password" name="password2" autocomplete="new-password" required id="id_password2">
+            
+ <input id="login-button" type="submit" value="Přihlásit se">
+<p class="centered-text">* = Povinný <br>
+Přihlšení se školním emailem má
+
+
+  
+  <a class="minimal-link" href="{% url 'verify_page'%}">
+    spoustu výhod
+  </a>
+
+</p>
+        </form>
+        <p>Už máš účet? <a class="minimal-link" href="{% url 'login'%}">Přihlaš se</a></p>
+      </div>
+
+
+    
+
+
+
+
+
+
+
+
+<!-- {{form.as_p}} you can do this, but it has a lot of bloat, so the below is debloated-->  
+
+<!-- 
     <div>
         <form method="POST" action="">
             {%csrf_token%}
     
-          <!-- {{form.as_p}} you can do this, but it has a lot of bloat, so the below is debloated-->  
     
     
     
@@ -58,6 +108,6 @@
         </form>
         <a href="{% url 'new_login'%}">Already have an account?</a>
             
-    </div>
+    </div> -->
 </body>
 </html>

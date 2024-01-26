@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="/static/universal2v3.css" rel="stylesheet">
-    <title>Document</title>
+    <title>Přihlásit se</title>
 </head>
 <body>
     <div class="background-center">
@@ -15,22 +15,22 @@
                 {%csrf_token%}
                 
 <!--                 <label for="">Username</label> -->
-                <input class="login-field" type="text" name="username" placeholder="Uživatelké jméno">
+                <input class="login-field" type="text" name="username" required placeholder="Uživatelké jméno">
                 
                 
 <!--                 <label for="">Password</label> -->
-                <input class="login-field" type="password" name="password" placeholder="Heslo">
+                <input class="login-field" type="password" name="password" required placeholder="Heslo">
                 
                 
                 <input id="login-button" type="submit" value="Přihlásit se">
             </form>
-       <!--  </div> -->
+            <p>Ještě nemáš účet <a class="minimal-link" href="{% url 'register'%}">Registruj se</a></p>
     </div>
 
 
         
 
-        <a href="{% url 'new_register'%}">Don't have an account?</a>
+
 
 
 
