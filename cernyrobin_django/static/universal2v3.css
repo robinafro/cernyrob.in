@@ -431,9 +431,8 @@ label{
   width: clamp(30vw, 400px, 90vw);
   /* height: 30vh; */
   height: auto;
-  padding-top: clamp(4vw, 50px, 2vw);
-  padding-top: clamp(2vw, 50px, 2vw);
-
+  padding-top: clamp(25px, 50px, 2vw);
+/*  */
  
 }
 
@@ -456,8 +455,8 @@ label{
   height: clamp(2.5em, 8vh, 60px);
   color: var(--textCr);
   border-radius: 1.5vh;
-  margin-bottom: clamp(4vw, 50px, 2vw);
-  margin-bottom: clamp(2vw, 50px, 2vw);
+/*   margin-bottom: clamp(4vw, 50px, 2vw); */
+  margin-bottom: clamp(20px, 50px, 2vw);
   padding-left: 2%;
 }
   
