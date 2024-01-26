@@ -222,7 +222,11 @@ def new_register(request):
             user_profile.save()
 
             login(request, user)
-            return redirect("home")
+
+            if (request.POST.get("email") or "") == "":
+                return redirect("home")
+            else:
+                return redirect("verify_account")
         else:
             messages.error(request, "error happened")
     page = "register"
