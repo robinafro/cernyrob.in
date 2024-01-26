@@ -4,12 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="/static/universal2v3.css" rel="stylesheet">
-    <title>Document</title>
+    <title>Registrace</title>
 </head>
 <body>
-
-
-
 
 
 
@@ -35,18 +32,17 @@
  <input id="login-button" type="submit" value="Přihlásit se">
 <p class="centered-text">* = Povinný <br>
 Přihlšení se školním emailem má
-<u>
+
 
   
-  <a class="contrast-text" href="{% url 'verify_page'%}">
+  <a class="minimal-link" href="{% url 'verify_page'%}">
     spoustu výhod
-    
   </a>
-</u>
+
 </p>
         </form>
-   <!--  </div> -->
-</div>
+        <p>Už máš účet? <a class="minimal-link" href="{% url 'login'%}">Přihlaš se</a></p>
+      </div>
 
 
     
