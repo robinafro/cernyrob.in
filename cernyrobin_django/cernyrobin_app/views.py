@@ -238,6 +238,9 @@ def get_current_school_year():
         return now.year
     else:
         return now.year - 1
+    
+def email_sent(request):
+    return render(request, "cernyrobin/email_sent.html")
 
 def verify_submit(request):
     if not request.user.is_authenticated:
@@ -256,10 +259,13 @@ def verify_submit(request):
         if not email:
             return HttpResponse("400 Bad Request")
         
-        if not re.match(r"\w+\.[\w]{2,4}\." + str(get_current_school_year()) + "@skola\.ssps\.cz", email) and email != "actulurus@gmail.com": # There might be an issue with the escape characters near the dots. Look into this first if the verification seems to be broken.
+        if not re.match(r"\w+\.[\w]{2,4}\.2[\d]{3}@skola\.ssps\.cz", email) and email != "actulurus@gmail.com": # There might be an issue with the escape characters near the dots. Look into this first if the verification seems to be broken.
             return HttpResponse("400 Bad Request")
     
         #! Check if the email is already being used
+        for user in UserProfile.objects.all():
+            if user.email == email and user.email_verified:
+                return HttpResponse("Email is already being used")
         
         cernyrobin_user, created = UserProfile.objects.get_or_create(user=request.user)
 
@@ -277,7 +283,7 @@ def verify_submit(request):
         #! Send email with code
         send_mail.verify_mail(email, request.user.username, code)
 
-        return HttpResponse("200 OK")
+        return redirect("email_sent")
     else:
         return HttpResponse("Invalid captcha")
 
@@ -315,7 +321,8 @@ def verify_code(request):
 
 def verify_account_page(request):
     context = {
-        "current_user" : request.user
+        "current_user" : request.user,
+        "cernyrobin_user": get_user(request),
     }
 
     # if request.user.email_verified:
