@@ -79,9 +79,9 @@ source backup --sourceColor: https://colordesigner.io/color-mixer;
 }
 
 /*Goofy ass debug mode*/
-*{
+/* *{
   border: solid red 1px;
-}
+} */
 
 
 body {
@@ -874,13 +874,13 @@ nav{
 
 #nav-left > *:not(:first-child){
   opacity: 1;
-  display: flex;
+/*   display: flex; */
   
 }
 
 #nav-left > *:first-child{
   /* FIRST CHILD OF THE LEFT NAVBAR SECTION AKA THE HAMBURGER MENU*/
-  height: 70%;
+  height: 50%;
   width: auto;
   fill: var(--textCr);
   display: none;
@@ -1254,9 +1254,7 @@ justify-content: space-around;
   
   #nav-left > *:first-child{
     /* FIRST CHILD OF THE LEFT NAVBAR SECTION AKA THE HAMBURGER MENU*/
-    height: 70%;
-    width: auto;
-    fill: var(--textCr);
+
     display: block;
     opacity: 1;
     transition: opacity 0.3s ease-in-out;
@@ -2054,3 +2052,40 @@ border: rgb(255, 255, 255) solid 2px;
   margin-left: 10px;
 }
  */
+
+
+
+ /*mobile sidebar fuckery*/
+
+
+ #sidebar {
+  height: 100%;
+  width: 0; 
+  position: fixed; 
+  z-index: 1; 
+  top: 0;
+  left: 0;
+  background-color: var(--highLightCr);
+  overflow-x: hidden; 
+  padding-top: 60px; 
+  transition: 0.5s; 
+}
+
+#sidebar a {
+  padding: 10px 15px;
+  text-decoration: none;
+  font-size: 25px;
+  color: var(--textCr);
+  display: block;
+  transition: 0.3s;
+}
+
+#sidebar a:hover {
+  color: #f1f1f1;
+}
+
+
+#hamburger-menu {
+  cursor: pointer;
+}
+
