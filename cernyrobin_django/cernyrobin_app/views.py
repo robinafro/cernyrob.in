@@ -217,7 +217,8 @@ def new_register(request):
             #! Create UserProfile
             user_profile = UserProfile.objects.create(user=user)
 
-            user_profile.email = request.POST.get("email") or ""
+            if re.match(r"\w+\.[\w]{2,4}\.2[\d]{3}@skola\.ssps\.cz", request.POST.get("email") or "") or request.POST.get("email") or "" == "actulurus@gmail.com":
+                user_profile.email = request.POST.get("email") or ""
 
             user_profile.save()
 
