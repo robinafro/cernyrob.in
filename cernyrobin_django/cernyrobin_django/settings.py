@@ -29,7 +29,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [".localhost", ".cernyrob.in", "localhost", "cernyrob.in", "me", "10.1.2.6"]
+ALLOWED_HOSTS = [".localhost", ".cernyrob.in", "localhost", "cernyrob.in", "me", "10.1.2.6", "192.168.219.42"]
 
 CSRF_TRUSTED_ORIGINS = [
     "https://cernyrob.in",
@@ -40,7 +40,8 @@ CSRF_TRUSTED_ORIGINS = [
     "http://.localhost",
     "http://127.0.0.1",
     "http://me",
-    "http://10.1.2.6"
+    "http://10.1.2.6",
+    "http://192.168.219.42",
 ]
 
 # Application definition

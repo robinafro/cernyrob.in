@@ -178,8 +178,17 @@ def new_login(request):
         return redirect("home")
     else:
         if request.method == "POST":
-            username = request.POST.get("username").lower()
+            username = request.POST.get("username")
             password = request.POST.get("password")
+
+            if username == "" or password == "":
+                messages.error(request, "Username or password is empty")
+                return redirect("new_login")
+        
+            username = username.lower()
+
+            next_page = request.POST.get("next")
+
             try:
                 user = User.objects.get(username=username)
 
@@ -189,7 +198,7 @@ def new_login(request):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect("home")
+                return redirect(next_page or "home")
             else:
                 messages.error(request, "Password wrong")
 
@@ -204,6 +213,11 @@ def new_register(request):
             user = form.save(commit=False)
             user.username = user.username.lower()
             user.save()
+
+            #! Create UserProfile
+            user_profile = UserProfile.objects.create(user=user)
+            user_profile.save()
+
             login(request, user)
             return redirect("home")
         else:
