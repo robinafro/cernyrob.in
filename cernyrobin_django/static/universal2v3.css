@@ -405,25 +405,7 @@ p{
 
 /*New login code*/
 
-.login-field {
-    width: 95%; /* 
-    height: 70%;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    position: relative; MODERNIFIED */
-    background-color: var(--inputFieldBgRc);
-/*     color: rgb(16, 14, 120); */
-    border: none;
-    text-align: left;
-    font-size: 150%;
 
-    height: clamp(15%, 50px, 20%);
-    height: clamp(2.5em, 8vh, 60px);
-    color: var(--textCr);
-    border-radius: 0.5vw;
-    margin: clamp(1vw, 40px, 5vw) 0px;
-  }
 
 
 label{
@@ -449,7 +431,34 @@ label{
   width: clamp(30vw, 400px, 90vw);
   /* height: 30vh; */
   height: auto;
+  padding-top: clamp(4vw, 50px, 2vw);
+  padding-top: clamp(2vw, 50px, 2vw);
+
  
+}
+
+
+
+.login-field {
+  width: 95%; /* 
+  height: 70%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  position: relative; MODERNIFIED */
+  background-color: var(--inputFieldBgRc);
+/*     color: rgb(16, 14, 120); */
+  border: none;
+  text-align: left;
+  font-size: 150%;
+
+  height: clamp(15%, 50px, 20%);
+  height: clamp(2.5em, 8vh, 60px);
+  color: var(--textCr);
+  border-radius: 1.5vh;
+  margin-bottom: clamp(4vw, 50px, 2vw);
+  margin-bottom: clamp(2vw, 50px, 2vw);
+  padding-left: 2%;
 }
   
   /*Redirect page code*/
