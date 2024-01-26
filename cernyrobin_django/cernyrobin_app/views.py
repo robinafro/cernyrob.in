@@ -216,6 +216,9 @@ def new_register(request):
 
             #! Create UserProfile
             user_profile = UserProfile.objects.create(user=user)
+
+            user_profile.email = request.POST.get("email") or ""
+
             user_profile.save()
 
             login(request, user)
