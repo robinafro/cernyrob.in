@@ -132,6 +132,7 @@ def view(request):
 #                "questions": parse_numbered_text(video_info["description"]),
 #                "answers": parse_numbered_text(answers),
                 "qa_pairs" : qa_pairs,
+                "answers_copy": answers,
                 "transcript": transcript,
                 "ads_left": ads["ads_left"],
                 "ads_right": ads["ads_right"],
