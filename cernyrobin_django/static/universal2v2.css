@@ -47,6 +47,7 @@ source backup --sourceColor: https://colordesigner.io/color-mixer;
 --bgCr: color-mix(in srgb-linear, var(--sourceColor) 0.1%,#0F0F0F);
 --highLightCr:color-mix(in srgb-linear, var(--sourceColor) 5%,#000000);
 --blockCr: color-mix(in srgb-linear, var(--sourceColor) 9%,#000000);
+--inputFieldBgRc : color-mix(in srgb-linear, var(--sourceColor) 5%,#000000);
 
 /*Colors with equal ratio*/
 --borderCr: color-mix(in srgb-linear, var(--sourceColor),#474747);
@@ -65,6 +66,8 @@ source backup --sourceColor: https://colordesigner.io/color-mixer;
 --bannerBgCr: #ffff00;
 --warniningTextCr: #ff0000;
 --navButtonTextCr: #ffffff;
+
+
 
 
 
@@ -400,7 +403,56 @@ p{
 
 /*DO NOT TOUCH THIS OR IT REALLY FUCKS UP!###################################################################*/
 
-/*Redirect page code*/
+/*New login code*/
+
+.login-field {
+    width: 95%; /* 
+    height: 70%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    position: relative; MODERNIFIED */
+    background-color: var(--inputFieldBgRc);
+/*     color: rgb(16, 14, 120); */
+    border: none;
+    text-align: left;
+    font-size: 150%;
+
+    height: clamp(15%, 50px, 20%);
+    height: clamp(2.5em, 8vh, 60px);
+    color: var(--textCr);
+    border-radius: 0.5vw;
+    margin: clamp(1vw, 40px, 5vw) 0px;
+  }
+
+
+label{
+  color: var(--textCr);
+}
+#login-block{
+
+  background-color: var(--blockCr);
+  border: var(--borderCr) solid var(--thickBorderSize);
+  border-radius: 10px;
+  padding: 2px;
+  margin: 10px;
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 15px;
+  box-shadow: 6px 6px 5px rgb(0, 0, 0);
+  width: 40vw;
+  height: 50vw;
+/*   width: clamp(96%, 500px, 50%); */
+  width: clamp(30vw, 400px, 90vw);
+  /* height: 30vh; */
+  height: auto;
+ 
+}
+  
+  /*Redirect page code*/
 #animation-container{
   display: flex;
   flex-direction: row;
@@ -1770,34 +1822,32 @@ height: 32%;
   position: relative;
 }
 
-.login-field {
-  width: 95%;
-  height: 70%;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  position: relative;
-  background: none;
-  border: none;
-  text-align: left;
-  font-size: 150%;
-}
+
 
 #login-button {
-  width: 40%;
-  height: 80%;
-  left: 50%;
-  top: -17%;
-  transform: translateX(-50%);
+/*   width: 40%;
+  height: 80%; */
+/*   left: 50%;
+  top: -17%;  MODERNINIFIED2*/
+/*   transform: translateX(-50%); */
   background-color: rgb(8, 1, 49);
-
-  position: relative;
+  padding: 4%;
+/* 
+  position: relative; */
 
   border-radius: 10px;
   border-style: none;
 
   font-size: 150%;
+  color: var(--textCr);
 }
+
+#login-button:hover {
+
+    background-color: rgb(8, 1, 49);
+
+  }
+  
 
 #login-warning {
   width: 70%;

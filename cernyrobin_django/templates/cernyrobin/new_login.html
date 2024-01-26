@@ -3,28 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/static/universal2v2.css" rel="stylesheet">
     <title>Document</title>
 </head>
 <body>
-    <form method="POST" action="">
-        {%csrf_token%}
+    <div class="background-center">
 
-        <label for="">Username</label>
-        <input type="text" name="username" placeholder="Your Username">
+        
+        <!-- <div id=""> -->
+            <form method="POST" action="" id="login-block">
+                {%csrf_token%}
+                
+<!--                 <label for="">Username</label> -->
+                <input class="login-field" type="text" name="username" placeholder="Uživatelké jméno">
+                
+                
+<!--                 <label for="">Password</label> -->
+                <input class="login-field" type="password" name="password" placeholder="Heslo">
+                
+                
+                <input id="login-button" type="submit" value="Přihlásit se">
+            </form>
+       <!--  </div> -->
+    </div>
 
 
-        <label for="">Password</label>
-        <input type="password" name="password" placeholder="Your Password">
-
-
-
-        <input type="submit" value="Log In">
+        
 
         <a href="{% url 'new_register'%}">Don't have an account?</a>
 
 
 
 
-    </form>
+
 </body>
 </html>
