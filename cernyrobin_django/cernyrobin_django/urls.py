@@ -40,6 +40,7 @@ urlpatterns = [
     path("verify_account/", cernyrobin.verify_account_page, name="verify_page"),
     path("verify/", cernyrobin.verify_code, name="verify_code"),
     path("captchaimg/", cernyrobin.get_captcha_image, name="captchaimg"),
+    path("email_sent/", cernyrobin.email_sent, name="email_sent"),
 
     # vvv Remove in production
     path("simulate_redirect/", cernyrobin.simulate_redirect,name="simulate_redirect"),
