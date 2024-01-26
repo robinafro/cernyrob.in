@@ -413,6 +413,35 @@ p{
 
 /*DO NOT TOUCH THIS OR IT REALLY FUCKS UP!###################################################################*/
 
+ /*mobile sidebar fuckery*/
+
+
+ #sidebar {
+  height: 100%;
+  width: 0; 
+  position: fixed; 
+  z-index: 1; 
+  top: 0;
+  left: 0;
+  background-color: var(--highLightCr);
+  overflow-x: hidden; 
+  padding-top: 60px; 
+  transition: 0.5s; 
+  display: none;
+}
+
+#sidebar a {
+  padding: 10px 15px;
+  text-decoration: none;
+  font-size: 25px;
+  color: var(--textCr);
+  display: block;
+  transition: 0.3s;
+}
+
+
+
+
 /*New login code*/
 
 
@@ -1263,6 +1292,10 @@ justify-content: space-around;
   #nav-right{
     width: 70vw;
   }
+  #sidebar{
+    width: 0px;
+     display: block; 
+  }
 }
 
 
@@ -2054,38 +2087,4 @@ border: rgb(255, 255, 255) solid 2px;
  */
 
 
-
- /*mobile sidebar fuckery*/
-
-
- #sidebar {
-  height: 100%;
-  width: 0; 
-  position: fixed; 
-  z-index: 1; 
-  top: 0;
-  left: 0;
-  background-color: var(--highLightCr);
-  overflow-x: hidden; 
-  padding-top: 60px; 
-  transition: 0.5s; 
-}
-
-#sidebar a {
-  padding: 10px 15px;
-  text-decoration: none;
-  font-size: 25px;
-  color: var(--textCr);
-  display: block;
-  transition: 0.3s;
-}
-
-#sidebar a:hover {
-  color: #f1f1f1;
-}
-
-
-#hamburger-menu {
-  cursor: pointer;
-}
 
