@@ -227,7 +227,7 @@ def new_register(request):
             if (request.POST.get("email") or "") == "":
                 return redirect("home")
             else:
-                return redirect("verify_account")
+                return redirect("verify_page")
         else:
             messages.error(request, "error happened")
     page = "register"
