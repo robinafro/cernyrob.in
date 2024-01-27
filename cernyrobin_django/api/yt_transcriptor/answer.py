@@ -55,7 +55,7 @@ def get_video_description(video_url):
         print(e)
         return None
 
-def chatbot(questions_path, transcript_path, save_path, youtube_url=None):
+def chatbot(questions_path, transcript_path, save_path, summary_save_path, youtube_url=None):
     questions = ""
     if questions_path:
         try:
@@ -85,9 +85,16 @@ def chatbot(questions_path, transcript_path, save_path, youtube_url=None):
 
     system_message_path = os.path.join(os.path.dirname(__file__), "system_message.txt")
     system_message = ""
+    summary_prompt_path = os.path.join(os.path.dirname(__file__), "summary_prompt.txt")
+    summary_prompt = ""
+
     if os.path.exists(system_message_path):
         with open(system_message_path, encoding="utf-8") as txt:    
             system_message = txt.read()
+
+    if os.path.exists(summary_prompt_path):
+        with open(summary_prompt_path, encoding="utf-8") as txt:
+            summary_prompt = txt.read()
 
     print("System message: " + system_message)
     print("Transcript: " + transcript[0:100])
@@ -133,5 +140,34 @@ def chatbot(questions_path, transcript_path, save_path, youtube_url=None):
                 txt.write(response_text)
     except:
         print("Error while saving answers. Will print to console instead.")
+
+        print(response)
+
+    print("Sending summary prompt...")
+    messages.append({"role": "user", "content": summary_prompt})
+
+    response = openai.chat.completions.create(
+        model=MODEL,
+        messages=messages,
+        temperature=TEMPERATURE,
+        max_tokens=MAX_TOKENS
+    )
+
+    # summary_save_path = os.path.join(os.path.dirname(save_path), os.path.basename(save_path).split(".")[0] + "_summary.txt")
+
+    print("Saving summary to " + summary_save_path)
+
+    try:
+        response_text = response.choices[0].message.content
+
+        if summary_save_path.endswith(".docx") or summary_save_path.endswith(".doc"):
+            doc = Document()
+            doc.add_paragraph(response_text)
+            doc.save(summary_save_path)
+        elif summary_save_path.endswith(".txt"):
+            with open(summary_save_path, "w", encoding="utf-8") as txt:
+                txt.write(response_text)
+    except:
+        print("Error while saving summary. Will print to console instead.")
 
         print(response)

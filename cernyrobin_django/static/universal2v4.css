@@ -1215,7 +1215,7 @@ justify-content: space-around;
 /*Code for submit loading bar*/
 
 #loadingBarContainer {
-  width: 80%;
+  width: 80vw;
   max-width: 600px;
   background-color: #ddd;
   border-radius: 25px;
