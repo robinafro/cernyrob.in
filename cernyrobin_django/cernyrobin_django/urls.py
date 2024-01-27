@@ -72,6 +72,8 @@ urlpatterns = [
     path("pending/", ads.admin_pending, {"subdomain": "reklamy"}, name="admin_pending"),
     path("accept/", ads.admin_accept, {"subdomain": "reklamy"}, name="admin_accept"),
     path("reject/", ads.admin_reject, {"subdomain": "reklamy"}, name="admin_reject"),
+
+    path("manifest.json/", cernyrobin.manifest, name="manifest"),
 ]
 
 if settings.DEBUG:

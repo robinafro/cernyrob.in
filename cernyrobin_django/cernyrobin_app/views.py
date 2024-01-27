@@ -357,3 +357,6 @@ def simulate_redirect(request):
         "target_url" : "https://status.stuckinvim.com"
     }
     return render(request, "global/redirecting.html", context)
+def manifest(request):
+    context = {}
+    return render(request, 'global/manifest.json', context, content_type='application/json')
