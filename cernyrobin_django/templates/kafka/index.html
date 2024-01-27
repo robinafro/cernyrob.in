@@ -5,7 +5,7 @@
 
 <head>
  <link href="{% static 'universal2v4.css' %}" rel="stylesheet">
-
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="/static/assets/kafka.ico">
 <!--     <script src="{% static 'kafka-list.js' %}"></script> -->
     <script src="{% static 'porn.js' %}"></script>
@@ -19,7 +19,7 @@
 
 {%include "global/navbar.html"%}
 
-    <div class="background">
+<!--     <div class="background-center"> -->
         <div id="title-container">
             <h1 class="title">Kafka AI</h1>
             <h2 class="subtitle">Využijte sílu umělé inteligence pro jednodušší učení se a přípravu na testy z dějepisu!</h2>
@@ -82,8 +82,23 @@
         </div>
     </div>
 
-    {% include "disclaimer.html" %}
+<!--     {% include "disclaimer.html" %} -->
 
+<p id="viewportWidth"></p>
+
+<script>
+    // Function to update the viewport width
+    function updateViewportWidth() {
+        var width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+        document.getElementById('viewportWidth').textContent = 'Viewport width: ' + width + 'px';
+    }
+
+    // Call the function on initial load
+    updateViewportWidth();
+
+    // Update the width value whenever the window is resized
+    window.onresize = updateViewportWidth;
+</script>
 
 
 </body>

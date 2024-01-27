@@ -55,6 +55,7 @@
   --dropdownBorderRadius: 20px;
   --mediumBorderSize: 2px;
   --thickBorderSize: 2.5px;
+  --navbarHeight:  clamp(65px, 10vh, 100px);
 
 }
 
@@ -853,7 +854,7 @@ nav{
   background-color: var(--blockCr);
 
   width: 100%;
-  height: 65px;
+  height: 65px; /*thing*/
   display: flex;
   margin: 0px;
   transition: 0.25s;
@@ -898,7 +899,7 @@ nav{
 }
 
 #nav-left > *:first-child{
-  /* FIRST CHILD OF THE LEFT NAVBAR SECTION AKA THE HAMBURGER MENU*/
+  /* FIRST CHILD OF THE LEFT NAVBAR AKA THE HAMBURGER MENU*/
   height: 50%;
   width: auto;
   fill: var(--textCr);
@@ -1259,6 +1260,8 @@ justify-content: space-around;
 
 
 /* SECTION
+
+
  /$$      /$$                 /$$ /$$                                                         /$$                    
 | $$$    /$$$                | $$|__/                                                        |__/                    
 | $$$$  /$$$$  /$$$$$$   /$$$$$$$ /$$  /$$$$$$         /$$$$$$  /$$   /$$  /$$$$$$   /$$$$$$  /$$  /$$$$$$   /$$$$$$$
@@ -1273,7 +1276,7 @@ justify-content: space-around;
 */
 
 
- @media (max-width: 768px) {
+ @media (max-width: 1000px) {
   #nav-left > *:not(:first-child){
     opacity: 0;
     display: none;
@@ -1281,7 +1284,7 @@ justify-content: space-around;
   }
   
   #nav-left > *:first-child{
-    /* FIRST CHILD OF THE LEFT NAVBAR SECTION AKA THE HAMBURGER MENU*/
+    /* FIRST CHILD OF THE LEFT NAVBAR  AKA THE HAMBURGER MENU*/
 
     display: block;
     opacity: 1;

@@ -15,6 +15,33 @@
 
     {%include "global/navbar.html"%}
    <p class="contrast-text">Homepage se předělává</p> 
+
+
+
+
+
+
+
+   <p id="viewportWidth"></p>
+
+   <script>
+       // Function to update the viewport width
+       function updateViewportWidth() {
+           var width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+           document.getElementById('viewportWidth').textContent = 'Viewport width: ' + width + 'px';
+       }
+   
+       // Call the function on initial load
+       updateViewportWidth();
+   
+       // Update the width value whenever the window is resized
+       window.onresize = updateViewportWidth;
+   </script>
+
+
+
+
+
  <!--    <div class="background">
         <div class="scroll-background">
 
