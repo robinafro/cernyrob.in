@@ -55,7 +55,7 @@
   --dropdownBorderRadius: 20px;
   --mediumBorderSize: 2px;
   --thickBorderSize: 2.5px;
-  --navbarHeight:  clamp(65px, 10vh, 100px);
+  --navbarHeight:  65px;
 
 }
 
@@ -88,7 +88,7 @@
 body {
   background-color: var(--bgCr);
   font-family: 'Roboto', sans-serif;
-  margin: 0px;
+  margin: var(--navbarHeight) 0px 0px 0px;
 }
 .warning{
   color: var(--warniningTextCr);
@@ -144,9 +144,10 @@ p{
 }
 
 .subtitle {
-  font-size: 1.5rem;
+  font-size: clamp(16px, 3vw, 24px) ;
   font-weight: bold;
   color: var(--textCr);
+  margin: 13px 10px;
 }
 
 .add-button{
@@ -427,6 +428,15 @@ p{
 
 
 
+/*Newcode*/
+#responsive-page-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+
  /*mobile sidebar fuckery*/
 
 
@@ -434,7 +444,7 @@ p{
   height: 100%;
   width: 0; 
   position: fixed; 
-  z-index: 1; 
+  z-index: 2; 
   top: 0;
   left: 0;
   background-color: var(--highLightCr);
@@ -487,7 +497,7 @@ label{
   height: auto;
   padding-top: clamp(25px, 50px, 2vw);
 /*  */
- 
+ margin-top: 50px;
 }
 
 
@@ -854,20 +864,26 @@ nav{
   background-color: var(--blockCr);
 
   width: 100%;
-  height: 65px; /*thing*/
+  height: var(--navbarHeight); /*thing*/
   display: flex;
   margin: 0px;
   transition: 0.25s;
   border-bottom: var(--borderCr) solid var(--mediumBorderSize); 
   background-color: var(--blockCr);
-  z-index: 2;
+  z-index: 3;
   
   padding: 0px;
   display: flex;
   justify-content: space-between;
+  position: fixed;
+  top: 0;
+  right: 0;
 
 }
 
+#sidebar-item-container{
+  padding-left: 20px;
+}
 
 
 
@@ -968,6 +984,7 @@ nav *{
   position: relative;
   z-index: 1;
   transition: background-color, border 0.2s ease-in-out;
+  width: clamp(55vw, 1000px, 85vw);
 }
 
 .video-container:hover{
@@ -1276,7 +1293,7 @@ justify-content: space-around;
 */
 
 
- @media (max-width: 1000px) {
+ @media (max-width: 1000px) { /* if (phone){do this}*/
   #nav-left > *:not(:first-child){
     opacity: 0;
     display: none;
@@ -1298,7 +1315,25 @@ justify-content: space-around;
     width: 0px;
      display: block; 
   }
+  .kafka-thumbnail{
+    aspect-ratio: 16/9;
+    width: 85vw;
+    height: 47vw;
+  }
+  .video-description-container{
+    display: none;
+  }
+  .video-container::after{
+    display: none;
+  }
+  .video-container::after{
+    display: none;
+  }
 }
+
+
+
+
 
 
 
@@ -1895,7 +1930,7 @@ justify-content: space-around;
   margin-top: 0.5vh;
 }
 
-#login-holder {
+/* #login-holder {
 transform: translate(-50%, -50%);
 top: 50%;
 left: 50%;
@@ -1918,7 +1953,7 @@ height: 32%;
   padding-bottom: 2.5%;
 
   position: absolute;
-}
+} */
 
 .login-line {
   width: 90%;
