@@ -11,6 +11,7 @@ class Kafka(models.Model):
     language = models.CharField(max_length=10, null=True)
     transcript = models.CharField(max_length=999999, null=True)
     answers = models.CharField(max_length=99999, null=True)
+    summary = models.CharField(max_length=99999, null=True)
     timestamp = models.FloatField(default=0, null=True)
     custom_answers = models.JSONField(default=str, null=True)
 

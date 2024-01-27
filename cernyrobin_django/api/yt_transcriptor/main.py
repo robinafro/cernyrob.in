@@ -152,11 +152,11 @@ def run(video_url, language="en-US", callback=None):
     answers_path = os.path.join(get_folder('output_dir'), f'{name}_answers.txt')
 
     if not os.path.exists(answers_path):
-        answer.chatbot(None, os.path.join(get_folder('output_dir'), f'{name}.txt'), os.path.join(get_folder('output_dir'), f'{name}_answers.txt'), youtube_url=video_url)
+        answer.chatbot(None, os.path.join(get_folder('output_dir'), f'{name}.txt'), os.path.join(get_folder('output_dir'), f'{name}_answers.txt'), os.path.join(get_folder('output_dir'), f'{name}summary.txt'), youtube_url=video_url)
 
     if os.path.exists(answers_path):
-        return open_transcript(f'{name}_answers', only_return=True), open_transcript(name, only_return=True)
+        return open_transcript(f'{name}_answers', only_return=True), open_transcript(name, only_return=True), open_transcript(f'{name}_summary', only_return=True)
     else:
-        return "Couldn't get answers", "Couldn't get transcript"
+        return "Couldn't get answers", "Couldn't get transcript", "Couldn't get summary"
 
 initialize_folders()

@@ -240,8 +240,8 @@ def generate_answers(video_url, language, user=None, runbackground=False):
                 job.total_chunks = max_chunks
                 job.save()
             
-            answers, transcript = yt_transcriptor.run(video_url, language, callback=progress_callback)
-            print(answers, transcript)
+            answers, transcript, summary = yt_transcriptor.run(video_url, language, callback=progress_callback)
+            print(answers, transcript, summary)
             # Save to database
             kafka, created = Kafka.objects.get_or_create(video_url=video_url)
 
@@ -251,6 +251,7 @@ def generate_answers(video_url, language, user=None, runbackground=False):
             if user is None:
                 kafka.answers = answers
                 kafka.transcript = transcript
+                kafka.summary = summary
                 kafka.language = language
                 kafka.video_info = json.loads(video_info)
             else:
