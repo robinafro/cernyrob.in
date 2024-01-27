@@ -450,6 +450,8 @@ p{
   color: var(--textCr);
   display: block;
   transition: 0.3s;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 
