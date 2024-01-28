@@ -279,7 +279,7 @@ p{
 }
 
 #video-embed {
-  width: 100%;
+  width: clamp(55vw, 1000px, 95vw);
   aspect-ratio: 16/9;
   margin: 1rem;
   border-radius: 10px;
@@ -988,7 +988,13 @@ nav *{
   z-index: 1;
   transition: background-color, border 0.2s ease-in-out;
   width: clamp(55vw, 1000px, 85vw);
-}
+} 
+
+
+
+
+
+
 
 .video-container:hover{
   border: rgb(255, 255, 255) solid var(--thickBorderSize); 
