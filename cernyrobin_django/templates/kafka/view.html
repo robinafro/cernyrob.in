@@ -19,90 +19,88 @@
     {%include "global/navbar.html"%}
 
 
-    <div class="background-center">
 
+<div id="responsive-page-container">
 
-        <div id="page-container">
-
-
-                <h1 id="video-name">{{title}}</h1>
-
-            <iframe id="video-embed" src="https://www.youtube.com/embed/{{ video_id }}" title="{{ title}}"
-                frameborder="0"
-                allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen></iframe>
-
-            <h2 class="view-subheading">Odpovědi</h2>
-            <p hidden id="answers-copy">{{answers_copy}}</p>
-            <p onclick="navigator.clipboard.writeText(document.getElementById('answers-copy').textContent)">📋</p>
-            <div id="view-answers-container">
-                {% for question, answer in qa_pairs %}
-                <div class="pair-container">
-                    <div class="pair-container-heading">
-
-                        
-                        <p class="question-container">
-                            Otázka  {{question}}
-                            
-                            
-                        </p>
-                        <p class="wrapping-button" onclick="changeOpenStatus()"><!-- Rozbalit  -->⮟⮝</p>
-                    </div>
-
-                    
-                    <p class="answer-text">
-                        Odpověd {{answer}}
-
-                    </p>
-
-
-                </div>
-                {%endfor%}
-
-
-                {%if is_staff%}
-                <img onclick="enterEditMode()" style="width: 50px; padding: 1px; margin: 1px;" id="edit-button" src="/static/assets/Untitled.png" alt="">
-
-
-                    
-                    
-                    
+    
+    <h1 id="video-name">{{title}}</h1>
+    
+    <iframe id="video-embed" src="https://www.youtube.com/embed/{{ video_id }}" title="{{ title}}"
+    frameborder="0"
+    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowfullscreen></iframe>
+    
+    <h2 class="view-subheading">Odpovědi</h2>
+    <p hidden id="answers-copy">{{answers_copy}}</p>
+    <p onclick="navigator.clipboard.writeText(document.getElementById('answers-copy').textContent)">📋</p>
+    <div id="view-answers-container">
+        {% for question, answer in qa_pairs %}
+        <div class="pair-container">
+            <div class="pair-container-heading">
                 
                 
-                <textarea name="edited_answers" id="text-area" rows="12" cols="100" form="edit-form"> 
-                    {{answers}}
-                </textarea>
-                <textarea readonly form="edit-form" style="display: none;" name="video_id" id="text-area-id" cols="15" rows="4">
+                <p class="question-container">
+                    Otázka  {{question}}
                     
-                    {{video_id}}
-                </textarea>
-                
-                <form method="POST" action="" id="edit-form">
-                    <input type="submit">
-                    {%csrf_token%}
                     
-                </form>
-                {%endif%}
-
-
+                </p>
+                <p class="wrapping-button" onclick="changeOpenStatus()"><!-- Rozbalit  -->⮟⮝</p>
             </div>
+            
+            
+            <p class="answer-text">
+                Odpověd {{answer}}
                 
-
-            <h2 class="view-subheading">Transkript videa</h2>
-
-<!--             <div id="view-transcript-container"> -->
-                <div class="transcript-container">
-                    <p class="transcript-text">{{transcript}}</p>
-                </div>
-
-
-
-<!--             </div> -->
-
+            </p>
+            
+            
         </div>
+        {%endfor%}
+        
+        
+        {%if is_staff%}
+        <img onclick="enterEditMode()" style="width: 50px; padding: 1px; margin: 1px;" id="edit-button" src="/static/assets/Untitled.png" alt="">
+        
+        
+        
+        
+        
+        
+        
+        <textarea name="edited_answers" id="text-area" rows="12" cols="100" form="edit-form"> 
+            {{answers}}
+        </textarea>
+        <textarea readonly form="edit-form" style="display: none;" name="video_id" id="text-area-id" cols="15" rows="4">
+            
+            {{video_id}}
+        </textarea>
+        
+        <form method="POST" action="" id="edit-form">
+            <input type="submit">
+            {%csrf_token%}
+            
+        </form>
+        {%endif%}
+        
+        
     </div>
-
-    {% include "disclaimer.html" %}
+    
+    
+    <h2 class="view-subheading">Transkript videa</h2>
+    
+    <!--             <div id="view-transcript-container"> -->
+        <div class="transcript-container">
+            <p class="transcript-text">{{transcript}}</p>
+        </div>
+        
+        
+        
+        <!--             </div> -->
+        
+    </div>
+</div>
+</div>
+{% include "disclaimer.html" %}
 </body>
 
 </html>
