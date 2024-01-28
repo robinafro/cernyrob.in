@@ -810,7 +810,7 @@ display: flex;
 
 .dropdown:hover .dropdown-content {display: block;}
 
-.dropdown:hover #dropdown-head {
+.dropdown:hover .dropdown-head {
   
   background-color: var(--borderCr);
   padding-bottom: 12px;
