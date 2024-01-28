@@ -1,4 +1,3 @@
-console.log("loaded")
 document.getElementById('hamburger-menu').addEventListener('click', function() {
     console.log(document.getElementById('sidebar').style.width)
     if (document.getElementById('sidebar').style.width == "0px" || document.getElementById('sidebar').style.width == ""){
