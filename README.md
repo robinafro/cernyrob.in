@@ -5,13 +5,13 @@ a portfolio website used to practice my coding skills <-- outdated af descriptio
 ### This is the progress on individual aspects of each page
 | Page | HTML | CSS | JS | Mobile responsive
 | -| - | - | - | - |
-| Home | ❌ | ❌ | ❌ | ✅ |
+| Home | ❌ | ❌ | ❌ | ❌ |
 | Login | ✅ | ✅ | ❌ | ✅ |
 | Register | ✅ | ✅ | ❌ | ✅ |
 | Account | ❌ | ❌ | ❌ | ❌ |
 | Verify account | ❌ | ❌ | ❌ | ❌ |
 | Redirect | ❌ | ❌ | ❌ | ❌ |
 | Clicker | ❌ | ❌ | ❌ | ❌ |
-| Kafka Home | ✅ | ✅ | ❌ | ❌ |
-| Kafka Video | ✅ | ✅ | ❌ | ❌ |
+| Kafka Home | ✅ | ✅ | ❌ | ✅ |
+| Kafka Video | ✅ | ✅ | ❌ | ✅ |
 | Kafka Submit | ❌ | ❌ | ❌ | ❌ |
