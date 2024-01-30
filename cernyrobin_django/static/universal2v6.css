@@ -1340,6 +1340,9 @@ justify-content: space-around;
   .video-container::after{
     display: none;
   }
+  #invite-link{
+    display: none;
+  }
 }
 
 
