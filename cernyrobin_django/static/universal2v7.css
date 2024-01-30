@@ -1343,6 +1343,9 @@ justify-content: space-around;
   #invite-link{
     display: none;
   }
+  #invite{
+    display: none;
+  }
 }
 
 
