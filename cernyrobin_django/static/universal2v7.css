@@ -468,6 +468,12 @@ p{
   overflow: hidden;
 }
 
+#sidebar-dropdown-conatiner{
+  max-height: 0px;
+  overflow: hidden;
+  transition: max-height 0.5s cubic-bezier(.77,0,.18,1);
+}
+
 
 
 
