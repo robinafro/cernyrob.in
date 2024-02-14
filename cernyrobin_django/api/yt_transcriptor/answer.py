@@ -17,7 +17,7 @@ dotenv.load_dotenv()
 STUCKINVIM_KEY = os.getenv("STUCKINVIM_KEY")
 
 TEMPERATURE = 0.35 # Tweaked manually
-MAX_TOKENS = 1000
+MAX_TOKENS = 1250
 
 if not STUCKINVIM_KEY:
     print("Missing API key. Please set the STUCKINVIM_KEY environment variable.")
