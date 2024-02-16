@@ -17,6 +17,54 @@ DESCRIPTION_FORMAT = r".*/s(?:\s+\d+.\s+.*?)+(?=\n\n|\Z)" #r"\d+\.\s(?:.+?\?)" #
 if os.getenv("NORATELIMIT") == "1":
     GENERATE_RATE_LIMIT = 0
 
+def strip_yapping(s):
+    for i, char in enumerate(s):
+        if char.isdigit():
+            return s[i:]
+    return s
+
+def parse_numbered_text(text):
+    segments = re.split(r'(\d+\.)', text)
+
+    extracted_parts = []
+    last_number = 0
+    current_part = ''
+
+    for segment in segments:
+        if re.match(r'\d+\.', segment):
+            current_number = int(segment.split('.')[0])
+            if current_number == last_number + 1:
+                if current_part:
+                    extracted_parts.append(current_part.strip())
+                current_part = segment
+                last_number = current_number
+            else:
+                current_part += segment
+        else:
+            current_part += segment
+
+    if current_part:
+        extracted_parts.append(current_part.strip())
+
+    return extracted_parts
+
+def strip_number(arr):
+    new_arr = []
+
+    for line in arr:
+        digit_count = 0
+        for char in line:
+            if char.isdigit(): 
+                digit_count += 1
+            else:
+                break
+
+        new_line = line[(digit_count + 2):]
+
+        new_arr.append(new_line)
+
+    return new_arr
+
 def modify_questions(video_url, questions):
 #    print(video_url)
     kafka = Kafka.objects.get(video_url=video_url)
@@ -334,6 +382,7 @@ def kafka_get(request, subdomain):
         response["message"] = "OK"
         response["data"] = {
             "answers": kafka.answers,
+            "list_answers": strip_number(parse_numbered_text(strip_yapping(kafka.answers))),
             "transcript": kafka.transcript,
             "language": kafka.language,
             "video_info": kafka.video_info,
