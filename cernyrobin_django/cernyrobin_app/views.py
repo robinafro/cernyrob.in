@@ -265,10 +265,10 @@ def verify_submit(request):
         email = request.POST.get("email")
 
         if not email:
-            return HttpResponse("400 Bad Request")
+            return HttpResponse("400 Bad Request (debug: no email)")
         
         if not re.match(r"\w+\.[\w]{2,4}\.2[\d]{3}@skola\.ssps\.cz", email) and email != "actulurus@gmail.com": # There might be an issue with the escape characters near the dots. Look into this first if the verification seems to be broken.
-            return HttpResponse("400 Bad Request")
+            return HttpResponse("400 Bad Request (debug: email does not match regex)")
     
         #! Check if the email is already being used
         for user in UserProfile.objects.all():
