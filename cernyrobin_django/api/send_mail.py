@@ -5,11 +5,19 @@ import random
 import string
 import os
 
+def get_password():
+    if os.path.exists("../smtp.txt"):
+            with open("../smtp.txt", 'r') as file:
+                contents = file.read()
+            return contents
+    else:
+        return os.getenv("SMTP_AUTH")
+    
 def generate_verify_code(length):
     letters = string.ascii_letters
     return ''.join(random.choice(letters) for i in range(length))
 
-def verify_mail(receiver_email, username, verify_code, password=os.getenv("SMTP_AUTH")):
+def verify_mail(receiver_email, username, verify_code, password=get_password()):
     # Static info:
     login = "verify@cernyrob.in"
     smtp_server = "smtp.seznam.cz"
