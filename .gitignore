@@ -31,6 +31,8 @@ __pycache__/
 *.cpython-311.pyc
 
 /cernyrobin_django/db.sqlite3
+/smpt.txt
+smtp.txt
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
