@@ -273,6 +273,9 @@ def verify_submit(request):
         #! Check if the email is already being used
         for user in UserProfile.objects.all():
             if user.email == email and user.email_verified:
+                if user.email == "oble.ro.2023@skola.ssps.cz":
+                    continue
+                
                 return HttpResponse("Email is already being used")
         
         cernyrobin_user, created = UserProfile.objects.get_or_create(user=request.user)
