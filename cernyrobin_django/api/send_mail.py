@@ -45,7 +45,11 @@ def verify_mail(receiver_email, username, verify_code, password=os.getenv("SMTP_
             text = msg.as_string()
             server.sendmail(sender_email, receiver_email, text)
             status["sent_successfully"] = True
-            return status
+            # return status
     except Exception as e:
         status["error_message"] = str(e)
-        return status
+        # return status
+    print(password)
+    print(status)
+
+    return status
