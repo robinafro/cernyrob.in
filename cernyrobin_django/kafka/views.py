@@ -72,7 +72,7 @@ def index(request):
     return render(request, "kafka/index.html", context)
 
 
-def view(request):
+def view(request, is_custom=False):
     if request.method == "GET":
         id = request.GET.get("id").strip(" ")
 
@@ -83,7 +83,7 @@ def view(request):
 
         video_info = json.loads(get_video_info.get_video_info(video_url))
 
-        answers = api_views.get_answers(video_url, request.user).strip()
+        answers = api_views.get_answers(video_url, request.user, is_custom).strip()
         transcript = api_views.get_transcript(video_url).strip()
 
         ads = ads_views.get_ads(length=2)
@@ -152,6 +152,9 @@ def view(request):
             return redirect("kafka_list")
         else:
             return HttpResponse("Nuh uh")
+
+def view_custom(request):
+    return view(request, True)
 
 def submit(request):
     if request.method == "GET":

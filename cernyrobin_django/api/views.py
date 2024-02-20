@@ -75,7 +75,7 @@ def modify_questions(video_url, questions):
 
     return "Success"
 
-def get_answers(video_url, user):
+def get_answers(video_url, user, is_custom):
     try:
         kafka = Kafka.objects.get(video_url=video_url)
 
@@ -85,7 +85,10 @@ def get_answers(video_url, user):
             try:
                 custom_answers = json.loads(kafka.custom_answers)
 
-                return custom_answers.get(user.username) or kafka.answers or "Unable to get answers"
+                if is_custom:
+                    return custom_answers.get(user.username) or "Unable to get answers"
+                else:
+                    return kafka.answers or "Unable to get answers"
             except Exception as e:
                 print("-"*60)
                 print(e)
