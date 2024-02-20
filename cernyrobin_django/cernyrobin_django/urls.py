@@ -45,6 +45,7 @@ urlpatterns = [
 
     # vvv Remove in production
     path("simulate_redirect/", cernyrobin.simulate_redirect,name="simulate_redirect"),
+    # ^^^ did not age well
 
     path("clicker/", cernyrobin.clicker_page, name="clicker"),
     path("clicker/add_click", cernyrobin.add_click, name="add_click"),
