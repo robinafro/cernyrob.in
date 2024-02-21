@@ -365,5 +365,10 @@ def manifest(request):
     return render(request, 'global/manifest.json', context, content_type='application/json')
 
 def email_sent(request):
-    context = {"user": request.user}
+    email = ""
+
+    if UserProfile.objects.filter(user=request.user).exists():
+        email = UserProfile.objects.get(user=request.user).email
+    
+    context = {"user": request.user, "user_email": email}
     return render(request, "global/sent_mail.html", context)
