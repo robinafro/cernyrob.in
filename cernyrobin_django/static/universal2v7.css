@@ -49,6 +49,7 @@
 --bannerBgCr: #ffff00;
 --warniningTextCr: #ff0000;
 --navButtonTextCr: #ffffff;
+--lowTextCr: #bfbfbf;
 
 
   /*NON color variables*/
@@ -429,7 +430,11 @@ p{
                                                                                                 
 */
 
+.low-text{
+  color: var(--lowTextCr);
+  line-height: 1.6;
 
+}
 
 /*Newcode*/
 #responsive-page-container{

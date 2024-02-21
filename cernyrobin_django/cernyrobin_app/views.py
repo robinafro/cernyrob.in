@@ -372,3 +372,8 @@ def email_sent(request):
     
     context = {"user": request.user, "user_email": email}
     return render(request, "global/sent_mail.html", context)
+
+def verification_success(request):
+    context = {}
+    return render(request, "global/verification_success.html", context)
+
