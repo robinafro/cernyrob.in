@@ -363,3 +363,7 @@ def simulate_redirect(request):
 def manifest(request):
     context = {}
     return render(request, 'global/manifest.json', context, content_type='application/json')
+
+def email_sent(request):
+    context = {"user": request.user}
+    return render(request, "global/sent_mail.html", context)
