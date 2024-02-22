@@ -163,6 +163,18 @@ p{
   margin: 15px;
   transition: 0.2s ease-in-out
 }
+.regen-button{
+  width: 200px;
+  height: 40px;
+  background-color: var(--borderCr);
+  color: var(--textCr);
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 15px;
+  transition: 0.2s ease-in-out
+}
 
 .add-button:hover{
   background-color: var(--addButtonTriggerCr);
@@ -429,6 +441,50 @@ p{
                                                                                                 
                                                                                                 
 */
+#answer-intro-splitter{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+#answer-intro{
+  display: flex;
+  width: 65%;
+  flex-direction: column;
+  align-items: center;
+}
+
+.copy-icon{
+  width: 30px;
+  height: 30px;
+  margin: 10px;
+  cursor: pointer;
+
+}
+
+.answer-intro-side{
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  align-items: center;
+}
+.answer-intro-side:first-child{
+  padding-right: 150px;
+  padding-left: 10px;
+}
+#answer-intro-heading{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+#answer-intro-heading > *{
+  margin: 10px;
+}
+
+.white-svg{
+  fill: var(--textCr);
+}
+
 
 .low-text{
   color: var(--lowTextCr);
@@ -2158,4 +2214,6 @@ height: 32%;
     margin: 0px 0px 0px 10px;
   }
   
-  
+/*   *{
+    border: 1px solid red;
+  } */
