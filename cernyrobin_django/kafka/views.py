@@ -67,7 +67,6 @@ def index(request):
     context["current_user"] = request.user
     context["cernyrobin_user"] = get_user(request)
     context["logged_in"] = request.user.is_authenticated
-    print(context)
 
     return render(request, "kafka/index.html", context)
 
