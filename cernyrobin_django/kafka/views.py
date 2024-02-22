@@ -64,6 +64,8 @@ def index(request):
                 "questions" : parse_numbered_text(strip_yapping(video["description"])),
             }
         )
+
+    context["recent_video"] = api_views.get_recent_video()
     context["current_user"] = request.user
     context["cernyrobin_user"] = get_user(request)
     context["logged_in"] = request.user.is_authenticated

@@ -101,6 +101,12 @@ def get_answers(video_url, user, is_custom):
     except Kafka.DoesNotExist:
         return "Unable to get answers"
     
+def get_recent_video():
+    try:
+        return Kafka.objects.filter(video_info__isnull=False).latest("timestamp").video_url
+    except Kafka.DoesNotExist:
+        return ""
+    
 def get_transcript(video_url):
     video_url = video_url.strip(" ")
 
