@@ -57,6 +57,74 @@
         </div>
 
 
+        <!-- start of copied code -->
+        <div class="title-container">
+            <div class="title">Submit</div>
+        </div>
+
+
+        <div id="page-container">
+            <div id="submit-form-container">
+                <div id="submit-form-title" class="subtitle">Video URL</div>
+
+                <div id="submit-form">
+                    {% csrf_token %}
+
+                    <input type="text" name="video_url" id="submit-video-url" class="submit-form-input" required>
+                </div>
+
+                <button id="submit-button">Odeslat</button>
+            </div>
+
+            <div id="loadingContainer">
+
+                <div class="spinnerContainer">
+                    <div class=" spinner">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                </div>
+            </div>
+            <div id="barContainer">
+
+                <div id="loadingBarContainer">
+
+
+                    <div id="loadingBar"></div>
+                </div>
+            </div>
+
+            <!-- <div id="barDetails">
+
+
+                <p id="remainingTime">Time: unknown</p>
+                <p id="percentage">Percentage: unknown</p>
+
+            </div> -->
+
+            <div id="submit-response-container">
+                <p id="submit-response" style="visibility: hidden">This is the response</p>
+            </div>
+
+            <div id="submit-info-container">
+                <div class="subtitle">Jak to funguje?</div>
+
+                <p class="submit-info-text">
+                    Tento web používá umělou inteligenci, která dokáže odpovědět na otázky na základě transkriptu videa.
+                    Pokud chcete přidat nové video, stačí napsat jeho URL do formuláře nahoře.
+                    Odpovědi se automaticky vygenerují a přidají na web. To může trvat až 10 minut.
+                    Video se přidá i pokud opustíte stránku.
+                </p>
+
+                <div class="subtitle">Disclaimer</div>
+
+                <p class="submit-info-text">
+                    Pamatujte, že bla bla bla legal bullshit aby nas nevyhodili xdd nekdo to sem prosim doplnte lol 👺👺👺👺
+                </p>
+        <!-- end of copied code -->
+<!-- 
+
         <div id="page-container">
             <div id="submit-form-container">
                 <div id="submit-form-title" class="subtitle">Video URL</div>
@@ -88,7 +156,7 @@
                     <div id="loadingBar"></div>
                 </div>
             </div>
-        
+         -->
         
 
     
