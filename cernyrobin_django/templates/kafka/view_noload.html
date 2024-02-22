@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 
 <html lang="cs">
@@ -57,40 +56,6 @@
         </div>
 
 
-        <div id="page-container">
-            <div id="submit-form-container">
-                <div id="submit-form-title" class="subtitle">Video URL</div>
-        
-                <div id="submit-form">
-                    {% csrf_token %}
-        
-                    <input type="text" name="video_url" id="submit-video-url" class="submit-form-input" required>
-                </div>
-        
-                <button id="submit-button">Odeslat</button>
-            </div>
-        
-            <div id="loadingContainer">
-        
-                <div class="spinnerContainer">
-                    <div class=" spinner">
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                    </div>
-                </div>
-            </div>
-            <div id="barContainer">
-        
-                <div id="loadingBarContainer">
-        
-        
-                    <div id="loadingBar"></div>
-                </div>
-            </div>
-        
-        
-
     
         
         <p hidden id="answers-copy">{{answers_copy}}</p>
@@ -148,8 +113,6 @@
         
         
     </div>
-
-    
     
     
     <h2 class="view-subheading">Transkript videa</h2>
