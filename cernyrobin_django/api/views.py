@@ -202,6 +202,11 @@ def generate_answers(video_url, language, user=None, runbackground=False):
             system_data[0].save()
             print("C")
         
+        job_id = id_from_url(video_url)
+
+        if user is not None:
+            job_id += user.username
+
         try:
             print("Getting kafak object")
             print("video_url", video_url)
@@ -213,7 +218,7 @@ def generate_answers(video_url, language, user=None, runbackground=False):
                 kafka.video_info = json.loads(video_info)
             print(kafka.video_info)
             response["code"] = 201
-            response["message"] = id_from_url(video_url)
+            response["message"] = job_id
             # response["data"] = {
             #     "answers": kafka.answers,
             #     "transcript": kafka.transcript,
@@ -235,7 +240,7 @@ def generate_answers(video_url, language, user=None, runbackground=False):
         job = None
         try:
             print("Finding job")
-            job = Job.objects.get(job_id=id_from_url(video_url).strip(" "))
+            job = Job.objects.get(job_id=job_id.strip(" "))
             
             job_already_exists = True
         except Exception as e:
@@ -249,7 +254,7 @@ def generate_answers(video_url, language, user=None, runbackground=False):
             job_already_exists = False
             
         if job_already_exists:
-            return JsonResponse(data={"code": 200, "message": id_from_url(video_url)})
+            return JsonResponse(data={"code": 200, "message": job_id})
         else:
             if rate_limited:
                 return JsonResponse(data={"code": 400, "message": "Rate limit exceeded"})
@@ -258,9 +263,9 @@ def generate_answers(video_url, language, user=None, runbackground=False):
             system_data[0].last_generated = datetime.datetime.now().replace(tzinfo=None).timestamp()
             system_data[0].save()
             print("Set last generated")
-            print("Creating job with id " + id_from_url(video_url))
+            print("Creating job with id " + job_id)
             job = Job.objects.create(
-                job_id = id_from_url(video_url).strip(" "),
+                job_id = job_id.strip(" "),
                 video_url=video_url,
                 created = datetime.datetime.now().replace(tzinfo=None).timestamp()
             )
@@ -347,7 +352,7 @@ def generate_answers(video_url, language, user=None, runbackground=False):
 
             daemon.start()
 
-            return JsonResponse(data={"code": 200, "message": id_from_url(video_url)})
+            return JsonResponse(data={"code": 200, "message": job_id})
         else:
             return run()
         
