@@ -1404,6 +1404,7 @@ justify-content: space-around;
     opacity: 0;
     display: none;
     
+    
   }
   
   #nav-left > *:first-child{
@@ -1441,6 +1442,21 @@ justify-content: space-around;
   #invite{
     display: none;
   }
+
+  #answer-intro-splitter {
+    width: 100vw;
+  }
+  .answer-intro-side:first-child{
+    padding-right: 0px;
+    padding-left: 0px;
+  
+  }
+  .answer-intro-side > *{
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+
 }
 
 
