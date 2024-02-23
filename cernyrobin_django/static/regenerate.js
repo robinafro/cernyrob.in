@@ -142,25 +142,25 @@ document.addEventListener('DOMContentLoaded', function () {
                     while (true) {
                         let status = await fetchData(id);
 
-                        if (status == true) {
+/*                         if (status == true) {
                             // Redirect to view page
                             var view = '/kafka/view?id=' + id;
 
                             window.location.href = view;
 
                             break
-                        }
+                        } */
 
                         await sleep(10000); // Sleep for 1000 milliseconds
                     }
                 }
 
                 continuousFetch(id)
-            } else if (jsonData.code == 201) {
+            } /* else if (jsonData.code == 201) {
                 let id = jsonData.message;
 
                 window.location.href = '/kafka/view?id=' + id;
-            } else {
+            } */ else {
                 document.getElementById('submit-response').style.visibility = 'visible';
                 document.getElementById('submit-response').textContent = jsonData.message;
 
