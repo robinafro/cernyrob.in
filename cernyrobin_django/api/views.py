@@ -213,21 +213,23 @@ def generate_answers(video_url, language, user=None, runbackground=False):
             print(type(video_url))
             kafka = Kafka.objects.get(video_url=video_url) 
             print("done")
-            if kafka.video_info is None or kafka.video_info == {} or kafka.video_info is {}:
-                print("A") 
-                kafka.video_info = json.loads(video_info)
-            print(kafka.video_info)
-            response["code"] = 201
-            response["message"] = job_id
-            # response["data"] = {
-            #     "answers": kafka.answers,
-            #     "transcript": kafka.transcript,
-            #     "language": language,
-            #     "video_info": (kafka.video_info),
-            #     "video_url": video_url,
-            # }
 
-            return JsonResponse(data=response)
+            if kafka.custom_answers is None or kafka.custom_answers.get(user.username):
+                if kafka.video_info is None or kafka.video_info == {} or kafka.video_info is {}:
+                    print("A") 
+                    kafka.video_info = json.loads(video_info)
+                print(kafka.video_info)
+                response["code"] = 201
+                response["message"] = job_id
+                # response["data"] = {
+                #     "answers": kafka.answers,
+                #     "transcript": kafka.transcript,
+                #     "language": language,
+                #     "video_info": (kafka.video_info),
+                #     "video_url": video_url,
+                # }
+
+                return JsonResponse(data=response)
         except Exception as e:
             print(e)
             kafka = None
@@ -254,6 +256,7 @@ def generate_answers(video_url, language, user=None, runbackground=False):
             job_already_exists = False
             
         if job_already_exists:
+            print("already exists")
             return JsonResponse(data={"code": 200, "message": job_id})
         else:
             if rate_limited:
@@ -302,7 +305,7 @@ def generate_answers(video_url, language, user=None, runbackground=False):
                 job.total_chunks = max_chunks
                 job.save()
             
-            answers, transcript, summary = yt_transcriptor.run(video_url, language, callback=progress_callback)
+            answers, transcript, summary = yt_transcriptor.run(video_url, language, callback=progress_callback, ignore_existing=True)
             print(answers, transcript, summary)
             # Save to database
             kafka, created = Kafka.objects.get_or_create(video_url=video_url)
@@ -464,6 +467,9 @@ def kafka_job(request, subdomain):
             return HttpResponse("Bad request")
         
         try:
+            for job in (Job.objects.all()):
+                print(job.job_id)
+
             job = Job.objects.get(job_id=job_id.strip(" "))
 
             return JsonResponse(data={
