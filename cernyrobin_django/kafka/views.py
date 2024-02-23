@@ -196,7 +196,7 @@ def submit(request):
         return response
 
 def regenerate(request):
-    if request.method == "POST" and request.is_authenticated:
+    if request.method == "POST" and request.user.is_authenticated:
         #! Check if the user has a verified email
         # if not request.user.email_verified:
         #     return HttpResponse("403 Forbidden")
