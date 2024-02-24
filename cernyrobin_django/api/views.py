@@ -210,13 +210,15 @@ def generate_answers(video_url, language, user=None, runbackground=False):
             print("video_url", video_url)
             kafka = Kafka.objects.get(video_url=video_url) 
 
-            if kafka.custom_answers is not None and user is not None and kafka.custom_answers.get(user.username):
+            custom_answers = json.loads(kafka.custom_answers) if kafka.custom_answers else None
+
+            if custom_answers is not None and user is not None and custom_answers.get(user.username):
                 response["code"] = 418
                 response["message"] = "Already generated for user"
 
                 return JsonResponse(data=response)
 
-            if kafka.custom_answers is None or kafka.custom_answers.get(user.username):
+            if custom_answers is None or custom_answers.get(user.username):
                 if kafka.video_info is None or kafka.video_info == {} or kafka.video_info is {}:
                     kafka.video_info = json.loads(video_info)
 
