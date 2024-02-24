@@ -197,10 +197,8 @@ def generate_answers(video_url, language, user=None, runbackground=False):
         print("Created system data")
         
         if not system_data[0].last_generated:
-            print("B")
             system_data[0].last_generated = datetime.datetime.now().replace(tzinfo=None).timestamp()
             system_data[0].save()
-            print("C")
         
         job_id = id_from_url(video_url)
 
@@ -208,17 +206,20 @@ def generate_answers(video_url, language, user=None, runbackground=False):
             job_id += user.username
 
         try:
-            print("Getting kafak object")
+            print("Getting kafka object")
             print("video_url", video_url)
-            print(type(video_url))
             kafka = Kafka.objects.get(video_url=video_url) 
-            print("done")
+
+            if kafka.custom_answers is not None and user is not None and kafka.custom_answers.get(user.username):
+                response["code"] = 418
+                response["message"] = "Already generated for user"
+
+                return JsonResponse(data=response)
 
             if kafka.custom_answers is None or kafka.custom_answers.get(user.username):
                 if kafka.video_info is None or kafka.video_info == {} or kafka.video_info is {}:
-                    print("A") 
                     kafka.video_info = json.loads(video_info)
-                print(kafka.video_info)
+
                 response["code"] = 201
                 response["message"] = job_id
                 # response["data"] = {
@@ -305,8 +306,10 @@ def generate_answers(video_url, language, user=None, runbackground=False):
                 job.total_chunks = max_chunks
                 job.save()
             
-            answers, transcript, summary = yt_transcriptor.run(video_url, language, callback=progress_callback, ignore_existing=True)
-            print(answers, transcript, summary)
+            is_regen = user is not None
+
+            answers, transcript, summary = yt_transcriptor.run(video_url, language, callback=progress_callback, ignore_existing=True, is_regen=is_regen)
+            
             # Save to database
             kafka, created = Kafka.objects.get_or_create(video_url=video_url)
 
@@ -467,9 +470,6 @@ def kafka_job(request, subdomain):
             return HttpResponse("Bad request")
         
         try:
-            for job in (Job.objects.all()):
-                print(job.job_id)
-
             job = Job.objects.get(job_id=job_id.strip(" "))
 
             return JsonResponse(data={

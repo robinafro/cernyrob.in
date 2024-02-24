@@ -17,6 +17,7 @@ dotenv.load_dotenv()
 STUCKINVIM_KEY = os.getenv("STUCKINVIM_KEY")
 
 TEMPERATURE = 0.35 # Tweaked manually
+REGEN_TEMPERATURE = 0.45
 MAX_TOKENS = 1250
 
 if not STUCKINVIM_KEY:
@@ -47,7 +48,7 @@ def get_video_description(video_url):
         return None
     elif not video_url.startswith("http") and not video_url.startswith("www") and not video_url.startswith("youtube"):
         video_url = "https://www.youtube.com/watch?v=" + video_url
-    print(video_url)
+        
     try:
         yt = YouTube(video_url)
         return yt.initial_data["engagementPanels"][1]["engagementPanelSectionListRenderer"]["content"]["structuredDescriptionContentRenderer"]["items"][1]["expandableVideoDescriptionBodyRenderer"]["attributedDescriptionBodyText"]["content"]
@@ -55,7 +56,14 @@ def get_video_description(video_url):
         print(e)
         return None
 
-def chatbot(questions_path, transcript_path, save_path, summary_save_path, youtube_url=None):
+def chatbot(questions_path, transcript_path, save_path, summary_save_path, youtube_url=None, is_regen=False):
+    temperature = 0
+
+    if is_regen:
+        temperature = REGEN_TEMPERATURE
+    else:
+        temperature = TEMPERATURE
+
     questions = ""
     if questions_path:
         try:
@@ -96,35 +104,29 @@ def chatbot(questions_path, transcript_path, save_path, summary_save_path, youtu
         with open(summary_prompt_path, encoding="utf-8") as txt:
             summary_prompt = txt.read()
 
-    print(f"System message: {system_message[0:50]}... ")
-    print(f"Transcript: {transcript[0:50]}... ")
-    print(f"Questions: {questions[0:50]}... ")
-
     messages = [
         {"role": "system", "content": system_message},
     ]
 
     messages.append({"role": "user", "content": transcript})
 
-    # print(messages)
-
     print("Sending prompt with transcript...")
 
     response = openai.chat.completions.create(
         model=MODEL,
         messages=messages,
-        temperature=TEMPERATURE,
+        temperature=temperature,
         max_tokens=MAX_TOKENS
     )
-    # print(response)
+
     print("Sending prompt with questions...")
 
     messages.append({"role": "user", "content": questions})
-    print(messages)
+ 
     response = openai.chat.completions.create(
         model=MODEL,
         messages=messages,
-        temperature=TEMPERATURE,
+        temperature=temperature,
         max_tokens=MAX_TOKENS
     )
 
@@ -141,7 +143,7 @@ def chatbot(questions_path, transcript_path, save_path, summary_save_path, youtu
     except:
         print("Error while saving answers. Will print to console instead.")
 
-        # print(response)
+        print(response)
 
     print("Sending summary prompt...")
     messages.append({"role": "user", "content": summary_prompt})
@@ -149,7 +151,7 @@ def chatbot(questions_path, transcript_path, save_path, summary_save_path, youtu
     response = openai.chat.completions.create(
         model=MODEL,
         messages=messages,
-        temperature=TEMPERATURE,
+        temperature=temperature,
         max_tokens=MAX_TOKENS
     )
 
