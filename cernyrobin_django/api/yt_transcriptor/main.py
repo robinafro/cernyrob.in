@@ -142,7 +142,7 @@ def get_transcript(url_or_path, language, return_if_exists=False, callback=None)
 def format_transcript(transcript):
     return textwrap.fill(transcript, width=140)
 
-def run(video_url, language="en-US", callback=None, ignore_existing=False):
+def run(video_url, language="en-US", callback=None, ignore_existing=False, is_regen=False):
     clear_dir('temp_dir')
     
     name, transcript = get_transcript(video_url, language, return_if_exists=True, callback=callback)
@@ -152,7 +152,7 @@ def run(video_url, language="en-US", callback=None, ignore_existing=False):
     answers_path = os.path.join(get_folder('output_dir'), f'{name}_answers.txt')
 
     if not os.path.exists(answers_path) or ignore_existing:
-        answer.chatbot(None, os.path.join(get_folder('output_dir'), f'{name}.txt'), os.path.join(get_folder('output_dir'), f'{name}_answers.txt'), os.path.join(get_folder('output_dir'), f'{name}summary.txt'), youtube_url=video_url)
+        answer.chatbot(None, os.path.join(get_folder('output_dir'), f'{name}.txt'), os.path.join(get_folder('output_dir'), f'{name}_answers.txt'), os.path.join(get_folder('output_dir'), f'{name}summary.txt'), youtube_url=video_url, is_regen=is_regen)
 
     if os.path.exists(answers_path):
         return open_transcript(f'{name}_answers', only_return=True), open_transcript(name, only_return=True), open_transcript(f'{name}_summary', only_return=True)

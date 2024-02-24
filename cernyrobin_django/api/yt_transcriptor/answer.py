@@ -17,6 +17,7 @@ dotenv.load_dotenv()
 STUCKINVIM_KEY = os.getenv("STUCKINVIM_KEY")
 
 TEMPERATURE = 0.35 # Tweaked manually
+REGEN_TEMPERATURE = 0.35
 MAX_TOKENS = 1250
 
 if not STUCKINVIM_KEY:
@@ -55,7 +56,14 @@ def get_video_description(video_url):
         print(e)
         return None
 
-def chatbot(questions_path, transcript_path, save_path, summary_save_path, youtube_url=None):
+def chatbot(questions_path, transcript_path, save_path, summary_save_path, youtube_url=None, is_regen=False):
+    temperature = 0
+
+    if is_regen:
+        temperature = REGEN_TEMPERATURE
+    else:
+        temperature = TEMPERATURE
+
     questions = ""
     if questions_path:
         try:
@@ -113,7 +121,7 @@ def chatbot(questions_path, transcript_path, save_path, summary_save_path, youtu
     response = openai.chat.completions.create(
         model=MODEL,
         messages=messages,
-        temperature=TEMPERATURE,
+        temperature=temperature,
         max_tokens=MAX_TOKENS
     )
     print(response)
@@ -124,7 +132,7 @@ def chatbot(questions_path, transcript_path, save_path, summary_save_path, youtu
     response = openai.chat.completions.create(
         model=MODEL,
         messages=messages,
-        temperature=TEMPERATURE,
+        temperature=temperature,
         max_tokens=MAX_TOKENS
     )
 
@@ -149,7 +157,7 @@ def chatbot(questions_path, transcript_path, save_path, summary_save_path, youtu
     response = openai.chat.completions.create(
         model=MODEL,
         messages=messages,
-        temperature=TEMPERATURE,
+        temperature=temperature,
         max_tokens=MAX_TOKENS
     )
 
