@@ -17,7 +17,7 @@ dotenv.load_dotenv()
 STUCKINVIM_KEY = os.getenv("STUCKINVIM_KEY")
 
 TEMPERATURE = 0.35 # Tweaked manually
-REGEN_TEMPERATURE = 0.35
+REGEN_TEMPERATURE = 0.45
 MAX_TOKENS = 1250
 
 if not STUCKINVIM_KEY:
