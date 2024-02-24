@@ -173,7 +173,9 @@ p{
   justify-content: center;
   align-items: center;
   margin: 15px;
-  transition: 0.2s ease-in-out
+  transition: 0.2s ease-in-out;
+  border: 0px;
+  cursor: pointer;
 }
 
 .add-button:hover{
