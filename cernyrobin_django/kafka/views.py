@@ -155,7 +155,7 @@ def view(request, is_custom=False):
             return HttpResponse("Nuh uh")
 
 def view_custom(request):
-    return view(request, True)
+    return view(request, is_custom=True)
 
 def submit(request):
     if request.method == "GET":
