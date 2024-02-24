@@ -303,8 +303,6 @@ def verify_code(request):
         cernyrobin_user, created = UserProfile.objects.get_or_create(user=request.user)
         code = request.GET.get("code")
 
-        print(cernyrobin_user.email_verified)
-
         if not code:
             return HttpResponse("400 Bad Request")
         
@@ -319,8 +317,6 @@ def verify_code(request):
         cernyrobin_user.email_verified = True
 
         cernyrobin_user.save()
-
-        print(cernyrobin_user.email_verified)
 
         del verification_codes[code]
 

@@ -57,7 +57,5 @@ def verify_mail(receiver_email, username, verify_code, password=get_password()):
     except Exception as e:
         status["error_message"] = str(e)
         # return status
-    print(password)
-    print(status)
 
     return status

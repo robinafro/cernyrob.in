@@ -48,7 +48,7 @@ def get_video_description(video_url):
         return None
     elif not video_url.startswith("http") and not video_url.startswith("www") and not video_url.startswith("youtube"):
         video_url = "https://www.youtube.com/watch?v=" + video_url
-    print(video_url)
+        
     try:
         yt = YouTube(video_url)
         return yt.initial_data["engagementPanels"][1]["engagementPanelSectionListRenderer"]["content"]["structuredDescriptionContentRenderer"]["items"][1]["expandableVideoDescriptionBodyRenderer"]["attributedDescriptionBodyText"]["content"]
@@ -104,17 +104,11 @@ def chatbot(questions_path, transcript_path, save_path, summary_save_path, youtu
         with open(summary_prompt_path, encoding="utf-8") as txt:
             summary_prompt = txt.read()
 
-    print("System message: " + system_message)
-    print("Transcript: " + transcript[0:100])
-    print("Questions: " + questions[0:100])
-
     messages = [
         {"role": "system", "content": system_message},
     ]
 
     messages.append({"role": "user", "content": transcript})
-
-    print(messages)
 
     print("Sending prompt with transcript...")
 
@@ -124,11 +118,11 @@ def chatbot(questions_path, transcript_path, save_path, summary_save_path, youtu
         temperature=temperature,
         max_tokens=MAX_TOKENS
     )
-    print(response)
+
     print("Sending prompt with questions...")
 
     messages.append({"role": "user", "content": questions})
-    print(messages)
+ 
     response = openai.chat.completions.create(
         model=MODEL,
         messages=messages,
