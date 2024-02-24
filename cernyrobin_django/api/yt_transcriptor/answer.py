@@ -96,9 +96,9 @@ def chatbot(questions_path, transcript_path, save_path, summary_save_path, youtu
         with open(summary_prompt_path, encoding="utf-8") as txt:
             summary_prompt = txt.read()
 
-    print("System message: " + system_message)
-    print("Transcript: " + transcript[0:100])
-    print("Questions: " + questions[0:100])
+    print(f"System message: {system_message[0:50]}... ")
+    print(f"Transcript: {transcript[0:50]}... ")
+    print(f"Questions: {questions[0:50]}... ")
 
     messages = [
         {"role": "system", "content": system_message},
@@ -106,7 +106,7 @@ def chatbot(questions_path, transcript_path, save_path, summary_save_path, youtu
 
     messages.append({"role": "user", "content": transcript})
 
-    print(messages)
+    # print(messages)
 
     print("Sending prompt with transcript...")
 
@@ -116,7 +116,7 @@ def chatbot(questions_path, transcript_path, save_path, summary_save_path, youtu
         temperature=TEMPERATURE,
         max_tokens=MAX_TOKENS
     )
-    print(response)
+    # print(response)
     print("Sending prompt with questions...")
 
     messages.append({"role": "user", "content": questions})
@@ -141,7 +141,7 @@ def chatbot(questions_path, transcript_path, save_path, summary_save_path, youtu
     except:
         print("Error while saving answers. Will print to console instead.")
 
-        print(response)
+        # print(response)
 
     print("Sending summary prompt...")
     messages.append({"role": "user", "content": summary_prompt})
