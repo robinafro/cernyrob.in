@@ -475,6 +475,7 @@ def kafka_job(request, subdomain):
             job = Job.objects.get(job_id=job_id.strip(" "))
 
             return JsonResponse(data={
+                "status": "OK",
                 "video_url": job.video_url,
                 "percent_completed": job.percent_completed,
                 "chunks_completed": job.chunks_completed,
@@ -482,7 +483,7 @@ def kafka_job(request, subdomain):
                 "finished": job.finished,
             })
         except Job.DoesNotExist:
-            return HttpResponse("Job not found")
+            return JsonResponse(data={"status": "Error", "message": "Job not found"})
         except Exception as e:
             print("Error: " + e)
-            return HttpResponse("Internal server error")
+            return JsonResponse(data={"status": "Error", "message": "Internal server error"})
