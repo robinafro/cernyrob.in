@@ -198,9 +198,9 @@ def submit(request):
 
 def regenerate(request):
     if request.method == "POST" and request.user.is_authenticated:
-        #! Check if the user has a verified email
-        # if not request.user.email_verified:
-        #     return HttpResponse("403 Forbidden")
+        # Check if the user has a verified email
+        if not (UserProfile.objects.get(user=request.user)).email_verified:
+            return HttpResponse("403 Forbidden")
         
         video_url = request.POST.get("video_url")
 

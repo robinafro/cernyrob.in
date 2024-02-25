@@ -213,26 +213,26 @@ def generate_answers(video_url, language, user=None, runbackground=False):
             custom_answers = json.loads(kafka.custom_answers) if kafka.custom_answers else None
 
             if custom_answers is not None and user is not None and custom_answers.get(user.username):
-                response["code"] = 418
+                response["code"] = 429
                 response["message"] = "Already generated for user"
 
                 return JsonResponse(data=response)
 
-            if custom_answers is None or custom_answers.get(user.username):
-                if kafka.video_info is None or kafka.video_info == {} or kafka.video_info is {}:
-                    kafka.video_info = json.loads(video_info)
+            # if custom_answers is None or custom_answers.get(user.username):
+            #     if kafka.video_info is None or kafka.video_info == {} or kafka.video_info is {}:
+            #         kafka.video_info = json.loads(video_info)
 
-                response["code"] = 201
-                response["message"] = job_id
-                # response["data"] = {
-                #     "answers": kafka.answers,
-                #     "transcript": kafka.transcript,
-                #     "language": language,
-                #     "video_info": (kafka.video_info),
-                #     "video_url": video_url,
-                # }
+            #     response["code"] = 201
+            #     response["message"] = job_id
+            #     # response["data"] = {
+            #     #     "answers": kafka.answers,
+            #     #     "transcript": kafka.transcript,
+            #     #     "language": language,
+            #     #     "video_info": (kafka.video_info),
+            #     #     "video_url": video_url,
+            #     # }
 
-                return JsonResponse(data=response)
+            #     return JsonResponse(data=response)
         except Exception as e:
             print(e)
             kafka = None
