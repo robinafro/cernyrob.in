@@ -221,9 +221,9 @@ def regenerate(request):
             video_id = video_id.split("&")[0]
         elif video_id.find("?") != -1:
             video_id = video_id.split("?")[0]
- 
-        video_url = "https://www.youtube.com/watch?v=" + video_id
 
-        response = api_views.generate_answers(video_url, "cs-CZ", runbackground=True, user=request.user)
+        # video_url = "https://www.youtube.com/watch?v=" + video_id
 
-        return response
+        # response = api_views.generate_answers(video_url, "cs-CZ", runbackground=True, user=request.user)
+
+        return api_views.regenerate_answers(request, video_id)
