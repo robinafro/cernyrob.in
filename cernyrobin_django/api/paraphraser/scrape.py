@@ -3,14 +3,15 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import Select
+from selenium.webdriver import ChromeOptions
 
 import time
 
 def open_webpage_and_input_text(input_text):
     # create a new instance of the webdriver
-    options = webdriver.ChromeOptions()
-    options.add_argument('--headless=new')
-    driver = webdriver.Chrome()
+    options = ChromeOptions()
+    options.headless = True
+    driver = webdriver.Chrome(options=options)
 
     # navigate to the webpage you want to open
     driver.get("https://zerogpt.com/paraphraser")
