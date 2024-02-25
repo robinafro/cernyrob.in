@@ -140,6 +140,7 @@ def view(request, is_custom=False):
                 "is_staff" : request.user.is_staff,
                 "current_user" : request.user,
                 "cernyrobin_user": get_user(request),
+                "is_custom" : is_custom,
             },
         )
     elif request.method == "POST":
