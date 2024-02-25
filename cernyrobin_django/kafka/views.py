@@ -22,7 +22,7 @@ def strip_yapping(s):
             return s[i:]
     return s
 
-def parse_numbered_text(text):
+def parse_numbered_text_old(text):
     segments = re.split(r'(\d+\.)', text)
 
     extracted_parts = []
@@ -30,7 +30,7 @@ def parse_numbered_text(text):
     current_part = ''
 
     for segment in segments:
-        if re.match(r'\d+\.', segment):
+        if re.match(r'(\d+\.)', segment):
             current_number = int(segment.split('.')[0])
             if current_number == last_number + 1:
                 if current_part:
@@ -47,7 +47,19 @@ def parse_numbered_text(text):
 
     return extracted_parts
 
+def parse_numbered_text(text):
+    all_that_match = re.findall(r'(?:\A|\n)\d+\. [^\n]+', text)
 
+    processed = []
+
+    for i, match in enumerate(all_that_match):
+        digit = int(match.split(".")[0])
+        next_digit = int(all_that_match[i + 1].split(".")[0]) if i + 1 < len(all_that_match) else None
+
+        if (next_digit or 999) > digit:
+            processed.append(match)
+
+    return processed
 
 def index(request):
     all_videos = api_views.get_all_to_be_displayed()

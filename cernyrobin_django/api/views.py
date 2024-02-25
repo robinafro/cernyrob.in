@@ -24,29 +24,18 @@ def strip_yapping(s):
     return s
 
 def parse_numbered_text(text):
-    segments = re.split(r'(\d+\.)', text)
+    all_that_match = re.findall(r'(?:\A|\n)\d+\. [^\n]+', text)
 
-    extracted_parts = []
-    last_number = 0
-    current_part = ''
+    processed = []
 
-    for segment in segments:
-        if re.match(r'\d+\.', segment):
-            current_number = int(segment.split('.')[0])
-            if current_number == last_number + 1:
-                if current_part:
-                    extracted_parts.append(current_part.strip())
-                current_part = segment
-                last_number = current_number
-            else:
-                current_part += segment
-        else:
-            current_part += segment
+    for i, match in enumerate(all_that_match):
+        digit = int(match.split(".")[0])
+        next_digit = int(all_that_match[i + 1].split(".")[0]) if i + 1 < len(all_that_match) else None
 
-    if current_part:
-        extracted_parts.append(current_part.strip())
+        if (next_digit or 999) > digit:
+            processed.append(match)
 
-    return extracted_parts
+    return processed
 
 def strip_number(arr):
     new_arr = []
