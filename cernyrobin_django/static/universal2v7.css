@@ -2013,7 +2013,7 @@ justify-content: space-around;
 .background-center {
   width: 100%;
   height: fit-content;
-  min-height: 100vh;
+  min-height: calc( 100svh - var(--navbarHeight));
   background-color: rgb(16, 18, 22);
 
   top: 0px;
