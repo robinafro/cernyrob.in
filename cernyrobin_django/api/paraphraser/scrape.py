@@ -10,7 +10,7 @@ import time
 def open_webpage_and_input_text(input_text):
     # create a new instance of the webdriver
     options = ChromeOptions()
-    options.headless = True
+    options.add_argument("--headless=chrome")
     driver = webdriver.Chrome(options=options)
 
     # navigate to the webpage you want to open
