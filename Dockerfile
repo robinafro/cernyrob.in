@@ -2,7 +2,7 @@ FROM python:3.8
 WORKDIR /app
 
 COPY . /app
-RUN chmod 777 /app
+RUN chmod -R 777 /app
 #Update repos
 RUN apt-get update && apt-get install -y 
 #Install ffmpeg dependency
