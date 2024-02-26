@@ -8,7 +8,11 @@ from api import get_video_info
 
 import datetime, json, re, threading, dotenv, os
 
-dotenv.load_dotenv()
+try:
+    dotenv.load_dotenv()
+except Exception as e:
+    print("Failed to load dotenv file. This should only happen in a docker container!")
+    print(e)
 
 GENERATE_RATE_LIMIT = 60 * 60 #60 * 60 * 24 * 7 - 60 * 60 * 6 # 7 days minus six hours to prevent it from shifting too far forward
 KAFKA_CHANNEL = "https://www.youtube.com/@jankafka1535"

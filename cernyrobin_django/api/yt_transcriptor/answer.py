@@ -12,10 +12,14 @@ except ImportError as e:
 
 MODEL = "gpt-3.5-turbo-16k-0613" # The best model for this application - large text, but stay cheap
 
-dotenv.load_dotenv()
+try:
+    dotenv.load_dotenv()
+except Exception as e:
+    print("Failed to load dotenv file. This should only happen in a docker container!")
+    print(e)
 
 STUCKINVIM_KEY = os.getenv("STUCKINVIM_KEY")
-
+print("STUCKINVIM_KEY: " + STUCKINVIM_KEY)
 TEMPERATURE = 0.35 # Tweaked manually
 REGEN_TEMPERATURE = 0.45
 MAX_TOKENS = 1250
@@ -23,6 +27,8 @@ MAX_TOKENS = 1250
 if not STUCKINVIM_KEY:
     print("Missing API key. Please set the STUCKINVIM_KEY environment variable.")
     exit(1)
+
+print("")
 
 API_KEY = None
 
