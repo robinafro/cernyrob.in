@@ -6,7 +6,7 @@ def concatenate_strings(strings):
     counter = 0
 
     for i, string in enumerate(strings):
-        if counter < 4:
+        if counter < 6:
             last_str = concatenated_strings[-1] if len(concatenated_strings) > 0 else ""
             if len(concatenated_strings) > 0:
                 concatenated_strings[-1] = last_str + string
