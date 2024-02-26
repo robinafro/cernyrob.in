@@ -14,6 +14,13 @@ RUN apt install ffmpeg -y
 #Activate the virtual environment
 # RUN source /app/venv/bin/activate
 #Install the requirements into the virtual environment
+
+#Setup virtual display
+RUN apt-get install xvfb -y
+RUN Xvfb :99 -ac &
+RUN export DISPLAY=:99  
+
+
 RUN pip3 install -r requirements.txt
 RUN cd /app/cernyrobin_django
 WORKDIR /app/cernyrobin_django
