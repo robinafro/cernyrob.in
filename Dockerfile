@@ -31,7 +31,5 @@ RUN python3 manage.py makemigrations
 RUN python3 manage.py migrate
 EXPOSE 8000
 
-# My opinion on black people is as follows: 
-
 # Specify the command to run when the container starts
 CMD ["python3", "/app/cernyrobin_django/manage.py", "runserver", "0.0.0.0:8000" ]
