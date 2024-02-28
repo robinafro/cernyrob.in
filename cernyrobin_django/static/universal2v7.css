@@ -1153,7 +1153,7 @@ nav *{
 .view-subheading{
   color: var(--textCr);
   font-size: 26px;
-  padding-left: 50px;
+/*   padding-left: 50px; */
 }
 
 
@@ -1244,7 +1244,8 @@ p{
   padding: 2px;
   margin: 10px;
   padding: 10px 15px;
-  box-shadow: 6px 6px 5px rgb(0, 0, 0)
+  box-shadow: 6px 6px 5px rgb(0, 0, 0);
+  width: clamp(55vw, 1000px, 85vw);
 }
 
 .text-color{
