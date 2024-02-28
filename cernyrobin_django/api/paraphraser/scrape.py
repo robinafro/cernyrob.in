@@ -1,60 +1,50 @@
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.ui import Select
-from selenium.webdriver import ChromeOptions
+import requests
+import json
 
-import time
+# Define the URL
+url = 'https://api.paraphrase.app/paraphrase-modes'
 
-def open_webpage_and_input_text(input_text):
-    # create a new instance of the webdriver
-    options = ChromeOptions()
-    options.add_argument("--headless=chrome")
-    driver = webdriver.Chrome(options=options)
+# Define headers with Content-Type
+headers = {
+    'authority': 'api.paraphrase.app',
+    'method': 'POST',
+    'path': '/paraphrase-modes',
+    'scheme': 'https',
+    'Accept': 'application/json, text/plain, */*',
+    'Accept-Encoding': 'gzip, deflate, br',
+    'Accept-Language': 'en-US,en;q=0.5',
+    'Authorization': 'Bearer f9a9cc1b-67ba-4920-ba47-05faa4646974',
+    'Cache-Control': 'no-cache',
+    'Content-Length': '1574',
+    'Content-Type': 'application/json',
+    'Expires': 'no-cache',
+    'Origin': 'https://paraphrasetool.com',
+    'Pragma': 'no-cache',
+    'Referer': 'https://paraphrasetool.com/',
+    'Sec-Ch-Ua': '"Chromium";v="122", "Not(A:Brand";v="24", "Brave";v="122"',
+    'Sec-Ch-Ua-Mobile': '?0',
+    'Sec-Ch-Ua-Platform': '"Linux"',
+    'Sec-Fetch-Dest': 'empty',
+    'Sec-Fetch-Mode': 'cors',
+    'Sec-Fetch-Site': 'cross-site',
+    'Sec-Gpc': '1',
+    'Sectoken': 'a74714d4-d055-4830-b9c8-c80c6641cd8d',
+    'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36'
+}
 
-    # navigate to the webpage you want to open
-    driver.get("https://zerogpt.com/paraphraser")
+def send_request(input_text):
+    # Define the payload as a dictionary
+    payload = {'lang': 'cs', 'mode': 'standard', 'text': input_text}
 
-    # wait for the text area element to load
-    wait_time_seconds = 60
-    wait = WebDriverWait(driver, wait_time_seconds)
-    cookie_button = wait.until(EC.presence_of_element_located((By.CLASS_NAME, "css-47sehv")))
-    cookie_button.click()
+    # Convert payload to JSON format
+    json_payload = json.dumps(payload)
 
-    # find the text area element
-    text_area = wait.until(EC.presence_of_element_located((By.TAG_NAME, "textarea")))
+    # Send the POST request with JSON payload and headers
+    response = requests.post(url, data=json_payload, headers=headers)
 
-    # input the text into the text area
-    text_area.send_keys(input_text)
-
-    # selection dropdown field
-    select_element = wait.until(EC.presence_of_element_located((By.CLASS_NAME, "paraphraser-tone")))
-
-    # create a Select object for the drop-down menu
-    dropdown = Select(select_element)
-
-    # select a value in the drop-down menu by visible text
-    dropdown.select_by_visible_text("Teenager")
-
-    # submit button
-    button = wait.until(EC.presence_of_element_located((By.CLASS_NAME, "scoreButton")))
-    button.click()
-
-    # wait for the paraphrased text to load
-    result_text = wait.until(EC.presence_of_element_located((By.CLASS_NAME, "result-text")))
-
-    prev_text = None
-    while True:
-        if prev_text == result_text.text:
-            break
-        prev_text = result_text.text
-        
-        time.sleep(2)
-
-    result = {"success": True, "result": result_text.text}
-
-    # when you're done, close the webdriver
-    driver.quit()
-
-    return result
+    # Check the response status
+    if response.status_code == 200:
+        return json.loads(response.text)
+    else:
+        print("POST request failed with status code:", response.status_code)
+        return None
