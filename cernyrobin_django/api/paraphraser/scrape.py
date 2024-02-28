@@ -40,8 +40,11 @@ def send_request(input_text):
     json_payload = json.dumps(payload)
 
     # Send the POST request with JSON payload and headers
+    print("sending respone")
+    print(json_payload)
+    
     response = requests.post(url, data=json_payload, headers=headers)
-
+    print(response)
     # Check the response status
     if response.status_code == 200:
         return json.loads(response.text)
