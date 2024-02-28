@@ -25,11 +25,11 @@ def get_paraphrase(text):
 
     for answer in concatenate_strings(answers):
         if answer:
-            result = scrape.open_webpage_and_input_text(answer)
+            result = scrape.send_request(answer)
 
-            if result["success"]:
-                paraphrased_answers.append(result["result"])
-            else:
+            try:
+                paraphrased_answers.append(result["output"][result["mode"]]["text"])
+            except Exception as e:
                 paraphrased_answers.append(answer)
 
     paraphrased_answers_str = "\n".join(paraphrased_answers)
