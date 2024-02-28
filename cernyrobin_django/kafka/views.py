@@ -134,6 +134,12 @@ def view(request, is_custom=False):
 #        print(video_info)
         # for question in answers:
         #     print("1111 " + question))
+        i = 1
+        qa_pairs_list_form = []
+        for question, answer in qa_pairs:
+            qa_pairs_list_form.append([i, question, answer])
+            i=+1
+
         return render(
             request,
             "kafka/view.html",
@@ -153,6 +159,7 @@ def view(request, is_custom=False):
                 "current_user" : request.user,
                 "cernyrobin_user": get_user(request),
                 "is_custom" : is_custom,
+                "qa_pairs_indexed" : qa_pairs_list_form,
             },
         )
     elif request.method == "POST":

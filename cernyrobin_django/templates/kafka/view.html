@@ -19,11 +19,14 @@
 <body>
     {% include "cernyrobin/invite.html" %}
     {%include "global/navbar.html"%}
-
-
-
-<div id="responsive-page-container">
-
+    
+    
+    
+    <div id="responsive-page-container">
+        
+        <div onclick="changeOpenStatusBulk(this.innerText == '⮟')" id="bulk-collapse-menu">
+            ⮟⮝
+        </div>
     
     <h1 id="video-name">{{title}}</h1>
     
@@ -136,7 +139,7 @@
         
     </div>
     <div id="view-answers-container">
-        {% for question, answer in qa_pairs %}
+        {% for index, question, answer in qa_pairs_indexed %}
         <div class="pair-container">
             <div class="pair-container-heading">
                 
@@ -146,11 +149,11 @@
                     
                     
                 </p>
-                <p class="wrapping-button" onclick="changeOpenStatus()"><!-- Rozbalit  -->⮟⮝</p>
+                <p id="" class="wrapping-button" onclick='let answerTextElement=this.parentElement.parentElement.querySelector(".answer-text");console.log(answerTextElement),answerTextElement.style.maxHeight?answerTextElement.style.maxHeight=null:answerTextElement.style.maxHeight=answerTextElement.scrollHeight+"px";'><!-- Rozbalit  -->⮟⮝</p>
             </div>
             
             
-            <p class="answer-text">
+            <p class="answer-text" id="ans-{{index}}">
                 Odpověd {{answer}}
                 
             </p>

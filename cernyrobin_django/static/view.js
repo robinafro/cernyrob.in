@@ -1,20 +1,56 @@
-  function changeOpenStatus() {
+//   function changeOpenStatus() {
+//     var articles = document.getElementsByClassName("answer-text");
+//     for (var i = 0; i < articles.length; i++) {
+//       var article = articles[i];
+//       if (article.style.maxHeight) {
+//         article.style.maxHeight = null;
+// /*         article.style.margin = "0px 0px -5.5px 0px" */
+//       } else {
+//         article.style.maxHeight = article.scrollHeight + "px";
+// /*         article.style.margin = "3px 3px 3px 3px" */
+//       }
+//     }
+//   }
+
+
+
+
+// function changeOpenStatus() {
+//     let answerTextElement = this.parentElement.parentElement.querySelector('.answer-text');
+//     console.log(answerTextElement);
+//     if (article.style.maxHeight) {
+//      article.style.maxHeight = null;
+
+//             } else {
+//               article.style.maxHeight = article.scrollHeight + "px";
+
+
+//             }
+//           }
+
+  function changeOpenStatusBulk(open) {
     var articles = document.getElementsByClassName("answer-text");
+    var button = document.getElementById("bulk-collapse-menu");
     for (var i = 0; i < articles.length; i++) {
       var article = articles[i];
-      if (article.style.maxHeight) {
+      if (!open) {
         article.style.maxHeight = null;
+        button.innerHTML = "⮟"; //⮟⮝
 /*         article.style.margin = "0px 0px -5.5px 0px" */
       } else {
         article.style.maxHeight = article.scrollHeight + "px";
+        button.innerHTML = "⮝"; //⮟
+
 /*         article.style.margin = "3px 3px 3px 3px" */
       }
     }
   }
 
 
+
   document.addEventListener("DOMContentLoaded", function () {
-    changeOpenStatus()
+    changeOpenStatusBulk(true)
+
   });
 
 
@@ -46,4 +82,9 @@ const urlParams = new URLSearchParams(queryString);
 // Get the value of the 'id' parameter
 const id = urlParams.get('id');
 
-console.log(id); // Outputs: 123
+console.log(id);
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  // Your code here
+});

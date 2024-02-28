@@ -104,7 +104,7 @@ body {
   flex-direction: column;
   align-items: center;
   height: fit-content;
-  min-height: 100vh;
+  min-height: calc(100svh - var(--navbarHeight));
 }
 
 a {
@@ -1226,6 +1226,14 @@ p{
 
 .wrapping-button{
   margin-bottom: 0px;
+  cursor: pointer;
+  transition: color 0.15s ease-in-out;
+
+}
+
+.wrapping-button:hover{
+  color: var(--addButtonTriggerCr);
+
 }
 
 
@@ -1273,6 +1281,34 @@ font-size: 18px;
   transition: 0.25s;
   border: rgb(8, 0, 101) solid 2px; 
   z-index: 2;
+  
+  
+
+}
+
+#bulk-collapse-menu{
+  background-color:  var(--blockCr);
+  border-radius: 10px;
+  position: fixed;
+  color: var(--textCr);
+  bottom: 0;
+  left: 0;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+  padding: 10px;
+  transition: 0.25s;
+  border: var(--borderCr) solid 2px; 
+  z-index: 3;
+  font-size: 30px;
+  cursor: pointer;
+  padding-bottom: 0;
+}
+#bulk-collapse-menu:hover{
+  color: var(--addButtonTriggerCr);
 
 }
 
@@ -1998,7 +2034,7 @@ justify-content: space-around;
 .background {
   width: 100%;
   height: fit-content;
-  min-height: 100vh;
+  min-height: calc( 100svh - var(--navbarHeight));
   background-color: rgb(16, 18, 22);
 
   top: 0px;
