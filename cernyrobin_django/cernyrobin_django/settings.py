@@ -13,7 +13,11 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 import dotenv, os
 
-dotenv.load_dotenv()
+try:
+    dotenv.load_dotenv()
+except Exception as e:
+    print("Failed to load dotenv file. This should only happen in a docker container!")
+    print(e)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -27,7 +31,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["*", ".localhost", ".cernyrob.in", "localhost", "cernyrob.in", "me", "10.1.2.6", "192.168.219.42"]
 

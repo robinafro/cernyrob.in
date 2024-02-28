@@ -1,48 +1,55 @@
 <!DOCTYPE html>
 <html lang="cs">
-
-{% load static %}
-
-<head>
- <link href="{% static 'universal2v7.css' %}" rel="stylesheet">
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="/static/assets/kafka.ico">
-    <meta name="description" content="Stránka Unethical AI pro kafkovy videa">
-<!--     <script src="{% static 'kafka-list.js' %}"></script> -->
-
-    <title>Kafka AI</title>
-    {%include "global/manifest_link.html"%}
-</head>
-
-<body>
-
-{%include "cernyrobin/invite.html"%}
-
-{%include "global/navbar.html"%}
-
-
-<!--     <div class="background-center"> -->
-        <div id="title-container">
-            <h1 class="title">Kafka AI</h1>
-            <h2 class="subtitle">Využijte sílu umělé inteligence pro jednodušší učení se a přípravu na testy z dějepisu!</h2>
-        </div>
-
-        <div id="responsive-page-container">
-<!--             <div class="side-rekl-container" id="ad-container">
-                {% for ad in ads_left %}
-                <a class="side-rekl" id="rekl-left" href="{{ ad.link }}">
-                    <img class="rekl-image" src="{{ ad.image_link }}"></img>
-                </a>
-                {% endfor %}
-            </div> -->
-
-<!--             <div id="page-container"> -->
-                {% for object in videos %}
-
-            <a class="" href="/kafka/view/?id={{object.video_id}}">
-
-                <div class="video-container" >
-                    <div class="video-heading-container">
+    
+    {% load static %}
+    
+    <head>
+        <link href="{% static 'universal2v7.css' %}" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image/x-icon" href="/static/assets/kafka.ico">
+        <meta name="description" content="Stránka Unethical AI pro kafkovy videa">
+        <!--     <script src="{% static 'kafka-list.js' %}"></script> -->
+        
+        <title>Kafka AI</title>
+        {%include "global/manifest_link.html"%}
+    </head>
+    
+    <body>
+        
+        {%include "cernyrobin/invite.html"%}
+        
+        {%include "global/navbar.html"%}
+        
+        
+        <!--     <div class="background-center"> -->
+            <div id="title-container">
+                <h1 class="title">Kafka AI</h1>
+                <h2 class="subtitle">Využijte sílu umělé inteligence pro jednodušší učení se a přípravu na testy z dějepisu!</h2>
+            </div>
+            
+            <div id="responsive-page-container">
+                <!--             <div class="side-rekl-container" id="ad-container">
+                    {% for ad in ads_left %}
+                    <a class="side-rekl" id="rekl-left" href="{{ ad.link }}">
+                        <img class="rekl-image" src="{{ ad.image_link }}"></img>
+                    </a>
+                    {% endfor %}
+                </div> -->
+                
+                <!--             <div id="page-container"> -->
+                    <div id="kafka-list-add-video-container">
+ <!--                            <div id="cantfindvideo">Nemůžete najít video?</div>
+                     -->
+                            <!-- <div id="add-button"> -->
+                                <a href="/kafka/submit/" class="add-button">Přidat video</a>
+                            <!-- </div> -->
+                        </div>
+                    {% for object in videos %}
+                    
+                    <a class="" href="/kafka/view/?id={{object.video_id}}">
+                        
+                        <div class="video-container" >
+                            <div class="video-heading-container">
                         <div class="video-heading-left" onclick="event.stopPropagation();">
                             <!-- date -->
                         </div>
@@ -65,42 +72,11 @@
             </a>
                 {% endfor %}
 
-            <div id="kafka-list-add-video-container">
-                    <div id="cantfindvideo">Nemůžete najít video?</div>
-
-                    <!-- <div id="add-button"> -->
-                        <a href="/kafka/submit/" class="add-button">Přidat video</a>
-                    <!-- </div> -->
-                </div>
 
 
-                <!--             <div class="side-rekl-container">
-                {% for ad in ads_right %}
-                <a class="side-rekl" id="rekl-right", href="{{ ad.link }}">
-                    <img class="rekl-image" src="{{ ad.image_link }}"></img>
-                </a>
-                {% endfor %}
-            </div> -->
         </div>
 
-<!--     {% include "disclaimer.html" %} -->
 
-<!-- <p id="viewportWidth"></p>
-
-<script>
-    // Function to update the viewport width
-    function updateViewportWidth() {
-        var width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-        document.getElementById('viewportWidth').textContent = 'Viewport width: ' + width + 'px';
-    }
-
-    // Call the function on initial load
-    updateViewportWidth();
-
-    // Update the width value whenever the window is resized
-    window.onresize = updateViewportWidth;
-</script>
- -->
 
 </body>
 

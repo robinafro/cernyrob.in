@@ -5,10 +5,16 @@ from api.models import System, Kafka, Job
 
 from api.yt_transcriptor import main as yt_transcriptor
 from api import get_video_info
+from api.paraphraser import main as paraphraser
+from cernyrobin_app.models import UserProfile
 
 import datetime, json, re, threading, dotenv, os
 
-dotenv.load_dotenv()
+try:
+    dotenv.load_dotenv()
+except Exception as e:
+    print("Failed to load dotenv file. This should only happen in a docker container!")
+    print(e)
 
 GENERATE_RATE_LIMIT = 60 * 60 #60 * 60 * 24 * 7 - 60 * 60 * 6 # 7 days minus six hours to prevent it from shifting too far forward
 KAFKA_CHANNEL = "https://www.youtube.com/@jankafka1535"
@@ -24,29 +30,18 @@ def strip_yapping(s):
     return s
 
 def parse_numbered_text(text):
-    segments = re.split(r'(\d+\.)', text)
+    all_that_match = re.findall(r'(?:\A|\n)\d+\. [^\n]+', text)
 
-    extracted_parts = []
-    last_number = 0
-    current_part = ''
+    processed = []
 
-    for segment in segments:
-        if re.match(r'\d+\.', segment):
-            current_number = int(segment.split('.')[0])
-            if current_number == last_number + 1:
-                if current_part:
-                    extracted_parts.append(current_part.strip())
-                current_part = segment
-                last_number = current_number
-            else:
-                current_part += segment
-        else:
-            current_part += segment
+    for i, match in enumerate(all_that_match):
+        digit = int(match.split(".")[0])
+        next_digit = int(all_that_match[i + 1].split(".")[0]) if i + 1 < len(all_that_match) else None
 
-    if current_part:
-        extracted_parts.append(current_part.strip())
+        if (next_digit or 999) > digit:
+            processed.append(match)
 
-    return extracted_parts
+    return processed
 
 def strip_number(arr):
     new_arr = []
@@ -75,7 +70,7 @@ def modify_questions(video_url, questions):
 
     return "Success"
 
-def get_answers(video_url, user):
+def get_answers(video_url, user, is_custom):
     try:
         kafka = Kafka.objects.get(video_url=video_url)
 
@@ -85,7 +80,10 @@ def get_answers(video_url, user):
             try:
                 custom_answers = json.loads(kafka.custom_answers)
 
-                return custom_answers.get(user.username) or kafka.answers or "Unable to get answers"
+                if is_custom:
+                    return custom_answers.get(user.username) or "Unable to get answers"
+                else:
+                    return kafka.answers or "Unable to get answers"
             except Exception as e:
                 print("-"*60)
                 print(e)
@@ -97,6 +95,12 @@ def get_answers(video_url, user):
             
     except Kafka.DoesNotExist:
         return "Unable to get answers"
+    
+def get_recent_video():
+    try:
+        return Kafka.objects.filter(video_info__isnull=False).latest("timestamp").video_url
+    except Kafka.DoesNotExist:
+        return ""
     
 def get_transcript(video_url):
     video_url = video_url.strip(" ")
@@ -188,32 +192,42 @@ def generate_answers(video_url, language, user=None, runbackground=False):
         print("Created system data")
         
         if not system_data[0].last_generated:
-            print("B")
             system_data[0].last_generated = datetime.datetime.now().replace(tzinfo=None).timestamp()
             system_data[0].save()
-            print("C")
         
-        try:
-            print("Getting kafak object")
-            print("video_url", video_url)
-            print(type(video_url))
-            kafka = Kafka.objects.get(video_url=video_url) 
-            print("done")
-            if kafka.video_info is None or kafka.video_info == {} or kafka.video_info is {}:
-                print("A") 
-                kafka.video_info = json.loads(video_info)
-            print(kafka.video_info)
-            response["code"] = 201
-            response["message"] = id_from_url(video_url)
-            # response["data"] = {
-            #     "answers": kafka.answers,
-            #     "transcript": kafka.transcript,
-            #     "language": language,
-            #     "video_info": (kafka.video_info),
-            #     "video_url": video_url,
-            # }
+        job_id = id_from_url(video_url)
 
-            return JsonResponse(data=response)
+        if user is not None:
+            job_id += user.username
+
+        try:
+            print("Getting kafka object")
+            print("video_url", video_url)
+            kafka = Kafka.objects.get(video_url=video_url) 
+
+            custom_answers = json.loads(kafka.custom_answers) if kafka.custom_answers else None
+
+            if custom_answers is not None and user is not None and custom_answers.get(user.username):
+                response["code"] = 429
+                response["message"] = "Already generated for user"
+
+                return JsonResponse(data=response)
+
+            # if custom_answers is None or custom_answers.get(user.username):
+            #     if kafka.video_info is None or kafka.video_info == {} or kafka.video_info is {}:
+            #         kafka.video_info = json.loads(video_info)
+
+            #     response["code"] = 201
+            #     response["message"] = job_id
+            #     # response["data"] = {
+            #     #     "answers": kafka.answers,
+            #     #     "transcript": kafka.transcript,
+            #     #     "language": language,
+            #     #     "video_info": (kafka.video_info),
+            #     #     "video_url": video_url,
+            #     # }
+
+            #     return JsonResponse(data=response)
         except Exception as e:
             print(e)
             kafka = None
@@ -226,7 +240,7 @@ def generate_answers(video_url, language, user=None, runbackground=False):
         job = None
         try:
             print("Finding job")
-            job = Job.objects.get(job_id=id_from_url(video_url).strip(" "))
+            job = Job.objects.get(job_id=job_id.strip(" "))
             
             job_already_exists = True
         except Exception as e:
@@ -240,7 +254,8 @@ def generate_answers(video_url, language, user=None, runbackground=False):
             job_already_exists = False
             
         if job_already_exists:
-            return JsonResponse(data={"code": 200, "message": id_from_url(video_url)})
+            print("already exists")
+            return JsonResponse(data={"code": 200, "message": job_id})
         else:
             if rate_limited:
                 return JsonResponse(data={"code": 400, "message": "Rate limit exceeded"})
@@ -249,9 +264,9 @@ def generate_answers(video_url, language, user=None, runbackground=False):
             system_data[0].last_generated = datetime.datetime.now().replace(tzinfo=None).timestamp()
             system_data[0].save()
             print("Set last generated")
-            print("Creating job with id " + id_from_url(video_url))
+            print("Creating job with id " + job_id)
             job = Job.objects.create(
-                job_id = id_from_url(video_url).strip(" "),
+                job_id = job_id.strip(" "),
                 video_url=video_url,
                 created = datetime.datetime.now().replace(tzinfo=None).timestamp()
             )
@@ -288,8 +303,10 @@ def generate_answers(video_url, language, user=None, runbackground=False):
                 job.total_chunks = max_chunks
                 job.save()
             
-            answers, transcript, summary = yt_transcriptor.run(video_url, language, callback=progress_callback)
-            print(answers, transcript, summary)
+            is_regen = user is not None
+
+            answers, transcript, summary = yt_transcriptor.run(video_url, language, callback=progress_callback, ignore_existing=True, is_regen=is_regen)
+            
             # Save to database
             kafka, created = Kafka.objects.get_or_create(video_url=video_url)
 
@@ -338,7 +355,7 @@ def generate_answers(video_url, language, user=None, runbackground=False):
 
             daemon.start()
 
-            return JsonResponse(data={"code": 200, "message": id_from_url(video_url)})
+            return JsonResponse(data={"code": 200, "message": job_id})
         else:
             return run()
         
@@ -355,6 +372,61 @@ def generate_answers(video_url, language, user=None, runbackground=False):
 
         return JsonResponse(data=response)
 
+def regenerate_answers(request, video_id):
+    if not request.user.is_authenticated or not UserProfile.objects.get(user=request.user).email_verified:
+        return JsonResponse({"code": 403, "message": "Forbidden"})
+    
+    video_url = "https://www.youtube.com/watch?v=" + video_id
+    job_id = video_id + request.user.username
+
+    kafka = None
+
+    if Kafka.objects.filter(video_url=video_url).exists():
+        kafka = Kafka.objects.get(video_url=video_url)
+    else:
+        return JsonResponse({"code": 404, "message": "Not found"})
+
+    if Job.objects.filter(job_id=job_id).exists():
+        # Expire if its too old
+        job = Job.objects.get(job_id=job_id)
+
+        if (datetime.datetime.now().replace(tzinfo=None).timestamp() - job.created >= 60 * 0.1 or job.video_url == ""):
+            job.delete()
+        else:
+            return JsonResponse({"code": 400, "message": "Job already exists"})
+    
+    job = Job.objects.create(
+        job_id = job_id.strip(" "),
+        video_url=video_url,
+        created = datetime.datetime.now().replace(tzinfo=None).timestamp()
+    )
+
+    def run():
+        current_answers = kafka.answers
+
+        custom_answers = paraphraser.get_paraphrase(current_answers)
+
+        try:
+            kafka_custom_answers = json.loads(kafka.custom_answers)
+        except:
+            kafka_custom_answers = {}
+
+        kafka_custom_answers[request.user.username] = custom_answers
+
+        kafka.kafka_custom_answers = json.dumps(kafka_custom_answers)
+
+        kafka.save()
+
+        job.percent_completed = 100
+        job.finished = True
+
+        job.save()
+
+    daemon = threading.Thread(target=run, daemon=True)
+
+    daemon.start()
+
+    return JsonResponse(data={"code": 200, "message": job_id})
 
 def kafka(request, subdomain):
     return HttpResponse("Hello, world. You're at the api index.")
@@ -453,6 +525,7 @@ def kafka_job(request, subdomain):
             job = Job.objects.get(job_id=job_id.strip(" "))
 
             return JsonResponse(data={
+                "status": "OK",
                 "video_url": job.video_url,
                 "percent_completed": job.percent_completed,
                 "chunks_completed": job.chunks_completed,
@@ -460,7 +533,7 @@ def kafka_job(request, subdomain):
                 "finished": job.finished,
             })
         except Job.DoesNotExist:
-            return HttpResponse("Job not found")
+            return JsonResponse(data={"status": "Error", "message": "Job not found"})
         except Exception as e:
             print("Error: " + e)
-            return HttpResponse("Internal server error")
+            return JsonResponse(data={"status": "Error", "message": "Internal server error"})

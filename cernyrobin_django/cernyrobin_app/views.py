@@ -303,8 +303,6 @@ def verify_code(request):
         cernyrobin_user, created = UserProfile.objects.get_or_create(user=request.user)
         code = request.GET.get("code")
 
-        print(cernyrobin_user.email_verified)
-
         if not code:
             return HttpResponse("400 Bad Request")
         
@@ -319,8 +317,6 @@ def verify_code(request):
         cernyrobin_user.email_verified = True
 
         cernyrobin_user.save()
-
-        print(cernyrobin_user.email_verified)
 
         del verification_codes[code]
 
@@ -363,3 +359,17 @@ def simulate_redirect(request):
 def manifest(request):
     context = {}
     return render(request, 'global/manifest.json', context, content_type='application/json')
+
+def email_sent(request):
+    email = ""
+
+    if UserProfile.objects.filter(user=request.user).exists():
+        email = UserProfile.objects.get(user=request.user).email
+    
+    context = {"user": request.user, "user_email": email}
+    return render(request, "global/sent_mail.html", context)
+
+def verification_success(request):
+    context = {}
+    return render(request, "global/verification_success.html", context)
+

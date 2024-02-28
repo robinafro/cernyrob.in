@@ -169,17 +169,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 document.getElementById('loadingBar').style.display = 'none';
             }
         });
-
-        // .then(jsonData => jsonData.data).then(function(jsonData) {
-        //     if (jsonData && jsonData.answers != undefined) {
-        //         var id = jsonData.video_url.split('v=')[1];
-        //         var view = '/kafka/view?id=' + id;
-
-        //         document.getElementById('loadingContainer').style.display = 'none';
-
-        //         window.location.href = view
-        //     }
-        // });
     });
 
     function getCookie(name) {

@@ -22,7 +22,7 @@ def strip_yapping(s):
             return s[i:]
     return s
 
-def parse_numbered_text(text):
+def parse_numbered_text_old(text):
     segments = re.split(r'(\d+\.)', text)
 
     extracted_parts = []
@@ -30,7 +30,7 @@ def parse_numbered_text(text):
     current_part = ''
 
     for segment in segments:
-        if re.match(r'\d+\.', segment):
+        if re.match(r'(\d+\.)', segment):
             current_number = int(segment.split('.')[0])
             if current_number == last_number + 1:
                 if current_part:
@@ -47,7 +47,19 @@ def parse_numbered_text(text):
 
     return extracted_parts
 
+def parse_numbered_text(text):
+    all_that_match = re.findall(r'(?:\A|\n)\d+\. [^\n]+', text)
 
+    processed = []
+
+    for i, match in enumerate(all_that_match):
+        digit = int(match.split(".")[0])
+        next_digit = int(all_that_match[i + 1].split(".")[0]) if i + 1 < len(all_that_match) else None
+
+        if (next_digit or 999) > digit:
+            processed.append(match)
+
+    return processed
 
 def index(request):
     all_videos = api_views.get_all_to_be_displayed()
@@ -64,15 +76,16 @@ def index(request):
                 "questions" : parse_numbered_text(strip_yapping(video["description"])),
             }
         )
+
+    context["recent_video"] = api_views.get_recent_video()
     context["current_user"] = request.user
     context["cernyrobin_user"] = get_user(request)
     context["logged_in"] = request.user.is_authenticated
-    print(context)
 
     return render(request, "kafka/index.html", context)
 
 
-def view(request):
+def view(request, is_custom=False):
     if request.method == "GET":
         id = request.GET.get("id").strip(" ")
 
@@ -83,7 +96,7 @@ def view(request):
 
         video_info = json.loads(get_video_info.get_video_info(video_url))
 
-        answers = api_views.get_answers(video_url, request.user).strip()
+        answers = api_views.get_answers(video_url, request.user, is_custom).strip()
         transcript = api_views.get_transcript(video_url).strip()
 
         ads = ads_views.get_ads(length=2)
@@ -139,6 +152,7 @@ def view(request):
                 "is_staff" : request.user.is_staff,
                 "current_user" : request.user,
                 "cernyrobin_user": get_user(request),
+                "is_custom" : is_custom,
             },
         )
     elif request.method == "POST":
@@ -152,6 +166,9 @@ def view(request):
             return redirect("kafka_list")
         else:
             return HttpResponse("Nuh uh")
+
+def view_custom(request):
+    return view(request, is_custom=True)
 
 def submit(request):
     if request.method == "GET":
@@ -192,10 +209,10 @@ def submit(request):
         return response
 
 def regenerate(request):
-    if request.method == "POST" and request.is_authenticated:
-        #! Check if the user has a verified email
-        # if not request.user.email_verified:
-        #     return HttpResponse("403 Forbidden")
+    if request.method == "POST" and request.user.is_authenticated:
+        # Check if the user has a verified email
+        if not (UserProfile.objects.get(user=request.user)).email_verified:
+            return HttpResponse("403 Forbidden")
         
         video_url = request.POST.get("video_url")
 
@@ -207,6 +224,8 @@ def regenerate(request):
             video_id = video_url.split("v=")[1]
         elif video_url.find("youtu.be/") != -1:
             video_id = video_url.split("youtu.be/")[1]
+        else:
+            video_id = video_url
 
         if video_id is None:
             return JsonResponse({"code": 400, "message": "Invalid video URL"})
@@ -215,9 +234,9 @@ def regenerate(request):
             video_id = video_id.split("&")[0]
         elif video_id.find("?") != -1:
             video_id = video_id.split("?")[0]
- 
-        video_url = "https://www.youtube.com/watch?v=" + video_id
 
-        response = api_views.generate_answers(video_url, "cs-CZ", runbackground=True, user=request.user)
+        # video_url = "https://www.youtube.com/watch?v=" + video_id
 
-        return response
+        # response = api_views.generate_answers(video_url, "cs-CZ", runbackground=True, user=request.user)
+
+        return api_views.regenerate_answers(request, video_id)

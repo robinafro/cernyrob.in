@@ -18,13 +18,12 @@
     {%include "global/navbar.html"%}
     <div class="background-center">
         <div class="title-container">
-            <div class="title">Submit</div>
+            <div class="title">Přidat Video</div>
         </div>
 
 
         <div id="page-container">
             <div id="submit-form-container">
-                <div id="submit-form-title" class="subtitle">Video URL</div>
 
                 <div id="submit-form">
                     {% csrf_token %}
@@ -32,7 +31,7 @@
                     <input type="text" name="video_url" id="submit-video-url" class="submit-form-input" required>
                 </div>
 
-                <button id="submit-button">Odeslat</button>
+                <button class="add-button" id="submit-button">Přidat video</button>
             </div>
 
             <div id="loadingContainer">
@@ -66,7 +65,7 @@
                 <p id="submit-response" style="visibility: hidden">This is the response</p>
             </div>
 
-            <div id="submit-info-container">
+           <!--  <div id="submit-info-container">
                 <div class="subtitle">Jak to funguje?</div>
 
                 <p class="submit-info-text">
@@ -83,7 +82,7 @@
                 </p>
             </div>
 
-
+ -->
 
             {% include "disclaimer.html" %}
 </body>

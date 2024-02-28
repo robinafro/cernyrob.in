@@ -42,9 +42,11 @@ urlpatterns = [
     path("verify/", cernyrobin.verify_code, name="verify_code"),
     path("captchaimg/", cernyrobin.get_captcha_image, name="captchaimg"),
     path("email_sent/", cernyrobin.email_sent, name="email_sent"),
+    path("verification_success/", cernyrobin.verification_success, name="verification_successfull"),
 
     # vvv Remove in production
     path("simulate_redirect/", cernyrobin.simulate_redirect,name="simulate_redirect"),
+    # ^^^ did not age well
 
     path("clicker/", cernyrobin.clicker_page, name="clicker"),
     path("clicker/add_click", cernyrobin.add_click, name="add_click"),
@@ -57,6 +59,7 @@ urlpatterns = [
     path("kafka/job", api.kafka_job, {"subdomain": "api"}, name="kafka_job"),
     path("kafka/", kafka.index, name="kafka_index"),
     path("kafka/view/", kafka.view, name="kafka_view"),
+    path("kafka/view/custom/", kafka.view_custom, name="kafka_view_custom"),
     path("kafka/submit/", kafka.submit, name="kafka_submit"),
     path("kafka/regenerate/", kafka.regenerate, name="kafka_regenerate"),
 
