@@ -5,10 +5,16 @@ from api.models import System, Kafka, Job
 
 from api.yt_transcriptor import main as yt_transcriptor
 from api import get_video_info
+from api.paraphraser import main as paraphraser
+from cernyrobin_app.models import UserProfile
 
 import datetime, json, re, threading, dotenv, os
 
-dotenv.load_dotenv()
+try:
+    dotenv.load_dotenv()
+except Exception as e:
+    print("Failed to load dotenv file. This should only happen in a docker container!")
+    print(e)
 
 GENERATE_RATE_LIMIT = 60 * 60 #60 * 60 * 24 * 7 - 60 * 60 * 6 # 7 days minus six hours to prevent it from shifting too far forward
 KAFKA_CHANNEL = "https://www.youtube.com/@jankafka1535"
@@ -366,6 +372,61 @@ def generate_answers(video_url, language, user=None, runbackground=False):
 
         return JsonResponse(data=response)
 
+def regenerate_answers(request, video_id):
+    if not request.user.is_authenticated or not UserProfile.objects.get(user=request.user).email_verified:
+        return JsonResponse({"code": 403, "message": "Forbidden"})
+    
+    video_url = "https://www.youtube.com/watch?v=" + video_id
+    job_id = video_id + request.user.username
+
+    kafka = None
+
+    if Kafka.objects.filter(video_url=video_url).exists():
+        kafka = Kafka.objects.get(video_url=video_url)
+    else:
+        return JsonResponse({"code": 404, "message": "Not found"})
+
+    if Job.objects.filter(job_id=job_id).exists():
+        # Expire if its too old
+        job = Job.objects.get(job_id=job_id)
+
+        if (datetime.datetime.now().replace(tzinfo=None).timestamp() - job.created >= 60 * 0.1 or job.video_url == ""):
+            job.delete()
+        else:
+            return JsonResponse({"code": 400, "message": "Job already exists"})
+    
+    job = Job.objects.create(
+        job_id = job_id.strip(" "),
+        video_url=video_url,
+        created = datetime.datetime.now().replace(tzinfo=None).timestamp()
+    )
+
+    def run():
+        current_answers = kafka.answers
+
+        custom_answers = paraphraser.get_paraphrase(current_answers)
+
+        try:
+            kafka_custom_answers = json.loads(kafka.custom_answers)
+        except:
+            kafka_custom_answers = {}
+
+        kafka_custom_answers[request.user.username] = custom_answers
+
+        kafka.kafka_custom_answers = json.dumps(kafka_custom_answers)
+
+        kafka.save()
+
+        job.percent_completed = 100
+        job.finished = True
+
+        job.save()
+
+    daemon = threading.Thread(target=run, daemon=True)
+
+    daemon.start()
+
+    return JsonResponse(data={"code": 200, "message": job_id})
 
 def kafka(request, subdomain):
     return HttpResponse("Hello, world. You're at the api index.")
