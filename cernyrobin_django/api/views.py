@@ -413,7 +413,7 @@ def regenerate_answers(request, video_id):
 
         kafka_custom_answers[request.user.username] = custom_answers
 
-        kafka.kafka_custom_answers = json.dumps(kafka_custom_answers)
+        kafka.custom_answers = json.dumps(kafka_custom_answers)
 
         kafka.save()
 
