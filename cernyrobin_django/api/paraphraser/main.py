@@ -20,7 +20,8 @@ def concatenate_strings(strings):
     return concatenated_strings
 
 def get_paraphrase(text):
-    answers = re.findall(r'(?:\A|\n)\d+\. [^\n]+', text)
+    answers = re.findall(r"(?:\A|\n)\d+\. [^\n]+", text.strip())
+    
     paraphrased_answers = []
 
     for answer in concatenate_strings(answers):
@@ -28,10 +29,10 @@ def get_paraphrase(text):
             result = scrape.send_request(answer)
 
             try:
-                paraphrased_answers.append(result["output"][result["mode"]]["text"])
+                paraphrased_answers.append(result["output"]["standard"]["text"])
             except Exception as e:
-                paraphrased_answers.append(answer)
+                paraphrased_answers.append(e)
 
     paraphrased_answers_str = "\n".join(paraphrased_answers)
-
+    
     return paraphrased_answers_str
