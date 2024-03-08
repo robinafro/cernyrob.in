@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 
 from cernyrobin_app.models import UserProfile
+from api.models import Kafka
 from api import get_video_info
 from api import views as api_views
 from ads import views as ads_views
@@ -62,20 +63,28 @@ def parse_numbered_text(text):
     return processed
 
 def index(request):
+    filter = (request.GET.get("search") or "").lower()
+
     all_videos = api_views.get_all_to_be_displayed()
 
     context = ads_views.get_ads(length=len(all_videos))
     context["videos"] = []
 
     for video in all_videos:
-        context["videos"].append(
-    {
-                "title": video["title"],
-                "video_id": video["video_id"],
-                # "description": video["description"],
-                "questions" : parse_numbered_text(strip_yapping(video["description"])),
-            }
-        )
+        try:
+            kafka_obj = Kafka.objects.get(video_url="https://www.youtube.com/watch?v=" + video["video_id"])
+        except Kafka.DoesNotExist:
+            kafka_obj = None
+
+        if filter in video["title"].lower() or filter in video["description"].lower() or filter in kafka_obj.transcript.lower() or filter in kafka_obj.answers.lower() or filter == "":
+            context["videos"].append(
+                {
+                    "title": video["title"],
+                    "video_id": video["video_id"],
+                    # "description": video["description"],
+                    "questions" : parse_numbered_text(strip_yapping(video["description"])),
+                }
+            )
 
     context["recent_video"] = api_views.get_recent_video()
     context["current_user"] = request.user
