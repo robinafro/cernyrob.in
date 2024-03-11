@@ -86,6 +86,8 @@ def index(request):
                 }
             )
 
+    context["videos"] = context["videos"][::-1]
+
     context["recent_video"] = api_views.get_recent_video()
     context["current_user"] = request.user
     context["cernyrobin_user"] = get_user(request)
