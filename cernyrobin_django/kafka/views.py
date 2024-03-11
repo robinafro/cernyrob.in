@@ -161,6 +161,7 @@ def view(request, is_custom=False):
                 "video_title" :video_info["title"],
 #                "questions": parse_numbered_text(video_info["description"]),
 #                "answers": parse_numbered_text(answers),
+                "summary": api_views.get_summary(video_url),
                 "qa_pairs" : qa_pairs,
                 "answers_copy": answers,
                 "transcript": transcript,
