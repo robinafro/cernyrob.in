@@ -152,10 +152,10 @@ def run(video_url, language="en-US", callback=None, ignore_existing=False, is_re
     answers_path = os.path.join(get_folder('output_dir'), f'{name}_answers.txt')
 
     if not os.path.exists(answers_path) or ignore_existing:
-        answer.chatbot(None, os.path.join(get_folder('output_dir'), f'{name}.txt'), os.path.join(get_folder('output_dir'), f'{name}_answers.txt'), os.path.join(get_folder('output_dir'), f'{name}summary.txt'), youtube_url=video_url, is_regen=is_regen)
+        color = answer.chatbot(None, os.path.join(get_folder('output_dir'), f'{name}.txt'), os.path.join(get_folder('output_dir'), f'{name}_answers.txt'), os.path.join(get_folder('output_dir'), f'{name}summary.txt'), youtube_url=video_url, is_regen=is_regen)
 
     if os.path.exists(answers_path):
-        return open_transcript(f'{name}_answers', only_return=True), open_transcript(name, only_return=True), open_transcript(f'{name}_summary', only_return=True)
+        return open_transcript(f'{name}_answers', only_return=True), open_transcript(name, only_return=True), open_transcript(f'{name}_summary', only_return=True), color
     else:
         return "Couldn't get answers", "Couldn't get transcript", "Couldn't get summary"
 
