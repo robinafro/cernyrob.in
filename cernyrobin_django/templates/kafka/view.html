@@ -109,7 +109,7 @@
             
             
             <p class="answer-text" id="ans-{{index}}">
-                Odpověd {{answer}}
+                Odpověď {{answer}}
                 
             </p>
             
@@ -141,6 +141,54 @@
     </div>
 
     
+<!-- Komentáře start -->
+<h2 class="view-subheading">Komentáře</h2>
+{% for index, author, comment in qa_pairs_indexed %}
+{%endfor%}
+        <!-- <div class="pair-container">
+            <div class="pair-container-heading">
+                
+                
+                <p class="question-container">
+                    Otázka  {{author}}
+                    
+                    
+                </p>
+                <p id="" class="wrapping-button"></p>
+            </div>
+            
+            
+            <p class="answer-text" id="ans-{{index}}">
+                Odpověď {{comment}}
+                
+            </p>
+            
+            
+        </div> -->
+
+        <div class="pair-container">
+            <div class="pair-container-heading">
+                
+                
+                <p class="question-container">
+                      StuckInVim
+                    
+                    
+                </p>
+                <p id="" class="wrapping-button"></p>
+            </div>
+            
+            
+            <p class="answer-text" id="ans-{{index}}">
+                 Ta dnešní mrdka mi sklouza do krku jak po másle
+                
+            </p>
+
+
+        
+<!-- Komentáře end -->
+
+
     
 </div>
 
