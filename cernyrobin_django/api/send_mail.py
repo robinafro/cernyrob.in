@@ -79,7 +79,7 @@ def broadcast_mail(receiver_emails, password=get_password()):
     msg = MIMEMultipart()
     msg['From'] = sender_email
     msg['To'] = "videa@cernyrob.in"
-    msg['Bcc'] = ",".join(receiver_emails)
+    # msg['Bcc'] = ",".join(receiver_emails)
     msg['Subject'] = subject
 
     msg.attach(MIMEText(body, 'html'))
@@ -88,7 +88,7 @@ def broadcast_mail(receiver_emails, password=get_password()):
         with smtplib.SMTP_SSL(smtp_server, smtp_port) as server:
             server.login(login, password)
             text = msg.as_string()
-            server.sendmail(sender_email, "dawg@cernyrob.in", text)
+            server.sendmail(sender_email, ",".join(receiver_emails), text)
             status["sent_successfully"] = True
     except Exception as e:
         status["error_message"] = str(e)
