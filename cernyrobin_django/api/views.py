@@ -100,7 +100,7 @@ def get_answers(video_url, user, is_custom):
 def get_color(video_url):
     try:
         kafka = Kafka.objects.get(video_url=video_url)
-
+        
         return kafka.color or "#000000"
     except Kafka.DoesNotExist:
         return "Unable to get color"
