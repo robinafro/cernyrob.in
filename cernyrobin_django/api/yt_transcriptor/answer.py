@@ -182,7 +182,7 @@ def chatbot(questions_path, transcript_path, save_path, summary_save_path, youtu
 
     # Generate a color based on the theme
     if not is_regen:
-        messages.append({"role": "user", "content": "Now generate a HEX color code based on the overall mood of the summary."})
+        messages.append({"role": "user", "content": "Now generate a HEX color code based on the overall mood of the summary and what it was about."})
 
         response = openai.chat.completions.create(
             model=MODEL,
@@ -191,7 +191,40 @@ def chatbot(questions_path, transcript_path, save_path, summary_save_path, youtu
             max_tokens=MAX_TOKENS
         )
 
-        color = re.match(r"#[a-fA-F0-9]{6}", response.choices[0].message.content)
-
+        
+        color = re.search(r"#[a-fA-F0-9]{6}", response.choices[0].message.content).group()
+        
         if color:
             return color
+        
+
+from api.models import Kafka
+
+for kafka in Kafka.objects.all():
+    summary = kafka.summary
+
+    if not summary:
+        print("Skipping " + kafka.video_url)
+        continue
+
+    if kafka.color:
+        print("Color exists, skipping " + kafka.video_url)
+        continue
+
+    print("Generating color for " + kafka.video_url)
+
+    messages = [
+        {"role": "system", "content": "Generate a HEX color code based on the overall mood of the summary and what it was about."},
+        {"role": "user", "content": summary}
+    ]
+
+    response = openai.ChatCompletion.create(
+        model=MODEL,
+        messages=messages,
+        temperature=TEMPERATURE,
+        max_tokens=MAX_TOKENS
+    )
+
+    color = re.search(r"#[a-fA-F0-9]{6}", response.choices[0].message.content).group()
+    print(color)
+    kafka.color = color
