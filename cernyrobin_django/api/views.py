@@ -95,6 +95,15 @@ def get_answers(video_url, user, is_custom):
             
     except Kafka.DoesNotExist:
         return "Unable to get answers"
+
+
+def get_color(video_url):
+    try:
+        kafka = Kafka.objects.get(video_url=video_url)
+
+        return kafka.color or "#000000"
+    except Kafka.DoesNotExist:
+        return "Unable to get color"
     
 def get_recent_video():
     try:
@@ -305,7 +314,7 @@ def generate_answers(video_url, language, user=None, runbackground=False):
             
             is_regen = user is not None
 
-            answers, transcript, summary = yt_transcriptor.run(video_url, language, callback=progress_callback, ignore_existing=True, is_regen=is_regen)
+            answers, transcript, summary, color = yt_transcriptor.run(video_url, language, callback=progress_callback, ignore_existing=True, is_regen=is_regen)
             
             # Save to database
             kafka, created = Kafka.objects.get_or_create(video_url=video_url)
@@ -319,6 +328,9 @@ def generate_answers(video_url, language, user=None, runbackground=False):
                 kafka.summary = summary
                 kafka.language = language
                 kafka.video_info = json.loads(video_info)
+
+                if color is not None:
+                    kafka.color = color
             else:
                 try:
                     custom_answers = json.loads(kafka.custom_answers)

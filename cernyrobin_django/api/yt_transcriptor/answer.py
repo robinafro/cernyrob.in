@@ -6,6 +6,7 @@ try:
     import requests
     from pytube import YouTube
     from docx import Document
+    import re
 except ImportError as e:
   print("Missing dependencies detected. Run pip install -r requirements.txt to install...")
   print(e)
@@ -178,3 +179,19 @@ def chatbot(questions_path, transcript_path, save_path, summary_save_path, youtu
         print("Error while saving summary. Will print to console instead.")
 
         print(response)
+
+    # Generate a color based on the theme
+    if not is_regen:
+        messages.append({"role": "user", "content": "Now generate a HEX color code based on the overall mood of the summary."})
+
+        response = openai.chat.completions.create(
+            model=MODEL,
+            messages=messages,
+            temperature=temperature,
+            max_tokens=MAX_TOKENS
+        )
+
+        color = re.match(r"#[a-fA-F0-9]{6}", response.choices[0].message.content)
+
+        if color:
+            return color

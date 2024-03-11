@@ -171,6 +171,7 @@ def view(request, is_custom=False):
                 "cernyrobin_user": get_user(request),
                 "is_custom" : is_custom,
                 "qa_pairs_indexed" : qa_pairs_list_form,
+                "color": api_views.get_color(video_url),
             },
         )
     elif request.method == "POST":
