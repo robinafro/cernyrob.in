@@ -3,7 +3,9 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import random
 import string
-import os
+import os, dotenv
+
+dotenv.load_dotenv()
 
 def get_password():
     if os.path.exists("../smtp.txt"):
@@ -57,5 +59,38 @@ def verify_mail(receiver_email, username, verify_code, password=get_password()):
     except Exception as e:
         status["error_message"] = str(e)
         # return status
+
+    return status
+
+def broadcast_mail(receiver_emails, password=get_password()):
+    # Static info:
+    login = "videa@cernyrob.in"
+    smtp_server = "smtp.seznam.cz"
+    smtp_port = 465
+    sender_email = "videa@cernyrob.in"
+    subject = "Nová mrdka dropla"
+    body = f"""Hej vole kafka zase dropnul mrdku, posilam soubor docx<br>"""
+
+    status = {
+        "sent_successfully": False,
+        "error_message": "",
+    }
+
+    msg = MIMEMultipart()
+    msg['From'] = sender_email
+    msg['To'] = "videa@cernyrob.in"
+    # msg['Bcc'] = ",".join(receiver_emails)
+    msg['Subject'] = subject
+
+    msg.attach(MIMEText(body, 'html'))
+
+    try:
+        with smtplib.SMTP_SSL(smtp_server, smtp_port) as server:
+            server.login(login, password)
+            text = msg.as_string()
+            server.sendmail(sender_email, ",".join(receiver_emails), text)
+            status["sent_successfully"] = True
+    except Exception as e:
+        status["error_message"] = str(e)
 
     return status
