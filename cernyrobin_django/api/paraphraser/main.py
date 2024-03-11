@@ -24,14 +24,17 @@ def get_paraphrase(text):
     
     paraphrased_answers = []
 
-    for answer in concatenate_strings(answers):
+    for answer in answers:
         if answer:
+            num = answer.split(".")[0]
+            answer = "".join(answer.split(".")[1:]).strip()
+
             result = scrape.send_request(answer)
 
             try:
-                paraphrased_answers.append(result["output"]["standard"]["text"])
+                paraphrased_answers.append(num + ". " + result["output"]["standard"]["text"])
             except Exception as e:
-                paraphrased_answers.append(e)
+                paraphrased_answers.append(num + ". " + e)
 
     paraphrased_answers_str = "\n".join(paraphrased_answers)
     
