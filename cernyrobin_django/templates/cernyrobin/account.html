@@ -11,12 +11,15 @@
     {% include "global/navbar.html"%}
 
     
-    <h1 id="username-heading">{{current_user}}</h1>
-    <p id="meber-since">Už jsi člen {{current_user.date_joined|timesince}}</p>
-    {%if current_user.is_verified%}
-    Jsi verifikovaný člen cernyrob.in, můžete využívat všechny služby naplno!
-    {%else%}
-    Používáš neverifikovaný účet, pokud chceš využívat všechny funkce Kafka AI naplno, můžeš si jednoduše účet verifikovat.
-    {%endif%}
+    <h1 id="username-heading" class="centered-text">{{current_user}}</h1>
+    <p id="meber-since" class="centered-text">Už jsi člen {{current_user.date_joined|timesince}}</p>
+    <p class="contrast-text">
+
+        {%if current_user.is_verified%}
+        Jsi verifikovaný člen cernyrob.in, můžete využívat všechny služby naplno!
+        {%else%}
+        Používáš neverifikovaný účet, pokud chceš využívat všechny funkce Kafka AI naplno, můžeš si jednoduše účet verifikovat.
+        {%endif%}
+    </p>
 </body>
 </html>
