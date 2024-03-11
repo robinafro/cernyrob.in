@@ -20,7 +20,9 @@
     {% include "cernyrobin/invite.html" %}
     {%include "global/navbar.html"%}
     
-    
+    <script>
+        document.documentElement.style.setProperty('--sourceColor', '#{{color}}');
+    </script>
     
     <div id="responsive-page-container">
         
@@ -90,7 +92,7 @@
 
 {%endif%}
 
-{{color}}
+
 
         <p hidden id="answers-copy">{{answers_copy}}</p>
         
