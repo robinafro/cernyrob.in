@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+
+<html>
+
+<body>
+    {% for comment in comments %}
+        <p>{{ comment.user }}:</p>
+        <p>{{ comment.message }}</p>
+        <br>
+    {% endfor %}
+</body>
+
+</html>

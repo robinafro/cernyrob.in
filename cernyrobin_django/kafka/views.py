@@ -287,6 +287,66 @@ def comment(request):
 
         video_url = "https://www.youtube.com/watch?v=" + video_id
 
-        response = api_views.comment(video_url, comment, request.user, type)
+        response = api_views.comment(video_url, comment, request.user, "kafka")
 
         return response
+    
+def test_view_comments(request):
+    if request.method == "GET":
+        video_id = request.GET.get("video_url")
+        video_url = ("https://www.youtube.com/watch?v=" + video_id).strip()
+
+        comments = api_views.get_comments(video_url)
+
+        print(video_url)
+        print(comments)
+
+        return render(
+            request,
+            "kafka/test_view_comments.html",
+            context={
+                "comments": comments,
+                "current_user" : request.user,
+                "cernyrobin_user": get_user(request),
+            },
+        )
+
+def test_comment(request):
+    if request.method == "POST":
+        video_url = request.POST.get("video_url")
+        comment = request.POST.get("comment")
+
+        if video_url is None or comment is None:
+            return JsonResponse({"code": 400, "message": "Invalid video URL or comment"})
+
+        video_id = None
+        if video_url.find("watch?v=") != -1:
+            video_id = video_url.split("v=")[1]
+        elif video_url.find("youtu.be/") != -1:
+            video_id = video_url.split("youtu.be/")[1]
+        else:
+            video_id = video_url
+
+        if video_id is None:
+            return JsonResponse({"code": 400, "message": "Invalid video URL"})
+
+        if video_id.find("&") != -1:
+            video_id = video_id.split("&")[0]
+        elif video_id.find("?") != -1:
+            video_id = video_id.split("?")[0]
+
+        video_url = "https://www.youtube.com/watch?v=" + video_id
+        print(video_url)
+        response = api_views.comment(video_url, comment, request.user, "kafka")
+
+        return response
+    else:
+        # render template
+        return render(
+            request,
+            "kafka/test_comment.html",
+            context={
+                "current_user" : request.user,
+                "cernyrobin_user": get_user(request),
+            },
+        )

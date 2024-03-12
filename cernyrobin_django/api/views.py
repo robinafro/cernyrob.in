@@ -558,7 +558,21 @@ def kafka_job(request, subdomain):
             print("Error: " + e)
             return JsonResponse(data={"status": "Error", "message": "Internal server error"})
 
+def get_comments(video_url):
+    print(video_url)
+    try:
+        for kafka in Kafka.objects.all():
+            print(kafka.video_url)
+            
+        kafka = Kafka.objects.get(video_url=video_url)
+        print(kafka.comments)
+        return json.loads(kafka.comments) if kafka.comments else []
+    except Exception as e:
+        print(e)
+        return []
+
 def comment(video_url, comment, user, type):
+    print(type)
     if type == "kafka":
         try:
             kafka = Kafka.objects.get(video_url=video_url)
@@ -567,7 +581,7 @@ def comment(video_url, comment, user, type):
 
             comments.append({
                 "user": user.username,
-                "comment": comment,
+                "message": comment,
                 "timestamp": datetime.datetime.now().replace(tzinfo=None).timestamp()
             })
 

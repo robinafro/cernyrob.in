@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+
+<html>
+    <body>
+        <h1>Test Comment</h1>
+        <form action="/kafka/test_comment/" method="post">
+            {% csrf_token %}
+            <input type="text" name="comment" id="comment" />
+            <input type="text" name="video_url" id="video_url" />
+            <input type="submit" value="Submit" />
+        </form>
+    </body>
+</html>
