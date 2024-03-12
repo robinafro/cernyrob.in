@@ -62,6 +62,7 @@ urlpatterns = [
     path("kafka/view/custom/", kafka.view_custom, name="kafka_view_custom"),
     path("kafka/submit/", kafka.submit, name="kafka_submit"),
     path("kafka/regenerate/", kafka.regenerate, name="kafka_regenerate"),
+    path("kafka/comment/", kafka.comment, name="kafka_comment"),
 
     # path("miskovsky/", miskovsky.index, name="miskovsky_index"),
     # path("miskovsky/submit/", miskovsky.submit, name="miskovsky_submit"),

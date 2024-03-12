@@ -557,3 +557,27 @@ def kafka_job(request, subdomain):
         except Exception as e:
             print("Error: " + e)
             return JsonResponse(data={"status": "Error", "message": "Internal server error"})
+
+def comment(video_url, comment, user, type):
+    if type == "kafka":
+        try:
+            kafka = Kafka.objects.get(video_url=video_url)
+
+            comments = json.loads(kafka.comments) if kafka.comments else []
+
+            comments.append({
+                "user": user.username,
+                "comment": comment,
+                "timestamp": datetime.datetime.now().replace(tzinfo=None).timestamp()
+            })
+
+            kafka.comments = json.dumps(comments)
+
+            kafka.save()
+
+            return JsonResponse({"code": 200, "message": "OK"})
+        except Kafka.DoesNotExist:
+            return JsonResponse({"code": 404, "message": "Not found"})
+        except Exception as e:
+            print(e)
+            return JsonResponse({"code": 500, "message": "Internal server error"})

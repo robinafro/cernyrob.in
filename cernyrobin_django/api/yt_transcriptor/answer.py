@@ -197,31 +197,54 @@ def chatbot(questions_path, transcript_path, save_path, summary_save_path, youtu
         if color:
             return color
         
+if False:
+    from api.models import Kafka
 
-from api.models import Kafka
+    for kafka in Kafka.objects.all():
+        summary = kafka.summary
 
-for kafka in Kafka.objects.all():
-    summary = kafka.summary
+        if not summary:
+            print("Generating summary for " + kafka.video_url)
 
-    if not summary:
-        print("Generating summary for " + kafka.video_url)
+            transcript = kafka.transcript
 
-        transcript = kafka.transcript
+            if not transcript:
+                print("No transcript found for " + kafka.video_url)
+                continue
 
-        if not transcript:
-            print("No transcript found for " + kafka.video_url)
+            summary_prompt_path = os.path.join(os.path.dirname(__file__), "summary_prompt.txt")
+            summary_prompt = ""
+
+            if os.path.exists(summary_prompt_path):
+                with open(summary_prompt_path, encoding="utf-8") as txt:
+                    summary_prompt = txt.read()
+
+            messages = [
+                {"role": "system", "content": "Z transkriptu napiš shrnutí."},
+                {"role": "user", "content": transcript},
+            ]
+
+            response = openai.chat.completions.create(
+                model=MODEL,
+                messages=messages,
+                temperature=TEMPERATURE,
+                max_tokens=MAX_TOKENS
+            )
+
+            summary = response.choices[0].message.content
+            print(summary[:100])
+            kafka.summary = summary
+
+        if kafka.color and kafka.color != "#000000":
+            print("Color exists, skipping " + kafka.video_url)
+            print(kafka.color)
             continue
 
-        summary_prompt_path = os.path.join(os.path.dirname(__file__), "summary_prompt.txt")
-        summary_prompt = ""
-
-        if os.path.exists(summary_prompt_path):
-            with open(summary_prompt_path, encoding="utf-8") as txt:
-                summary_prompt = txt.read()
+        print("Generating color for " + kafka.video_url)
 
         messages = [
-            {"role": "system", "content": "Z transkriptu napiš shrnutí."},
-            {"role": "user", "content": transcript},
+            {"role": "system", "content": "Vygeneruj HEX kód barvy na základě nálady shrnutí a toho, o čem bylo."},
+            {"role": "user", "content": summary}
         ]
 
         response = openai.chat.completions.create(
@@ -231,33 +254,10 @@ for kafka in Kafka.objects.all():
             max_tokens=MAX_TOKENS
         )
 
-        summary = response.choices[0].message.content
-        print(summary[:100])
-        kafka.summary = summary
+        color = re.search(r"#[a-fA-F0-9]{6}", response.choices[0].message.content).group()
+        print(color)
+        kafka.color = color
 
-    if kafka.color and kafka.color != "#000000":
-        print("Color exists, skipping " + kafka.video_url)
-        print(kafka.color)
-        continue
+        kafka.save()
 
-    print("Generating color for " + kafka.video_url)
-
-    messages = [
-        {"role": "system", "content": "Vygeneruj HEX kód barvy na základě nálady shrnutí a toho, o čem bylo."},
-        {"role": "user", "content": summary}
-    ]
-
-    response = openai.chat.completions.create(
-        model=MODEL,
-        messages=messages,
-        temperature=TEMPERATURE,
-        max_tokens=MAX_TOKENS
-    )
-
-    color = re.search(r"#[a-fA-F0-9]{6}", response.choices[0].message.content).group()
-    print(color)
-    kafka.color = color
-
-    kafka.save()
-
-    print("Done. Please remove this code in production.")
+        print("Done. Please remove this code in production.")
