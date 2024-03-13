@@ -173,9 +173,11 @@
                     <p id="" class="wrapping-button"></p>
                 </div>
                 <p class="answer-text" id="ans-{{index}}">
-                    <form action="/url" method="POST" style="width: 100%;">
+                    <form action="/comment" method="POST" style="width: 100%;">
 
-                        <input class="comment-field" type="text" >
+                        <input class="comment-field" type="text" name="comment" >
+                        <input hidden name="video_url" value="{{video_id}}">
+                        {%csrf_token%}
                         <input class="round-button" type="submit" name="" id="" value="Přidat komentář">
                     </form>
                     
