@@ -9,6 +9,8 @@ from ads import views as ads_views
 import json
 import re
 
+MAX_COMMENTS_PER_USER = 5
+
 def get_user(request):
     try:
         user = UserProfile.objects.get_or_create(user=request.user)[0]
@@ -151,6 +153,12 @@ def view(request, is_custom=False):
             qa_pairs_list_form.append([i, question, answer])
             i=+1
 
+        comments = []
+
+        if not is_custom:
+            comments = api_views.get_comments(video_url)
+            comments.reverse()
+
         return render(
             request,
             "kafka/view.html",
@@ -173,7 +181,7 @@ def view(request, is_custom=False):
                 "is_custom" : is_custom,
                 "qa_pairs_indexed" : qa_pairs_list_form,
                 "color": api_views.get_color(video_url),
-                "comments": api_views.get_comments(video_url),
+                "comments": comments,
             },
         )
     elif request.method == "POST":
@@ -345,10 +353,20 @@ def comment(request):
             video_id = video_id.split("?")[0]
 
         video_url = "https://www.youtube.com/watch?v=" + video_id
-        print(video_url)
+       
+        comments_from_this_user = 0
+        comments = api_views.get_comments(video_url)
+
+        for comment in comments:
+            if comment["user"] == request.user.username:
+                comments_from_this_user += 1
+
+        if comments_from_this_user >= MAX_COMMENTS_PER_USER:
+            return JsonResponse({"code": 403, "message": "Forbidden"})
+
         response = api_views.comment(video_url, comment, request.user, "kafka")
 
-        return response
+        return redirect("/kafka/view?id=" + video_id)
     else:
         # render template
         return render(

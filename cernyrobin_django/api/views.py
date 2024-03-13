@@ -560,10 +560,7 @@ def kafka_job(request, subdomain):
 
 def get_comments(video_url):
     # print(video_url)
-    try:
-        for kafka in Kafka.objects.all():
-            print(kafka.video_url)
-            
+    try:    
         kafka = Kafka.objects.get(video_url=video_url)
         # print(kafka.comments)
         return json.loads(kafka.comments) if kafka.comments else []
