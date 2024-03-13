@@ -173,6 +173,7 @@ def view(request, is_custom=False):
                 "is_custom" : is_custom,
                 "qa_pairs_indexed" : qa_pairs_list_form,
                 "color": api_views.get_color(video_url),
+                "comments": api_views.get_comments(video_url),
             },
         )
     elif request.method == "POST":
@@ -261,35 +262,35 @@ def regenerate(request):
 
         return api_views.regenerate_answers(request, video_id)
     
-def comment(request):
-    if request.method == "POST":
-        video_url = request.POST.get("video_url")
-        comment = request.POST.get("comment")
+# def comment(request):
+#     if request.method == "POST":
+#         video_url = request.POST.get("video_url")
+#         comment = request.POST.get("comment")
 
-        if video_url is None or comment is None:
-            return JsonResponse({"code": 400, "message": "Invalid video URL or comment"})
+#         if video_url is None or comment is None:
+#             return JsonResponse({"code": 400, "message": "Invalid video URL or comment"})
 
-        video_id = None
-        if video_url.find("watch?v=") != -1:
-            video_id = video_url.split("v=")[1]
-        elif video_url.find("youtu.be/") != -1:
-            video_id = video_url.split("youtu.be/")[1]
-        else:
-            video_id = video_url
+#         video_id = None
+#         if video_url.find("watch?v=") != -1:
+#             video_id = video_url.split("v=")[1]
+#         elif video_url.find("youtu.be/") != -1:
+#             video_id = video_url.split("youtu.be/")[1]
+#         else:
+#             video_id = video_url
 
-        if video_id is None:
-            return JsonResponse({"code": 400, "message": "Invalid video URL"})
+#         if video_id is None:
+#             return JsonResponse({"code": 400, "message": "Invalid video URL"})
 
-        if video_id.find("&") != -1:
-            video_id = video_id.split("&")[0]
-        elif video_id.find("?") != -1:
-            video_id = video_id.split("?")[0]
+#         if video_id.find("&") != -1:
+#             video_id = video_id.split("&")[0]
+#         elif video_id.find("?") != -1:
+#             video_id = video_id.split("?")[0]
 
-        video_url = "https://www.youtube.com/watch?v=" + video_id
+#         video_url = "https://www.youtube.com/watch?v=" + video_id
 
-        response = api_views.comment(video_url, comment, request.user, "kafka")
+#         response = api_views.comment(video_url, comment, request.user, "kafka")
 
-        return response
+#         return response
     
 def test_view_comments(request):
     if request.method == "GET":
@@ -311,7 +312,7 @@ def test_view_comments(request):
             },
         )
 
-def test_comment(request):
+def comment(request):
     if request.method == "POST":
         video_url = request.POST.get("video_url")
         comment = request.POST.get("comment")
