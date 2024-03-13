@@ -173,14 +173,14 @@
                     <p id="" class="wrapping-button"></p>
                 </div>
                 <p class="answer-text" id="ans-{{index}}">
-                    <form action="/comment" method="POST" style="width: 100%;">
+                <form action="/kafka/comment/" method="POST" style="width: 100%;">
 
-                        <input class="comment-field" type="text" name="comment" >
-                        <input hidden name="video_url" value="{{video_id}}">
-                        {%csrf_token%}
-                        <input class="round-button" type="submit" name="" id="" value="Přidat komentář">
-                    </form>
-                    
+                    <input class="comment-field" type="text" name="comment">
+                    <input hidden name="video_url" value="{{video_id}}">
+                    {%csrf_token%}
+                    <input class="round-button" type="submit" name="" id="" value="Přidat komentář">
+                </form>
+
                 </p>
             </div>
 
@@ -197,26 +197,12 @@
                 <p class="answer-text">
                     {{comment.message}}
                 </p>
+            </div>
 
-                {%endfor%}
-
-
-
-
-                <div class="comment-container">
-                    <div class="pair-container-heading">
-                        <p class="question-container">
-                            StuckInVim
-                        </p>
-                        <p id="" class="wrapping-button"></p>
-                    </div>
-                    <p class="answer-text" id="ans-{{index}}">
-                        Ta dnešní mrdka mi sklouza do krku jak po másle
-                    </p>
-                </div>
+            {%endfor%}
 
 
-                <!-- <div class="comment-container">
+            <!-- <div class="comment-container">
                     <div class="pair-container-heading">
                         <p class="question-container">
                             StuckInVim
@@ -228,8 +214,6 @@
                     </p>
                 </div>
  -->
-
-            </div>
         </div>
         <!-- Komentáře end -->
 

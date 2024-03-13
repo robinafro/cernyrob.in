@@ -314,6 +314,14 @@ def test_view_comments(request):
 
 def comment(request):
     if request.method == "POST":
+        if request.user.is_anonymous:
+            return JsonResponse({"code": 403, "message": "Forbidden"})
+        
+        cernyrobin_user = get_user(request)
+
+        if not cernyrobin_user.email_verified:
+            return JsonResponse({"code": 403, "message": "Forbidden"})
+        
         video_url = request.POST.get("video_url")
         comment = request.POST.get("comment")
 
