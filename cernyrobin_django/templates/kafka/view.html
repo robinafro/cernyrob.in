@@ -20,9 +20,9 @@
     {% include "cernyrobin/invite.html" %}
     {%include "global/navbar.html"%}
 
-    <script>
+    <!-- <script>
         document.documentElement.style.setProperty('--sourceColor', '{{color}}');
-    </script>
+    </script> -->
 
     <div id="responsive-page-container">
 
@@ -158,33 +158,47 @@
 
 
             </div>
+        </div>
 
 
-            <!-- Komentáře start -->
-            <h2 class="view-subheading">Komentáře</h2>
-            {% for comment in comments %}
-            {%endfor%}
-            <!-- <div class="pair-container">
-            <div class="pair-container-heading">
-                
-                
-                <p class="question-container">
-                    Otázka  {{author}}
-                    
+        <!-- Komentáře start -->
+        <h2 class="view-subheading">Komentáře</h2>
+        <div id="comment-section-container">
+
+            <div class="comment-container" id="add-comment">
+                <div class="pair-container-heading">
+                    <p class="question-container">
+                        Přidej Komentář
+                    </p>
+                    <p id="" class="wrapping-button"></p>
+                </div>
+                <p class="answer-text" id="ans-{{index}}">
+                    <form action="/url" method="POST" style="width: 100%;">
+
+                        <input class="comment-field" type="text" >
+                        <input class="round-button" type="submit" name="" id="" value="Přidat komentář">
+                    </form>
                     
                 </p>
-                <p id="" class="wrapping-button"></p>
             </div>
-            
-            
-            <p class="answer-text" id="ans-{{index}}">
-                Odpověď {{comment}}
-                
-            </p>
-            
-            
-        </div> -->
-            <div id="comment-section-container">
+
+
+            {% for comment in comments %}
+
+            <div class="comment-container">
+                <div class="pair-container-heading">
+                    <p class="question-container">
+                        {{comment.user}}
+                    </p>
+                    <p id="" class="wrapping-button"></p>
+                </div>
+                <p class="answer-text">
+                    {{comment.message}}
+                </p>
+
+                {%endfor%}
+
+
 
 
                 <div class="comment-container">
@@ -200,7 +214,7 @@
                 </div>
 
 
-                <div class="comment-container">
+                <!-- <div class="comment-container">
                     <div class="pair-container-heading">
                         <p class="question-container">
                             StuckInVim
@@ -211,22 +225,21 @@
                         Ta dnešní mrdka mi sklouza do krku jak po másle
                     </p>
                 </div>
-
-
+ -->
 
             </div>
-            <!-- Komentáře end -->
-
-
-
-
-            <h2 class="view-subheading">Transkript videa</h2>
-            <div class="transcript-container">
-                <p class="transcript-text">{{transcript}}</p>
-            </div>
-
-
         </div>
+        <!-- Komentáře end -->
+
+
+
+
+        <h2 class="view-subheading">Transkript videa</h2>
+        <div class="transcript-container">
+            <p class="transcript-text">{{transcript}}</p>
+        </div>
+
+
     </div>
     {% include "disclaimer.html" %}
 </body>

@@ -151,6 +151,22 @@ p{
   margin: 13px 10px;
 }
 
+.round-button{
+
+  height: 40px;
+  background-color: var(--borderCr);
+  color: var(--textCr);
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0px;
+  transition: 0.2s ease-in-out;
+  border: 0px;
+  cursor: pointer;
+  font-size: 1.0rem;
+}
+
 .add-button{
   width: 110px;
   height: 40px;
@@ -1247,9 +1263,14 @@ p{
   align-items: start;
   padding: 10px 15px;
   box-shadow: 6px 6px 5px rgb(0, 0, 0);
-  max-width: max-content;
-  margin-left: calc( calc( calc(100vw - clamp(55vw, 1000px, 85vw)) / 2) - 17px )
+  
+  margin-left: calc( calc( calc(100vw - clamp(55vw, 1000px, 85vw)) / 2) - 17px );
+  width: calc( clamp(55vw, 1000px, 85vw) - 50px );
 
+}
+
+.comment-container:not(#add-comment){
+  max-width: max-content;
 }
 
 .comment-container::before {
@@ -1259,10 +1280,42 @@ p{
   height: 0;
   border-left: 13px solid transparent;
   border-right: 13px solid transparent;
+  border-bottom: 26px solid var(--borderCr);
+  margin: -37px 0 -26px -1px
+}
+
+.comment-field {
+  
+  background-color: var(--inputFieldBgRc);
+  border: none;
+  text-align: left;
+  font-size: 150%;
+  height: clamp(15%, 50px, 20%);
+  height: clamp(2.5em, 8vh, 60px);
+  color: var(--textCr);
+  border-radius: 1.5vh;
+  margin-bottom: clamp(20px, 50px, 2vw);
+  padding-left: 2%;
+  width: 98%;
+}
+/* .comment-container::before {
+  content:"";
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 13px solid transparent;
+  border-right: 13px solid transparent;
   border-top: 26px solid var(--borderCr);
   margin: 0px 0 0 -13px;
 
+} FACING DOWN*/
+#add-comment{
+  padding-right: 50px;
+  max-width: auto;
 }
+/* #add-comment > form > input.comment-field {
+
+} */
 
 .pair-container-heading{
   border-bottom: solid 1px var(--borderCr);
