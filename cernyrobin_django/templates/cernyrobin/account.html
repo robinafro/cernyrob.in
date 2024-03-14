@@ -20,12 +20,12 @@
 
         <div>
             <p>Chtěl by jsi každý týden když vyjde video dostávat na mail soubor s regenerovanými unikátními odpovědmi?</p>
-            <div id="anon-container">
-                <input type="checkbox" name=""> <p>Přihlást k odběru</p>
-
-            </div>
-            <form action="/kafka/subscribed" method="POST">
-                <input type="submit" value="Přihlásit se k odběru" name="subscribe">
+            
+            <form action="/kafka/subscribe" method="POST">
+                <div id="anon-container">
+                    <input type="checkbox" name="subscribed"> <p>Přihlást k odběru</p>
+                </div>
+                <input type="submit" value="Přihlásit se k odběru" >
             </form>
         </div>
 
