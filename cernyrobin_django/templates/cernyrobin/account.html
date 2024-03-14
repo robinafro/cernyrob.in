@@ -15,12 +15,16 @@
     <p id="meber-since" class="centered-text">Už jsi člen {{current_user.date_joined|timesince}}</p>
     <p class="contrast-text">
 
-        {%if current_user.is_verified%}
+        {%if current_user.is_verified or True%}
         Jsi verifikovaný člen cernyrob.in, můžete využívat všechny služby naplno!
 
         <div>
-            <p>Chtěl by jsi každý týden dostávat na mail soubor s regenerovanými unikátními odpovědmi?</p>
-            <form action="/url" method="POST">
+            <p>Chtěl by jsi každý týden když vyjde video dostávat na mail soubor s regenerovanými unikátními odpovědmi?</p>
+            <div id="anon-container">
+                <input type="checkbox" name=""> <p>Přihlást k odběru</p>
+
+            </div>
+            <form action="/kafka/subscribed" method="POST">
                 <input type="submit" value="Přihlásit se k odběru" name="subscribe">
             </form>
         </div>
