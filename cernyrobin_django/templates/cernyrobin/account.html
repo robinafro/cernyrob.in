@@ -15,7 +15,7 @@
     <p id="meber-since" class="centered-text">Už jsi člen {{current_user.date_joined|timesince}}</p>
     <p class="contrast-text">
 
-        {%if current_user.is_verified or True%}
+        {%if current_user.is_verified%}
         Jsi verifikovaný člen cernyrob.in, můžete využívat všechny služby naplno!
 
         <div>
