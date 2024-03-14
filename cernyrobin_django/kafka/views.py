@@ -114,37 +114,9 @@ def view(request, is_custom=False):
 
 
         parsed_questions = parse_numbered_text(strip_yapping(video_info["description"]))
-
         parsed_answers = parse_numbered_text(strip_yapping(answers))
-        # questions = ["otázka 1", "otázka 2"]
-        # answers = ["odpověď 1", "odpověď 2"]
-
-  #      qa_pairs = zip(parsed_questions, parsed_answers)
-        
-
-        # Bro stop waffling stupid ass shit
-        # ˇˇˇˇ DO NOT EVER FUCKING TOUCH THIS GODDAMN LINE OR THE WHOLE THING FALLS APART
         qa_pairs = zip(parse_numbered_text(strip_yapping(video_info["description"])), parse_numbered_text(strip_yapping(answers)))
-        # ^^^^ DO NOT EVER FUCKING TOUCH THIS GODDAMN LINE OR THE WHOLE THING FALLS APART
 
-        # print(parsed_answers)
-        # print(parsed_questions)
-        # print(type(video_info["description"]))
-        # print(type(strip_yapping(video_info["description"])))
-        # print(type(parse_numbered_text(strip_yapping(video_info["description"]))))
-        
-        # print(type(answers))
-        # print(type(parse_numbered_text(answers)))
-
-
-        # for q, a in qa_pairs:
-        #     print(q)
-        #     print(a)
-        #     print("---------------------")
-        
-#        print(video_info)
-        # for question in answers:
-        #     print("1111 " + question))
         i = 1
         qa_pairs_list_form = []
         for question, answer in qa_pairs:
@@ -159,8 +131,6 @@ def view(request, is_custom=False):
                 "video_url": video_url,
                 "video_id": id,
                 "video_title" :video_info["title"],
-#                "questions": parse_numbered_text(video_info["description"]),
-#                "answers": parse_numbered_text(answers),
                 "summary": api_views.get_summary(video_url),
                 "qa_pairs" : qa_pairs,
                 "answers_copy": answers,
