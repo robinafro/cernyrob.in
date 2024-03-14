@@ -233,7 +233,7 @@ def submit(request):
  
         video_url = "https://www.youtube.com/watch?v=" + video_id
 
-        response = api_views.generate_answers(video_url, "cs-CZ", runbackground=True)
+        response = api_views.generate_answers(video_url, "cs-CZ", runbackground=True, submitter=request.user)
 
         return response
 
