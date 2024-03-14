@@ -103,7 +103,7 @@ def broadcast_mail(receiver_emails, file_path=None, password=get_password()):
         with smtplib.SMTP_SSL(smtp_server, smtp_port) as server:
             server.login(login, password)
             text = msg.as_string()
-            server.sendmail(sender_email, ",".join(receiver_emails), text)
+            server.sendmail(sender_email, receiver_emails, text)
             status["sent_successfully"] = True
     except Exception as e:
         status["error_message"] = str(e)

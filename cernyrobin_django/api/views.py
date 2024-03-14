@@ -7,8 +7,9 @@ from api.yt_transcriptor import main as yt_transcriptor
 from api import get_video_info
 from api.paraphraser import main as paraphraser
 from cernyrobin_app.models import UserProfile
+import api.send_mail as send_mail
 
-import datetime, json, re, threading, dotenv, os
+import datetime, json, re, threading, dotenv, os, docx, shortuuid
 
 try:
     dotenv.load_dotenv()
@@ -184,7 +185,7 @@ def get_all_to_be_displayed():
     
     return all_data
 
-def generate_answers(video_url, language, user=None, runbackground=False):
+def generate_answers(video_url, language, user=None, runbackground=False, submitter=None):
     video_url = video_url.strip(" ")
     
     response = {"code": 200, "message": "OK"}
@@ -339,6 +340,8 @@ def generate_answers(video_url, language, user=None, runbackground=False):
 
                 if color is not None:
                     kafka.color = color
+                else:
+                    kafka.color = "#221fc7"
             else:
                 try:
                     custom_answers = json.loads(kafka.custom_answers)
@@ -355,6 +358,44 @@ def generate_answers(video_url, language, user=None, runbackground=False):
             job.chunks_completed = job.total_chunks
             job.finished = True
             job.save()
+
+            # Broadcast to mailing list
+            if not is_regen:
+                try:
+                    print(submitter)
+                    email = UserProfile.objects.get(user=submitter).email
+                    print(email)
+                    year = email.split("@")[0].split(".")[-1]
+                    print(year)
+                    all_users = UserProfile.objects.filter(email_verified=True)
+                    print(all_users)
+                    send_to = []
+
+                    for usr in all_users:
+                        if year in usr.email:
+                            send_to.append(usr.email)
+
+                    print(send_to)
+
+                    if len(send_to) > 0:
+                        filename = "odpovedi.docx"
+                        dirname = shortuuid.uuid()[:8]
+
+                        os.makedirs(f"/tmp/{dirname}", exist_ok=True)
+
+                        doc = docx.Document()
+                        doc.add_paragraph(answers)
+                        doc.save(f"/tmp/{dirname}/" + filename)
+
+                        send_mail.broadcast_mail(send_to, file_path=f"/tmp/{dirname}/" + filename)
+
+                        # os.remove(f"/tmp/{dirname}/" + filename)
+                        # os.rmdir(f"/tmp/{dirname}")
+                            
+                except Exception as e:
+                    print(e)
+                    pass
+
 
             if not runbackground:
                 response["code"] = 200
@@ -560,10 +601,7 @@ def kafka_job(request, subdomain):
 
 def get_comments(video_url):
     # print(video_url)
-    try:
-        for kafka in Kafka.objects.all():
-            print(kafka.video_url)
-            
+    try:    
         kafka = Kafka.objects.get(video_url=video_url)
         # print(kafka.comments)
         return json.loads(kafka.comments) if kafka.comments else []

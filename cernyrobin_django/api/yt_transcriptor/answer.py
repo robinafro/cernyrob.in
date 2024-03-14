@@ -182,20 +182,26 @@ def chatbot(questions_path, transcript_path, save_path, summary_save_path, youtu
 
     # Generate a color based on the theme
     if not is_regen:
-        messages.append({"role": "user", "content": "Now generate a HEX color code based on the overall mood of the summary and what it was about."})
+        try:
+            messages.append({"role": "user", "content": "Now generate a HEX color code based on the overall mood of the summary and what it was about."})
 
-        response = openai.chat.completions.create(
-            model=MODEL,
-            messages=messages,
-            temperature=temperature,
-            max_tokens=MAX_TOKENS
-        )
+            response = openai.chat.completions.create(
+                model=MODEL,
+                messages=messages,
+                temperature=temperature,
+                max_tokens=MAX_TOKENS
+            )
 
-        
-        color = re.search(r"#[a-fA-F0-9]{6}", response.choices[0].message.content).group()
-        
-        if color:
-            return color
+            
+            color = re.search(r"#[a-fA-F0-9]{6}", response.choices[0].message.content).group()
+            
+            if color:
+                return color
+        except Exception as e:
+            print("Error generating color: " + str(e))
+
+            return None
+
         
 if False:
     from api.models import Kafka
