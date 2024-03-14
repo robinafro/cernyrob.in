@@ -177,8 +177,11 @@
                 </div>
                 <p class="answer-text" id="ans-{{index}}">
                 <form action="/kafka/comment/" method="POST" style="width: 100%;">
-
                     <input class="comment-field" type="text" name="comment">
+                    <div id="anon-container">
+                        <input type="checkbox" name="anonymous"> <p>Přidat komntář anonymně (nebude vidět, kdo ho poslal)</p>
+                        
+                    </div>
                     <input hidden name="video_url" value="{{video_id}}">
                     {%csrf_token%}
                     <input class="round-button" type="submit" name="" id="" value="Přidat komentář">

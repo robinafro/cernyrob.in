@@ -1189,6 +1189,7 @@ nav *{
 .view-subheading{
   color: var(--textCr);
   font-size: 26px;
+  text-align: center;
 /*   padding-left: 50px; */
 }
 
@@ -1294,10 +1295,17 @@ p{
   height: clamp(2.5em, 8vh, 60px);
   color: var(--textCr);
   border-radius: 1.5vh;
-  margin-bottom: clamp(20px, 50px, 2vw);
+  margin-bottom: 20px;
   padding-left: 2%;
   width: 98%;
 }
+#anon-container{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
 /* .comment-container::before {
   content:"";
   position: absolute;
