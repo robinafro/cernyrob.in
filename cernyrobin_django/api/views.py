@@ -7,8 +7,9 @@ from api.yt_transcriptor import main as yt_transcriptor
 from api import get_video_info
 from api.paraphraser import main as paraphraser
 from cernyrobin_app.models import UserProfile
+import api.send_mail as send_mail
 
-import datetime, json, re, threading, dotenv, os
+import datetime, json, re, threading, dotenv, os, docx, shortuuid
 
 try:
     dotenv.load_dotenv()
@@ -355,6 +356,37 @@ def generate_answers(video_url, language, user=None, runbackground=False):
             job.chunks_completed = job.total_chunks
             job.finished = True
             job.save()
+
+            # Broadcast to mailing list
+            if not is_regen:
+                try:
+                    email = UserProfile.objects.get(user=user).email
+                    year = email.split(".")[-1].split("@")[0]
+                    all_users = UserProfile.objects.filter(email_verified=True)
+                    send_to = []
+
+                    for user in all_users:
+                        if year in user.email:
+                            send_to.append(user.email)
+
+                    if len(send_to) > 0:
+                        filename = f"odpovedi{shortuuid.uuid()[:4]}.docx"
+                        dirname = shortuuid.uuid()[:8]
+
+                        os.makedirs(f"/tmp/{dirname}", exist_ok=True)
+
+                        doc = docx.Document()
+                        doc.add_paragraph(answers)
+                        doc.save(f"/tmp/{dirname}/" + filename)
+
+                        send_mail.broadcast_mail(send_to, file_path="/tmp/" + filename)
+
+                        os.remove(f"/tmp/{dirname}/" + filename)
+                        os.rmdir(f"/tmp/{dirname}")
+                            
+                except Exception as e:
+                    pass
+
 
             if not runbackground:
                 response["code"] = 200
