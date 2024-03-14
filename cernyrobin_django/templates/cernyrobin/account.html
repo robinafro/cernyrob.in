@@ -17,9 +17,19 @@
 
         {%if current_user.is_verified%}
         Jsi verifikovaný člen cernyrob.in, můžete využívat všechny služby naplno!
+
+        <div>
+            <p>Chtěl by jsi každý týden dostávat na mail soubor s regenerovanými unikátními odpovědmi?</p>
+            <form action="/url" method="POST">
+                <input type="submit" value="Přihlásit se k odběru" name="subscribe">
+            </form>
+        </div>
+
         {%else%}
         Používáš neverifikovaný účet, pokud chceš využívat všechny funkce Kafka AI naplno, můžeš si jednoduše účet verifikovat.
+        <a href="/verify_account" class="round-button">Verifikovat</a>
         {%endif%}
+
     </p>
 </body>
 </html>

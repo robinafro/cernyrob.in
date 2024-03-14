@@ -1202,7 +1202,9 @@ nav *{
   margin: 0px;
 
 }
-
+#tldr-button{
+  display: none;
+}
 
 .copy-popup {
   visibility: hidden;
