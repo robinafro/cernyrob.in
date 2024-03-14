@@ -164,6 +164,9 @@
         <!-- Komentáře start -->
         <h2 class="view-subheading">Komentáře</h2>
         <div id="comment-section-container">
+            {%if is_custom%}
+            <p>Komentáře jsou dostupné jenom na stránce s veřejnými odpověďmi</p>
+            {%else%}
 
             <div class="comment-container" id="add-comment">
                 <div class="pair-container-heading">
@@ -200,7 +203,7 @@
             </div>
 
             {%endfor%}
-
+            {%endif%}
 
             <!-- <div class="comment-container">
                     <div class="pair-container-heading">
