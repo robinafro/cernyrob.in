@@ -392,6 +392,9 @@ def quiz_get_questions(request):
 
 def quiz_evaluate(request):
     questions_answers = request.POST.get("questions_answers")
+
+    if questions_answers is None:
+        return HttpResponse("Retard kurva")
     id = request.POST.get("topic")
 
     course = quiz.get_courses(id=id)
