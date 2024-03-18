@@ -387,9 +387,8 @@ def quiz_play(request):
 
 def quiz_get_questions(request):
     questions = quiz.get_questions(request.GET.get("topic", "0"))
-    context = {"questions": questions}
 
-    return render(request, "lalalala", context)
+    return JsonResponse({"questions": questions})
 
 def quiz_evaluate(request):
     questions_answers = request.POST.get("questions_answers")
