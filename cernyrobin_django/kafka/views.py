@@ -6,6 +6,7 @@ from api.models import Kafka
 from api import get_video_info
 from api import views as api_views
 from ads import views as ads_views
+from kafka.history_quiz import quiz
 import json
 import re
 
@@ -333,8 +334,10 @@ def comment(request):
 
         if comments_from_this_user >= MAX_COMMENTS_PER_USER:
             return JsonResponse({"code": 403, "message": "Forbidden"})
+        
+        anonymous = request.GET.get("anonymous", "off") == "on"
 
-        response = api_views.comment(video_url, comment, request.user, "kafka")
+        response = api_views.comment(video_url, comment, request.user, anonymous, "kafka")
 
         return redirect("/kafka/view?id=" + video_id)
     else:
@@ -365,7 +368,42 @@ def subscribe(request):
         profile.email_subscribed = subscribed
         profile.save()
 
-        return redirect("/account/") 
+        return redirect("/account/")
+    
+def quiz_info(request):
+    courses = quiz.get_courses()
+    context = {"courses": courses}
+
+    return render(request, "lelele", context)
+
+def quiz_play(request):
+    context = {"topic": request.GET.get("topic", "0")}
+    return render(request, "xdddd", context)
+
+def quiz_get_questions(request):
+    questions = quiz.get_questions(request.GET.get("topic", "0"))
+    context = {"questions": questions}
+
+    return render(request, "lalalala", context)
+
+def quiz_evaluate(request):
+    questions_answers = request.POST.get("questions_answers")
+    id = request.POST.get("topic")
+
+    course = quiz.get_courses(id=id)
+
+    similarities = {}
+    score = 0
+
+    for question, answer in questions_answers.items():
+        similarity = quiz.get_similarity(course, question, answer)
+
+        similarities[question] = similarity
+        
+        if similarity > 0.2:
+            score += similarity * 100
+
+    return JsonResponse({"similarities": similarities, "score": score})
     
 def quiz_dummy(request):
     return render(request, "kafka/quiz_dummy.html")

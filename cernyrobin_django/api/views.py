@@ -606,7 +606,7 @@ def get_comments(video_url):
         print(e)
         return []
 
-def comment(video_url, comment, user, type):
+def comment(video_url, comment, user, anonymous, type):
     # print(type)
     if type == "kafka":
         try:
@@ -615,7 +615,7 @@ def comment(video_url, comment, user, type):
             comments = json.loads(kafka.comments) if kafka.comments else []
 
             comments.append({
-                "user": user.username,
+                "user": "Anonymous" if anonymous else user.username,
                 "message": comment,
                 "timestamp": datetime.datetime.now().replace(tzinfo=None).timestamp()
             })
