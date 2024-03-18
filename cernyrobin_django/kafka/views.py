@@ -334,8 +334,10 @@ def comment(request):
 
         if comments_from_this_user >= MAX_COMMENTS_PER_USER:
             return JsonResponse({"code": 403, "message": "Forbidden"})
+        
+        anonymous = request.GET.get("anonymous", "off") == "on"
 
-        response = api_views.comment(video_url, comment, request.user, "kafka")
+        response = api_views.comment(video_url, comment, request.user, anonymous, "kafka")
 
         return redirect("/kafka/view?id=" + video_id)
     else:
