@@ -1,3 +1,4 @@
 #!/bin/bash
 
-# navar to tak ze se ti zkopiruje setup/corpora do nltk_data
+mkdir /usr/local/share/nltk_data
+cp -r ./corpora /usr/local/share/nltk_data
