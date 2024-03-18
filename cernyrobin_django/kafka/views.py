@@ -391,7 +391,7 @@ def quiz_get_questions(request):
 
     return JsonResponse({"questions": questions})
 
-@csrf_exempt
+# @csrf_exempt
 def quiz_evaluate(request):
     questions_answers = request.POST.get("questions_answers")
     print(questions_answers)

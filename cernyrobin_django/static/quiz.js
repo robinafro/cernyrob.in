@@ -69,7 +69,8 @@ document.addEventListener('DOMContentLoaded', function () {
             fetch('/kafka/quiz/evaluate/', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    "X-CSRFToken": getCookie("csrftoken")
                 },
                 body: formData
             })
@@ -99,3 +100,9 @@ document.addEventListener('DOMContentLoaded', function () {
         console.log(answer)
     })
 })
+
+function getCookie(name) {
+    var value = "; " + document.cookie;
+    var parts = value.split("; " + name + "=");
+    if (parts.length == 2) return parts.pop().split(";").shift();
+}
