@@ -371,7 +371,7 @@ def subscribe(request):
         return redirect("/account/")
     
 def quiz_info(request):
-    topic = request.GET.get("topic", "0")
+    topic = request.GET.get("topic")
 
     if topic:
         return JsonResponse({"course_name": quiz.get_courses(id=topic)})
