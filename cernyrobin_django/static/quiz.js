@@ -7,17 +7,29 @@ document.addEventListener('DOMContentLoaded', function () {
     const queryParams = new URLSearchParams(queryString)
     const topicSlug = queryParams.get('topic')
 
-    const questionApiPath = window.location.origin + "/quiz/questions?topic=" + topicSlug
-    const topicApiPath = window.location.origin + "/quiz/info?topic=" + topicSlug
+    const questionApiPath = window.location.origin + "/kafka/quiz/questions?topic=" + topicSlug
+    const topicApiPath = window.location.origin + "/kafka/quiz/info?topic=" + topicSlug
+    let questions = []
 
+    fetch(topicApiPath)
+        .then(response => response.json())
+        .then(data => {
+            console.log(data)
+           let topic = data["course_name"]
+              document.getElementById("video-name").innerText = document.getElementById("video-name").innerText + " " + topic
+           console.log(topic)
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
 
     fetch(questionApiPath)
         .then(response => response.json())
         .then(data => {
-           let qaPairs = data
-           let questions = []
-           for (question, answer in qaPairs) {
+           for (const [question, answer] of Object.entries(data.questions)) {
                 questions.push(question)
+                console.log(question)
+                document.getElementById("quiz-question").innerText = questions[0]
               }
 
         })
@@ -25,24 +37,10 @@ document.addEventListener('DOMContentLoaded', function () {
             console.error('Error:', error);
         });
 
-    fetch(topicApiPath)
-        .then(response => response.json())
-        .then(data => {
-           let topic = data.name
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
 
 
 
 
-
-    let questions = [
-        'kdy vznikl unix timestamp',
-        'kdo udělal linux',
-        'kdo udělal gnu',
-    ]
     let userAnswers = []
 
     let currentQuestionIndex = 0
