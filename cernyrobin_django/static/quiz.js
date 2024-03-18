@@ -70,7 +70,6 @@ document.addEventListener('DOMContentLoaded', function () {
             fetch('/kafka/quiz/evaluate/', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
                     "X-CSRFToken": getCookie("csrftoken")
                 },
                 body: formData

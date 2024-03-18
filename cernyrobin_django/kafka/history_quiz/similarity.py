@@ -20,7 +20,7 @@ def preprocess(text):
         if token == "":
             tokens.remove(token)
     
-    print(tokens)
+    
     # stemmer = SnowballStemmer("czech")
     # tokens = [stemmer.stem(token) for token in tokens]
     return tokens
