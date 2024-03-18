@@ -184,6 +184,9 @@ def submit(request):
             },
         )
     elif request.method == "POST":
+        if not get_user(request.user).email_verified:
+            return JsonResponse({"code": 418, "message": "Nemáš verifikovaný email"})
+        
         video_url = request.POST.get("video_url")
 
         if video_url is None:
