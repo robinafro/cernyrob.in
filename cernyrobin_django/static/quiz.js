@@ -65,6 +65,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             let formData = new FormData()
             formData.append('questions_answers', JSON.stringify(payload))
+            formData.append('topic', topicSlug)
 
             fetch('/kafka/quiz/evaluate/', {
                 method: 'POST',
