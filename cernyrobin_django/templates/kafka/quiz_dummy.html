@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="/static/view.js"></script>
     <meta name="description" content="Stránka Unethical AI pro kafkovy videa">
+    <script src="/static/quiz.js"></script>
 
 
 
@@ -25,9 +26,9 @@
         <h1 id="video-name">Kvíz na téma [topic]</h1>
         <div id="answer-intro">
 
-            <div id="transcript-center">
+            <div id="question-container" class="transcript-center">
                 <div class="transcript-container">
-                    <p class="transcript-text quiz-question">Kdy začal UNIX timestamp</p>
+                    <p id="quiz-question" class="transcript-text quiz-question">Kdy začal UNIX timestamp</p>
     
                 </div>
             </div>
@@ -37,13 +38,15 @@
 
 
 
-            <div id="transcript-center">
+            <div id="user-answer-container" class="transcript-center">
                 <div class="transcript-container">
                     <h2 class="contrast-heading centered-text">Odpověď</h2>
-                    <input class="comment-field" type="text" name="comment">
+                    <input id="answer-input" class="comment-field" type="text" name="comment">
                     <div class="centering-container">
 
-                        <input class="round-button" type="submit" name="" id="" value="Odeslat odpověď">
+                        <buttton  class="round-button" id="answer-button">
+                            Odeslat Odpověď
+                        </button>
                     </div>
 
                 </div>
