@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-    let userAnswers = []
+    var userAnswers = []
 
     let currentQuestionIndex = 0
 
@@ -58,6 +58,32 @@ document.addEventListener('DOMContentLoaded', function () {
             document.getElementById('answer-input').value = ""
         } else {
             console.log(userAnswers)
+            let payload = {}
+            for (let i = 0; i < questions.length; i++) {
+                payload[questions[i]] = userAnswers[i]
+            }
+
+            let formData = new FormData()
+            formData.append('questions_answers', JSON.stringify(payload))
+
+            fetch('/kafka/quiz/evaluate/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: formData
+            })
+                .then(response => {
+                    if (response.ok) {
+                        console.log('Answers submitted successfully');
+                    } else {
+                        console.error('Failed to submit answers');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+
             document.getElementById("question-container").style.display = "none"
             document.getElementById("user-answer-container").style.display = "none"
 

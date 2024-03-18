@@ -9,6 +9,7 @@ from ads import views as ads_views
 from kafka.history_quiz import quiz
 import json
 import re
+from django.views.decorators.csrf import csrf_exempt
 
 MAX_COMMENTS_PER_USER = 5
 
@@ -390,6 +391,7 @@ def quiz_get_questions(request):
 
     return JsonResponse({"questions": questions})
 
+@csrf_exempt
 def quiz_evaluate(request):
     questions_answers = request.POST.get("questions_answers")
     id = request.POST.get("topic")
