@@ -3,7 +3,7 @@ from nltk.stem import SnowballStemmer
 from nltk.corpus import stopwords
 from collections import Counter
 import math
-import czech_stemmer
+from kafka.history_quiz import czech_stemmer
 
 def preprocess(text):
     # Tokenize the text

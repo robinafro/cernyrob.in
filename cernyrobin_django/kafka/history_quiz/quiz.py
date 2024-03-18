@@ -1,7 +1,7 @@
 import json
 import os
 import random
-import similarity
+from kafka.history_quiz import similarity
 
 NUM_QUESTIONS = 25
 SIMILARITY_THRESHOLD = 0.26
