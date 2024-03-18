@@ -471,6 +471,21 @@ p{
                                                                                                 
 */
 
+
+.quiz-question{
+  font-size: 1.2rem;
+  margin: 0.5rem;
+}
+.centering-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0px;
+  padding: 0px;
+
+}
+
 /* Comment section code */
 
 #comment-section-container{
