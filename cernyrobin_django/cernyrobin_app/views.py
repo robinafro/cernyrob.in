@@ -20,6 +20,8 @@ from api import send_mail
 
 import json, re, shortuuid, datetime
 
+mail_blocklist = ["kafka", "sablik", "inneman", "lacina", "ruzicka", "santrucek"]
+
 # Utils
 def go_back(request):
     next_url = request.POST.get("next", request.GET.get("next", ""))
@@ -269,6 +271,17 @@ def verify_submit(request):
         
         if not re.match(r"\w+\.[\w]{2,4}\.2[\d]{3}@skola\.ssps\.cz", email) and email != "actulurus@gmail.com": # There might be an issue with the escape characters near the dots. Look into this first if the verification seems to be broken.
             return HttpResponse("400 Bad Request (debug: email does not match regex)")
+        
+        year = int(email.split("@")[0].split(".")[-1])
+        current_year = datetime.now().year
+
+        if year <= current_year - 5:
+            return HttpResponse("400 Bad Request")
+        
+        surname = email.split(".")[0]
+
+        if surname in mail_blocklist:
+            return HttpResponse("400 Bad Request")
     
         #! Check if the email is already being used
         for user in UserProfile.objects.all():
