@@ -5,7 +5,33 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const queryString = window.location.search
     const queryParams = new URLSearchParams(queryString)
-    const topic = queryParams.get('topic')
+    const topicSlug = queryParams.get('topic')
+
+    const questionApiPath = window.location.origin + "/quiz/questions?topic=" + topicSlug
+    const topicApiPath = window.location.origin + "/quiz/info?topic=" + topicSlug
+
+
+    fetch(questionApiPath)
+        .then(response => response.json())
+        .then(data => {
+           let qaPairs = data
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+
+    fetch(topicApiPath)
+        .then(response => response.json())
+        .then(data => {
+           let topic = data.name
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+
+
+
+
 
     let questions = [
         'kdy vznikl unix timestamp',
