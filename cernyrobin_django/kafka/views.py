@@ -9,7 +9,7 @@ from ads import views as ads_views
 import json
 import re
 
-MAX_COMMENTS_PER_USER = 5
+MAX_COMMENTS_PER_USER = 50
 
 def get_user(request):
     try:
@@ -130,8 +130,6 @@ def view(request, is_custom=False):
         if not is_custom:
             comments = api_views.get_comments(video_url)
             comments.reverse()
-
-        print(comments)
 
         return render(
             request,
@@ -339,7 +337,7 @@ def comment(request):
         if comments_from_this_user >= MAX_COMMENTS_PER_USER:
             return JsonResponse({"code": 403, "message": "Forbidden"})
         
-        anonymous = request.GET.get("anonymous", "off") == "on"
+        anonymous = request.POST.get("anonymous", "off") == "on"
 
         response = api_views.comment(video_url, comment, request.user, anonymous, "kafka")
 
