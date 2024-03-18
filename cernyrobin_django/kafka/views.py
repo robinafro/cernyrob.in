@@ -392,7 +392,7 @@ def quiz_get_questions(request):
 
 def quiz_evaluate(request):
     questions_answers = request.POST.get("questions_answers")
-    console.log(questions_answers)
+    print(questions_answers)
     id = request.POST.get("topic")
 
     course = quiz.get_courses(id=id)
