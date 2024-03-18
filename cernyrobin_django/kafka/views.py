@@ -374,15 +374,19 @@ def quiz_info(request):
 
     return render(request, "lelele", context)
 
+def quiz_play(request):
+    context = {"topic": request.GET.get("topic", "0")}
+    return render(request, "xdddd", context)
+
 def quiz_get_questions(request):
-    questions = quiz.get_questions(request.GET.get("id", "0"))
+    questions = quiz.get_questions(request.GET.get("topic", "0"))
     context = {"questions": questions}
 
     return render(request, "lalalala", context)
 
 def quiz_evaluate(request):
     questions_answers = request.POST.get("questions_answers")
-    id = request.POST.get("id")
+    id = request.POST.get("topic")
 
     course = quiz.get_courses(id=id)
 
