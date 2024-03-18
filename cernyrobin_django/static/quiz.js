@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', function () {
             document.getElementById("question-container").style.display = "none"
             document.getElementById("user-answer-container").style.display = "none"
 
-            document.getElementById("video-name").innerText = "Dokončil jsi " + titleText;
+            document.getElementById("video-name").innerText = "Dokončil jsi " + document.getElementById("video-name").innerText;
 
         }
     }
