@@ -398,3 +398,6 @@ def quiz_evaluate(request):
             score += similarity * 100
 
     return JsonResponse({"similarities": similarities, "score": score})
+    
+def quiz_dummy(request):
+    return render(request, "kafka/quiz_dummy.html")

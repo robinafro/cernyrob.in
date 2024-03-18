@@ -81,6 +81,12 @@ urlpatterns = [
     path("reject/", ads.admin_reject, {"subdomain": "reklamy"}, name="admin_reject"),
 
     path("manifest.json/", cernyrobin.manifest, name="manifest"),
+
+
+    # QUIZ APP URLS
+    # path("quiz/", kafka.quiz, name="quiz"),
+    # path("quiz/info/", kafka.quiz_info, name="quiz_info"),   
+    path("quiz/dummy/", kafka.quiz_dummy, name="quiz_dummy"),
 ]
 
 if settings.DEBUG:
