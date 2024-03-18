@@ -131,6 +131,8 @@ def view(request, is_custom=False):
             comments = api_views.get_comments(video_url)
             comments.reverse()
 
+        print(comments)
+
         return render(
             request,
             "kafka/view.html",
@@ -327,8 +329,8 @@ def comment(request):
         comments_from_this_user = 0
         comments = api_views.get_comments(video_url)
 
-        for comment in comments:
-            if comment["user"] == request.user.username:
+        for _comment in comments:
+            if _comment["user"] == request.user.username:
                 comments_from_this_user += 1
 
         if comments_from_this_user >= MAX_COMMENTS_PER_USER:
