@@ -16,3 +16,4 @@ shortuuid
 django-cors-headers
 
 selenium
+nltk
