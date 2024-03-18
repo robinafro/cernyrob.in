@@ -379,11 +379,11 @@ def quiz_info(request):
         courses = quiz.get_courses()
         context = {"courses": courses}
 
-        return render(request, "lelele", context)
+        return render(request, "kafka/quiz_info.html", context)
 
 def quiz_play(request):
     context = {"topic": request.GET.get("topic", "0")}
-    return render(request, "xdddd", context)
+    return render(request, "kafka/quiz.html", context)
 
 def quiz_get_questions(request):
     questions = quiz.get_questions(request.GET.get("topic", "0"))
