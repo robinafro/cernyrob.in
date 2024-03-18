@@ -365,4 +365,7 @@ def subscribe(request):
         profile.email_subscribed = subscribed
         profile.save()
 
-        return redirect("/account/")
+        return redirect("/account/") 
+    
+def quiz_dummy(request):
+    return render(request, "kafka/quiz_dummy.html")
