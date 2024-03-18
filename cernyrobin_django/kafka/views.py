@@ -371,10 +371,15 @@ def subscribe(request):
         return redirect("/account/")
     
 def quiz_info(request):
-    courses = quiz.get_courses()
-    context = {"courses": courses}
+    topic = request.GET.get("topic")
 
-    return render(request, "lelele", context)
+    if topic:
+        return JsonResponse({"course_name": quiz.get_courses(id=topic)})
+    else:
+        courses = quiz.get_courses()
+        context = {"courses": courses}
+
+        return render(request, "lelele", context)
 
 def quiz_play(request):
     context = {"topic": request.GET.get("topic", "0")}
