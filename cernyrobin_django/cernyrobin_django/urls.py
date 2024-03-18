@@ -84,8 +84,8 @@ urlpatterns = [
 
 
     # QUIZ APP URLS
-    path("quiz/", kafka.quiz, name="quiz"),
-    path("quiz/info/", kafka.quiz_info, name="quiz_info"),   
+    # path("quiz/", kafka.quiz, name="quiz"),
+    # path("quiz/info/", kafka.quiz_info, name="quiz_info"),   
     path("quiz/dummy/", kafka.quiz_dummy, name="quiz_dummy"),
 ]
 
