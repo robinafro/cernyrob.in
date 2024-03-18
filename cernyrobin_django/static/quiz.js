@@ -15,6 +15,11 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(response => response.json())
         .then(data => {
            let qaPairs = data
+           let questions = []
+           for (question, answer in qaPairs) {
+                questions.push(question)
+              }
+
         })
         .catch(error => {
             console.error('Error:', error);
