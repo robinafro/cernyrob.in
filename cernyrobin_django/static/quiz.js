@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const questionApiPath = window.location.origin + "/kafka/quiz/questions?topic=" + topicSlug
     const topicApiPath = window.location.origin + "/kafka/quiz/info?topic=" + topicSlug
-    let questions = []
+    var questions = []
 
     fetch(topicApiPath)
         .then(response => response.json())
