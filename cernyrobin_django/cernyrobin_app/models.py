@@ -19,6 +19,7 @@ class BaseUserProfile(models.Model):
 
     callme = models.CharField(max_length=100, default=json.dumps(get_default_callme()))
 
+    email_subscribed = models.BooleanField(default=False)
     email_verified = models.BooleanField(default=False)
     email = models.CharField(max_length=100, default="")
 

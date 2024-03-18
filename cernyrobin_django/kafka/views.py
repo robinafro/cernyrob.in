@@ -347,3 +347,22 @@ def comment(request):
                 "cernyrobin_user": get_user(request),
             },
         )
+    
+def subscribe(request):
+    if request.method == "POST":
+        if request.user.is_anonymous:
+            return JsonResponse({"code": 403, "message": "Forbidden"})
+        
+        profile = get_user(request)
+
+        if not profile.email_verified:
+            return JsonResponse({"code": 403, "message": "Forbidden"})
+        
+        subscribed = request.POST.get("subscribed") == "on"
+
+        print(subscribed)
+
+        profile.email_subscribed = subscribed
+        profile.save()
+
+        return redirect("/account/")

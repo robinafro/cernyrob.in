@@ -362,20 +362,17 @@ def generate_answers(video_url, language, user=None, runbackground=False, submit
             # Broadcast to mailing list
             if not is_regen:
                 try:
-                    print(submitter)
                     email = UserProfile.objects.get(user=submitter).email
-                    print(email)
+                    
                     year = email.split("@")[0].split(".")[-1]
-                    print(year)
+                    
                     all_users = UserProfile.objects.filter(email_verified=True)
-                    print(all_users)
+
                     send_to = []
 
                     for usr in all_users:
-                        if year in usr.email:
+                        if year in usr.email and usr.email_subscribed == True:
                             send_to.append(usr.email)
-
-                    print(send_to)
 
                     if len(send_to) > 0:
                         filename = "odpovedi.docx"
