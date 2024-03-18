@@ -12,7 +12,7 @@ courses = json.load(courses_file)
 def get_courses(id=None):
     if id != None:
         for course, data in courses.items():
-            if data.get("id", "0"):
+            if data.get("id", "0") == id:
                 return course
     else:
         all_courses = {}
@@ -24,7 +24,7 @@ def get_courses(id=None):
 
 def get_questions(id):
     for course, data in courses.items():
-        if data.get("id", "0"):
+        if data.get("id", "0") == id:
             return data.get("Questions", {})
 
 def get_qa_pair(course):
