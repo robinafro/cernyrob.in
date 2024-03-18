@@ -394,7 +394,7 @@ def quiz_get_questions(request):
 # @csrf_exempt
 def quiz_evaluate(request):
     questions_answers = json.loads(request.POST.get("questions_answers"))
-    
+
     id = request.POST.get("topic")
 
     course = quiz.get_courses(id=id)
@@ -407,7 +407,7 @@ def quiz_evaluate(request):
 
         similarities[question] = similarity
         
-        if similarity > 0.2:
+        if similarity > 0:
             score += similarity * 100
 
     return JsonResponse({"similarities": similarities, "score": score})
