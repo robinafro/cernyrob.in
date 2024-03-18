@@ -1,0 +1,44 @@
+{
+    "Úvod do výuky dějepisu": {
+        "id": "uvod",
+        "Questions": {
+            "Proč se v dějepise neučí o dinosaurech?": "dějiny lidí a civilizace.",
+            "Jakými způsoby vnímali lidé plynutí času v průběhu času?": "V antice cyklický pohled, ve středověku lineární pohled.",
+            "S jakými prameny poznání minulosti primárně pracuje historik?": "S písemnými, historické dokumenty, dopisy, kroniky.",
+            "Co je to dlouhé století?": "19. století, průmyslové revoluce a rozvoje moderních idejí.",
+            "Co je to krátké století?": "20. století, světové války, rozpad koloniálních říší a studenou válku.",
+            "Kdo byl Jan Vavák a čím jsou jeho paměti zajímavé?": "Sedlák, zažil napoleonské války. odlišný pohled na historické události.",
+            "Vysvětlete, co v pojmu osvícenství znamená ono světlo.": "Světlo znamená rozum a poznání.",
+            "V čem všem éra osvícenství změnila svět?": "Přinesením nových myšlenek a ideálů, jako je svoboda, rovnost, lidská práva, rozvoj vědy a technologií.",
+            "Jak se John Locke vyjadřuje o soukromém vlastnictví? Jaké to mělo důsledky?": "Jako o právu jednotlivce vlastnit a disponovat svým majetkem. Mělo to důsledky v podobě rozvoje kapitalismu a podnikání.",
+            "Vysvětlete myšlenku dělby moci.": "Oddělení moci na výkonnou, zákonodárnou a soudní, aby nedocházelo k nadměrnému koncentrování moci a zneužívání.",
+            "Kdo je to občan? Čím se tento status liší od obyvatele či poddaného?": "Má určitý právní status a práva ve společnosti. Máa možnost volit."
+        }
+    },
+    "Revoluce, průmyslová revoluce a moderní nacionalismus ": {
+        "id": "prumyslrev",
+        "Questions": {
+            "Jaký je základní rozdíl mezi tradičním a moderním nacionalismem?": "Tradiční nacionalismus se zaměřuje na elitu a privilegované vrstvy, zatímco moderní nacionalismus klade důraz na obyčejné lidi a jejich identitu.",
+            "Zjistěte, s jakým uměleckým směrem je spojen počátek 19. století.": "romantismus",
+            "Jak je moderní nacionalismus provázán s velkou francouzskou revolucí?": "Oboje prosazuje myšlenky rovnosti, svobody a bratrství, které jsou základem moderního nacionalismu.",
+            "Co je to ústava a proč je pro fungování demokratických států tak důležitá?": "Základní právní dokument, v demokratických státech stanovuje pravidla a zásady.",
+            "Jak vynález gilotiny souvisí s érou osvícenství?": "Byl považován za pokrok v oblasti lidských práv a spravedlnosti, protože umožňoval rychlé a humánní popravy.",
+            "Proč se za francouzské revoluce bourají kostely a odmítá dosavadní počítání času?": "Protože se prosazuje nový racionální pohled na svět, který odmítá tradiční náboženské a kulturní symboly.",
+            "Jaké zásady do povědomí Evropanů přinese Napoleonův Code civil (občanský zákoník)?": "Přináší zásady rovnosti před zákonem, svobody a ochrany soukromého vlastnictví. ",
+            "Jak se v průběhu 19. století proměňuje postavení katolické církve?": "Církev ztrácí svůj dosavadní vliv a moc, stává se spíše jedním z mnoha náboženských směrů.",
+            "Jak se nastupující nacionalismus projeví v našich zemích?": "Konflikty mezi různými národnostmi, hlavně mezi Čechy a Němci.",
+            "Co je to sionismus? ": "Nacionalistické hnutí židovského lidu, které usiluje o obnovení a založení židovského státu. ",
+            "Jakých úspěchů sionisté ve 20. století dosáhli?": "Založení moderního Izraele v roce 1948.",
+            "Proč asi průmyslová revoluce započala právě ve Velké Británii?": "Kvůli kombinaci faktorů, jako je přítomnost přírodních zdrojů (uhlí, železná ruda), rozvoj obchodu a koloniálních vztahů, technické inovace a podpora vlády.",
+            "Jaké výrobní a marketingové metody se během 19. století vyvinuly v USA?": "sériová výroba, využití strojů a automatizace, rozvoj dopravy (železnice, parníky), využití reklamy a propagace a rozvoj velkoobchodu",
+            "Jaká je ekonomická podstata kapitalistického systému?": "Spočívá v soukromém vlastnictví výrobních prostředků (továrny, stroje, půda) a jejich provozování za účelem zisku.",
+            "V jakém odvětví se průmyslová revoluce projevila nejdříve?": "V textilním průmyslu",
+            "Co je tzv. létající člunkek a jaký je jeho princip.": "Létající člunek je zařízení, které umožňuje rychlejší a efektivnější tkaní. Létající člunek nahrazuje lidské ruce při přenášení osnovních nití přes osnovní nitě, čímž umožňuje rychlejší a rovnoměrnější tkaní.",
+            "Proč první průmyslové provozy u nás vznikaly v blízkosti hor?": "Kvůli dostupnosti dřeva a vody, které byly potřebné pro pohon strojů a výrobu energie.",
+            "Jaké důsledky mělo zapojení parní síly v dopravě?": "Zkrácení cestovní doby, zvýšení kapacity přepravy a rozvoje železniční sítě, což přispělo k rychlejšímu a efektivnějšímu obchodu a rozvoji průmyslu.",
+            "Proč při dělnických stávkách docházelo často k rozbíjení strojů?": "Protože dělníci viděli stroje jako hrozbu svého zaměstnání a snažili se tímto způsobem vyjádřit svůj nesouhlas.",
+            "Co to byly kartounky a jak souvisí se Smíchovem?": "Kartounky byly továrny vyrábějící potištěné látky. Na Smíchově se nacházely významné kartounky.",
+            "Jaká plodina způsobila v 19. století revoluci v českém potravinářském průmyslu?": "cukrová řepa"
+        }
+    }
+}

@@ -6,6 +6,7 @@ from api.models import Kafka
 from api import get_video_info
 from api import views as api_views
 from ads import views as ads_views
+from kafka.history_quiz import quiz
 import json
 import re
 
@@ -366,3 +367,34 @@ def subscribe(request):
         profile.save()
 
         return redirect("/account/")
+    
+def quiz_info(request):
+    courses = quiz.get_courses()
+    context = {"courses": courses}
+
+    return render(request, "lelele", context)
+
+def quiz_get_questions(request):
+    questions = quiz.get_questions(request.GET.get("id", "0"))
+    context = {"questions": questions}
+
+    return render(request, "lalalala", context)
+
+def quiz_evaluate(request):
+    questions_answers = request.POST.get("questions_answers")
+    id = request.POST.get("id")
+
+    course = quiz.get_courses(id=id)
+
+    similarities = {}
+    score = 0
+
+    for question, answer in questions_answers.items():
+        similarity = quiz.get_similarity(course, question, answer)
+
+        similarities[question] = similarity
+        
+        if similarity > 0.2:
+            score += similarity * 100
+
+    return JsonResponse({"similarities": similarities, "score": score})
