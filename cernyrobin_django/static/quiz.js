@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         // console.log("lorem");
                     }
 
-                    const result_title = document.getElementById("xxxxxx")
+                    const result_title = document.getElementById("score-title")
 
                     result_title.textContent = "Celkový výsledek: " + (Math.floor(data.result * 1000) / 10) + "%"
                 })
