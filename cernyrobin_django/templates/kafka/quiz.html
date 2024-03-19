@@ -29,10 +29,10 @@
             <div id="question-container" class="transcript-center">
                 <div class="transcript-container">
                     <p id="quiz-question" class="transcript-text quiz-question">Kdy začal UNIX timestamp</p>
-    
+
                 </div>
             </div>
-    
+
 
 
 
@@ -44,9 +44,9 @@
                     <input id="answer-input" class="comment-field" type="text" name="comment">
                     <div class="centering-container">
 
-                        <buttton  class="round-button" id="answer-button">
+                        <buttton class="round-button" id="answer-button">
                             Odeslat Odpověď
-                        </button>
+                            </button>
                     </div>
 
                 </div>
@@ -56,8 +56,52 @@
 
 
 
-    </div>
-    {% include "disclaimer.html" %}
+
+
+
+
+
+
+            <div id="finished-pair-container" class="pair-container">
+                <div class="pair-container-heading">
+
+
+                    <p class="question-container">
+                        <b>  Otázka </b> <span id="quiz-done-question"></span>
+
+
+                    </p>
+                    <p id="" class="wrapping-button"
+                        onclick='let answerTextElement=this.parentElement.parentElement.querySelector(".answer-text");console.log(answerTextElement),answerTextElement.style.maxHeight?answerTextElement.style.maxHeight=null:answerTextElement.style.maxHeight=answerTextElement.scrollHeight+"px";'>
+                        <!-- Rozbalit  -->⮟⮝
+                    </p>
+                </div>
+
+
+                <p class="answer-text" id="ans-{{index}}">
+                    <span>
+
+                        <b>Tvoje odpověď</b>   <span  id="quiz-done-user-answer"></span>
+                    </span>
+                    <br>
+                    <span>
+                        <b>  Správná odpověď</b> <span  id="quiz-done-correct-answer"></span>
+                    </span>
+                </p>
+
+                
+
+
+            </div>
+
+
+
+
+
+
+
+        </div>
+        {% include "disclaimer.html" %}
 </body>
 
 </html>
