@@ -1,12 +1,12 @@
 document.addEventListener('DOMContentLoaded', function () {
     var quizButtonElement = document.getElementById('answer-button')
     var titleText = document.getElementById("video-name").innerText
-    
-    
+
+
     const queryString = window.location.search
     const queryParams = new URLSearchParams(queryString)
     const topicSlug = queryParams.get('topic')
-    
+
     const questionApiPath = window.location.origin + "/kafka/quiz/questions?topic=" + topicSlug
     const topicApiPath = window.location.origin + "/kafka/quiz/info?topic=" + topicSlug
     var questions = []
@@ -17,9 +17,9 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(response => response.json())
         .then(data => {
             console.log(data)
-           let topic = data["course_name"]
-              document.getElementById("video-name").innerText = document.getElementById("video-name").innerText + " " + topic
-           console.log(topic)
+            let topic = data["course_name"]
+            document.getElementById("video-name").innerText = document.getElementById("video-name").innerText + " " + topic
+            console.log(topic)
         })
         .catch(error => {
             console.error('Error:', error);
@@ -30,11 +30,11 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(data => {
             correct_answers = data.questions
 
-           for (const [question, answer] of Object.entries(data.questions)) {
+            for (const [question, answer] of Object.entries(data.questions)) {
                 questions.push(question)
                 console.log(question)
                 document.getElementById("quiz-question").innerText = questions[0]
-              }
+            }
 
         })
         .catch(error => {
@@ -77,25 +77,25 @@ document.addEventListener('DOMContentLoaded', function () {
                 },
                 body: formData
             })
-            .then(response => {
-                if (response.ok) {
-                    return response.json(); // Parse response as JSON
-                } else {
-                    throw new Error('Failed to submit answers');
-                }
-            })
-            .then(data => {
-                console.log('Answers submitted successfully');
-                console.log(data);
-                
-                const ogContainer = document.getElementById("finished-pair-container");
-                
-                console.log(ogContainer);
-                
-                for (const [question, similarity] of Object.entries(data.similarities)) {
-                    console.log(question)
-                        let correct_answer  = correct_answers[question]
-                    
+                .then(response => {
+                    if (response.ok) {
+                        return response.json(); // Parse response as JSON
+                    } else {
+                        throw new Error('Failed to submit answers');
+                    }
+                })
+                .then(data => {
+                    console.log('Answers submitted successfully');
+                    console.log(data);
+
+                    const ogContainer = document.getElementById("finished-pair-container");
+
+                    console.log(ogContainer);
+
+                    for (const [question, similarity] of Object.entries(data.similarities)) {
+                        console.log(question)
+                        let correct_answer = correct_answers[question]
+
                         const clonedContainer = ogContainer.cloneNode(true);
                         clonedContainer.querySelector("#quiz-done-question").innerText = question;
                         clonedContainer.querySelector("#quiz-done-correct-answer").innerText = correct_answer;
@@ -110,25 +110,25 @@ document.addEventListener('DOMContentLoaded', function () {
                 .catch(error => {
                     console.error('Error:', error);
                 });
-                
-                document.getElementById("question-container").style.display = "none"
-                document.getElementById("user-answer-container").style.display = "none"
-                
-                document.getElementById("video-name").innerText = "Dokončil jsi " + document.getElementById("video-name").innerText;
-                
-            }
+
+            document.getElementById("question-container").style.display = "none"
+            document.getElementById("user-answer-container").style.display = "none"
+
+            document.getElementById("video-name").innerText = "Dokončil jsi " + document.getElementById("video-name").innerText;
+
         }
-        
-        quizButtonElement.addEventListener('click', function () {
-            var answerInputElement = document.getElementById('answer-input')
-            var answer = answerInputElement.value
-            checkAnswer(answer)
-            console.log(answer)
-        })
-    })
-    
-    function getCookie(name) {
-        var value = "; " + document.cookie;
-        var parts = value.split("; " + name + "=");
-        if (parts.length == 2) return parts.pop().split(";").shift();
     }
+
+    quizButtonElement.addEventListener('click', function () {
+        var answerInputElement = document.getElementById('answer-input')
+        var answer = answerInputElement.value
+        checkAnswer(answer)
+        console.log(answer)
+    })
+})
+
+function getCookie(name) {
+    var value = "; " + document.cookie;
+    var parts = value.split("; " + name + "=");
+    if (parts.length == 2) return parts.pop().split(";").shift();
+}
