@@ -102,10 +102,14 @@ document.addEventListener('DOMContentLoaded', function () {
                         clonedContainer.querySelector("#quiz-done-user-answer").innerText = payload[question];
                         clonedContainer.querySelector("#similarity").innerText = Math.floor(similarity * 1000) / 10 + "%";
                         ogContainer.parentElement.appendChild(clonedContainer);
-                        console.log(question);
-                        console.log(similarity);
-                        console.log("lorem");
+                        // console.log(question);
+                        // console.log(similarity);
+                        // console.log("lorem");
                     }
+
+                    const result_title = document.getElementById("xxxxxx")
+
+                    result_title.textContent = "Celkový výsledek: " + (Math.floor(data.result * 1000) / 10) + "%"
                 })
                 .catch(error => {
                     console.error('Error:', error);

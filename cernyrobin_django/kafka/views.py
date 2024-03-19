@@ -401,6 +401,7 @@ def quiz_evaluate(request):
 
     similarities = {}
     score = 0
+    total = 0
 
     for question, answer in questions_answers.items():
         similarity = quiz.get_similarity(course, question, answer)
@@ -409,8 +410,11 @@ def quiz_evaluate(request):
         
         if similarity > 0:
             score += similarity * 100
+            total += similarity
 
-    return JsonResponse({"similarities": similarities, "score": score})
+    average = total / len(questions_answers)
+
+    return JsonResponse({"similarities": similarities, "score": score, "result": average})
     
 def quiz_dummy(request):
     return render(request, "kafka/quiz_dummy.html")
