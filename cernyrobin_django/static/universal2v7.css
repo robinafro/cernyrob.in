@@ -1125,9 +1125,6 @@ nav *{
 
 
 
-
-
-
 .video-container:hover{
   border: rgb(255, 255, 255) solid var(--thickBorderSize); 
 }
