@@ -2,15 +2,16 @@ document.addEventListener('DOMContentLoaded', function () {
     var quizButtonElement = document.getElementById('answer-button')
     var titleText = document.getElementById("video-name").innerText
     
-
+    
     const queryString = window.location.search
     const queryParams = new URLSearchParams(queryString)
     const topicSlug = queryParams.get('topic')
-
+    
     const questionApiPath = window.location.origin + "/kafka/quiz/questions?topic=" + topicSlug
     const topicApiPath = window.location.origin + "/kafka/quiz/info?topic=" + topicSlug
     var questions = []
     var correct_answers = {}
+    var userAnswers = []
 
     fetch(topicApiPath)
         .then(response => response.json())
@@ -44,7 +45,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-    var userAnswers = []
 
     let currentQuestionIndex = 0
 
@@ -99,6 +99,8 @@ document.addEventListener('DOMContentLoaded', function () {
                         const clonedContainer = ogContainer.cloneNode(true);
                         clonedContainer.querySelector("#quiz-done-question").innerText = question;
                         clonedContainer.querySelector("#quiz-done-correct-answer").innerText = correct_answer;
+                        clonedContainer.querySelector("#quiz-done-user-answer").innerText = payload[question];
+                        clonedContainer.querySelector("#similarity").innerText = Math.floor(similarity * 1000) / 10 + "%";
                         ogContainer.parentElement.appendChild(clonedContainer);
                         console.log(question);
                         console.log(similarity);

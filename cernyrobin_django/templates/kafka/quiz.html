@@ -67,13 +67,18 @@
 
 
                     <p class="question-container">
-                        <b>  Otázka </b> <span id="quiz-done-question"></span>
+                        <b> Otázka </b> <span id="quiz-done-question"></span>
 
 
                     </p>
-                    <p id="" class="wrapping-button"
-                        onclick='let answerTextElement=this.parentElement.parentElement.querySelector(".answer-text");console.log(answerTextElement),answerTextElement.style.maxHeight?answerTextElement.style.maxHeight=null:answerTextElement.style.maxHeight=answerTextElement.scrollHeight+"px";'>
-                        <!-- Rozbalit  -->⮟⮝
+                    <p>
+
+                        <span class="contrast-text">
+                            Správnost odpovědi
+                        </span>
+                        <span class="contrast-text" id="similarity">
+                            
+                        </span>
                     </p>
                 </div>
 
@@ -81,15 +86,15 @@
                 <p class="answer-text" id="ans-{{index}}">
                     <span>
 
-                        <b>Tvoje odpověď</b>   <span  id="quiz-done-user-answer"></span>
+                        <b>Tvoje odpověď</b> <span id="quiz-done-user-answer"></span>
                     </span>
                     <br>
                     <span>
-                        <b>  Správná odpověď</b> <span  id="quiz-done-correct-answer"></span>
+                        <b> Správná odpověď</b> <span id="quiz-done-correct-answer"></span>
                     </span>
                 </p>
 
-                
+
 
 
             </div>
