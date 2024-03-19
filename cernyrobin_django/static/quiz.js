@@ -97,6 +97,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         let correct_answer = correct_answers[question]
 
                         const clonedContainer = ogContainer.cloneNode(true);
+                        clonedContainer.style.display = "flex";
                         clonedContainer.querySelector("#quiz-done-question").innerText = question;
                         clonedContainer.querySelector("#quiz-done-correct-answer").innerText = correct_answer;
                         clonedContainer.querySelector("#quiz-done-user-answer").innerText = payload[question];
