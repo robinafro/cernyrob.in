@@ -54,6 +54,10 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function checkAnswer(answer) {
+        if (answer.replace(/\s/g, "") === "") {
+            return
+        }
+
         userAnswers.push(answer)
         currentQuestionIndex++
         if (currentQuestionIndex < questions.length) {
