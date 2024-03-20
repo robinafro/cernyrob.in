@@ -105,6 +105,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         clonedContainer.querySelector("#quiz-done-correct-answer").innerText = correct_answer;
                         clonedContainer.querySelector("#quiz-done-user-answer").innerText = payload[question];
                         clonedContainer.querySelector("#similarity").innerText = Math.floor(similarity * 1000) / 10 + "%";
+                        clonedContainer.querySelector(".answer-text").style.maxHeight = "100%";
                         clonedContainer.style.visibility = "visible";
                         ogContainer.parentElement.appendChild(clonedContainer);
                         // console.log(question);
