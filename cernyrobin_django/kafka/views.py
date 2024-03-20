@@ -364,7 +364,7 @@ def subscribe(request):
         
         subscribed = request.POST.get("subscribed") == "on"
 
-        print(subscribed)
+        # print(subscribed)
 
         profile.email_subscribed = subscribed
         profile.save()
