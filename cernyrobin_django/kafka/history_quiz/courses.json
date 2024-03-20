@@ -1,4 +1,13 @@
 {
+    "Demo": {
+        "id": "demo",
+        "Questions": {
+            "Proč se v dějepise neučí o dinosaurech?": "dějiny lidí a civilizace.",
+            "S jakými prameny poznání minulosti primárně pracuje historik?": "S písemnými, historické dokumenty, dopisy, kroniky.",
+            "Kdo je to občan? Čím se tento status liší od obyvatele či poddaného?": "Má určitý právní status a práva ve společnosti. Má možnost volit."
+        }
+    },
+
     "Úvod do výuky dějepisu": {
         "id": "uvod",
         "Questions": {
