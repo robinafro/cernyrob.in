@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     var quizButtonElement = document.getElementById('answer-button')
     var titleText = document.getElementById("video-name").innerText
+    document.getElementById("finished-pair-container").style.visibility = "hidden"
 
 
     const queryString = window.location.search
@@ -104,11 +105,13 @@ document.addEventListener('DOMContentLoaded', function () {
                         clonedContainer.querySelector("#quiz-done-correct-answer").innerText = correct_answer;
                         clonedContainer.querySelector("#quiz-done-user-answer").innerText = payload[question];
                         clonedContainer.querySelector("#similarity").innerText = Math.floor(similarity * 1000) / 10 + "%";
+                        clonedContainer.style.visibility = "visible";
                         ogContainer.parentElement.appendChild(clonedContainer);
                         // console.log(question);
                         // console.log(similarity);
                         // console.log("lorem");
                     }
+                    document.getElementsByClassName("pair-container")[0].remove();
 
                     const result_title = document.getElementById("score-title")
 
