@@ -31,6 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(data => {
             correct_answers = data.questions
 
+
             for (const [question, answer] of Object.entries(data.questions)) {
                 questions.push(question)
                 console.log(question)
@@ -48,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     let currentQuestionIndex = 0
-
+this.elementFromPoint
     function displayQuestion() {
         var questionElement = document.getElementById('quiz-question')
         questionElement.textContent = questions[currentQuestionIndex]
