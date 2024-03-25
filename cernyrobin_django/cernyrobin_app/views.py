@@ -273,7 +273,7 @@ def verify_submit(request):
             return HttpResponse("400 Bad Request (debug: email does not match regex)")
         
         year = int(email.split("@")[0].split(".")[-1])
-        current_year = datetime.now().year
+        current_year = datetime.datetime.now().year
 
         if year <= current_year - 5:
             return HttpResponse("400 Bad Request")
