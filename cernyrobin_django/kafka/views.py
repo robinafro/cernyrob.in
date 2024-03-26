@@ -133,6 +133,12 @@ def view(request, is_custom=False):
             comments = api_views.get_comments(video_url)
             comments.reverse()
 
+        try:
+            print("User is verified?")
+            print(get_user(request).email_verified)
+        except:
+            print("User is not verified")
+            
         return render(
             request,
             "kafka/view.html",
