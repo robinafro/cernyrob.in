@@ -6,8 +6,10 @@ from api.models import Kafka
 from api import get_video_info
 from api import views as api_views
 from ads import views as ads_views
+from kafka.history_quiz import quiz
 import json
 import re
+from django.views.decorators.csrf import csrf_exempt
 
 MAX_COMMENTS_PER_USER = 50
 
@@ -365,9 +367,57 @@ def subscribe(request):
         
         subscribed = request.POST.get("subscribed") == "on"
 
-        print(subscribed)
+        # print(subscribed)
 
         profile.email_subscribed = subscribed
         profile.save()
 
         return redirect("/account/")
+    
+def quiz_info(request):
+    topic = request.GET.get("topic")
+
+    if topic:
+        return JsonResponse({"course_name": quiz.get_courses(id=topic)})
+    else:
+        courses = quiz.get_courses()
+        context = {"courses": courses}
+
+        return render(request, "kafka/quiz_info.html", context)
+
+def quiz_play(request):
+    context = {"topic": request.GET.get("topic", "0")}
+    return render(request, "kafka/quiz.html", context)
+
+def quiz_get_questions(request):
+    questions = quiz.get_questions(request.GET.get("topic", "0"))
+
+    return JsonResponse({"questions": questions})
+
+# @csrf_exempt
+def quiz_evaluate(request):
+    questions_answers = json.loads(request.POST.get("questions_answers"))
+
+    id = request.POST.get("topic")
+
+    course = quiz.get_courses(id=id)
+
+    similarities = {}
+    score = 0
+    total = 0
+
+    for question, answer in questions_answers.items():
+        similarity = quiz.get_similarity(course, question, answer)
+
+        similarities[question] = similarity
+        
+        if similarity > 0:
+            score += similarity * 100
+            total += similarity
+
+    average = total / len(questions_answers)
+
+    return JsonResponse({"similarities": similarities, "score": score, "result": average})
+    
+def quiz_dummy(request):
+    return render(request, "kafka/quiz_dummy.html")

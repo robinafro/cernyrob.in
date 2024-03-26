@@ -65,6 +65,11 @@ urlpatterns = [
     path("kafka/comment/", kafka.comment, name="kafka_comment"),
     path("kafka/test_view_comments/", kafka.test_view_comments, name="kafka_test_view_comments"),
     path("kafka/subscribe/", kafka.subscribe, name="kafka_subscribe"),
+
+    path("kafka/quiz/", kafka.quiz_play, name="quiz"),
+    path("kafka/quiz/info/", kafka.quiz_info, name="quiz_info"),
+    path("kafka/quiz/questions/", kafka.quiz_get_questions, name="quiz_questions"),
+    path("kafka/quiz/evaluate/", kafka.quiz_evaluate, name="quiz_evaluate"),
     # path("kafka/test_comment/", kafka.test_comment, name="kafka_test_comment"),
 
     # path("miskovsky/", miskovsky.index, name="miskovsky_index"),
@@ -81,6 +86,12 @@ urlpatterns = [
     path("reject/", ads.admin_reject, {"subdomain": "reklamy"}, name="admin_reject"),
 
     path("manifest.json/", cernyrobin.manifest, name="manifest"),
+
+
+    # QUIZ APP URLS
+    # path("quiz/", kafka.quiz, name="quiz"),
+    # path("quiz/info/", kafka.quiz_info, name="quiz_info"),   
+    path("quiz/dummy/", kafka.quiz_dummy, name="quiz_dummy"),
 ]
 
 if settings.DEBUG:

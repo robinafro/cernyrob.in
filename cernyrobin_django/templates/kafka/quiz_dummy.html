@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+
+<html lang="cs">
+{% load static %}
+
+<head>
+    <link href="{% static 'universal2v7.css' %}" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="/static/assets/kafka.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/static/view.js"></script>
+    <meta name="description" content="Stránka Unethical AI pro kafkovy videa">
+    <script src="/static/quiz.js"></script>
+
+
+
+    <title>Autokafka</title>
+</head>
+
+<body>
+    {% include "cernyrobin/invite.html" %}
+    {%include "global/navbar.html"%}
+
+
+    <div id="responsive-page-container">
+
+        <h1 id="video-name">Kvíz na téma [topic]</h1>
+        <div id="answer-intro">
+
+            <div id="question-container" class="transcript-center">
+                <div class="transcript-container">
+                    <p id="quiz-question" class="transcript-text quiz-question">Kdy začal UNIX timestamp</p>
+    
+                </div>
+            </div>
+    
+
+
+
+
+
+            <div id="user-answer-container" class="transcript-center">
+                <div class="transcript-container">
+                    <h2 class="contrast-heading centered-text">Odpověď</h2>
+                    <input id="answer-input" class="comment-field" type="text" name="comment">
+                    <div class="centering-container">
+
+                        <buttton  class="round-button" id="answer-button">
+                            Odeslat Odpověď
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+
+
+    </div>
+    {% include "disclaimer.html" %}
+</body>
+
+</html>

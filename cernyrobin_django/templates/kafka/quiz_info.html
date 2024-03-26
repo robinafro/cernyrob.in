@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="cs">
+    
+    {% load static %}
+    
+    <head>
+        <link href="{% static 'universal2v7.css' %}" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image/x-icon" href="/static/assets/kafka.ico">
+        <meta name="description" content="Stránka Unethical AI pro kafkovy videa">
+        <!--     <script src="{% static 'kafka-list.js' %}"></script> -->
+        
+        <title>Autokafka</title>
+        {%include "global/manifest_link.html"%}
+    </head>
+    
+    <body>
+        {%include "cernyrobin/invite.html"%}
+        
+        {%include "global/navbar.html"%}
+
+
+        <div id="responsive-page-container">
+    
+            <h1 id="video-name">Dostupné kvízy</h1>
+            {% for id, course in courses.items %}
+            <div id="answer-intro">
+                
+                <div id="question-container" class="transcript-center">
+                    <div class="transcript-container">
+                        <p id="quiz-question" class="transcript-text quiz-question"><a href="/kafka/quiz/?topic={{course}}">{{id}}</a></p>
+                        <br>
+                        
+                    </div>
+                </div>
+                {%endfor%}
+        </div>
+
+
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

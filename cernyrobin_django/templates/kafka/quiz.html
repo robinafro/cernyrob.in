@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+
+<html lang="cs">
+{% load static %}
+
+<head>
+    <link href="{% static 'universal2v7.css' %}" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="/static/assets/kafka.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/static/view.js"></script>
+    <meta name="description" content="Stránka Unethical AI pro kafkovy videa">
+    <script src="/static/quiz.js"></script>
+
+
+
+    <title>Autokafka</title>
+</head>
+
+<body>
+    {% include "cernyrobin/invite.html" %}
+    {%include "global/navbar.html"%}
+
+
+    <div id="responsive-page-container">
+
+        <h1 id="video-name">Kvíz na téma</h1>
+        <h2 id="score-title" class="contrast-heading"></h2>
+        <div id="answer-intro">
+
+            <div id="question-container" class="transcript-center">
+                <div class="transcript-container">
+                    <p id="quiz-question" class="transcript-text quiz-question"></p>
+
+                </div>
+            </div>
+
+            <div id="user-answer-container" class="transcript-center">
+                <div class="transcript-container">
+                    <h2 class="contrast-heading centered-text">Odpověď</h2>
+                    <input id="answer-input" class="comment-field" type="text" name="comment" placeholder="Tvoje odpověď">
+                    <div class="centering-container">
+                        <input type="submit" value="  Odeslat  " class="round-button" id="answer-button">
+                    </div>
+                    <script>
+                        document.getElementById("answer-input").addEventListener("keyup", function(event) {
+                            if (event.keyCode === 13) {
+                                event.preventDefault();
+                                document.getElementById("answer-button").click();
+                            }
+                        });
+                    </script>
+
+                </div>
+            </div>
+
+            <div id="finished-pair-container" class="pair-container">
+                <div class="pair-container-heading">
+
+
+                    <p class="question-container">
+                        <b> Otázka: </b> <span id="quiz-done-question"></span>
+
+
+                    </p>
+                    <p>
+
+                        <span class="contrast-text">
+                            Správnost odpovědi:
+                        </span>
+                        <span class="contrast-text" id="similarity">
+
+                        </span>
+                    </p>
+                </div>
+
+
+                <p class="answer-text" id="ans-{{index}}">
+                    <span>
+
+                        <b>Tvoje odpověď</b> <span id="quiz-done-user-answer"></span>
+                    </span>
+                    <br>
+                    <span>
+                        <b> Správná odpověď</b> <span id="quiz-done-correct-answer"></span>
+                    </span>
+                </p>
+
+
+
+
+            </div>
+        </div>
+        {% include "disclaimer.html" %}
+</body>
+
+</html>

@@ -1,0 +1,86 @@
+{
+    "Demo": {
+        "id": "demo",
+        "Questions": {
+            "Proč se v dějepise neučí o dinosaurech?": "Dějepis je o dějinách lidí a civilizace.",
+            "S jakými prameny poznání minulosti primárně pracuje historik?": "S písemnými, historické dokumenty, dopisy, kroniky.",
+            "Kdo je to občan? Čím se tento status liší od obyvatele či poddaného?": "Má určitý právní status a práva ve společnosti. Má možnost volit."
+        }
+    },
+    "Úvod do výuky dějepisu": {
+        "Questions": {
+            "Proč se v dějepise neučí o dinosaurech?": "Dějepis je o dějinách lidí a civilizace.",
+            "Jakými způsoby vnímali lidé plynutí času v průběhu času?": "V antice cyklický pohled, ve středověku lineární pohled.",
+            "S jakými prameny poznání minulosti primárně pracuje historik?": "S písemnými, historické dokumenty, dopisy, kroniky.",
+            "Co je to dlouhé století?": "19. století, průmyslové revoluce a rozvoje moderních idejí.",
+            "Co je to krátké století?": "20. století, světové války, rozpad koloniálních říší a studenou válku.",
+            "Kdo byl Jan Vavák a čím jsou jeho paměti zajímavé?": "Sedlák, zažil napoleonské války. odlišný pohled na historické události.",
+            "Vysvětlete, co v pojmu osvícenství znamená ono světlo.": "rozum a poznání.",
+            "V čem všem éra osvícenství změnila svět?": "nové myšlenky a ideály, svoboda, rovnost, lidská práva, rozvoj vědy a technologií.",
+            "Jak se John Locke vyjadřuje o soukromém vlastnictví? Jaké to mělo důsledky?": "právo jednotlivcům vlastnit svůj majetek. Rozvoj kapitalismu a podnikání.",
+            "Vysvětlete myšlenku dělby moci.": "moc výkonná, zákonodárná a soudní.",
+            "Kdo je to občan? Čím se tento status liší od obyvatele či poddaného?": "Mají právní status a práva ve společnosti, možnost volit."
+        }
+    },
+    "Revoluce, průmyslová revoluce a moderní nacionalismus ": {
+        "Questions": {
+            "Jaký je základní rozdíl mezi tradičním a moderním nacionalismem?": "tradiční nacionalismus elita a privilegované vrstvy, moderní nacionalismus obyčejní lidé a identita.",
+            "Zjistěte, s jakým uměleckým směrem je spojen počátek 19. století.": "romantismus",
+            "Jak je moderní nacionalismus provázán s velkou francouzskou revolucí?": "Prosazují myšlenky rovnosti, svobody a bratrství.",
+            "Co je to ústava a proč je pro fungování demokratických států tak důležitá?": "Základní právní dokument, stanovuje pravidla a zásady.",
+            "Jak vynález gilotiny souvisí s érou osvícenství?": "pokrok, umožňoval rychlé a humánní popravy",
+            "Proč se za francouzské revoluce bourají kostely a odmítá dosavadní počítání času?": "nový pohled na svět, odmítá staré náboženské a kulturní symboly",
+            "Jaké zásady do povědomí Evropanů přinese Napoleonův Code civil (občanský zákoník)?": "zásady rovnosti před zákonem a ochranu soukromého vlastnictví",
+            "Jak se v průběhu 19. století proměňuje postavení katolické církve?": "ztrácí svůj dosavadní vliv a moc",
+            "Jak se nastupující nacionalismus projeví v našich zemích?": "Konflikty mezi různými národnostmi, mezi Čechy a Němci.",
+            "Co je to sionismus? ": "Nacionalistické hnutí židovského lidu, obnovení židovského státu",
+            "Jakých úspěchů sionisté ve 20. století dosáhli?": "Založení Izraele",
+            "Proč asi průmyslová revoluce započala právě ve Velké Británii?": "přítomnost přírodních zdrojů, rozvoj obchodu, technické inovace a podpora vlády.",
+            "Jaké výrobní a marketingové metody se během 19. století vyvinuly v USA?": "sériová výroba, využití strojů a automatizace, rozvoj dopravy (železnice, parníky)",
+            "Jaká je ekonomická podstata kapitalistického systému?": "soukromé vlastnictví továren, strojů, půdy",
+            "V jakém odvětví se průmyslová revoluce projevila nejdříve?": "textilní průmysl",
+            "Co je tzv. létající člunkek a jaký je jeho princip.": "umožňuje rychlejší a efektivnější tkaní, nahrazuje lidské ruce.",
+            "Proč první průmyslové provozy u nás vznikaly v blízkosti hor?": "dostupnost materiálů - dřeva a vody",
+            "Jaké důsledky mělo zapojení parní síly v dopravě?": "Zkrácení cestovní doby, zvýšení kapacity.",
+            "Proč při dělnických stávkách docházelo často k rozbíjení strojů?": "dělníci viděli stroje jako hrozbu, mysleli si že jim vezmou práci.",
+            "Co to byly kartounky a jak souvisí se Smíchovem?": "továrny vyrábějící potištěné látky, nacházely se zde významné kartounky.",
+            "Jaká plodina způsobila v 19. století revoluci v českém potravinářském průmyslu?": "cukrová řepa"
+        }
+    },
+    "Předvečer a začátek 1 sv. války": {
+        "Questions": {
+            "Čemu se říkalo koncert velmocí?": "vyrovnané postavení evropských mocností",
+            "Jaké důvody měla Francie pro rozpoutání války s Německem?": "Pomsta za ztrátu Alsaska a Lotrinska v prusko-francouzské válce.",
+            "Proč se Balkánskému poloostrovu říkalo sud střelného prachu?": "napjatá situace, stačilo málo k rozpoutání konfliktu.",
+            "Jaké složení obyvatelstva (z hlediska jazyka, národnosti a víry) měla předválečná Bosna a Hercegovina?": "Mluvilo se srbsky, chorvatsky, bosensky, byli zde Srbové, Chorvati, Bosňané a další, náboženství jako pravoslavní, katolíci, muslimové.",
+            "ak se nazývá železniční trať, která propojila evropské a asijské Rusko?": "Transsibiřská magistrála.",
+            "Díky čemu se búrským osadníkům v jižní Africe dařilo dlouho vzdorovat anglické přesile?": "znalosti terénu a prostředí.",
+            "Proč bylo africké vnitrozemí kolonizováno až v závěru koloniální éry?": "Kvůli obtížnému terénu, nemocem a odporu domorodců.",
+            "Jaké země se dnes nacházejí v oblasti, které se v období kolonialismu říkalo Francouzská Indočína?": "Vietnam, Laos a Kambodža",
+            "Jaká nemoc decimovala masy dělníků na stavbě Panamského průplavu?": "malárie",
+            "Proč se atentát na Františka Ferdinanda dEste uskutečnil právě v Sarajevu?": "Bosna anektována Rakousko-Uherskem, anektace vnímána jako provokace.",
+            "V čem je pozoruhodná či kuriózní postava Gavrila Principa?": "mladý a nebyl zdravotně způsobilý",
+            "Co společného měl František Ferdinand dEste s Čechami?": "Sídlo Konopiště u Benešova, vztah s českou šlechtickou rodinou.",
+            "Uveďte pozitivní a negativní stránky osobnosti Františka Ferdinanda dEste.": "Pozitivní vztah s manželkou Žofií, vášeň pro lov. Negativní nadměrné střílení zvěře.",
+            "Jaké politické události nastanou po atentátu na následníka rakouského trůnu?": "Rakousko obvinilo Srbsko a vyhlásilo ultimátum, vypuknutí první světové války.",
+            "Jak je pevnost Terezín spojena s první světovou válkou?": "využívána jako vězení pro zajatce",
+            "Jak polský stát figuroval v první světové válce? Na jaké straně válčil?": "rozdělené mezi Německo, Rakousko-Uhersko a Rusko. zapojili na různých stranách",
+            "Vyjmenujte evropská bojiště první světové války.": "Západní, Východní, Balkánská, Italská a Solunská fronta",
+            "Co to byl Schlieffenův plán? Byl někdy plně realizován?": "rychlé dobytí Francie přes Belgii, nebyl plně realizován"
+        }
+    },
+    "Průběh 1. sv. války": {
+        "Questions": {
+            "Díky čemu se Rakušanům podařilo v roce 1915 ovládnout Srbsko?": "díky pomoci Bulharska",
+            "Z jakého důvodu nakonec Itálie vstoupila do války na straně Dohody?": "protože si slibovala územní zisky",
+            "Jaký symbolický význam asi mělo dobytí Jeruzaléma Brity v roce 1917?": "protože Jeruzalém byl důležité náboženské město",
+            "Zjistěte, jak město Verdun figuruje v raně středověkých dějinách a proč tedy pro Francouze i Němce mělo takový význam.": "jako pevnostní město a hraniční bod mezi Francií a Německem",
+            "Jak se jmenoval zaoceánský parník, jehož potopení mělo výrazný vliv na vstup USA do války?": "Lusitania",
+            "Jaké stopy a připomínky první světové války můžeme dnes v oblasti, kde se rozkládala západní fronta, najít?": "stopy po zákopech, pozůstatky pevností",
+            "Kde se nacházelo historické Sedmihradsko? Jak zní jeho latinský název? Komu dneska patří?": "v dnešním Rumunsku, Transylvánie, patří Rumunsku",
+            "Jakým způsobem pořizoval fotograf Sergej Prokudin-Gorskij své „barevné“ snímky?": "fotil každý záběr třikrát s různým barevným filtrem a potom je složil dohromady",
+            "Jaký stát poprvé v boji účinně zapojí ponorky?": "Německo",
+            "Proč se silně obrněným vozidlům s pásy a kanóny říká tank?": "připomínaly nádrže na vodu"
+        }
+    }
+}
