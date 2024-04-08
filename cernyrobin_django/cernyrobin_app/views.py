@@ -219,7 +219,7 @@ def new_register(request):
             #! Create UserProfile
             user_profile = UserProfile.objects.create(user=user)
 
-            if re.match(r"\w+\.[\w]{2,4}\.2[\d]{3}@skola\.ssps\.cz", request.POST.get("email") or "") or request.POST.get("email") or "" == "actulurus@gmail.com":
+            if re.match(r"\w+\.[\w]{2,4}\.2[\d]{3}@skola\.ssps\.cz", request.POST.get("email") or "") or request.POST.get("email") == "actulurus@gmail.com" or request.POST.get("email") == "stuckinvim@protonmail.com":
                 user_profile.email = request.POST.get("email") or ""
 
             user_profile.save()
@@ -269,7 +269,7 @@ def verify_submit(request):
         if not email:
             return HttpResponse("400 Bad Request (debug: no email)")
         
-        if not re.match(r"\w+\.[\w]{2,4}\.2[\d]{3}@skola\.ssps\.cz", email) and email != "actulurus@gmail.com": # There might be an issue with the escape characters near the dots. Look into this first if the verification seems to be broken.
+        if not re.match(r"\w+\.[\w]{2,4}\.2[\d]{3}@skola\.ssps\.cz", email) and email != "actulurus@gmail.com" and email != "stuckinvim@protonmail.com": # There might be an issue with the escape characters near the dots. Look into this first if the verification seems to be broken.
             return HttpResponse("400 Bad Request (debug: email does not match regex)")
         
         year = int(email.split("@")[0].split(".")[-1])
