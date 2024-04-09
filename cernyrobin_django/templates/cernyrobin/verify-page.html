@@ -127,9 +127,11 @@
         <input type="text" name="email" id="email-field" value={{cernyrobin_user.email}}>
 
         <label for="kafca-field"></label>
-        <input name="captcha" id="kafca-field" type="text">
-
+        
+        <p class="contrast-text">Zadejte text</p>
         <img src="{% url 'captchaimg'%}" alt="">
+        <input name="captcha" id="kafca-field" type="text">
+        <small class="contrast-text">Pokud vám nefunguje captcha zmáčkněte CTRL + R</small>
 
         <label class="contrast-text margin-label" for="password-field">Pro potvrzení zadejte heslo:</label>
         <input type="password" name="password" id="password-field">
