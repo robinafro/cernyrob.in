@@ -45,7 +45,7 @@ def home(request):
         "cernyrobin_user": get_user(request),
     }
 
-    return redirect("/kafka")
+    return render(request, "kafka/index.html", context)
 
 
 def clicker_page(request):

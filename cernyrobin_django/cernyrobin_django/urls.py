@@ -28,7 +28,7 @@ from ads import views as ads
 urlpatterns = [
     path("admin/", admin.site.urls),
 
-    path("", cernyrobin.home, name="root"),
+    path("", kafka.index, name="root"),
     path("home/", cernyrobin.home, name="home"),
 
     path("login/", cernyrobin.new_login, name="login"),
