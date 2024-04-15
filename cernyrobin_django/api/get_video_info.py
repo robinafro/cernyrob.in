@@ -4,7 +4,7 @@ import json
 
 import requests, re
 
-from api.yt_transcriptor import answer
+# from api.yt_transcriptor import answer
 
 def get_video_info(url):
     params = {"format": "json", "url": url}
@@ -27,20 +27,14 @@ def get_video_info(url):
             while True:
                 # get the letter at current index in text
                 letter = full_html[count]
-                if letter == "\"":
-                    if full_html[count - 1] == "\\":
-                        # this is case where the letter before is a backslash, meaning it is not real end of description
-                        desc += letter
-                        count += 1
-                    else:
-                        break
+
+                if letter == "\"" and full_html[count - 1] != "\\":
+                    break
                 else:
                     desc += letter
                     count += 1
-
+            
             data["description"] = desc
-
-            # print(f'description: {desc}')
 
             data = json.dumps(data)
             
@@ -70,3 +64,7 @@ def get_video_info(url):
 
 #     print(f'description: {desc}')
 #     return desc
+
+if __name__ == "__main__":
+    url = "https://www.youtube.com/watch?v=e3KoPorzYtU"
+    print(get_video_info(url))
