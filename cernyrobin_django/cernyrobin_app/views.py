@@ -111,7 +111,7 @@ def login_submit(request):
             user_profile.save()
             user.save()
 
-            login(request, user)
+            new_login(request, user)
 
             return go_back(request)
 
@@ -119,7 +119,7 @@ def login_submit(request):
             user = authenticate(request, username=username, password=password)
 
             if user is not None:
-                login(request, user)
+                new_login(request, user)
 
                 return go_back(request)
             else:
