@@ -297,12 +297,16 @@ def verify_submit(request):
                     continue
                 
                 return HttpResponse("Email is already being used")
+            
+        print("Will create user")
         
         cernyrobin_user, created = UserProfile.objects.get_or_create(user=request.user)
+        print("user created")
 
         cernyrobin_user.email = email
 
         cernyrobin_user.save()
+        print("user saved")
 
         code = shortuuid.uuid()
         
