@@ -275,7 +275,11 @@ def verify_submit(request):
         if not re.match(r"\w+\.[\w]{2,4}\.2[\d]{3}@skola\.ssps\.cz", email) and email != "actulurus@gmail.com" and email != "stuckinvim@protonmail.com": # There might be an issue with the escape characters near the dots. Look into this first if the verification seems to be broken.
             return HttpResponse("400 Bad Request (debug: email does not match regex)")
         
-        year = int(email.split("@")[0].split(".")[-1])
+        try:
+            year = int(email.split("@")[0].split(".")[-1])
+        except:
+            year = 2023
+        
         current_year = datetime.datetime.now().year
 
         if year <= current_year - 5:
