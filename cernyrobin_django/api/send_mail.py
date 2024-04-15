@@ -60,6 +60,7 @@ def verify_mail(receiver_email, username, verify_code, password=get_password()):
     print("D")
 
     try:
+        print("E")
         with smtplib.SMTP_SSL(smtp_server, smtp_port) as server:
             print("Logging in")
             server.login(login, password)
