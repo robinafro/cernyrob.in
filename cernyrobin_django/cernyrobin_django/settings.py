@@ -34,7 +34,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 DEBUG = os.getenv("LOCAL") == "1"
 
 
-ALLOWED_HOSTS = ["*", ".localhost", ".cernyrob.in", "localhost", "cernyrob.in", "me", "10.1.2.6", "192.168.219.42", ".autokafka.cz"]
+ALLOWED_HOSTS = ["*", ".localhost", ".cernyrob.in", "localhost", "cernyrob.in", "me", "10.1.2.6", "192.168.219.42", ".autokafka.cz", "autokafka.cz"]
 
 CSRF_TRUSTED_ORIGINS = [
     "https://cernyrob.in",
