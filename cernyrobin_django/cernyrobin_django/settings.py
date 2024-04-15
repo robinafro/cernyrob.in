@@ -141,7 +141,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # Delete the SESSION_COOKIE_DOMAIN code below if logging in seems to be broken
-SESSION_COOKIE_DOMAIN = ".cernyrob.in"
+SESSION_COOKIE_DOMAIN = ".autokafka.cz"
 
 if os.getenv("LOCAL") == "1":
     SESSION_COOKIE_DOMAIN = None
