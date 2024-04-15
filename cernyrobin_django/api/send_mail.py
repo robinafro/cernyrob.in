@@ -61,7 +61,7 @@ def verify_mail(receiver_email, username, verify_code, password=get_password()):
 
     try:
         print("E")
-        with smtplib.SMTP_SSL(smtp_server, smtp_port) as server:
+        with smtplib.SMTP_SSL("smtp.seznam.cz", 465) as server:
             print("Logging in")
             server.login(login, password)
             print("Logged in, sending message")
