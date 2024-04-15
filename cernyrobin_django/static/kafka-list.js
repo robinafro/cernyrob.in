@@ -5,7 +5,7 @@ var ads = [
     { image: "kytara4.png", link: "https://www.youtube.com/watch?v=qgbPi627zMU" },
     { image: "robot.png", link: "https://www.youtube.com/watch?v=dQw4w9WgXcQ" },
     { image: "robot2.png", link: "https://www.youtube.com/watch?v=QjAn2aMh3ug" },
-    { image: "clicker_ad.jpg", link: "https://cernyrob.in/clicker" },
+    { image: "clicker_ad.jpg", link: "https://autokafka.cz/clicker" },
     { image: "slovak.png", link: "https://slovakje.best/minesweeper" },
     { image: "slovak2.png", link: "https://slovakje.best/clicker" },
 ];

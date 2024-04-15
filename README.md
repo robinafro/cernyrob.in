@@ -1,4 +1,4 @@
-# cernyrob.in
+# autokafka.cz
 a portfolio website used to practice my coding skills <-- outdated af description
 
 ## A complete front-end rewrite is under way

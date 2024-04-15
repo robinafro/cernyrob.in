@@ -25,7 +25,7 @@ def generate_verify_code(length):
 
 def verify_mail(receiver_email, username, verify_code, password=get_password()):
     # Static info:
-    # login = "verify@cernyrob.in"
+    # login = "verify@autokafka.cz"
     login = "verify@autokafka.cz"
     smtp_server = "smtp.seznam.cz"
     smtp_port = 465
@@ -69,10 +69,10 @@ def verify_mail(receiver_email, username, verify_code, password=get_password()):
 
 def broadcast_mail(receiver_emails, file_path=None, password=get_password()):
     # Static info:
-    login = "videa@cernyrob.in"
+    login = "videa@autokafka.cz"
     smtp_server = "smtp.seznam.cz"
     smtp_port = 465
-    sender_email = "videa@cernyrob.in"
+    sender_email = "videa@autokafka.cz"
     subject = f"Dějepis samostudium {datetime.now().strftime('%d.%m.')} - AutoKafka"
     body = f"""Dobrý den, zde zasílám odpovědi na otázky nejnovějšího samostudia. Přikládám soubor formátu Microsoft Word.<br><br>Pamatuj, že odpovědi jsem vygeneroval pomocí umělé inteligence, takže nemusí být správné. Zkontroluj si je před odevzdáním!<br><br>S pozdravem, AutoKafka."""
 
@@ -83,7 +83,7 @@ def broadcast_mail(receiver_emails, file_path=None, password=get_password()):
 
     msg = MIMEMultipart()
     msg['From'] = sender_email
-    msg['To'] = "videa@cernyrob.in"
+    msg['To'] = "videa@autokafka.cz"
     # msg['Bcc'] = ",".join(receiver_emails)
     msg['Subject'] = subject
 
