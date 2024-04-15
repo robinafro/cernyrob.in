@@ -24,6 +24,7 @@ def generate_verify_code(length):
     return ''.join(random.choice(letters) for i in range(length))
 
 def verify_mail(receiver_email, username, verify_code, password=get_password()):
+    print("A")
     # Static info:
     # login = "verify@autokafka.cz"
     login = "verify@autokafka.cz"
@@ -35,6 +36,8 @@ def verify_mail(receiver_email, username, verify_code, password=get_password()):
             Pokud si o potvrzení nežádal, můžeš tento email ignorovat.<br>"""
     base_verify_url = "https://autokafka.cz/verify"
 
+    print("B")
+
     status = {
         "sent_successfully": False,
         "error_message": "",
@@ -45,7 +48,7 @@ def verify_mail(receiver_email, username, verify_code, password=get_password()):
 
     whole_verify_url = base_verify_url + "?code=" + verification_code
     body = body_template + f"""<a href="{whole_verify_url}">{whole_verify_url}</a>"""
-
+    print("C")
 
     msg = MIMEMultipart()
     msg['From'] = sender_email
@@ -53,6 +56,8 @@ def verify_mail(receiver_email, username, verify_code, password=get_password()):
     msg['Subject'] = subject
 
     msg.attach(MIMEText(body, 'html'))
+
+    print("D")
 
     try:
         with smtplib.SMTP_SSL(smtp_server, smtp_port) as server:
@@ -66,6 +71,7 @@ def verify_mail(receiver_email, username, verify_code, password=get_password()):
             # return status
     except Exception as e:
         status["error_message"] = str(e)
+        print(e)
         # return status
 
     return status
