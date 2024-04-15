@@ -116,6 +116,8 @@ def view(request, is_custom=False):
 
         ads = ads_views.get_ads(length=2)
 
+        print(video_info)
+        print(video_info["description"])
 
         parsed_questions = parse_numbered_text(strip_yapping(video_info["description"]))
         parsed_answers = parse_numbered_text(strip_yapping(answers))
