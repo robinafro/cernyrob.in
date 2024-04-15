@@ -56,9 +56,12 @@ def verify_mail(receiver_email, username, verify_code, password=get_password()):
 
     try:
         with smtplib.SMTP_SSL(smtp_server, smtp_port) as server:
+            print("Logging in")
             server.login(login, password)
+            print("Logged in, sending message")
             text = msg.as_string()
             server.sendmail(sender_email, receiver_email, text)
+            print("Message sent")
             status["sent_successfully"] = True
             # return status
     except Exception as e:
