@@ -25,14 +25,15 @@ def generate_verify_code(length):
 
 def verify_mail(receiver_email, username, verify_code, password=get_password()):
     # Static info:
-    login = "verify@cernyrob.in"
+    # login = "verify@cernyrob.in"
+    login = "verify@autokafka.cz"
     smtp_server = "smtp.seznam.cz"
     smtp_port = 465
     sender_email = login
     subject = "Ověř svůj mail"
     body_template = f"""Klikni na tento odkaz, pokud chceš ověřit svůj účet <b>{username}</b><br>
             Pokud si o potvrzení nežádal, můžeš tento email ignorovat.<br>"""
-    base_verify_url = "https://cernyrob.in/verify"
+    base_verify_url = "https://autokafka.cz/verify"
 
     status = {
         "sent_successfully": False,
