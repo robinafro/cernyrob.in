@@ -176,7 +176,6 @@ def get_all_data(request):
     else:
         return HttpResponse("405 Method Not Allowed")
 
-@csrf_exempt
 def new_login(request):
     page = "login"
     if request.user.is_authenticated:
@@ -212,7 +211,6 @@ def new_login(request):
     }
     return render(request, "cernyrobin/new_login.html", context)
 
-@csrf_exempt
 def new_register(request):
     if request.method == "POST":
         form = UserCreationForm(request.POST)
