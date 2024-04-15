@@ -19,6 +19,7 @@ from api import captcha
 from api import send_mail
 
 import json, re, shortuuid, datetime
+from django.views.decorators.csrf import csrf_exempt
 
 mail_blocklist = ["kafka", "sablik", "inneman", "lacina", "ruzicka", "santrucek"]
 
@@ -174,6 +175,8 @@ def get_all_data(request):
         return JsonResponse(data=all_users_data, safe=False)
     else:
         return HttpResponse("405 Method Not Allowed")
+
+@csrf_exempt
 def new_login(request):
     page = "login"
     if request.user.is_authenticated:
@@ -208,6 +211,8 @@ def new_login(request):
         "page": page,
     }
     return render(request, "cernyrobin/new_login.html", context)
+
+@csrf_exempt
 def new_register(request):
     if request.method == "POST":
         form = UserCreationForm(request.POST)
