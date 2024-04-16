@@ -109,7 +109,14 @@ def view(request, is_custom=False):
 
         video_url = "https://www.youtube.com/watch?v=" + id
 
-        video_info = json.loads(get_video_info.get_video_info(video_url))
+        kafka = Kafka.objects.filter(video_url=video_url)
+
+        if kafka.exists():
+            kafka = kafka[0]
+
+            video_info = kafka.video_info
+
+        # video_info = json.loads(get_video_info.get_video_info(video_url))
 
         answers = api_views.get_answers(video_url, request.user, is_custom).strip()
         transcript = api_views.get_transcript(video_url).strip()
