@@ -4,7 +4,7 @@ import json
 
 import requests, re
 
-# from api.yt_transcriptor import answer
+from api.yt_transcriptor import answer
 
 def get_video_info(url):
     params = {"format": "json", "url": url}
@@ -18,23 +18,23 @@ def get_video_info(url):
 
             data = json.loads(data)
 
-            # data["description"] = answer.get_video_description(url)
+            data["description"] = answer.get_video_description(url)
+            print(data["description"])
+            # full_html = requests.get(url).text
+            # y = re.search(r'shortDescription":"', full_html)
+            # desc = ""
+            # count = y.start() + 19  # adding the length of the 'shortDescription":"
+            # while True:
+            #     # get the letter at current index in text
+            #     letter = full_html[count]
 
-            full_html = requests.get(url).text
-            y = re.search(r'shortDescription":"', full_html)
-            desc = ""
-            count = y.start() + 19  # adding the length of the 'shortDescription":"
-            while True:
-                # get the letter at current index in text
-                letter = full_html[count]
-
-                if letter == "\"" and full_html[count - 1] != "\\":
-                    break
-                else:
-                    desc += letter
-                    count += 1
+            #     if letter == "\"" and full_html[count - 1] != "\\":
+            #         break
+            #     else:
+            #         desc += letter
+            #         count += 1
             
-            data["description"] = desc
+            # data["description"] = desc
 
             data = json.dumps(data)
             
