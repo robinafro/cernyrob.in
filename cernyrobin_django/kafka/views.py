@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 
 from cernyrobin_app.models import UserProfile
+from cernyrobin_app.profile_operations import get_profile as get_user
 from api.models import Kafka
 from api import get_video_info
 from api import views as api_views
@@ -13,13 +14,18 @@ from django.views.decorators.csrf import csrf_exempt
 
 MAX_COMMENTS_PER_USER = 50
 
-def get_user(request):
-    try:
-        user = UserProfile.objects.get_or_create(user=request.user)[0]
-    except Exception as e:
-        user = None
+# def get_profile(request):
+#     if request.user.is_authenticated:
+#         user = User.objects.get(username=request.user.username)
+#         return UserProfile.objects.get_or_create(user=user)
+#     else:
+#         session_key = request.session.session_key
 
-    return user or request.user
+#         if not session_key:
+#             request.session.save()
+#             session_key = request.session.session_key
+
+#         return AnonymousUserProfile.objects.get_or_create(session_key=session_key)
 
 def strip_yapping(s):
     for i, char in enumerate(s):
@@ -94,7 +100,7 @@ def index(request):
 
     context["recent_video"] = api_views.get_recent_video()
     context["current_user"] = request.user
-    context["cernyrobin_user"] = get_user(request)
+    context["cernyrobin_user"] = get_user(request)[0]
     context["logged_in"] = request.user.is_authenticated
 
     return render(request, "kafka/index.html", context)
@@ -144,7 +150,7 @@ def view(request, is_custom=False):
 
         try:
             print("User is verified?")
-            print(get_user(request).email_verified)
+            print(get_user(request)[0].email_verified)
         except:
             print("User is not verified")
             
@@ -164,7 +170,7 @@ def view(request, is_custom=False):
                 "ads_right": ads["ads_right"],
                 "is_staff" : request.user.is_staff,
                 "current_user" : request.user,
-                "cernyrobin_user": get_user(request),
+                "cernyrobin_user": get_user(request)[0],
                 "is_custom" : is_custom,
                 "qa_pairs_indexed" : qa_pairs_list_form,
                 "color": api_views.get_color(video_url),
@@ -195,11 +201,11 @@ def submit(request):
                 "last_generated": api_views.get_last_generated(),
                 "generate_rate_limit": api_views.GENERATE_RATE_LIMIT,
                 "current_user" : request.user,
-                "cernyrobin_user": get_user(request),
+                "cernyrobin_user": get_user(request)[0],
             },
         )
     elif request.method == "POST":
-        if not get_user(request.user).email_verified:
+        if not get_user(request)[0].email_verified:
             return JsonResponse({"code": 418, "message": "Nemáš verifikovaný email"})
         
         video_url = request.POST.get("video_url")
@@ -306,7 +312,7 @@ def test_view_comments(request):
             context={
                 "comments": comments,
                 "current_user" : request.user,
-                "cernyrobin_user": get_user(request),
+                "cernyrobin_user": get_user(request)[0],
             },
         )
 
@@ -315,7 +321,7 @@ def comment(request):
         if request.user.is_anonymous:
             return JsonResponse({"code": 403, "message": "Forbidden"})
         
-        cernyrobin_user = get_user(request)
+        cernyrobin_user = get_user(request)[0]
 
         if not cernyrobin_user.email_verified:
             return JsonResponse({"code": 403, "message": "Forbidden"})
@@ -366,7 +372,7 @@ def comment(request):
             "kafka/test_comment.html",
             context={
                 "current_user" : request.user,
-                "cernyrobin_user": get_user(request),
+                "cernyrobin_user": get_user(request)[0],
             },
         )
     
@@ -375,7 +381,7 @@ def subscribe(request):
         if request.user.is_anonymous:
             return JsonResponse({"code": 403, "message": "Forbidden"})
         
-        profile = get_user(request)
+        profile = get_user(request)[0]
 
         if not profile.email_verified:
             return JsonResponse({"code": 403, "message": "Forbidden"})

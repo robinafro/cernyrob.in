@@ -221,7 +221,11 @@ def generate_answers(video_url, language, user=None, runbackground=False, submit
         try:
             print("Getting kafka object")
             print("video_url", video_url)
-            kafka = Kafka.objects.get(video_url=video_url) 
+            kafka = Kafka.objects.get(video_url=video_url)
+
+            if kafka is not None:
+                print("Would redirect user to the page now")
+                # return redirect(f"/kafka/view/?id={id_from_url(video_url)}")
 
             custom_answers = json.loads(kafka.custom_answers) if kafka.custom_answers else None
 
@@ -323,6 +327,20 @@ def generate_answers(video_url, language, user=None, runbackground=False, submit
             
             is_regen = user is not None
 
+            kafka = None
+            try:
+                kafka = Kafka.objects.get(video_url=video_url)
+            except Kafka.DoesNotExist:
+                kafka = None
+
+            if kafka is not None and not is_regen:
+                job.percent_completed = 100
+                job.chunks_completed = job.total_chunks
+                job.finished = True
+                job.save()
+
+                return
+
             answers, transcript, summary, color = yt_transcriptor.run(video_url, language, callback=progress_callback, ignore_existing=True, is_regen=is_regen)
             
             # Save to database
@@ -361,37 +379,40 @@ def generate_answers(video_url, language, user=None, runbackground=False, submit
 
             # Broadcast to mailing list
             if not is_regen:
-                try:
-                    email = UserProfile.objects.get(user=submitter).email
+                print("&&Would send mail now")
+
+            # if not is_regen:
+            #     try:
+            #         email = UserProfile.objects.get(user=submitter).email
                     
-                    year = email.split("@")[0].split(".")[-1]
+            #         year = email.split("@")[0].split(".")[-1]
                     
-                    all_users = UserProfile.objects.filter(email_verified=True)
+            #         all_users = UserProfile.objects.filter(email_verified=True)
 
-                    send_to = []
+            #         send_to = []
 
-                    for usr in all_users:
-                        if year in usr.email and usr.email_subscribed == True:
-                            send_to.append(usr.email)
+            #         for usr in all_users:
+            #             if year in usr.email and usr.email_subscribed == True:
+            #                 send_to.append(usr.email)
 
-                    if len(send_to) > 0:
-                        filename = "odpovedi.docx"
-                        dirname = shortuuid.uuid()[:8]
+            #         if len(send_to) > 0:
+            #             filename = "odpovedi.docx"
+            #             dirname = shortuuid.uuid()[:8]
 
-                        os.makedirs(f"/tmp/{dirname}", exist_ok=True)
+            #             os.makedirs(f"/tmp/{dirname}", exist_ok=True)
 
-                        doc = docx.Document()
-                        doc.add_paragraph(answers)
-                        doc.save(f"/tmp/{dirname}/" + filename)
+            #             doc = docx.Document()
+            #             doc.add_paragraph(answers)
+            #             doc.save(f"/tmp/{dirname}/" + filename)
 
-                        send_mail.broadcast_mail(send_to, file_path=f"/tmp/{dirname}/" + filename)
+            #             send_mail.broadcast_mail(send_to, file_path=f"/tmp/{dirname}/" + filename)
 
-                        # os.remove(f"/tmp/{dirname}/" + filename)
-                        # os.rmdir(f"/tmp/{dirname}")
+            #             # os.remove(f"/tmp/{dirname}/" + filename)
+            #             # os.rmdir(f"/tmp/{dirname}")
                             
-                except Exception as e:
-                    print(e)
-                    pass
+            #     except Exception as e:
+            #         print(e)
+            #         pass
 
 
             if not runbackground:
