@@ -34,10 +34,17 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 DEBUG = os.getenv("LOCAL") == "1"
 
 
-ALLOWED_HOSTS = ["*", ".localhost", ".autokafka.cz", "localhost", "autokafka.cz", "me", "10.1.2.6", "192.168.219.42", ".autokafka.cz", "autokafka.cz"]
+ALLOWED_HOSTS = ["*", ".localhost", ".autokafka.cz", "localhost", "autokafka.cz", "me", "10.1.2.6", "192.168.219.42", ".autokafka.cz", "autokafka.cz", "api.autokafka.cz" "www.autokafka"]
 
 CSRF_TRUSTED_ORIGINS = [
     "https://autokafka.cz",
+    "https://www.autokafka.cz",
+    "https://api.autokafka.cz",
+    "http://autokafka.cz",
+    "http://www.autokafka.cz",
+    "http://api.autokafka.cz",
+
+
     "http://localhost",    
     "https://.autokafka.cz",
     "https://autokafka.cz",
